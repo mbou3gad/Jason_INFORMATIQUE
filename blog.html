@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Tech & Actualités | Jason_INFORMATIQUE</title>
+  <meta name="description" content="Articles, guides de sécurité, bonnes pratiques Cloud et actualités informatiques rédigés par les experts de Jason_INFORMATIQUE.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/ai-assistant.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-icon"><i class="fa-solid fa-microchip"></i></div>
+        <div class="logo-text">Jason<span>_INF</span></div>
+      </a>
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="about.html" class="nav-link">À propos</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="boutique.html" class="nav-link">Boutique IT</a>
+        <a href="formations.html" class="nav-link">Formations</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Changer le thème"><i class="fa-solid fa-sun"></i></button>
+        <a href="contact.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-paper-plane"></i> Devis Express</a>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menu Mobile"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="section" style="padding-top: 140px; padding-bottom: 40px;">
+    <div class="container text-center" data-aos="fade-up">
+      <div class="badge-tag"><i class="fa-solid fa-newspaper"></i> Journal de l'Innovation</div>
+      <h1 class="section-title">Blog & Insights <span class="text-brand-gradient">Technologiques</span></h1>
+      <p class="section-subtitle" style="max-width: 800px; margin: 0 auto;">
+        Analyses, guides pratiques et tendances sur la Cybersécurité, le Cloud Computing et l’Ingénierie Logicielle.
+      </p>
+    </div>
+  </section>
+
+  <!-- BLOG ARTICLES -->
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-cols-3 gap-lg">
+        
+        <div class="glass-card" data-aos="fade-up">
+          <div class="badge-tag" style="margin-bottom: 0.8rem;">Cybersécurité</div>
+          <h3>Les 5 Protections Indispensables contre les Ransomwares en 2026</h3>
+          <p style="margin-top: 0.5rem; margin-bottom: 1.2rem;">Découvrez les stratégies de défense active et d'architecture Zero-Trust pour immuniser votre entreprise.</p>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Publié le 18 Juillet 2026 • 5 min de lecture</div>
+        </div>
+
+        <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="badge-tag" style="margin-bottom: 0.8rem;">Cloud AWS</div>
+          <h3>Comment Optimiser les Coûts de votre Infrastructure Cloud (FinOps)</h3>
+          <p style="margin-top: 0.5rem; margin-bottom: 1.2rem;">Méthodologie concrète pour réduire jusqu'à 35% votre facture cloud mensuelle sans sacrifier les performances.</p>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Publié le 12 Juillet 2026 • 7 min de lecture</div>
+        </div>
+
+        <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="badge-tag" style="margin-bottom: 0.8rem;">Développement</div>
+          <h3>Pourquoi adopter les Microservices et les API REST Modernes</h3>
+          <p style="margin-top: 0.5rem; margin-bottom: 1.2rem;">Analyse comparative entre architectures monolithiques et microservices pour applications SaaS à forte charge.</p>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Publié le 05 Juillet 2026 • 6 min de lecture</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 <strong>Jason_INFORMATIQUE</strong>. Tous droits réservés.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="mentions-legales.html" style="color: var(--text-muted);">Mentions Légales</a>
+          <a href="politique-confidentialite.html" style="color: var(--text-muted);">Politique de Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
+  <a href="https://wa.me/33600000000" target="_blank" class="whatsapp-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/admin-schema.js"></script>
+  <script src="assets/js/ai-assistant.js"></script>
+  <script src="assets/js/form-validation.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/animations.js"></script>
+</body>
+</html>

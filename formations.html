@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formations Informatiques Professionnelles & Certifiantes | Jason_INFORMATIQUE</title>
+  <meta name="description" content="35 formations IT certifiantes : Cybersécurité, Développement Web/Mobile, Cloud AWS/Azure, DevOps, Réseaux Cisco, Linux, Data Science, Intelligence Artificielle, Bureautique et plus encore.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/ai-assistant.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+
+  <style>
+    /* ============================================
+       CATEGORY SECTION HEADINGS & PILLS
+       ============================================ */
+    .cat-section {
+      margin-bottom: 4rem;
+    }
+    .cat-heading {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .cat-icon-pill {
+      width: 54px;
+      height: 54px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .cat-cybersecurite .cat-icon-pill { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); border: 1px solid rgba(244, 63, 94, 0.3); }
+    .cat-developpement .cat-icon-pill { background: rgba(0, 240, 255, 0.1); color: var(--secondary); border: 1px solid rgba(0, 240, 255, 0.25); }
+    .cat-cloud .cat-icon-pill { background: rgba(10, 102, 194, 0.15); color: var(--primary); border: 1px solid rgba(10, 102, 194, 0.3); }
+    .cat-reseaux .cat-icon-pill { background: rgba(124, 58, 237, 0.12); color: var(--accent-purple); border: 1px solid rgba(124, 58, 237, 0.3); }
+    .cat-data-ia .cat-icon-pill { background: rgba(251, 146, 60, 0.12); color: var(--accent-amber); border: 1px solid rgba(251, 146, 60, 0.3); }
+    .cat-management .cat-icon-pill { background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .cat-bureautique .cat-icon-pill { background: rgba(0, 240, 255, 0.08); color: var(--secondary); border: 1px solid var(--border-light); }
+
+    .cat-heading h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin: 0;
+    }
+    .cat-count-badge {
+      margin-left: auto;
+      padding: 0.3rem 1rem;
+      border-radius: var(--radius-full);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-light);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* ============================================
+       FORMATION CARD
+       ============================================ */
+    .formation-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+    }
+    .formation-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+    .formation-card:hover {
+      border-color: rgba(0, 240, 255, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+    }
+    .formation-card:hover::before {
+      opacity: 1;
+    }
+    .cat-cybersecurite .formation-card::before { background: linear-gradient(90deg, var(--accent-rose), var(--accent-amber)); }
+    .cat-developpement .formation-card::before { background: linear-gradient(90deg, var(--secondary), var(--primary)); }
+    .cat-cloud .formation-card::before { background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+    .cat-reseaux .formation-card::before { background: linear-gradient(90deg, var(--accent-purple), var(--primary)); }
+    .cat-data-ia .formation-card::before { background: linear-gradient(90deg, var(--accent-amber), var(--accent-rose)); }
+    .cat-management .formation-card::before { background: linear-gradient(90deg, var(--accent-emerald), var(--secondary)); }
+    .cat-bureautique .formation-card::before { background: linear-gradient(90deg, var(--secondary), var(--accent-emerald)); }
+
+    .formation-card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .formation-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .cat-cybersecurite .formation-icon { background: rgba(244, 63, 94, 0.12); color: var(--accent-rose); }
+    .cat-developpement .formation-icon { background: rgba(0, 240, 255, 0.1); color: var(--secondary); }
+    .cat-cloud .formation-icon { background: rgba(10, 102, 194, 0.12); color: #60a5fa; }
+    .cat-reseaux .formation-icon { background: rgba(124, 58, 237, 0.12); color: var(--accent-purple); }
+    .cat-data-ia .formation-icon { background: rgba(251, 146, 60, 0.12); color: var(--accent-amber); }
+    .cat-management .formation-icon { background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald); }
+    .cat-bureautique .formation-icon { background: rgba(0, 240, 255, 0.07); color: var(--secondary); }
+
+    .formation-title {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.35;
+      flex: 1;
+    }
+    .formation-desc {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .formation-modules {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .formation-modules li {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .formation-modules li i {
+      font-size: 0.6rem;
+      margin-top: 0.32rem;
+      flex-shrink: 0;
+      color: var(--secondary);
+    }
+    .formation-card-footer {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .formation-meta-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-light);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .formation-price {
+      margin-left: auto;
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--secondary);
+      white-space: nowrap;
+    }
+
+    /* Level badge */
+    .level-badge {
+      padding: 0.2rem 0.65rem;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .level-Débutant, .level-débutant { background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .level-Inter, .level-inter { background: rgba(251, 146, 60, 0.12); color: var(--accent-amber); border: 1px solid rgba(251, 146, 60, 0.3); }
+    .level-Avancé, .level-avancé { background: rgba(244, 63, 94, 0.12); color: var(--accent-rose); border: 1px solid rgba(244, 63, 94, 0.3); }
+    .level-Tous { background: rgba(0, 240, 255, 0.08); color: var(--secondary); border: 1px solid rgba(0, 240, 255, 0.25); }
+
+    /* Certif badge */
+    .certif-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.75rem;
+      background: rgba(10, 102, 194, 0.12);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      border-radius: var(--radius-full);
+      color: var(--secondary);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Enroll CTA Button on card */
+    .btn-enroll {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: var(--text-primary);
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+    }
+    .btn-enroll:hover {
+      box-shadow: 0 0 18px rgba(0, 240, 255, 0.4);
+      transform: scale(1.03);
+    }
+
+    /* Quick Stats Bar */
+    .stats-strip {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+    .stat-strip-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      min-width: 130px;
+    }
+    .stat-strip-num {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 900;
+      background: var(--brand-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-strip-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* Filter tabs */
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Search bar */
+    .search-box-form {
+      max-width: 520px;
+      margin: 0 auto 1.5rem auto;
+      position: relative;
+    }
+    .search-box-form input {
+      width: 100%;
+      padding: 0.9rem 1.2rem 0.9rem 3rem;
+      border-radius: var(--radius-full);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-light);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all var(--transition-normal);
+    }
+    .search-box-form input:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 15px rgba(0,240,255,0.2);
+      outline: none;
+    }
+    .search-box-form i {
+      position: absolute;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .formation-card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .formation-price {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-icon"><i class="fa-solid fa-microchip"></i></div>
+        <div class="logo-text">Jason<span>_INF</span></div>
+      </a>
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="about.html" class="nav-link">À propos</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="boutique.html" class="nav-link">Boutique IT</a>
+        <a href="formations.html" class="nav-link active">Formations</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Changer le thème"><i class="fa-solid fa-sun"></i></button>
+        <a href="contact.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-paper-plane"></i> Devis Express</a>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menu Mobile"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="section" style="padding-top: 130px; padding-bottom: 40px;">
+    <div class="container text-center" data-aos="fade-up">
+      <div class="badge-tag"><i class="fa-solid fa-graduation-cap"></i> 35 Formations IT — 7 Domaines d'Expertise</div>
+      <h1 class="section-title">Formations Professionnelles <br><span class="text-brand-gradient">Certifiantes en Informatique</span></h1>
+      <p class="section-subtitle" style="max-width: 820px; margin: 0 auto 2rem auto;">
+        Du débutant à l'expert, nos formations couvrent <strong>tous les domaines du numérique</strong> : Cybersécurité, Cloud, DevOps, Développement Web &amp; Mobile, Réseaux, Intelligence Artificielle, Data Science et Gestion de Projet IT. Formations pratiques animées par des ingénieurs certifiés.
+      </p>
+
+      <!-- Search -->
+      <div class="search-box-form">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="formation-search" placeholder="Rechercher : Python, Cisco, AWS, Docker, Cybersécurité..." />
+      </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="container">
+      <div class="stats-strip" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-strip-item">
+          <span class="stat-strip-num">35</span>
+          <span class="stat-strip-label">Formations Disponibles</span>
+        </div>
+        <div class="stat-strip-item">
+          <span class="stat-strip-num">7</span>
+          <span class="stat-strip-label">Domaines Couverts</span>
+        </div>
+        <div class="stat-strip-item">
+          <span class="stat-strip-num">750h</span>
+          <span class="stat-strip-label">Volume Horaire Total</span>
+        </div>
+        <div class="stat-strip-item">
+          <span class="stat-strip-num">100%</span>
+          <span class="stat-strip-label">Pratique Orientée Terrain</span>
+        </div>
+        <div class="stat-strip-item">
+          <span class="stat-strip-num">+200</span>
+          <span class="stat-strip-label">Apprenants Formés</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTER BAR -->
+  <section style="padding: 0 0 1.5rem 0;">
+    <div class="container">
+      <div class="filter-tabs" id="formations-filter-bar">
+        <button class="chip-btn active" data-cat="all">Toutes les Formations (35)</button>
+        <button class="chip-btn" data-cat="cybersecurite">🛡️ Cybersécurité (5)</button>
+        <button class="chip-btn" data-cat="developpement">💻 Développement (7)</button>
+        <button class="chip-btn" data-cat="cloud">☁️ Cloud & DevOps (5)</button>
+        <button class="chip-btn" data-cat="reseaux">🌐 Réseaux & Systèmes (5)</button>
+        <button class="chip-btn" data-cat="data-ia">🧠 Data & IA (5)</button>
+        <button class="chip-btn" data-cat="management">📋 Gestion IT (4)</button>
+        <button class="chip-btn" data-cat="bureautique">🖥️ Bureautique & Design (4)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMATIONS GRID — rendered by JS -->
+  <section class="section-sm" style="padding-top: 0;">
+    <div class="container" id="formations-container">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="section" data-aos="fade-up">
+    <div class="container">
+      <div class="glass-card" style="text-align:center; padding: 4rem 2rem; background: rgba(10,102,194,0.1); border-color: rgba(0,240,255,0.25);">
+        <div class="badge-tag" style="margin-bottom:1.5rem;"><i class="fa-solid fa-star"></i> Formation Sur Mesure</div>
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2.2rem); margin-bottom: 1rem;">Besoin d'une formation <span class="text-brand-gradient">personnalisée</span> ?</h2>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem auto; font-size: 1rem; line-height:1.7;">
+          Nous créons des programmes sur-mesure adaptés à votre secteur, votre niveau et vos objectifs professionnels. Financement CPF, OPCO et FIFPL possibles.
+        </p>
+        <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+          <a href="contact.html?type=formation" class="btn btn-primary btn-lg btn-glow">
+            <i class="fa-solid fa-paper-plane"></i> Demander un Programme Sur Mesure
+          </a>
+          <a href="tel:+33189204500" class="btn btn-secondary btn-lg">
+            <i class="fa-solid fa-phone"></i> Appeler un Conseiller
+          </a>
+        </div>
+        <div style="margin-top: 2rem; display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; color: var(--text-muted); font-size:0.85rem;">
+          <span><i class="fa-solid fa-circle-check" style="color: var(--accent-emerald);"></i> Financement CPF possible</span>
+          <span><i class="fa-solid fa-circle-check" style="color: var(--accent-emerald);"></i> Groupe entreprise (Inter/Intra)</span>
+          <span><i class="fa-solid fa-circle-check" style="color: var(--accent-emerald);"></i> Attestation & Certificat inclus</span>
+          <span><i class="fa-solid fa-circle-check" style="color: var(--accent-emerald);"></i> En présentiel ou à distance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 <strong>Jason_INFORMATIQUE</strong>. Tous droits réservés.</div>
+        <div style="display:flex; gap:1.5rem;">
+          <a href="mentions-legales.html" style="color:var(--text-muted);">Mentions Légales</a>
+          <a href="politique-confidentialite.html" style="color:var(--text-muted);">Politique de Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
+  <a href="https://wa.me/33600000000" target="_blank" class="whatsapp-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <!-- SCRIPTS -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/ai-assistant.js"></script>
+  <script src="assets/js/form-validation.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/animations.js"></script>
+
+  <script>
+    /* ============================================
+       FORMATIONS PAGE — Dynamic Rendering
+       ============================================ */
+
+    const CATEGORIES = [
+      { id: 'cybersecurite', label: '🛡️ Cybersécurité & Ethical Hacking',     icon: 'fa-shield-halved',   iconClass: 'cat-cybersecurite'  },
+      { id: 'developpement', label: '💻 Développement Web & Mobile',            icon: 'fa-code',            iconClass: 'cat-developpement'  },
+      { id: 'cloud',         label: '☁️ Cloud Computing & DevOps',              icon: 'fa-cloud-bolt',      iconClass: 'cat-cloud'          },
+      { id: 'reseaux',       label: '🌐 Réseaux, Systèmes & Virtualisation',    icon: 'fa-network-wired',   iconClass: 'cat-reseaux'        },
+      { id: 'data-ia',       label: '🧠 Data Science & Intelligence Artificielle', icon: 'fa-brain',        iconClass: 'cat-data-ia'        },
+      { id: 'management',    label: '📋 Gestion de Projet & Management IT',     icon: 'fa-diagram-project', iconClass: 'cat-management'     },
+      { id: 'bureautique',   label: '🖥️ Bureautique, Design & Productivité',    icon: 'fa-pen-ruler',       iconClass: 'cat-bureautique'    }
+    ];
+
+    function getLevelClass(level) {
+      if (level.toLowerCase().startsWith('dé')) return 'level-Débutant';
+      if (level.toLowerCase().startsWith('av')) return 'level-Avancé';
+      if (level.toLowerCase().startsWith('to')) return 'level-Tous';
+      return 'level-Inter';
+    }
+
+    function renderFormationCard(f) {
+      return `
+        <div class="formation-card" data-id="${f.id}">
+          <div class="formation-card-top">
+            <div class="formation-icon"><i class="fa-solid ${f.icon}"></i></div>
+            <div style="flex:1; min-width:0;">
+              <h3 class="formation-title">${f.title}</h3>
+              <span class="level-badge ${getLevelClass(f.level)}">${f.level}</span>
+            </div>
+          </div>
+
+          <p class="formation-desc">${f.desc}</p>
+
+          <!-- Modules -->
+          <div>
+            <div style="font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:0.5rem; font-weight:700;">Modules clés</div>
+            <ul class="formation-modules">
+              ${f.modules.map(m => `<li><i class="fa-solid fa-circle-chevron-right"></i>${m}</li>`).join('')}
+            </ul>
+          </div>
+
+          <!-- Certification tag -->
+          <div class="certif-tag"><i class="fa-solid fa-award"></i>${f.certif}</div>
+
+          <!-- Footer -->
+          <div class="formation-card-footer">
+            <span class="formation-meta-pill"><i class="fa-solid fa-clock"></i> ${f.duration}</span>
+            <a href="contact.html?type=inscription-formation&id=${f.id}&titre=${encodeURIComponent(f.title)}" class="btn-enroll">
+              <i class="fa-solid fa-paper-plane"></i> S'inscrire
+            </a>
+            <div class="formation-price">${f.price}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFormations(filterCat = 'all', searchQuery = '') {
+      const container = document.getElementById('formations-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const q = searchQuery.toLowerCase().trim();
+      let total = 0;
+
+      const categoriesToRender = filterCat === 'all'
+        ? CATEGORIES
+        : CATEGORIES.filter(c => c.id === filterCat);
+
+      categoriesToRender.forEach(cat => {
+        let formations = JasonData.formations.filter(f => f.category === cat.id);
+
+        if (q) {
+          formations = formations.filter(f =>
+            f.title.toLowerCase().includes(q) ||
+            f.desc.toLowerCase().includes(q) ||
+            f.modules.some(m => m.toLowerCase().includes(q)) ||
+            f.certif.toLowerCase().includes(q)
+          );
+        }
+
+        if (formations.length === 0) return;
+        total += formations.length;
+
+        const section = document.createElement('section');
+        section.className = `cat-section cat-${cat.id}`;
+        section.setAttribute('data-aos', 'fade-up');
+
+        section.innerHTML = `
+          <div class="cat-heading">
+            <div class="cat-icon-pill"><i class="fa-solid ${cat.icon}"></i></div>
+            <h2>${cat.label}</h2>
+            <span class="cat-count-badge">${formations.length} formation${formations.length > 1 ? 's' : ''}</span>
+          </div>
+          <div class="grid grid-cols-3 gap-lg">
+            ${formations.map(f => renderFormationCard(f)).join('')}
+          </div>
+        `;
+
+        container.appendChild(section);
+      });
+
+      // No results
+      if (total === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:5rem 1rem; color:var(--text-muted);">
+            <i class="fa-solid fa-book-open" style="font-size:3.5rem; margin-bottom:1rem;"></i>
+            <h3>Aucune formation trouvée</h3>
+            <p>Essayez un autre mot-clé ou sélectionnez toutes les catégories.</p>
+          </div>
+        `;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let currentCat = 'all';
+      let currentSearch = '';
+
+      renderFormations('all', '');
+
+      // Filter tabs
+      document.querySelectorAll('#formations-filter-bar button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#formations-filter-bar button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCat = btn.getAttribute('data-cat');
+          renderFormations(currentCat, currentSearch);
+          // Scroll to content
+          document.getElementById('formations-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      // Search
+      document.getElementById('formation-search').addEventListener('input', (e) => {
+        currentSearch = e.target.value;
+        renderFormations(currentCat, currentSearch);
+      });
+    });
+  </script>
+</body>
+</html>

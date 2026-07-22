@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jason_INFORMATIQUE | Solutions Informatiques Modernes & Ingénierie Digital</title>
+  <meta name="description" content="Jason_INFORMATIQUE - Votre partenaire de confiance pour le Développement Web & Mobile, la Cybersécurité, le Cloud Computing, l'Administration Système/Réseaux et la Formation Professionnelle.">
+  <meta name="keywords" content="Jason INFORMATIQUE, Développement Web, Développement Mobile, Cybersécurité, Cloud, Serveurs, Caméras IP, Maintenance informatique, Formation IT">
+  <meta name="author" content="Jason_INFORMATIQUE">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jason_INFORMATIQUE - Solutions Informatiques Modernes">
+  <meta property="og:description" content="Expertise internationale en ingénierie informatique, Cybersécurité, Cloud, Développement et Infrastructures.">
+  <meta property="og:image" content="assets/images/og-image.jpg">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jason_INFORMATIQUE">
+  <meta name="twitter:description" content="Votre partenaire pour des solutions informatiques modernes.">
+
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- AOS Library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/intro.css">
+  <link rel="stylesheet" href="assets/css/ai-assistant.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Jason_INFORMATIQUE",
+    "slogan": "Votre partenaire pour des solutions informatiques modernes.",
+    "url": "https://www.jason-informatique.com",
+    "telephone": "+33189204500",
+    "email": "contact@jason-informatique.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "124 Avenue des Technologies",
+      "addressLocality": "Paris",
+      "postalCode": "75008",
+      "addressCountry": "FR"
+    },
+    "openingHours": "Mo-Sa 08:00-19:00"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ==========================================
+       3D HIGH-TECH INTRO OVERLAY (3 Seconds)
+       ========================================== -->
+  <div id="intro-overlay" class="intro-overlay">
+    <canvas id="intro-particles-canvas"></canvas>
+    <div class="intro-light-beam"></div>
+    <div class="intro-content">
+      <div class="intro-letters">
+        <span class="intro-letter" data-letter="J">J</span>
+        <span class="intro-letter" data-letter="A">A</span>
+        <span class="intro-letter" data-letter="S">S</span>
+        <span class="intro-letter" data-letter="O">O</span>
+        <span class="intro-letter" data-letter="N">N</span>
+      </div>
+      <div class="intro-full-brand">JASON_INFORMATIQUE</div>
+      <div class="intro-slogan">Votre partenaire pour des solutions informatiques modernes.</div>
+      <div class="intro-progress-bar">
+        <div class="intro-progress-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       HEADER & NAVIGATION BAR
+       ========================================== -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-microchip"></i>
+        </div>
+        <div class="logo-text">Jason<span>_INF</span></div>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link active">Accueil</a>
+        <a href="about.html" class="nav-link">À propos</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="boutique.html" class="nav-link">Boutique IT</a>
+        <a href="formations.html" class="nav-link">Formations</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Changer le thème">
+          <i class="fa-solid fa-sun"></i>
+        </button>
+        <a href="contact.html" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-paper-plane"></i> Devis Express
+        </a>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menu Mobile">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       HERO SECTION
+       ========================================== -->
+  <section class="section hero-section" style="padding-top: 140px; padding-bottom: 80px; position: relative; overflow: hidden;">
+    <div class="bg-glow-spot" style="top: -100px; left: 50%; transform: translateX(-50%);"></div>
+    <div class="container">
+      <div class="grid grid-cols-2 items-center gap-lg">
+        
+        <!-- Left Content -->
+        <div data-aos="fade-right">
+          <div class="badge-tag">
+            <i class="fa-solid fa-shield-halved"></i> Expertise Digitale & Cybersécurité
+          </div>
+          <h1 class="section-title" style="line-height: 1.1; margin-bottom: 1.5rem;">
+            Propulsez votre entreprise avec des <span class="text-brand-gradient">Solutions Informatiques</span> d'Élite.
+          </h1>
+          <p style="font-size: 1.15rem; margin-bottom: 2rem;">
+            Du développement logiciel sur-mesure au Cloud haute performance, en passant par la Cybersécurité et l'Administration Systèmes, <strong>Jason_INFORMATIQUE</strong> garantit votre excellence technologique.
+          </p>
+          <div class="flex items-center gap-md hero-buttons" style="flex-wrap: wrap;">
+            <a href="services.html" class="btn btn-primary btn-lg btn-glow">
+              Découvrir nos Services <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="contact.html" class="btn btn-secondary btn-lg">
+              Prendre Rendez-vous
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Visual Mockup -->
+        <div data-aos="fade-left" style="position: relative;">
+          <div class="glass-card animate-float" style="padding: 2.5rem; border-color: rgba(0, 240, 255, 0.3);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-light); padding-bottom: 1rem;">
+              <div style="display: flex; gap: 6px;">
+                <span style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F56;"></span>
+                <span style="width: 12px; height: 12px; border-radius: 50%; background: #FFBD2E;"></span>
+                <span style="width: 12px; height: 12px; border-radius: 50%; background: #27C93F;"></span>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--secondary);">
+                STATUS: SYSTEM_ONLINE 99.99%
+              </div>
+            </div>
+
+            <div style="font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.8; color: var(--text-primary);">
+              <span style="color: var(--secondary);">$</span> jason-cli init --environment=cloud-production<br>
+              <span style="color: var(--accent-emerald);">✔</span> Cloud AWS Hybride configuré.<br>
+              <span style="color: var(--accent-emerald);">✔</span> Firewalls & VPN WireGuard actifs.<br>
+              <span style="color: var(--accent-emerald);">✔</span> Protection Anti-DDoS & EDR opérationnels.<br>
+              <span style="color: var(--primary-light);">> System Ready for Enterprise Deployment.</span>
+            </div>
+
+            <div style="margin-top: 1.8rem; display: flex; gap: 1rem;">
+              <div style="flex: 1; padding: 1rem; background: rgba(0, 240, 255, 0.05); border-radius: var(--radius-md); text-align: center;">
+                <div style="font-weight: 700; font-size: 1.2rem; color: var(--secondary);">0.4ms</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">LATENCE CLOUD</div>
+              </div>
+              <div style="flex: 1; padding: 1rem; background: rgba(10, 102, 194, 0.08); border-radius: var(--radius-md); text-align: center;">
+                <div style="font-weight: 700; font-size: 1.2rem; color: var(--primary-light);">256-Bit</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">CHIFFREMENT</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       STATS BAR COMPONENT
+       ========================================== -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="stats-bar" data-aos="zoom-in">
+        <div class="stat-item">
+          <div class="stat-number" data-target="500" data-suffix="+">0</div>
+          <div class="stat-label">Projets Déployés</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="99" data-suffix=".9%">0</div>
+          <div class="stat-label">Haute Disponibilité</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="150" data-suffix="+">0</div>
+          <div class="stat-label">Clients Entreprises</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="24" data-suffix="/7">0</div>
+          <div class="stat-label">Support Réactif</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SERVICES HIGHLIGHT (19 ACTIVITÉS)
+       ========================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header center" data-aos="fade-up">
+        <div class="badge-tag"><i class="fa-solid fa-cubes"></i> Nos Domaines d'Intervention</div>
+        <h2 class="section-title">Une gamme complète de <span class="text-brand-gradient">Services IT d'Élite</span></h2>
+        <p class="section-subtitle">Découvrez comment nos 19 pôles d'expertise transforment la performance de vos infrastructures informatiques.</p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-lg" id="services-grid">
+        <!-- Main Featured Services Cards dynamically mapped -->
+        <div class="glass-card service-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-icon-box"><i class="fa-solid fa-code"></i></div>
+          <h3 class="service-title">Développement Web & Mobile</h3>
+          <p>Conception de sites vitrines, applications SaaS complexes et apps mobile iOS/Android sur-mesure.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Architecture Microservices / REST</li>
+            <li><i class="fa-solid fa-check"></i> Performance & SEO >95</li>
+          </ul>
+        </div>
+
+        <div class="glass-card service-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3 class="service-title">Cybersécurité & PenTest</h3>
+          <p>Audits de vulnérabilités, tests d'intrusion, protection anti-ransomware et conformité RGPD.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Audit OWASP & Security SOC</li>
+            <li><i class="fa-solid fa-check"></i> Protections EDR & Firewalls</li>
+          </ul>
+        </div>
+
+        <div class="glass-card service-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="service-icon-box"><i class="fa-solid fa-cloud-bolt"></i></div>
+          <h3 class="service-title">Cloud & Infrastructure AWS</h3>
+          <p>Migration Cloud, DevOps CI/CD, serveurs virtuels et hébergement SSD NVMe haute disponibilité.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> AWS, Azure & Kubernetes</li>
+            <li><i class="fa-solid fa-check"></i> Disponibilité garantie 99.99%</li>
+          </ul>
+        </div>
+
+        <div class="glass-card service-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="service-icon-box"><i class="fa-solid fa-network-wired"></i></div>
+          <h3 class="service-title">Réseaux & Télécoms</h3>
+          <p>Administration serveurs Linux/Windows, routage VLAN, VPN WireGuard et câblage structuré.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Équipements Cisco & Mikrotik</li>
+            <li><i class="fa-solid fa-check"></i> Supervision Zabbix 24/7</li>
+          </ul>
+        </div>
+
+        <div class="glass-card service-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="service-icon-box"><i class="fa-solid fa-video"></i></div>
+          <h3 class="service-title">Vidéosurveillance & Caméras IP</h3>
+          <p>Systèmes de protection vidéo HD 4K avec détection intelligente par IA et accès mobile sécurisé.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Caméras 4K Vision Nocturne</li>
+            <li><i class="fa-solid fa-check"></i> Enregistrement NVR / Cloud</li>
+          </ul>
+        </div>
+
+        <div class="glass-card service-card" data-aos="fade-up" data-aos-delay="600">
+          <div class="service-icon-box"><i class="fa-solid fa-graduation-cap"></i></div>
+          <h3 class="service-title">Formations Professionnelles</h3>
+          <p>Programmes intensifs en Cybersécurité, Développement Full-Stack, Cloud et Admin Réseaux.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-check"></i> Formateurs Experts Seniors</li>
+            <li><i class="fa-solid fa-check"></i> Certifications Délivrées</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-center" style="margin-top: 3rem;">
+        <a href="services.html" class="btn btn-secondary btn-lg">
+          Voir les 19 Activités <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       WHY CHOOSE US / COMPETENCES
+       ========================================== -->
+  <section class="section" style="background: rgba(13, 17, 30, 0.4);">
+    <div class="container">
+      <div class="section-header center" data-aos="fade-up">
+        <div class="badge-tag"><i class="fa-solid fa-award"></i> Pourquoi Nous Choisir</div>
+        <h2 class="section-title">Les piliers de l'engagement <span class="text-brand-gradient">Jason_INFORMATIQUE</span></h2>
+      </div>
+
+      <div class="grid grid-cols-4 gap-lg">
+        <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+          <div style="font-size: 2.2rem; color: var(--secondary); margin-bottom: 1rem;"><i class="fa-solid fa-shield-virus"></i></div>
+          <h4 style="margin-bottom: 0.5rem;">Sécurité Maximale</h4>
+          <p style="font-size: 0.9rem;">Chiffrement de bout en bout et audits réguliers pour parer à toute cyberattaque.</p>
+        </div>
+
+        <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+          <div style="font-size: 2.2rem; color: var(--accent-purple); margin-bottom: 1rem;"><i class="fa-solid fa-bolt-lightning"></i></div>
+          <h4 style="margin-bottom: 0.5rem;">Vitesse & Latence Zéro</h4>
+          <p style="font-size: 0.9rem;">Infrastructures optimisées et serveurs NVMe pour un temps de réponse instantané.</p>
+        </div>
+
+        <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
+          <div style="font-size: 2.2rem; color: var(--accent-emerald); margin-bottom: 1rem;"><i class="fa-solid fa-headset"></i></div>
+          <h4 style="margin-bottom: 0.5rem;">Support 24/7</h4>
+          <p style="font-size: 0.9rem;">Prise en charge réactive à distance ou sur site en cas d'urgence technique.</p>
+        </div>
+
+        <div class="glass-card" data-aos="fade-up" data-aos-delay="400">
+          <div style="font-size: 2.2rem; color: var(--primary-light); margin-bottom: 1rem;"><i class="fa-solid fa-diagram-project"></i></div>
+          <h4 style="margin-bottom: 0.5rem;">Architecture Évolutive</h4>
+          <p style="font-size: 0.9rem;">Solutions conçues pour grandir avec votre entreprise sans refonte coûteuse.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       TESTIMONIALS & REVIEWS
+       ========================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header center" data-aos="fade-up">
+        <div class="badge-tag"><i class="fa-solid fa-comments"></i> Avis Clients</div>
+        <h2 class="section-title">Ce que disent nos <span class="text-brand-gradient">Partenaires & Clients</span></h2>
+      </div>
+
+      <div class="grid grid-cols-3 gap-lg">
+        <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+          <div style="color: var(--accent-amber); margin-bottom: 1rem;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p style="font-style: italic; margin-bottom: 1.5rem;">"L'équipe de Jason_INFORMATIQUE a révisé l'ensemble de notre infrastructure cloud et réseaux avec un professionnalisme exemplaire."</p>
+          <div style="font-weight: 700; color: var(--text-primary);">Alexandre Mercier</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">Directeur Général, InnoTech Global</div>
+        </div>
+
+        <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+          <div style="color: var(--accent-amber); margin-bottom: 1rem;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p style="font-style: italic; margin-bottom: 1.5rem;">"Leur réactivité et la qualité de leur développement web sur notre plateforme SaaS sont impressionnantes. Un vrai partenaire de confiance."</p>
+          <div style="font-weight: 700; color: var(--text-primary);">Sophie Laurent</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">CTO, Retail Next Gen</div>
+        </div>
+
+        <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
+          <div style="color: var(--accent-amber); margin-bottom: 1rem;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p style="font-style: italic; margin-bottom: 1.5rem;">"La formation en cybersécurité a permis de combler nos failles critiques avant notre audit de certification ISO."</p>
+          <div style="font-weight: 700; color: var(--text-primary);">Marc Antoine Bertrand</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">Responsable IT, Santé Plus</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CTA BANNER & NEWSLETTER
+       ========================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="glass-card" style="padding: 3.5rem 2rem; background: linear-gradient(135deg, rgba(10, 102, 194, 0.25) 0%, rgba(0, 240, 255, 0.1) 100%); border-color: var(--secondary);" data-aos="zoom-in">
+        <div class="grid grid-cols-2 items-center gap-lg">
+          <div>
+            <h2 style="margin-bottom: 1rem;">Prêt à moderniser vos systèmes informatiques ?</h2>
+            <p>Demandez votre audit technique offert ou discutez en direct avec notre assistant IA <strong>Jason AI</strong>.</p>
+          </div>
+          <div class="flex justify-center" style="gap: 1rem; flex-wrap: wrap;">
+            <a href="contact.html" class="btn btn-primary btn-lg btn-glow">Obtenir un Devis Gratuit</a>
+            <a href="tel:+33189204500" class="btn btn-secondary btn-lg"><i class="fa-solid fa-phone"></i> +33 1 89 20 45 00</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER COMPONENT
+       ========================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <div class="logo-icon"><i class="fa-solid fa-microchip"></i></div>
+            <div class="logo-text">Jason<span>_INF</span></div>
+          </a>
+          <p>Votre partenaire de référence pour l'ingénierie logicielle, la cybersécurité, les réseaux et l'accompagnement Cloud moderne.</p>
+          <div class="social-links">
+            <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Services Principaux</h4>
+          <div class="footer-links">
+            <a href="services.html">Développement Web & Mobile</a>
+            <a href="services.html">Cybersécurité & PenTest</a>
+            <a href="services.html">Cloud Computing & AWS</a>
+            <a href="services.html">Administration Réseaux</a>
+            <a href="services.html">Caméras IP & Sécurité</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Liens Rapides</h4>
+          <div class="footer-links">
+            <a href="about.html">À propos de nous</a>
+            <a href="formations.html">Formations IT</a>
+            <a href="portfolio.html">Nos Réalisations</a>
+            <a href="blog.html">Actualités Tech</a>
+            <a href="faq.html">Foire Aux Questions</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Newsletter</h4>
+          <p style="font-size: 0.85rem; margin-bottom: 1rem;">Abonnez-vous pour recevoir nos analyses de sécurité et conseils IT.</p>
+          <form id="newsletter-form" style="display: flex; gap: 0.5rem;">
+            <input type="email" class="form-control" placeholder="Votre e-mail..." required style="padding: 0.6rem 0.8rem; font-size: 0.85rem;">
+            <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-arrow-right"></i></button>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 <strong>Jason_INFORMATIQUE</strong>. Tous droits réservés.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="mentions-legales.html" style="color: var(--text-muted);">Mentions Légales</a>
+          <a href="politique-confidentialite.html" style="color: var(--text-muted);">Politique de Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Retour en haut">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- WhatsApp Quick Float -->
+  <a href="https://wa.me/33600000000?text=Bonjour%20Jason_INFORMATIQUE,%20je%20souhaite%20des%20informations." target="_blank" class="whatsapp-btn" aria-label="Contacter sur WhatsApp" rel="noopener">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- ==========================================
+       SCRIPTS DE DÉPLOIEMENT
+       ========================================== -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/admin-schema.js"></script>
+  <script src="assets/js/intro-animation.js"></script>
+  <script src="assets/js/ai-assistant.js"></script>
+  <script src="assets/js/form-validation.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/animations.js"></script>
+</body>
+</html>

@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique Équipements Informatiques | Jason_INFORMATIQUE</title>
+  <meta name="description" content="Achetez votre matériel informatique d'entreprise certifié : Serveurs Dell/HP/Supermicro, Switchs & Routers Cisco/Mikrotik, Caméras IP Hikvision/Dahua, Workstations Lenovo/Dell, NAS Synology et Onduleurs APC.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/ai-assistant.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+
+  <style>
+    /* ====================================
+       PRODUCT DETAIL MODAL
+       ==================================== */
+    .product-detail-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 10, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 2500;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .product-detail-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .product-detail-modal {
+      width: min(860px, 100%);
+      max-height: 90vh;
+      background: rgba(13, 17, 30, 0.97);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: var(--radius-lg);
+      overflow-y: auto;
+      transform: translateY(40px) scale(0.96);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 60px rgba(10,102,194,0.2);
+      position: relative;
+    }
+    .product-detail-backdrop.active .product-detail-modal {
+      transform: translateY(0) scale(1);
+    }
+    .product-detail-modal::-webkit-scrollbar {
+      width: 6px;
+    }
+    .product-detail-modal::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.03);
+    }
+    .product-detail-modal::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 3px;
+    }
+
+    /* Top Light Edge */
+    .modal-top-accent {
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-purple) 100%);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    .product-detail-header {
+      padding: 1.75rem 2rem;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .modal-close-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      color: var(--accent-rose);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all var(--transition-fast);
+    }
+    .modal-close-btn:hover {
+      background: rgba(244, 63, 94, 0.25);
+      transform: rotate(90deg);
+    }
+
+    .product-detail-body {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    /* Left: Product Visual */
+    .product-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .product-icon-display {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      max-height: 260px;
+      background: linear-gradient(135deg, rgba(10, 102, 194, 0.15) 0%, rgba(0, 240, 255, 0.08) 100%);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      color: var(--secondary);
+      position: relative;
+      overflow: hidden;
+    }
+    .product-icon-display::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(0deg, rgba(0, 240, 255, 0.06) 0%, transparent 100%);
+    }
+    .product-icon-display i {
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Status Tags Row */
+    .product-status-row {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .status-tag {
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .status-available {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--accent-emerald);
+    }
+    .status-warranty {
+      background: rgba(10, 102, 194, 0.12);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--secondary);
+    }
+    .status-delivery {
+      background: rgba(124, 58, 237, 0.12);
+      border: 1px solid rgba(124, 58, 237, 0.35);
+      color: var(--accent-purple);
+    }
+
+    /* Right: Product Info */
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .spec-table th,
+    .spec-table td {
+      padding: 0.7rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.9rem;
+    }
+    .spec-table th {
+      color: var(--text-muted);
+      font-weight: 600;
+      width: 40%;
+      font-family: var(--font-body);
+    }
+    .spec-table td {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    .spec-table tr:last-child th,
+    .spec-table tr:last-child td {
+      border-bottom: none;
+    }
+    .spec-table tr:hover td,
+    .spec-table tr:hover th {
+      background: rgba(0, 240, 255, 0.04);
+    }
+
+    .spec-section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--secondary);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .highlight-item {
+      padding: 0.85rem 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+    }
+    .highlight-item:hover {
+      border-color: rgba(0, 240, 255, 0.3);
+      color: var(--text-primary);
+    }
+    .highlight-item i {
+      color: var(--secondary);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .modal-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem;
+      background: rgba(10, 102, 194, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: var(--radius-md);
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .modal-price {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--secondary);
+      line-height: 1;
+    }
+    .modal-price span {
+      font-size: 1rem;
+      color: var(--text-muted);
+      display: block;
+      font-weight: 400;
+      margin-top: 0.2rem;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* CART DRAWER */
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: min(440px, 90vw);
+      height: 100vh;
+      background: rgba(13, 17, 30, 0.96);
+      border-left: 1px solid var(--border-light);
+      backdrop-filter: blur(24px);
+      z-index: var(--z-modal);
+      display: flex;
+      flex-direction: column;
+      transition: right var(--transition-normal);
+      box-shadow: var(--shadow-lg);
+    }
+    .cart-drawer.active { right: 0; }
+
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      border-color: rgba(0, 240, 255, 0.3) !important;
+    }
+    .product-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: var(--radius-full);
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid var(--secondary);
+      color: var(--secondary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .product-price {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+    .search-box {
+      max-width: 500px;
+      margin: 0 auto 2rem auto;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 0.9rem 1.2rem 0.9rem 3rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-light);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all var(--transition-normal);
+    }
+    .search-box input:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+    }
+    .search-box i {
+      position: absolute;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    /* Click hint on card */
+    .card-click-hint {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(0deg, rgba(10, 102, 194, 0.18) 0%, transparent 100%);
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-radius: 0 0 var(--radius-md) var(--radius-md);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+    .product-icon-display:hover .card-click-hint {
+      opacity: 1;
+    }
+
+    /* Responsive modal */
+    @media (max-width: 768px) {
+      .product-detail-body {
+        grid-template-columns: 1fr;
+        padding: 1.25rem;
+      }
+      .product-detail-header {
+        padding: 1.25rem;
+      }
+      .highlights-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-icon"><i class="fa-solid fa-microchip"></i></div>
+        <div class="logo-text">Jason<span>_INF</span></div>
+      </a>
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="about.html" class="nav-link">À propos</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="boutique.html" class="nav-link active">Boutique IT</a>
+        <a href="formations.html" class="nav-link">Formations</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn btn-secondary btn-sm" id="cart-toggle-btn" aria-label="Voir le Panier">
+          <i class="fa-solid fa-cart-shopping" style="color: var(--secondary);"></i> Panier
+          <span id="cart-count-badge" style="background: var(--primary); color:#fff; border-radius:50%; padding:0.1rem 0.5rem; font-size:0.75rem; font-weight:700;">0</span>
+        </button>
+        <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Changer le thème"><i class="fa-solid fa-sun"></i></button>
+        <a href="contact.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-paper-plane"></i> Devis Express</a>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menu Mobile"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="section" style="padding-top: 140px; padding-bottom: 30px;">
+    <div class="container text-center" data-aos="fade-up">
+      <div class="badge-tag"><i class="fa-solid fa-store"></i> 24 Équipements Professionnels Certifiés — Cliquez pour voir les détails</div>
+      <h1 class="section-title">Catalogue Vente & <span class="text-brand-gradient">Matériel Informatique</span></h1>
+      <p class="section-subtitle" style="max-width: 800px; margin: 0 auto; margin-bottom: 2rem;">
+        Cliquez sur n'importe quel équipement pour consulter sa fiche technique complète, ses caractéristiques détaillées et l'ajouter au panier.
+      </p>
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="store-search-input" placeholder="Rechercher : Dell, Cisco, Hikvision, Serveur, Switch, Caméra..." />
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY FILTERS & GRID -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="flex justify-center gap-sm" style="flex-wrap: wrap; margin-bottom: 2.5rem;" id="product-filter-bar">
+        <button class="chip-btn active" data-cat="all">Tous les Équipements (24)</button>
+        <button class="chip-btn" data-cat="servers">Serveurs & Stockage NAS (6)</button>
+        <button class="chip-btn" data-cat="networking">Réseaux, Switchs & Wifi (6)</button>
+        <button class="chip-btn" data-cat="security">Caméras IP & Sécurité (5)</button>
+        <button class="chip-btn" data-cat="laptops">Workstations & Laptops (4)</button>
+        <button class="chip-btn" data-cat="accessories">Onduleurs & Baies (3)</button>
+      </div>
+
+      <div class="grid grid-cols-3 gap-lg" id="products-grid"></div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       PRODUCT DETAIL MODAL (Fiche Technique Complète)
+       ====================================================== -->
+  <div class="product-detail-backdrop" id="product-detail-backdrop" role="dialog" aria-modal="true" aria-label="Fiche Technique Produit">
+    <div class="product-detail-modal" id="product-detail-modal">
+      <!-- Filled dynamically -->
+    </div>
+  </div>
+
+  <!-- CART DRAWER -->
+  <div class="cart-drawer" id="cart-drawer">
+    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; justify-content: space-between;">
+      <h3 style="display: flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-cart-shopping" style="color: var(--secondary);"></i> Votre Panier Matériel</h3>
+      <button id="cart-close-btn" class="ai-close-btn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div style="flex: 1; padding: 1.5rem; overflow-y: auto;" id="cart-items-container"></div>
+    <div style="padding: 1.5rem; border-top: 1px solid var(--border-light); background: rgba(6, 8, 16, 0.8);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 1.1rem; font-weight: 700;">
+        <span>Total Équipements :</span>
+        <span id="cart-total-price" style="color: var(--secondary); font-size: 1.4rem;">0 €</span>
+      </div>
+      <button id="cart-checkout-btn" class="btn btn-primary btn-lg btn-glow" style="width: 100%;">
+        Valider la Commande / Devis Matériel <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 <strong>Jason_INFORMATIQUE</strong>. Tous droits réservés.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="mentions-legales.html" style="color: var(--text-muted);">Mentions Légales</a>
+          <a href="politique-confidentialite.html" style="color: var(--text-muted);">Politique de Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
+  <a href="https://wa.me/33600000000" target="_blank" class="whatsapp-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <!-- SCRIPTS -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/admin-schema.js"></script>
+  <script src="assets/js/ai-assistant.js"></script>
+  <script src="assets/js/form-validation.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/animations.js"></script>
+
+  <script>
+    /* ============================================================
+       BOUTIQUE - Store Logic (Filter, Search, Modal, Cart)
+       ============================================================ */
+    let cart = [];
+    let currentCategory = 'all';
+
+    // Category icon mapping
+    const categoryLabels = {
+      servers:      { icon: 'fa-server',         label: 'Serveurs & Stockage' },
+      networking:   { icon: 'fa-network-wired',  label: 'Réseaux & Wifi' },
+      security:     { icon: 'fa-video',          label: 'Sécurité & Vidéosurveillance' },
+      laptops:      { icon: 'fa-laptop',         label: 'Workstations & Laptops' },
+      accessories:  { icon: 'fa-plug',           label: 'Onduleurs & Accessoires' }
+    };
+
+    // Spec label mapping per category
+    function buildSpecTable(product) {
+      const specRows = product.specs.map(s => {
+        const parts = s.split(/(?<=^\S+)\s/); // Try to split on first space for key/value
+        // Use the full spec string as value with auto-generated row name from index
+        return s;
+      });
+
+      return specRows.map((spec, i) => {
+        const labels = ['Spécification 1', 'Spécification 2', 'Spécification 3', 'Spécification 4'];
+        // Try to split by first colon or specific keywords for nice display
+        const colonIdx = spec.indexOf(':');
+        let th = labels[i] || `Spec. ${i+1}`;
+        let td = spec;
+        if (colonIdx > 0 && colonIdx < 30) {
+          th = spec.slice(0, colonIdx).trim();
+          td = spec.slice(colonIdx + 1).trim();
+        }
+        return `<tr><th><i class="fa-solid fa-circle-dot" style="color:var(--secondary);font-size:0.6rem;margin-right:0.4rem;"></i>${th}</th><td>${td}</td></tr>`;
+      }).join('');
+    }
+
+    // Build additional highlights based on category
+    function buildHighlights(product) {
+      const cat = product.category;
+      const highlights = [];
+
+      if (cat === 'servers') {
+        highlights.push(
+          { icon: 'fa-award',          text: 'Équipement Certifié Professionnel' },
+          { icon: 'fa-shield-halved',  text: 'Support & Garantie Constructeur' },
+          { icon: 'fa-truck-fast',     text: 'Livraison & Installation sur site' },
+          { icon: 'fa-rotate',         text: 'Hot-Swap & Redondance disponibles' }
+        );
+      } else if (cat === 'networking') {
+        highlights.push(
+          { icon: 'fa-lock',           text: 'Chiffrement réseau WPA3 / IPsec' },
+          { icon: 'fa-sliders',        text: 'Interface d\'administration Web & CLI' },
+          { icon: 'fa-headset',        text: 'Support Technique Jason_INF 24/7' },
+          { icon: 'fa-plug',           text: 'Installation & Configuration incluse' }
+        );
+      } else if (cat === 'security') {
+        highlights.push(
+          { icon: 'fa-video',          text: 'Compatible ONVIF & RTSP' },
+          { icon: 'fa-cloud-arrow-up', text: 'Stockage NVR Local & Cloud disponible' },
+          { icon: 'fa-mobile-screen',  text: 'Application Mobile iOS / Android' },
+          { icon: 'fa-screwdriver-wrench', text: 'Installation complète par nos techniciens' }
+        );
+      } else if (cat === 'laptops') {
+        highlights.push(
+          { icon: 'fa-certificate',    text: 'Matériel Neuf & Garanti 12-36 Mois' },
+          { icon: 'fa-hard-drive',     text: 'Stockage SSD NVMe ultra-rapide' },
+          { icon: 'fa-microchip',      text: 'Processeur certifié pour usages pro' },
+          { icon: 'fa-headset',        text: 'Assistance configuration OS incluse' }
+        );
+      } else {
+        highlights.push(
+          { icon: 'fa-bolt',           text: 'Protection contre coupures courant' },
+          { icon: 'fa-wave-square',    text: 'Onde Sinusoïdale Pure qualité pro' },
+          { icon: 'fa-gear',           text: 'Supervision SNMP & Logiciel inclus' },
+          { icon: 'fa-truck-fast',     text: 'Livraison & Mise en service possible' }
+        );
+      }
+
+      return highlights.map(h => `
+        <div class="highlight-item">
+          <i class="fa-solid ${h.icon}"></i>
+          <span>${h.text}</span>
+        </div>
+      `).join('');
+    }
+
+    // ============================================================
+    // OPEN PRODUCT DETAIL MODAL
+    // ============================================================
+    function openProductDetail(productId) {
+      const product = JasonData.products.find(p => p.id === productId);
+      if (!product) return;
+
+      const backdrop = document.getElementById('product-detail-backdrop');
+      const modal = document.getElementById('product-detail-modal');
+      const catInfo = categoryLabels[product.category] || { icon: 'fa-box', label: 'Équipement' };
+
+      modal.innerHTML = `
+        <!-- Top Accent Bar -->
+        <div class="modal-top-accent"></div>
+
+        <!-- Modal Header -->
+        <div class="product-detail-header">
+          <div>
+            <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.5rem;">
+              <span class="badge-tag" style="margin-bottom:0; font-size:0.72rem;">
+                <i class="fa-solid ${catInfo.icon}"></i> ${catInfo.label}
+              </span>
+              <span style="padding: 0.3rem 0.8rem; border-radius: var(--radius-full); background: rgba(0,240,255,0.15); border: 1px solid rgba(0,240,255,0.35); color: var(--secondary); font-size: 0.75rem; font-weight: 700; text-transform:uppercase;">${product.badge}</span>
+            </div>
+            <h2 style="font-size: clamp(1.2rem, 2.5vw, 1.6rem); line-height:1.3; margin-bottom:0.4rem;">${product.name}</h2>
+            <p style="font-size:0.9rem; color:var(--text-secondary);">${product.desc}</p>
+          </div>
+          <button class="modal-close-btn" id="modal-close-btn" aria-label="Fermer">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="product-detail-body">
+
+          <!-- LEFT: Visual + Status -->
+          <div class="product-visual">
+            <div class="product-icon-display">
+              <i class="fa-solid ${product.icon}"></i>
+            </div>
+
+            <div class="product-status-row">
+              <span class="status-tag status-available"><i class="fa-solid fa-circle-check"></i> En Stock</span>
+              <span class="status-tag status-warranty"><i class="fa-solid fa-shield-halved"></i> Garantie Incluse</span>
+              <span class="status-tag status-delivery"><i class="fa-solid fa-truck-fast"></i> Livraison rapide</span>
+            </div>
+
+            <!-- Additional Highlights -->
+            <div>
+              <div class="spec-section-title"><i class="fa-solid fa-star"></i> Points Forts</div>
+              <div class="highlights-grid">
+                ${buildHighlights(product)}
+              </div>
+            </div>
+
+            <!-- Contact / WhatsApp Quick Action -->
+            <div style="padding: 1rem; background: rgba(37, 211, 102, 0.08); border: 1px solid rgba(37, 211, 102, 0.25); border-radius: var(--radius-md); display:flex; align-items:center; gap:0.75rem;">
+              <i class="fa-brands fa-whatsapp" style="font-size:1.6rem; color:#25D366;"></i>
+              <div>
+                <div style="font-weight:700; font-size:0.9rem;">Besoin de conseils ?</div>
+                <a href="https://wa.me/33600000000?text=Bonjour, je souhaite des infos sur le ${encodeURIComponent(product.name)}" target="_blank" style="color:#25D366; font-size:0.82rem; text-decoration:underline;">Discuter sur WhatsApp</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Full Tech Specs -->
+          <div class="product-info">
+
+            <!-- Caractéristiques Techniques -->
+            <div>
+              <div class="spec-section-title"><i class="fa-solid fa-microchip"></i> Caractéristiques Techniques</div>
+              <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-light); border-radius: var(--radius-md); overflow:hidden;">
+                <table class="spec-table">
+                  <tbody>
+                    ${product.specs.map((spec, i) => {
+                      // Parse spec strings intelligently
+                      const colonIdx = spec.indexOf(':');
+                      let key, val;
+                      if (colonIdx > 0 && colonIdx < 35) {
+                        key = spec.slice(0, colonIdx).trim();
+                        val = spec.slice(colonIdx + 1).trim();
+                      } else {
+                        // Common patterns
+                        const patterns = [
+                          { regex: /^([\d]x\s+)(.+)$/, kPfx: 'Quantité' },
+                        ];
+                        // Fallback: use position-based labels per category
+                        const keysByCategory = {
+                          servers:     ['Processeur', 'Mémoire RAM', 'Stockage', 'Garantie'],
+                          networking:  ['Débit / Ports', 'Ports Haut Débit', 'Protocoles', 'Licence / Logiciel'],
+                          security:    ['Résolution', 'Vision Nocturne', 'Analyse IA', 'Protection'],
+                          laptops:     ['Processeur', 'Mémoire RAM', 'GPU / Graphique', 'Écran / Affichage'],
+                          accessories: ['Puissance', 'Type d\'onde', 'Interface réseau', 'Autonomie / Format']
+                        };
+                        key = (keysByCategory[product.category] || [])[i] || `Spécification ${i + 1}`;
+                        val = spec;
+                      }
+                      return `<tr><th>${key}</th><td><strong>${val}</strong></td></tr>`;
+                    }).join('')}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Description Détaillée -->
+            <div>
+              <div class="spec-section-title"><i class="fa-solid fa-circle-info"></i> Description Détaillée</div>
+              <div style="padding: 1.1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); border-radius: var(--radius-md); color: var(--text-secondary); font-size:0.9rem; line-height:1.7;">
+                ${product.desc}
+                <br><br>
+                Cet équipement est soigneusement sélectionné par nos ingénieurs et vendu avec une garantie constructeur. Notre équipe peut assurer la livraison, l'installation physique et la configuration complète sur votre site.
+              </div>
+            </div>
+
+            <!-- Services Associés -->
+            <div>
+              <div class="spec-section-title"><i class="fa-solid fa-link"></i> Services Associés</div>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                <span class="chip-btn" style="cursor:default;"><i class="fa-solid fa-screwdriver-wrench"></i> Installation & Config</span>
+                <span class="chip-btn" style="cursor:default;"><i class="fa-solid fa-headset"></i> Maintenance 24/7</span>
+                <span class="chip-btn" style="cursor:default;"><i class="fa-solid fa-rotate"></i> Garantie Étendue</span>
+                <span class="chip-btn" style="cursor:default;"><i class="fa-solid fa-truck-fast"></i> Livraison Pro</span>
+              </div>
+            </div>
+
+            <!-- Price & Actions Row -->
+            <div class="modal-price-row">
+              <div>
+                <div class="modal-price">${product.price} ${product.currency} <span>Prix HT • TVA non incluse</span></div>
+              </div>
+              <div class="modal-actions">
+                <button class="btn btn-primary btn-glow" onclick="addToCartFromModal('${product.id}')">
+                  <i class="fa-solid fa-cart-plus"></i> Ajouter au Panier
+                </button>
+                <a href="contact.html?service=devis-equipement&product=${encodeURIComponent(product.name)}" class="btn btn-secondary">
+                  <i class="fa-solid fa-file-invoice"></i> Devis
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      `;
+
+      backdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      // Bind close button
+      document.getElementById('modal-close-btn').addEventListener('click', closeProductDetail);
+    }
+
+    function closeProductDetail() {
+      document.getElementById('product-detail-backdrop').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close modal when clicking backdrop
+    document.getElementById('product-detail-backdrop').addEventListener('click', (e) => {
+      if (e.target.id === 'product-detail-backdrop') closeProductDetail();
+    });
+
+    // ESC key closes modal
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeProductDetail();
+    });
+
+    // ============================================================
+    // RENDER PRODUCTS GRID
+    // ============================================================
+    function renderProducts() {
+      const grid = document.getElementById('products-grid');
+      const searchVal = (document.getElementById('store-search-input')?.value || '').toLowerCase().trim();
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      let filtered = currentCategory === 'all' 
+        ? JasonData.products 
+        : JasonData.products.filter(p => p.category === currentCategory);
+
+      if (searchVal) {
+        filtered = filtered.filter(p => 
+          p.name.toLowerCase().includes(searchVal) ||
+          p.desc.toLowerCase().includes(searchVal) ||
+          p.specs.some(s => s.toLowerCase().includes(searchVal))
+        );
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 5rem 1rem;">
+            <i class="fa-solid fa-box-open" style="font-size: 4rem; color: var(--border-light); margin-bottom: 1rem;"></i>
+            <h3>Aucun équipement trouvé</h3>
+            <p>Essayez une autre recherche ou sélectionnez une autre catégorie.</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach((p, idx) => {
+        const card = document.createElement('div');
+        card.className = 'glass-card product-card';
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `Voir la fiche technique : ${p.name}`);
+
+        card.innerHTML = `
+          <div style="position: relative;">
+            <div class="product-badge">${p.badge}</div>
+            <div class="product-icon-display" style="height: 150px; background: rgba(10, 102, 194, 0.12); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-size: 3.5rem; color: var(--secondary); cursor: pointer; position:relative; overflow:hidden; border: 1px solid var(--border-light);">
+              <i class="fa-solid ${p.icon}"></i>
+              <div style="position:absolute; bottom:0; left:0; right:0; padding:0.5rem; text-align:center; font-size:0.72rem; color:var(--text-muted); background:linear-gradient(0deg, rgba(10,102,194,0.2), transparent);">
+                <i class="fa-solid fa-expand"></i> Cliquer pour la fiche technique
+              </div>
+            </div>
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">${p.name}</h3>
+            <p style="font-size: 0.85rem; margin-bottom: 1rem; color: var(--text-secondary); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${p.desc}</p>
+            <ul class="service-features" style="margin-bottom: 1rem;">
+              ${p.specs.slice(0, 3).map(s => `<li><i class="fa-solid fa-check"></i> ${s}</li>`).join('')}
+              ${p.specs.length > 3 ? `<li style="color:var(--text-muted); font-style:italic;"><i class="fa-solid fa-ellipsis"></i> +${p.specs.length - 3} autres specs — voir la fiche</li>` : ''}
+            </ul>
+          </div>
+          <div style="border-top: 1px solid var(--border-light); padding-top: 1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: auto;">
+            <div class="product-price">${p.price} ${p.currency}</div>
+            <div style="display:flex; gap:0.4rem;">
+              <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation(); openProductDetail('${p.id}')" title="Voir Fiche Technique">
+                <i class="fa-solid fa-expand"></i>
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); addToCart('${p.id}')">
+                <i class="fa-solid fa-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        `;
+
+        // Clicking anywhere on card opens detail
+        card.addEventListener('click', () => openProductDetail(p.id));
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProductDetail(p.id); }
+        });
+
+        grid.appendChild(card);
+      });
+    }
+
+    // ============================================================
+    // CART FUNCTIONS
+    // ============================================================
+    function addToCart(productId) {
+      const product = JasonData.products.find(p => p.id === productId);
+      if (!product) return;
+
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+
+      updateCartUI();
+      document.getElementById('cart-drawer').classList.add('active');
+    }
+
+    function addToCartFromModal(productId) {
+      addToCart(productId);
+      closeProductDetail();
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const container = document.getElementById('cart-items-container');
+      const countBadge = document.getElementById('cart-count-badge');
+      const totalPriceEl = document.getElementById('cart-total-price');
+
+      let totalQty = 0;
+      let totalPrice = 0;
+      container.innerHTML = '';
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding: 3rem 1rem; color: var(--text-muted);">
+            <i class="fa-solid fa-basket-shopping" style="font-size: 3rem; margin-bottom: 1rem; color: var(--border-light);"></i>
+            <p>Votre panier est vide.<br>Cliquez sur un produit pour consulter sa fiche et l'ajouter.</p>
+          </div>
+        `;
+      } else {
+        cart.forEach(item => {
+          totalQty += item.qty;
+          totalPrice += item.price * item.qty;
+
+          const itemEl = document.createElement('div');
+          itemEl.style.cssText = 'display:flex; justify-content:space-between; align-items:center; padding: 0.85rem 0; border-bottom: 1px solid var(--border-light); gap:0.5rem;';
+          itemEl.innerHTML = `
+            <div style="flex:1; min-width:0;">
+              <div style="font-weight:700; font-size:0.9rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${item.name}</div>
+              <div style="font-size:0.82rem; color:var(--text-secondary); margin-top:0.15rem;">${item.qty} × ${item.price.toLocaleString('fr-FR')} €</div>
+            </div>
+            <div style="font-weight:700; color:var(--secondary); white-space:nowrap;">${(item.qty * item.price).toLocaleString('fr-FR')} €</div>
+            <button onclick="removeFromCart('${item.id}')" style="color:var(--accent-rose); cursor:pointer; font-size:1rem; flex-shrink:0; padding:0.2rem;">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          `;
+          container.appendChild(itemEl);
+        });
+      }
+
+      countBadge.textContent = totalQty;
+      totalPriceEl.textContent = `${totalPrice.toLocaleString('fr-FR')} €`;
+    }
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProducts();
+
+      // Category filter tabs
+      document.querySelectorAll('#product-filter-bar button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#product-filter-bar button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCategory = btn.getAttribute('data-cat');
+          renderProducts();
+        });
+      });
+
+      // Search bar
+      document.getElementById('store-search-input')?.addEventListener('input', renderProducts);
+
+      // Cart toggle
+      document.getElementById('cart-toggle-btn').addEventListener('click', () => document.getElementById('cart-drawer').classList.add('active'));
+      document.getElementById('cart-close-btn').addEventListener('click', () => document.getElementById('cart-drawer').classList.remove('active'));
+
+      // Cart checkout
+      document.getElementById('cart-checkout-btn').addEventListener('click', () => {
+        if (cart.length === 0) {
+          alert("Votre panier est vide. Veuillez ajouter au moins un équipement.");
+          return;
+        }
+        window.location.href = "contact.html?type=equipement_order";
+      });
+
+      // Init empty cart display
+      updateCartUI();
+    });
+  </script>
+</body>
+</html>

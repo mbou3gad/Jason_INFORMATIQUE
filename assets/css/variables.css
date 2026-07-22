@@ -1,0 +1,117 @@
+/* ==========================================================================
+   JASON_INFORMATIQUE - Design System Variables & Color Tokens
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Dark Theme (Default) */
+  --bg-primary: #060810;
+  --bg-secondary: #0D111E;
+  --bg-tertiary: #141A2E;
+  --bg-card: rgba(13, 17, 30, 0.75);
+  --bg-card-hover: rgba(20, 26, 46, 0.85);
+  --bg-glass: rgba(15, 22, 40, 0.6);
+  
+  /* Brand Accent Colors */
+  --primary: #0A66C2;
+  --primary-light: #2582E6;
+  --primary-dark: #07498C;
+  --primary-glow: rgba(10, 102, 194, 0.4);
+  
+  --secondary: #00F0FF;
+  --secondary-glow: rgba(0, 240, 255, 0.35);
+  
+  --accent-purple: #7C3AED;
+  --accent-emerald: #10B981;
+  --accent-amber: #F59E0B;
+  --accent-rose: #F43F5E;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #0A66C2 0%, #00F0FF 100%);
+  --gradient-dark: linear-gradient(180deg, #060810 0%, #0D111E 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+  --gradient-glow: radial-gradient(circle at center, rgba(10, 102, 194, 0.15) 0%, transparent 70%);
+  --gradient-text: linear-gradient(135deg, #FFFFFF 0%, #A1A1AA 100%);
+  --gradient-brand-text: linear-gradient(135deg, #00F0FF 0%, #0A66C2 50%, #7C3AED 100%);
+  
+  /* Text Colors */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-inverse: #0F172A;
+  
+  /* Borders & Shadows */
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(0, 240, 255, 0.5);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 25px rgba(10, 102, 194, 0.35);
+  --shadow-cyan-glow: 0 0 25px rgba(0, 240, 255, 0.3);
+  
+  /* Fonts */
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Responsive Font Sizes */
+  --fs-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --fs-sm: clamp(0.875rem, 0.825rem + 0.25vw, 1rem);
+  --fs-md: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --fs-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.35rem);
+  --fs-xl: clamp(1.35rem, 1.2rem + 0.75vw, 1.75rem);
+  --fs-2xl: clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem);
+  --fs-3xl: clamp(2.25rem, 1.8rem + 2.25vw, 3.5rem);
+  --fs-hero: clamp(2.75rem, 2.2rem + 3vw, 4.75rem);
+  
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  
+  /* Layout */
+  --container-max: 1320px;
+  --header-height: 80px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Z-Indices */
+  --z-back: -1;
+  --z-normal: 1;
+  --z-sticky: 100;
+  --z-header: 1000;
+  --z-modal: 2000;
+  --z-ai: 3000;
+  --z-intro: 9999;
+}
+
+/* Light Theme Variables */
+[data-theme="light"] {
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #EDF2F7;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --text-inverse: #F8FAFC;
+  
+  --border-light: rgba(15, 23, 42, 0.08);
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.1);
+  --shadow-lg: 0 16px 48px rgba(15, 23, 42, 0.12);
+  --gradient-text: linear-gradient(135deg, #0F172A 0%, #475569 100%);
+}
