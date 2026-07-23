@@ -513,7 +513,7 @@ const JasonData = {
  price: 3450,
  currency: "FCFA",
  badge: "Neuf Pro",
- icon: "fa-server",
+ 
  image: "images/dell-poweredge-r750.jpg",
  specs: [
    "2x Intel Xeon Silver 4314",
