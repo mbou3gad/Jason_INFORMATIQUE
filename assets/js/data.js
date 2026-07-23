@@ -23,7 +23,7 @@ const JasonData = {
  title: "Développement Web",
  category: "development",
  icon: "fa-code",
- image: "images/developpement-web.jpg",
+ image: "images/founder-jason.jpg",
  shortDesc: "Sites vitrines, plateformes e-commerce et applications web sur-mesure.",
  features: [
    "Architecture Microservices / REST",
