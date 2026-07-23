@@ -33,7 +33,18 @@ const JasonData = {
  ],
  popular: true
 },
-    { id: "dev-mobile", title: "Développement Mobile", category: "development", icon: "fa-mobile-screen-button", shortDesc: "Applications natives et hybrides iOS & Android performantes.", features: ["Applications iOS & Android", "Interface fluide & réactive", "Mode Hors-Ligne & Sync Cloud", "Notifications Push & Analytics"], popular: true },
+    { id: "dev-mobile",
+     title: "Développement Mobile",
+     category: "development",
+     icon: "fa-mobile-screen-button",
+     shortDesc: "Applications natives et hybrides iOS & Android performantes.",
+     features: [
+       "Applications iOS & Android",
+       "Interface fluide & réactive",
+       "Mode Hors-Ligne & Sync Cloud",
+       "Notifications Push & Analytics"],
+     popular: true },
+    
     { id: "admin-sys", title: "Administration Systèmes", category: "infrastructure", icon: "fa-server", shortDesc: "Gestion et maintenance globale de vos infrastructures serveurs Linux & Windows.", features: ["Linux / Windows Server", "Virtualisation Docker", "Supervision 24/7 Zabbix", "Plan de Reprise d'Activité"], popular: false },
     { id: "admin-reseau", title: "Administration Réseaux", category: "infrastructure", icon: "fa-network-wired", shortDesc: "Conception, routage, VLAN et sécurisation de vos réseaux d'entreprise.", features: ["VLAN, VPN IPSec/WireGuard", "Routage BGP, OSPF & QoS", "Firewalling", "Wifi Professionnel Mesh"], popular: false },
     { id: "cybersecurite", title: "Cybersécurité", category: "security", icon: "fa-shield-halved", shortDesc: "Audits, tests d'intrusion et protection contre les cybermenaces.", features: ["Audit OWASP & PenTest", "Protection Anti-Ransomware", "Conformité RGPD & ISO 27001", "SOC & Gestion Incidents"], popular: true },
