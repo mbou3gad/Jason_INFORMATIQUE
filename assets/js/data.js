@@ -514,7 +514,7 @@ const JasonData = {
  currency: "FCFA",
  badge: "Neuf Pro",
  
- image: "images/dell-poweredge-r750.jpg",
+ image: "images/founder-jason.jpg",
  specs: [
    "2x Intel Xeon Silver 4314",
    "64 GB RAM DDR4 ECC",
