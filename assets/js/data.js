@@ -7,10 +7,10 @@ const JasonData = {
   company: {
     name: "Jason_INFORMATIQUE",
     slogan: "Votre partenaire pour des solutions informatiques modernes.",
-    email: "contact@jason-informatique.com",
-    phone: "+33 1 89 20 45 00",
-    whatsapp: "+33600000000",
-    address: "124 Avenue des Technologies, 75008 Paris, France",
+    email: "jasoninformatique7@gmail.com",
+    phone: "+242 06 781 47 04",
+    whatsapp: "+242067814704",
+    address: "MPILA ISG, Brazzaville",
     workingHours: "Lun - Sam: 08h00 - 19h00 (Support 24/7 pour contrats)"
   },
 
@@ -526,5 +526,15 @@ const JasonData = {
     { q: "Comment fonctionne l'assistant IA Jason AI ?", a: "Jason AI répond instantanément à vos questions sur nos services, le matériel disponible et prépare vos devis 24/7." }
   ]
 };
+
+// Conversion automatique Euro vers FCFA
+JasonData.formations.forEach(f => {
+    let euro = parseInt(f.price.replace(/\D/g,''));
+    f.priceFCFA = (euro * 656).toLocaleString('fr-FR') + " FCFA";
+});
+
+JasonData.products.forEach(p => {
+    p.priceFCFA = (p.price * 656).toLocaleString('fr-FR') + " FCFA";
+});
 
 Object.freeze(JasonData);
