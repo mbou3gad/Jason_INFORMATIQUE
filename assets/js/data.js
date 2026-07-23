@@ -18,7 +18,7 @@ const JasonData = {
   // 19 SERVICES CATALOG
   // ============================================================
   services: [
-  {
+ {
  id: "dev-web",
  title: "Développement Web",
  category: "development",
