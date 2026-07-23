@@ -506,7 +506,23 @@ const JasonData = {
 
   // 24 Equipment Products
   products: [
-    { id: "prod-1", name: "Serveur Rack Dell PowerEdge R750", category: "servers", price: 3450, currency: "FCFA", badge: "Neuf Pro", icon: "fa-server", specs: ["2x Intel Xeon Silver 4314", "64 GB RAM DDR4 ECC", "2x 960GB SSD NVMe RAID", "Garantie 3 ans J+1"], desc: "Serveur bi-pro haute densité idéal pour virtualisation Proxmox, VMware et bases de données d'entreprise." },
+    {
+ id: "prod-1",
+ name: "Serveur Rack Dell PowerEdge R750",
+ category: "servers",
+ price: 3450,
+ currency: "FCFA",
+ badge: "Neuf Pro",
+ icon: "fa-server",
+ image: "images/dell-poweredge-r750.jpg",
+ specs: [
+   "2x Intel Xeon Silver 4314",
+   "64 GB RAM DDR4 ECC",
+   "2x 960GB SSD NVMe RAID",
+   "Garantie 3 ans J+1"
+ ],
+ desc: "Serveur bi-pro haute densité idéal pour virtualisation Proxmox, VMware et bases de données d'entreprise."
+},
     { id: "prod-2", name: "Serveur Tour HP ProLiant ML350 Gen11", category: "servers", price: 2890, currency: "€", badge: "En Stock", icon: "fa-server", specs: ["Intel Xeon Gold 5416S", "32 GB RAM DDR5", "4x 2TB SAS 12G Hot-Plug", "Alimentation Redondante 800W"], desc: "Serveur tour ultra-silencieux et évolutif conçu pour les PME et bureaux distants." },
     { id: "prod-3", name: "Serveur Lame Cisco UCS B200 M6", category: "servers", price: 4200, currency: "€", badge: "Enterprise", icon: "fa-server", specs: ["Dual Intel Xeon Platinum", "128 GB RAM DDR4", "Cisco VIC 1440 Modular", "Châssis Blade Compatible"], desc: "Serveur lame hautes performances pour infrastructures de datacenters et cloud privés." },
     { id: "prod-4", name: "NAS Synology DiskStation DS1821+ (8 Baies)", category: "servers", price: 1150, currency: "€", badge: "Best Seller", icon: "fa-hard-drive", specs: ["8 Baies SATA Hot-Swap", "AMD Ryzen V1500B Quad-Core", "4x Ports 1GbE / Slot PCIe 10G", "Dual Cache M.2 NVMe"], desc: "Solution NAS centralisé de sauvegarde automatisée immuable avec chiffrement AES-256." },
