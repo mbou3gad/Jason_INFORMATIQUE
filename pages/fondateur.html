@@ -1,0 +1,738 @@
+﻿<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gad Jason MBOU — Fondateur de Jason_INFORMATIQUE</title>
+  <meta name="description" content="Profil d'expert et biographie de Gad Jason MBOU, Administrateur Systèmes et Réseaux, Formateur IT et fondateur de Jason_INFORMATIQUE à Brazzaville.">
+  <meta name="keywords" content="Gad Jason MBOU, Jason_INFORMATIQUE, fondateur, administrateur systèmes et réseaux, formateur informatique, Brazzaville, Congo">
+  <meta property="og:title" content="Gad Jason MBOU — Fondateur de Jason_INFORMATIQUE">
+  <meta property="og:description" content="Découvrez le parcours académique, l'expertise et la vision de Gad Jason MBOU, fondateur de Jason_INFORMATIQUE.">
+  <meta property="og:type" content="profile">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    /* Spécificités page Fondateur */
+    .founder-hero-container {
+      background: linear-gradient(135deg, var(--blue-night) 0%, #0c2340 50%, var(--blue-dark) 100%);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .founder-hero-container::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(10,102,194,0.35) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .founder-main-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .founder-photo-box {
+      width: 100%;
+      height: 350px;
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.06);
+      border: 2px dashed rgba(255,255,255,0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: rgba(255,255,255,0.6);
+      position: relative;
+      text-align: center;
+      padding: 24px;
+    }
+    .founder-photo-box .photo-badge {
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--blue-primary);
+      color: white;
+      padding: 6px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    }
+    .founder-quote-banner {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-left: 5px solid var(--blue-primary);
+      border-radius: var(--radius-lg);
+      padding: 32px 36px;
+      position: relative;
+      margin: 40px 0;
+      box-shadow: var(--shadow-md);
+    }
+    .founder-quote-banner svg.quote-icon {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      opacity: 0.12;
+      color: var(--blue-primary);
+    }
+    .academic-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      padding-left: 28px;
+    }
+    .academic-timeline::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      bottom: 10px;
+      left: 9px;
+      width: 2px;
+      background: var(--blue-primary);
+    }
+    .academic-item {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+    .academic-item::before {
+      content: '';
+      position: absolute;
+      left: -27px;
+      top: 24px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      border: 3px solid var(--blue-primary);
+    }
+    .skill-grid-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .skill-grid-card:hover {
+      border-color: var(--blue-primary);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .skill-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: var(--blue-light);
+      color: var(--blue-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      transition: all var(--transition-fast);
+    }
+    .skill-grid-card:hover .skill-icon-wrap {
+      background: var(--blue-primary);
+      color: white;
+    }
+    .social-placeholder-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.8rem;
+      transition: all var(--transition-fast);
+    }
+    .social-placeholder-chip:hover {
+      background: rgba(255,255,255,0.15);
+      color: white;
+    }
+    @media (max-width: 900px) {
+      .founder-main-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .founder-photo-box {
+        max-width: 280px;
+        margin: 0 auto;
+      }
+      .social-links-wrap {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+  <nav class="nav-wrapper">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-icon">JI</div>
+      <div>
+        <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+        <div class="nav-logo-sub">Solutions informatiques</div>
+      </div>
+    </a>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="../index.html" class="nav-link">Accueil</a></li>
+      <li class="nav-item">
+        <a href="services.html" class="nav-link">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="services.html#maintenance" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div><div class="dropdown-item-text">Maintenance informatique</div><div class="dropdown-item-desc">Réparation, diagnostic, optimisation</div></div></a>
+          <a href="services.html#reseaux" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div><div><div class="dropdown-item-text">Systèmes & Réseaux</div><div class="dropdown-item-desc">Administration, configuration</div></div></a>
+          <a href="services.html#cybersecurite" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="dropdown-item-text">Cybersécurité</div><div class="dropdown-item-desc">Audit, protection, sécurisation</div></div></a>
+          <a href="services.html#developpement" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div><div class="dropdown-item-text">Développement web</div><div class="dropdown-item-desc">Sites, applications, outils</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="reparation.html" class="nav-link">Réparation</a></li>
+      <li class="nav-item"><a href="boutique.html" class="nav-link">Boutique</a></li>
+      <li class="nav-item"><a href="formations.html" class="nav-link">Formations</a></li>
+      <li class="nav-item"><a href="guides.html" class="nav-link">Guides</a></li>
+      <li class="nav-item"><a href="assistance.html" class="nav-link">Assistance</a></li>
+      <li class="nav-item">
+        <a href="entreprises.html" class="nav-link">Entreprises <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="entreprises.html#pro" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div><div class="dropdown-item-text">Jason PRO</div><div class="dropdown-item-desc">Solutions entreprises</div></div></a>
+          <a href="entreprises.html#contrats" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="dropdown-item-text">Contrats de maintenance</div><div class="dropdown-item-desc">Offres sur mesure</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="a-propos.html" class="nav-link active">À propos <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="a-propos.html" class="dropdown-item"><div class="dropdown-item-text">À propos de nous</div></a>
+          <a href="fondateur.html" class="dropdown-item"><div class="dropdown-item-text">Le fondateur</div></a>
+          <a href="publications.html" class="dropdown-item"><div class="dropdown-item-text">Publications</div></a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-search-btn search-open-btn" title="Rechercher (Ctrl+K)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <a href="boutique.html#panier" class="nav-cart-btn" title="Panier">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge cart-count" style="display:none">0</span>
+      </a>
+      <button class="theme-toggle" title="Changer le thème">
+        <svg class="theme-icon sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="connexion.html" class="btn-connexion">Connexion</a>
+      <a href="contact.html#devis" class="btn-devis">Demander un devis</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-header">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">JI</div>
+      <div>
+        <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+      </div>
+    </div>
+  </div>
+  <a href="../index.html" class="mobile-nav-link">Accueil</a>
+  <a href="services.html" class="mobile-nav-link">Services</a>
+  <a href="reparation.html" class="mobile-nav-link">Réparation</a>
+  <a href="boutique.html" class="mobile-nav-link">Boutique</a>
+  <a href="formations.html" class="mobile-nav-link">Formations</a>
+  <a href="guides.html" class="mobile-nav-link">Guides & Tutoriels</a>
+  <a href="assistance.html" class="mobile-nav-link">Assistance</a>
+  <a href="entreprises.html" class="mobile-nav-link">Entreprises</a>
+  <a href="a-propos.html" class="mobile-nav-link">À propos</a>
+  <a href="fondateur.html" class="mobile-nav-link active">Le Fondateur</a>
+  <a href="publications.html" class="mobile-nav-link">Publications</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+  <div class="mobile-menu-actions">
+    <a href="connexion.html" class="btn btn-outline btn-sm">Connexion</a>
+    <a href="contact.html#devis" class="btn btn-primary btn-sm">Demander un devis</a>
+  </div>
+</div>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <svg class="search-icon-input" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" class="search-input" id="search-input" placeholder="Rechercher un service, un guide, une formation..." autocomplete="off">
+    <button class="search-close" id="search-close" aria-label="Fermer la recherche">✕</button>
+  </div>
+  <div class="search-suggestions">
+    <div class="search-suggestion">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Parcours et compétences de Gad Jason MBOU</span>
+    </div>
+    <div class="search-suggestion">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Administration Systèmes et Réseaux</span>
+    </div>
+    <div class="search-suggestion">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Formations assurées par le fondateur</span>
+    </div>
+  </div>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-label">LE FONDATEUR</div>
+    <h1>Gad Jason MBOU</h1>
+    <p>Administrateur systèmes et réseaux · Formateur en informatique · Bâtisseur de solutions numériques durables au Congo.</p>
+  </div>
+</section>
+
+<!-- Breadcrumb -->
+<div class="container" style="margin-top: 24px;">
+  <nav class="breadcrumb" aria-label="Fil d'Ariane">
+    <a href="../index.html">Accueil</a>
+    <span>/</span>
+    <a href="a-propos.html">À propos</a>
+    <span>/</span>
+    <span>Le Fondateur</span>
+  </nav>
+</div>
+
+<!-- Main Founder Card -->
+<section class="section" style="padding-top: 20px;">
+  <div class="container">
+    <div class="founder-hero-container fade-in-up">
+      <div class="founder-main-grid">
+        <!-- LEFT: Photo Placeholder -->
+        <div class="founder-photo-wrapper">
+          <div class="founder-photo-box">
+            <svg width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: rgba(255,255,255,0.45);"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <div style="font-size: 0.85rem; font-weight: 500; line-height: 1.5; color: rgba(255,255,255,0.75);">
+              Photo professionnelle<br>à fournir par le fondateur
+            </div>
+            <div style="font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px;">
+              Mpila, Brazzaville (Congo)
+            </div>
+            <div class="photo-badge">Gad Jason MBOU</div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Bio, Credentials & Social -->
+        <div>
+          <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+            <span class="badge" style="background: rgba(56,189,248,0.2); color: #7DD3FC; border: 1px solid rgba(56,189,248,0.3);">FONDATEUR & DIRIGEANT</span>
+            <span class="badge" style="background: rgba(34,197,94,0.2); color: #4ADE80; border: 1px solid rgba(34,197,94,0.3);">PROFIL ACTIF</span>
+          </div>
+
+          <h2 style="font-size: clamp(2rem, 3.8vw, 2.7rem); color: white; margin-bottom: 6px;">Gad Jason MBOU</h2>
+          <div style="color: #93C5FD; font-size: 1.05rem; font-weight: 500; margin-bottom: 20px;">
+            Fondateur & Responsable de Jason_INFORMATIQUE<br>
+            <span style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Administrateur systèmes et réseaux · Formateur en informatique</span>
+          </div>
+
+          <p style="color: rgba(255,255,255,0.85); font-size: 0.98rem; line-height: 1.8; margin-bottom: 24px;">
+            Passionné par les nouvelles technologies et convaincu du rôle transformateur de l'informatique, <strong>Gad Jason MBOU</strong> a fondé <strong>Jason_INFORMATIQUE</strong> en 2024 à Brazzaville avec une ambition claire : rendre les solutions informatiques accessibles, fiables et utiles à tous.
+          </p>
+
+          <!-- Academic credentials badges -->
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px;">
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: rgba(255,255,255,0.9);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              <span><strong>DUT Informatique de gestion</strong> — Gestion des systèmes d'information, algorithmique et bases de données</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: rgba(255,255,255,0.9);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              <span><strong>Licence Informatique</strong> spécialité <strong>Administration Systèmes et Réseaux</strong></span>
+            </div>
+          </div>
+
+          <!-- Social Links Placeholders & Actions -->
+          <div class="social-links-wrap" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <span class="social-placeholder-chip" title="Profil LinkedIn à configurer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn (à configurer)
+            </span>
+            <span class="social-placeholder-chip" title="Profil GitHub à configurer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub (à configurer)
+            </span>
+            <a href="contact.html" class="btn btn-primary btn-sm" style="margin-left: auto;">
+              Contacter le fondateur
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote Section -->
+    <div class="founder-quote-banner fade-in-up">
+      <svg class="quote-icon" width="60" height="60" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+      <blockquote style="margin: 0; font-size: clamp(1.05rem, 2.2vw, 1.25rem); font-style: italic; color: var(--text-primary); line-height: 1.7;">
+        « L'informatique ne doit pas être un obstacle ni un luxe réservé à quelques initiés, mais un levier puissant d'émancipation, de rigueur et de croissance pour chacun de nos concitoyens et pour nos entreprises. »
+      </blockquote>
+      <div style="margin-top: 14px; font-weight: 700; color: var(--blue-primary); font-size: 0.9rem;">
+        — Gad Jason MBOU, Fondateur de Jason_INFORMATIQUE
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Expertise & Skills Section (8 cards from brief) -->
+<section class="section" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-header fade-in-up">
+      <span class="section-label">DOMAINE D'EXPERTISE</span>
+      <h2 class="section-title">Compétences Techniques Clés</h2>
+      <p class="section-desc">Un spectre étendu de savoir-faire éprouvés, combinant administration système, ingénierie réseaux et formation pratique.</p>
+    </div>
+
+    <div class="grid grid-4">
+      <!-- 1. Windows Server & Linux Admin -->
+      <div class="skill-grid-card fade-in-up">
+        <div class="skill-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+        </div>
+        <h3 style="font-size: 1.05rem; margin-bottom: 8px;">Windows Server & Linux Admin</h3>
+        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6;">
+          Déploiement Active Directory, gestion des GPO, DNS, DHCP, serveurs Samba, durcissement et administration avancée Debian/Ubuntu/RHEL.
+        </p>
+      </div>
+
+      <!-- 2. Gestion infrastructures -->
+      <div class="skill-grid-card fade-in-up stagger-1">
+        <div class="skill-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <h3 style="font-size: 1.05rem; margin-bottom: 8px;">Gestion d'infrastructures</h3>
+        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6;">
+          Supervision de parc, virtualisation (Hyper-V, Proxmox), politiques de sauvegardes automatisées (3-2-1) et continuité d'activité (PCA/PRA).
+        </p>
+      </div>
+
+      <!-- 3. Maintenance hw/sw -->
+      <div class="skill-grid-card fade-in-up stagger-2">
+        <div class="skill-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3 style="font-size: 1.05rem; margin-bottom: 8px;">Maintenance hw/sw</h3>
+        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6;">
+          Diagnostic minutieux niveau composant, réparation matérielle PC & serveurs, désinfection antivirale et optimisation OS en environnement chaud.
+        </p>
+      </div>
+
+      <!-- 4. Développement solutions numériques -->
+      <div class="skill-grid-card fade-in-up stagger-3">
+        <div class="skill-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3 style="font-size: 1.05rem; margin-bottom: 8px;">Développement solutions numériques</h3>
+        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6;">
+          Conception de sites internet performants, portails web réactifs, formulaires automatisés et outils numériques sur mesure.
+        </p>
+      </div>
+
+      <!-- 5. Automatisation Bash/PowerShell -->
+      <div class="skill-grid-card fade-in-up">
+        <div class="skill-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        </div>
+        <h3 style="font-size: 1.05rem; margin-bottom: 8px;">Automatisation Bash/PowerShell</h3>
+        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6;">
+          Écriture de scripts shell et scripts PowerShell pour l'administration périodique, la collecte de logs et la mise à jour sans interruption.
+        </p>
+      </div>
+
+      <!-- 6. Réseaux informatiques -->
+      <div class="skill-grid-card fade-in-up stagger-1">
+        <div class="skill-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3 style="font-size: 1.05rem; margin-bottom: 8px;">Réseaux informatiques</h3>
+        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6;">
+          Architecture LAN/WAN, plan d'adressage IPv4/IPv6, segmentation VLAN, routage statique et dynamique, pare-feu et tunnels VPN sécurisés.
+        </p>
+      </div>
+
+      <!-- 7. Formation & accompagnement -->
+      <div class="skill-grid-card fade-in-up stagger-2">
+        <div class="skill-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3 style="font-size: 1.05rem; margin-bottom: 8px;">Formation & accompagnement</h3>
+        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6;">
+          Pédagogie orientée pratique (ateliers lab), conception de cours clairs, vulgarisation technique et montée en compétences de profils juniors.
+        </p>
+      </div>
+
+      <!-- 8. Gestion de projets IT -->
+      <div class="skill-grid-card fade-in-up stagger-3">
+        <div class="skill-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3 style="font-size: 1.05rem; margin-bottom: 8px;">Gestion de projets IT</h3>
+        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6;">
+          Rédaction de cahiers des charges, dimensionnement budgétaire, coordination de déploiements et assurance qualité opérationnelle.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Academic Background -->
+<section class="section">
+  <div class="container">
+    <div class="section-header fade-in-up">
+      <span class="section-label">CURSUS UNIVERSITAIRE</span>
+      <h2 class="section-title">Parcours Académique</h2>
+      <p class="section-desc">Une formation d'excellence alliant gestion des organisations et ingénierie des infrastructures informatiques.</p>
+    </div>
+
+    <div style="max-width: 820px; margin: 0 auto;">
+      <div class="academic-timeline">
+        <!-- Licence -->
+        <div class="academic-item fade-in-up">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+            <h3 style="font-size: 1.2rem; color: var(--text-primary);">Licence Informatique — Spécialité Administration Systèmes et Réseaux</h3>
+            <span class="badge badge-primary">Formation supérieure</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7;">
+            Approfondissement théorique et pratique des architectures réseau complexes, administration avancée sous environnements Unix/Linux et Windows Server, protocoles de routage d'entreprise, sécurisation des flux (TLS/VPN/Firewall) et virtualisation de serveurs.
+          </p>
+        </div>
+
+        <!-- DUT -->
+        <div class="academic-item fade-in-up stagger-1">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+            <h3 style="font-size: 1.2rem; color: var(--text-primary);">DUT Informatique de Gestion</h3>
+            <span class="badge badge-primary">Diplôme universitaire</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7;">
+            Acquisition des compétences fondamentales en génie logiciel, modélisation conceptuelle de données (Merise, SQL), algorithmique appliquée, comptabilité générale et structuration des systèmes d'information d'entreprise.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Achievements (marked as 'à compléter') -->
+<section class="section" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-header fade-in-up">
+      <span class="section-label">RÉALISATIONS & ÉTAPES</span>
+      <h2 class="section-title">Parcours & Initiatives</h2>
+      <p class="section-desc">Un engagement permanent pour le progrès technologique et l'autonomie numérique locale.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <!-- 1. Jason_INFORMATIQUE -->
+      <div class="card card-hover" style="padding: 28px;">
+        <span class="badge badge-green" style="margin-bottom: 12px;">FONDÉ EN 2024</span>
+        <h3 style="font-size: 1.15rem; margin-bottom: 10px;">Création de Jason_INFORMATIQUE</h3>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+          Conception et lancement officiel de la structure à Mpila, Brazzaville. Structuration de l'offre de maintenance, des prestations d'infogérance et mise en place de processus de diagnostic éprouvés.
+        </p>
+      </div>
+
+      <!-- 2. Réalisations à compléter -->
+      <div class="card card-hover" style="padding: 28px; border-style: dashed;">
+        <span class="badge badge-orange" style="margin-bottom: 12px;">À COMPLÉTER</span>
+        <h3 style="font-size: 1.15rem; margin-bottom: 10px;">Projets d'Infrastructures & Réseaux</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          [Réalisations à compléter : détails des chantiers de déploiement réseau, d'interconnexion de sites et d'implémentation de serveurs menés auprès d'organisations partenaires].
+        </p>
+      </div>
+
+      <!-- 3. Accompagnement à compléter -->
+      <div class="card card-hover" style="padding: 28px; border-style: dashed;">
+        <span class="badge badge-orange" style="margin-bottom: 12px;">À COMPLÉTER</span>
+        <h3 style="font-size: 1.15rem; margin-bottom: 10px;">Cycles de Formation & Mentorat</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          [Réalisations à compléter : indicateurs sur les sessions de mentorat technique, volumes d'apprenants formés et programmes d'accompagnement académique délivrés].
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Publications Preview Section -->
+<section class="section">
+  <div class="container">
+    <div class="card" style="padding: 36px; border-radius: var(--radius-xl); border: 1.5px solid var(--border-color); background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));">
+      <div style="display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;">
+        <div>
+          <span class="badge badge-primary" style="margin-bottom: 10px;">ÉCRITS & RECHERCHES</span>
+          <h2 style="font-size: 1.5rem; margin-bottom: 8px;">Publications & Ouvrages du Fondateur</h2>
+          <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7; max-width: 680px; margin-bottom: 16px;">
+            Désireux de formaliser ses retours d'expérience et d'offrir des supports d'apprentissage adaptés aux réalités du terrain en Afrique centrale, Gad Jason MBOU prépare une série d'ouvrages et de guides méthodologiques.
+          </p>
+          <div style="font-size: 0.8rem; color: var(--text-muted); font-style: italic;">
+            ℹ️ Titres et résumés détaillés en cours de finalisation par l'auteur.
+          </div>
+        </div>
+        <div>
+          <a href="publications.html" class="btn btn-primary">
+            Consulter l'espace Publications
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact the Founder Section -->
+<section class="cta-section">
+  <div class="container">
+    <h2 class="cta-title">Échanger avec Gad Jason MBOU</h2>
+    <p class="cta-desc">
+      Vous avez un projet d'infrastructure, besoin d'un audit de conformité réseau ou souhaitez solliciter une session de formation personnalisée ?
+    </p>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn btn-white btn-lg">Prendre contact directement</a>
+      <a href="contact.html#devis" class="btn btn-outline btn-lg" style="color: white; border-color: rgba(255,255,255,0.7);">Demander un devis Jason PRO</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">JI</div>
+          <div>
+            <div style="font-weight:800;color:white;font-size:1rem"><span style="color:#38BDF8">Jason_</span>INFORMATIQUE</div>
+            <div style="font-size:.65rem;color:rgba(255,255,255,.4);letter-spacing:1px">SOLUTIONS INFORMATIQUES</div>
+          </div>
+        </div>
+        <p>Votre partenaire pour des solutions informatiques modernes. De la réparation à la formation, nous vous accompagnons.</p>
+        <div class="footer-social">
+          <a href="#" title="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" title="Twitter/X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="https://wa.me/242067814704" title="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <div class="footer-links">
+          <a href="services.html#maintenance">Maintenance informatique</a>
+          <a href="services.html#reseaux">Systèmes & Réseaux</a>
+          <a href="services.html#cybersecurite">Cybersécurité</a>
+          <a href="services.html#developpement">Développement web</a>
+          <a href="services.html#assistance">Assistance</a>
+          <a href="entreprises.html">Jason PRO</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Ressources</h4>
+        <div class="footer-links">
+          <a href="guides.html">Guides techniques</a>
+          <a href="formations.html">Formations IT</a>
+          <a href="boutique.html">Boutique</a>
+          <a href="reparation.html">Réparation</a>
+          <a href="assistance.html">Support</a>
+          <a href="publications.html">Publications</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Mpila, Brazzaville<br>République du Congo</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:jasoninformatique7@gmail.com" style="color:rgba(255,255,255,.55)">jasoninformatique7@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Lun – Sam : 08h00 – 19h00</span>
+        </div>
+        <div class="footer-links" style="margin-top:12px">
+          <a href="a-propos.html">À propos</a>
+          <a href="contact.html">Contact</a>
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="confidentialite.html">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Jason_INFORMATIQUE © 2026 — Fondé par Gad Jason MBOU. Tous droits réservés.</p>
+    <div class="footer-bottom-links">
+      <a href="cgv.html">CGV</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/242067814704" class="whatsapp-float" target="_blank" title="WhatsApp" id="whatsapp-float">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</a>
+
+<!-- Chatbot -->
+<button class="chatbot-float" id="chatbot-btn" title="Jason Assistant">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
+<div class="chatbot-panel" id="chatbot-panel">
+  <div class="chatbot-header">
+    <div class="chatbot-avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+    <div><div class="chatbot-name">Jason Assistant</div><div class="chatbot-status"><span class="chatbot-online"></span>En ligne</div></div>
+    <button class="chatbot-close" id="chatbot-close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="chatbot-messages" id="chatbot-messages"></div>
+  <div class="chatbot-input-area">
+    <input type="text" id="chatbot-input" placeholder="Posez votre question…" />
+    <button class="chatbot-send" id="chatbot-send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+
+<!-- Scroll Top -->
+<button class="scroll-top" id="scroll-top" title="Haut de page">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- Cookie Banner -->
+<div class="cookie-banner" id="cookie-banner">
+  <p>🍪 Ce site utilise uniquement des cookies essentiels à son fonctionnement. Aucun cookie publicitaire ou de traçage tiers n'est utilisé.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-sm btn-ghost" id="cookie-refuse" style="color:rgba(255,255,255,.6)">Refuser</button>
+    <button class="btn btn-sm btn-primary" id="cookie-accept">J'accepte</button>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

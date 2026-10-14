@@ -1,0 +1,1469 @@
+﻿<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guides & tutoriels informatiques — Jason_INFORMATIQUE</title>
+  <meta name="description" content="Bibliothèque de guides et tutoriels informatiques pratiques par Jason_INFORMATIQUE : Windows, Linux, réseaux, cybersécurité, dépannage hardware et développement.">
+  <meta name="keywords" content="guides informatiques, tutoriels PC, dépannage informatique Brazzaville, Windows 11, Linux, réseaux, Wireshark, cybersécurité, Jason_INFORMATIQUE">
+  <meta property="og:title" content="Guides & tutoriels informatiques — Jason_INFORMATIQUE">
+  <meta property="og:description" content="Découvrez nos tutoriels complets rédigés par nos spécialistes pour réparer, configurer et optimiser vos systèmes informatiques.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    /* Specific styles for Guides page */
+    .filter-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+      justify-content: center;
+    }
+    .filter-btn {
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all var(--transition-fast);
+    }
+    .filter-btn:hover {
+      border-color: var(--blue-primary);
+      color: var(--blue-primary);
+      background: var(--blue-light);
+    }
+    .filter-btn.active {
+      background: var(--blue-primary);
+      color: white;
+      border-color: var(--blue-primary);
+      box-shadow: 0 4px 12px rgba(10, 102, 194, 0.25);
+    }
+    .filter-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1px 7px;
+      font-size: 0.72rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.08);
+    }
+    .filter-btn.active .filter-count {
+      background: rgba(255, 255, 255, 0.25);
+      color: white;
+    }
+    .featured-guide-box {
+      background: var(--bg-card);
+      border: 2px solid var(--blue-primary);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      margin-bottom: 48px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 32px;
+      align-items: center;
+    }
+    .featured-guide-box::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(10, 102, 194, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    @media (max-width: 900px) {
+      .featured-guide-box {
+        grid-template-columns: 1fr;
+      }
+    }
+    .featured-badge-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      background: var(--blue-light);
+      color: var(--blue-primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .guide-meta-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin: 16px 0 20px;
+    }
+    .guide-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .guide-meta-item svg {
+      color: var(--blue-primary);
+    }
+    .guide-card-layout {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .guide-card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .guide-card-footer {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+    }
+    /* Inline preview accordion section */
+    .guide-preview-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      margin: 48px 0;
+      box-shadow: var(--shadow-md);
+      scroll-margin-top: 90px;
+    }
+    .progress-bar-container {
+      background: var(--bg-secondary);
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 16px 0 24px;
+      border: 1px solid var(--border-color);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 20%;
+      background: linear-gradient(90deg, var(--blue-primary), #38bdf8);
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+    .toc-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+    .toc-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toc-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 8px;
+    }
+    .toc-link {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 6px;
+      border-radius: 4px;
+      transition: all var(--transition-fast);
+    }
+    .toc-link:hover {
+      color: var(--blue-primary);
+      background: var(--blue-light);
+    }
+    .step-item {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background: var(--bg-primary);
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: all var(--transition-fast);
+    }
+    .step-header {
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      background: var(--bg-card);
+      user-select: none;
+    }
+    .step-header:hover {
+      background: var(--blue-light);
+    }
+    .step-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .step-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--blue-primary);
+      color: white;
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-title {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .step-body {
+      padding: 20px 24px;
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-primary);
+      display: none;
+    }
+    .step-item.open .step-body {
+      display: block;
+    }
+    .step-item.open .step-chevron {
+      transform: rotate(180deg);
+    }
+    .step-chevron {
+      transition: transform var(--transition-fast);
+      color: var(--text-muted);
+    }
+    .tools-needed-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-secondary);
+      font-size: 0.82rem;
+      margin-bottom: 14px;
+      color: var(--text-secondary);
+    }
+    .code-snippet-box {
+      position: relative;
+      background: #0D1117;
+      border: 1px solid #30363D;
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #A5F3FC;
+      margin: 12px 0;
+      overflow-x: auto;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 4px 10px;
+      font-size: 0.72rem;
+      background: rgba(255, 255, 255, 0.12);
+      color: #E6EDF3;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+    }
+    .copy-btn:hover {
+      background: var(--blue-primary);
+      color: white;
+    }
+    .sidebar-widget {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .sidebar-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sidebar-guide-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .sidebar-guide-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .sidebar-guide-num {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      line-height: 1;
+      width: 24px;
+    }
+    .author-card-small {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--bg-secondary);
+    }
+    .author-avatar-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-primary), var(--blue-dark));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+  <nav class="nav-wrapper">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-icon">JI</div>
+      <div>
+        <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+        <div class="nav-logo-sub">Solutions informatiques</div>
+      </div>
+    </a>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="../index.html" class="nav-link">Accueil</a></li>
+      <li class="nav-item">
+        <a href="services.html" class="nav-link">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="services.html#maintenance" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div><div class="dropdown-item-text">Maintenance informatique</div><div class="dropdown-item-desc">Réparation, diagnostic, optimisation</div></div></a>
+          <a href="services.html#reseaux" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div><div><div class="dropdown-item-text">Systèmes & Réseaux</div><div class="dropdown-item-desc">Administration, configuration</div></div></a>
+          <a href="services.html#cybersecurite" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="dropdown-item-text">Cybersécurité</div><div class="dropdown-item-desc">Audit, protection, sécurisation</div></div></a>
+          <a href="services.html#developpement" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div><div class="dropdown-item-text">Développement web</div><div class="dropdown-item-desc">Sites, applications, outils</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="reparation.html" class="nav-link">Réparation</a></li>
+      <li class="nav-item"><a href="boutique.html" class="nav-link">Boutique</a></li>
+      <li class="nav-item"><a href="formations.html" class="nav-link">Formations</a></li>
+      <li class="nav-item"><a href="guides.html" class="nav-link active">Guides</a></li>
+      <li class="nav-item"><a href="assistance.html" class="nav-link">Assistance</a></li>
+      <li class="nav-item">
+        <a href="entreprises.html" class="nav-link">Entreprises <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="entreprises.html#pro" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div><div class="dropdown-item-text">Jason PRO</div><div class="dropdown-item-desc">Solutions entreprises</div></div></a>
+          <a href="entreprises.html#contrats" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="dropdown-item-text">Contrats de maintenance</div><div class="dropdown-item-desc">Offres sur mesure</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="a-propos.html" class="nav-link">À propos <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="a-propos.html" class="dropdown-item"><div class="dropdown-item-text">À propos de nous</div></a>
+          <a href="fondateur.html" class="dropdown-item"><div class="dropdown-item-text">Le fondateur</div></a>
+          <a href="publications.html" class="dropdown-item"><div class="dropdown-item-text">Publications</div></a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-search-btn search-open-btn" title="Rechercher (Ctrl+K)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <a href="boutique.html#panier" class="nav-cart-btn" title="Panier">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge cart-count" style="display:none">0</span>
+      </a>
+      <button class="theme-toggle" title="Changer le thème">
+        <svg class="theme-icon sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="connexion.html" class="btn-connexion">Connexion</a>
+      <a href="contact.html#devis" class="btn-devis">Demander un devis</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-header">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">JI</div>
+      <div>
+        <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+      </div>
+    </div>
+  </div>
+  <a href="../index.html" class="mobile-nav-link">Accueil</a>
+  <a href="services.html" class="mobile-nav-link">Services</a>
+  <a href="reparation.html" class="mobile-nav-link">Réparation</a>
+  <a href="boutique.html" class="mobile-nav-link">Boutique</a>
+  <a href="formations.html" class="mobile-nav-link">Formations</a>
+  <a href="guides.html" class="mobile-nav-link active">Guides & Tutoriels</a>
+  <a href="assistance.html" class="mobile-nav-link">Assistance</a>
+  <a href="entreprises.html" class="mobile-nav-link">Entreprises</a>
+  <a href="a-propos.html" class="mobile-nav-link">À propos</a>
+  <a href="fondateur.html" class="mobile-nav-link">Le Fondateur</a>
+  <a href="publications.html" class="mobile-nav-link">Publications</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+  <div class="mobile-menu-actions">
+    <a href="connexion.html" class="btn btn-outline btn-sm">Connexion</a>
+    <a href="contact.html#devis" class="btn btn-primary btn-sm">Demander un devis</a>
+  </div>
+</div>
+
+<div style="padding-top:70px"></div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-label">Tutoriels & Savoir-faire technique</div>
+    <h1>Bibliothèque de guides techniques</h1>
+    <p>Des tutoriels concrets, clairs et illustrés étape par étape pour dépanner votre matériel, maîtriser vos systèmes d'exploitation, configurer vos réseaux et renforcer votre cybersécurité.</p>
+  </div>
+</section>
+
+<!-- Main Container -->
+<main class="section filter-container" style="padding-top:40px">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Fil d'Ariane">
+      <a href="../index.html">Accueil</a>
+      <span>›</span>
+      <span aria-current="page">Guides & tutoriels</span>
+    </nav>
+
+    <!-- Search Section -->
+    <div class="search-section" style="border-radius: var(--radius-lg); margin-bottom: 40px; padding: 32px 24px;">
+      <div class="search-hero">
+        <h2>Rechercher un tutoriel ou une procédure</h2>
+        <p>Tapez un mot-clé, un outil ou une technologie pour trouver le guide adapté</p>
+        <div class="search-bar-big">
+          <input type="text" id="guides-search-input" placeholder="Ex: Windows 11, DHCP, Pare-feu, rsync, Wireshark, PowerShell..." aria-label="Recherche de guides">
+          <button type="button" id="guides-search-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Rechercher
+          </button>
+        </div>
+        <div class="search-chips">
+          <span class="search-chip" data-query="Windows 11">Windows 11</span>
+          <span class="search-chip" data-query="DHCP">Serveur DHCP</span>
+          <span class="search-chip" data-query="Wireshark">Wireshark</span>
+          <span class="search-chip" data-query="Linux">Ubuntu / Linux</span>
+          <span class="search-chip" data-query="PowerShell">PowerShell</span>
+          <span class="search-chip" data-query="rsync">Sauvegarde rsync</span>
+          <span class="search-chip" data-query="VirtualBox">VirtualBox</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="filter-wrapper" role="tablist" aria-label="Filtrer les guides par catégorie">
+      <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
+        <span>Tous les guides</span>
+        <span class="filter-count">13</span>
+      </button>
+      <button class="filter-btn" data-filter="hardware" role="tab" aria-selected="false">
+        <span>Hardware</span>
+        <span class="filter-count">1</span>
+      </button>
+      <button class="filter-btn" data-filter="software" role="tab" aria-selected="false">
+        <span>Software</span>
+        <span class="filter-count">2</span>
+      </button>
+      <button class="filter-btn" data-filter="windows" role="tab" aria-selected="false">
+        <span>Windows</span>
+        <span class="filter-count">3</span>
+      </button>
+      <button class="filter-btn" data-filter="linux" role="tab" aria-selected="false">
+        <span>Linux</span>
+        <span class="filter-count">3</span>
+      </button>
+      <button class="filter-btn" data-filter="reseaux" role="tab" aria-selected="false">
+        <span>Réseaux</span>
+        <span class="filter-count">3</span>
+      </button>
+      <button class="filter-btn" data-filter="securite" role="tab" aria-selected="false">
+        <span>Sécurité</span>
+        <span class="filter-count">1</span>
+      </button>
+      <button class="filter-btn" data-filter="developpement" role="tab" aria-selected="false">
+        <span>Développement</span>
+        <span class="filter-count">1</span>
+      </button>
+      <button class="filter-btn" data-filter="virtualisation" role="tab" aria-selected="false">
+        <span>Virtualisation</span>
+        <span class="filter-count">1</span>
+      </button>
+      <button class="filter-btn" data-filter="astuces" role="tab" aria-selected="false">
+        <span>Astuces</span>
+        <span class="filter-count">2</span>
+      </button>
+    </div>
+
+    <!-- Featured Guide Section -->
+    <div class="featured-guide-box fade-in-up" data-category="windows" data-searchable="comment installer windows 11 proprement clean install rufus uefi tpm">
+      <div>
+        <div class="featured-badge-top">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Guide technique à la une
+        </div>
+        <span class="guide-card-diff diff-moyen">Moyen</span>
+        <span class="badge badge-primary" style="margin-left: 6px;">Système & OS</span>
+        <h2 style="font-size: 1.85rem; margin: 12px 0 8px; line-height: 1.25;">
+          Comment installer Windows 11 proprement (Clean Install)
+        </h2>
+        <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 12px;">
+          Découvrez la méthode professionnelle recommandée par nos techniciens : création d'un support USB d'installation propre via Rufus ou Media Creation Tool, configuration UEFI/GPT, contournement des prérequis TPM 2.0 si nécessaire, partitionnement sans perte et installation sans compte Microsoft obligatoire.
+        </p>
+        <div class="guide-meta-strip">
+          <div class="guide-meta-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Durée : 30 minutes</span>
+          </div>
+          <div class="guide-meta-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span>8 étapes détaillées</span>
+          </div>
+          <div class="guide-meta-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Par Gad Jason MBOU</span>
+          </div>
+          <div class="guide-meta-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>Mis à jour : 12 Octobre 2026</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap">
+          <a href="#guide-detail-preview" class="btn btn-primary" id="btn-toggle-featured-preview">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            Consulter le guide pas à pas
+          </a>
+          <button class="btn btn-outline" onclick="window.print()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Imprimer / PDF
+          </button>
+        </div>
+      </div>
+      <div style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:20px;">
+        <h4 style="font-size:0.9rem; margin-bottom:12px; color:var(--text-primary);">Outils requis pour ce guide :</h4>
+        <ul style="font-size:0.82rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:8px;">
+          <li style="display:flex; align-items:center; gap:8px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue-primary)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Clé USB de 8 Go minimum (vide)</span>
+          </li>
+          <li style="display:flex; align-items:center; gap:8px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue-primary)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Utilitaire Rufus v4.5 ou officiel Microsoft</span>
+          </li>
+          <li style="display:flex; align-items:center; gap:8px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue-primary)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Image ISO Windows 11 23H2 / 24H2</span>
+          </li>
+          <li style="display:flex; align-items:center; gap:8px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue-primary)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Sauvegarde préalable de vos fichiers personnels</span>
+          </li>
+        </ul>
+        <div class="highlight-box" style="margin-top:16px; padding:12px; font-size:0.75rem;">
+          💡 <strong>Conseil d'expert :</strong> Déconnectez tout disque secondaire avant le partitionnement pour éviter toute erreur de sélection.
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Layout with Sidebar -->
+    <div style="display:grid; grid-template-columns: 1fr 320px; gap: 32px; align-items:start;">
+      
+      <!-- Primary Column: 12 Guides Grid & Preview -->
+      <div>
+        
+        <!-- Section title for grid -->
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;">
+          <h2 style="font-size:1.35rem;">Tous nos guides & tutoriels</h2>
+          <span style="font-size:0.85rem; color:var(--text-muted);" id="guides-count-label">12 tutoriels disponibles</span>
+        </div>
+
+        <!-- Guides Grid (12 items) -->
+        <div class="grid grid-2" id="guides-grid" style="gap:24px;">
+
+          <!-- Guide 1 -->
+          <article class="card card-hover guide-card-layout fade-in-up" data-category="hardware" data-searchable="diagnostiquer pc qui ne demarre plus ecran noir alimentation ram carte mere hardware facile">
+            <div class="card-body">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                <div class="guide-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                </div>
+                <div style="text-align:right">
+                  <span class="guide-card-diff diff-facile">Facile</span>
+                  <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Hardware</div>
+                </div>
+              </div>
+              <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Diagnostiquer un PC qui ne démarre plus</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">
+                Méthode systématique pour tester le bloc d'alimentation, interpréter les bips BIOS de la carte mère, tester les barrettes RAM et vérifier l'affichage écran.
+              </p>
+              <div class="guide-meta-strip" style="margin:0 0 16px;">
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 20 min</span>
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg> 5 étapes</span>
+              </div>
+              <div class="guide-card-footer">
+                <span style="color:var(--text-muted);">Par Jason_INFORMATIQUE</span>
+                <a href="#guide-detail-preview" class="btn btn-outline btn-sm">Lire le tutoriel →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Guide 2 -->
+          <article class="card card-hover guide-card-layout fade-in-up stagger-1" data-category="reseaux" data-searchable="configurer serveur dhcp windows server 2022 etendue baux ip dns reseaux avance">
+            <div class="card-body">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                <div class="guide-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                </div>
+                <div style="text-align:right">
+                  <span class="guide-card-diff diff-avance">Avancé</span>
+                  <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Réseaux</div>
+                </div>
+              </div>
+              <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Configurer un serveur DHCP Windows Server</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">
+                Installation du rôle DHCP sous Windows Server 2022, création d'une étendue IPv4, définition des plages d'exclusions, baux dynamiques et options de passerelle.
+              </p>
+              <div class="guide-meta-strip" style="margin:0 0 16px;">
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 45 min</span>
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg> 7 étapes</span>
+              </div>
+              <div class="guide-card-footer">
+                <span style="color:var(--text-muted);">Par Gad Jason MBOU</span>
+                <a href="#guide-detail-preview" class="btn btn-outline btn-sm">Lire le tutoriel →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Guide 3 -->
+          <article class="card card-hover guide-card-layout fade-in-up stagger-2" data-category="reseaux" data-searchable="creer reseau local cisco packet tracer switch vlan router ping reseaux moyen">
+            <div class="card-body">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                <div class="guide-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <div style="text-align:right">
+                  <span class="guide-card-diff diff-moyen">Moyen</span>
+                  <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Réseaux</div>
+                </div>
+              </div>
+              <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Créer un réseau local avec Cisco Packet Tracer</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">
+                Concevez une architecture réseau d'entreprise complète avec deux switchs 2960, un routeur 2911, configuration de VLANs et test de routage inter-VLAN.
+              </p>
+              <div class="guide-meta-strip" style="margin:0 0 16px;">
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 60 min</span>
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg> 6 étapes</span>
+              </div>
+              <div class="guide-card-footer">
+                <span style="color:var(--text-muted);">Par Gad Jason MBOU</span>
+                <a href="#guide-detail-preview" class="btn btn-outline btn-sm">Lire le tutoriel →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Guide 4 -->
+          <article class="card card-hover guide-card-layout fade-in-up stagger-3" data-category="linux" data-searchable="installer apache2 ubuntu server web virtualhost ssl let's encrypt linux moyen">
+            <div class="card-body">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                <div class="guide-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <div style="text-align:right">
+                  <span class="guide-card-diff diff-moyen">Moyen</span>
+                  <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Linux</div>
+                </div>
+              </div>
+              <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Installer Apache2 sur Ubuntu Server</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">
+                Guide complet pour installer le serveur web Apache sous Ubuntu 24.04 LTS, configurer un VirtualHost sécurisé, activer le pare-feu UFW et mettre en place HTTPS.
+              </p>
+              <div class="guide-meta-strip" style="margin:0 0 16px;">
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 25 min</span>
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg> 5 étapes</span>
+              </div>
+              <div class="guide-card-footer">
+                <span style="color:var(--text-muted);">Par Jason_INFORMATIQUE</span>
+                <a href="#guide-detail-preview" class="btn btn-outline btn-sm">Lire le tutoriel →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Guide 5 -->
+          <article class="card card-hover guide-card-layout fade-in-up" data-category="windows" data-searchable="nettoyer optimiser windows 10 11 bloatware registre cache demarrage windows facile astuces">
+            <div class="card-body">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                <div class="guide-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <div style="text-align:right">
+                  <span class="guide-card-diff diff-facile">Facile</span>
+                  <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Windows</div>
+                </div>
+              </div>
+              <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Nettoyer et optimiser Windows 10/11</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">
+                Retrouvez la réactivité d'origine de votre PC : nettoyage des fichiers temporaires, désactivation des programmes au démarrage, désinstallation des bloatwares.
+              </p>
+              <div class="guide-meta-strip" style="margin:0 0 16px;">
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 15 min</span>
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg> 6 étapes</span>
+              </div>
+              <div class="guide-card-footer">
+                <span style="color:var(--text-muted);">Par Gad Jason MBOU</span>
+                <a href="#guide-detail-preview" class="btn btn-outline btn-sm">Lire le tutoriel →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Guide 6 -->
+          <article class="card card-hover guide-card-layout fade-in-up stagger-1" data-category="securite" data-searchable="configurer pare-feu windows firewall regles trafic entrant sortant securite moyen">
+            <div class="card-body">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                <div class="guide-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div style="text-align:right">
+                  <span class="guide-card-diff diff-moyen">Moyen</span>
+                  <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Sécurité</div>
+                </div>
+              </div>
+              <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Configurer un pare-feu Windows</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">
+                Paramétrez le Pare-feu Windows Defender avec fonctions avancées de sécurité : filtrage des ports entrants, blocage d'applications et journalisation des flux suspects.
+              </p>
+              <div class="guide-meta-strip" style="margin:0 0 16px;">
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 20 min</span>
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg> 4 étapes</span>
+              </div>
+              <div class="guide-card-footer">
+                <span style="color:var(--text-muted);">Par Jason_INFORMATIQUE</span>
+                <a href="#guide-detail-preview" class="btn btn-outline btn-sm">Lire le tutoriel →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Guide 7 -->
+          <article class="card card-hover guide-card-layout fade-in-up stagger-2" data-category="windows" data-searchable="premiers pas powershell cmdlets script automatisation windows debutant facile">
+            <div class="card-body">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                <div class="guide-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                </div>
+                <div style="text-align:right">
+                  <span class="guide-card-diff diff-facile">Débutant</span>
+                  <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Windows</div>
+                </div>
+              </div>
+              <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Premiers pas avec PowerShell</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">
+                Découvrez la puissance de la ligne de commande moderne Microsoft : syntaxe Verb-Noun, pipelining d'objets, gestion des processus et automatisation de tâches courantes.
+              </p>
+              <div class="guide-meta-strip" style="margin:0 0 16px;">
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 30 min</span>
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg> 5 étapes</span>
+              </div>
+              <div class="guide-card-footer">
+                <span style="color:var(--text-muted);">Par Gad Jason MBOU</span>
+                <a href="#guide-detail-preview" class="btn btn-outline btn-sm">Lire le tutoriel →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Guide 8 -->
+          <article class="card card-hover guide-card-layout fade-in-up stagger-3" data-category="virtualisation" data-searchable="introduction virtualisation virtualbox machine virtuelle vm iso virtualisation debutant facile">
+            <div class="card-body">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                <div class="guide-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                </div>
+                <div style="text-align:right">
+                  <span class="guide-card-diff diff-facile">Débutant</span>
+                  <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Virtualisation</div>
+                </div>
+              </div>
+              <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Introduction à la virtualisation avec VirtualBox</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">
+                Apprenez à créer et paramétrer un environnement de test isolé sous Oracle VM VirtualBox : allocation RAM/CPU, réseau pont/NAT et installation des Additions invité.
+              </p>
+              <div class="guide-meta-strip" style="margin:0 0 16px;">
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 40 min</span>
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg> 6 étapes</span>
+              </div>
+              <div class="guide-card-footer">
+                <span style="color:var(--text-muted);">Par Jason_INFORMATIQUE</span>
+                <a href="#guide-detail-preview" class="btn btn-outline btn-sm">Lire le tutoriel →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Guide 9 -->
+          <article class="card card-hover guide-card-layout fade-in-up" data-category="linux" data-searchable="sauvegarder donnees rsync ssh cron synchronisation linux moyen astuces">
+            <div class="card-body">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                <div class="guide-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                </div>
+                <div style="text-align:right">
+                  <span class="guide-card-diff diff-moyen">Moyen</span>
+                  <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Linux</div>
+                </div>
+              </div>
+              <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Sauvegarder ses données avec rsync</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">
+                Mettez en place une stratégie de sauvegarde incrémentale robuste avec l'outil rsync : options de compression, miroir distant via SSH et automatisation quotidienne avec cron.
+              </p>
+              <div class="guide-meta-strip" style="margin:0 0 16px;">
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 20 min</span>
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg> 4 étapes</span>
+              </div>
+              <div class="guide-card-footer">
+                <span style="color:var(--text-muted);">Par Gad Jason MBOU</span>
+                <a href="#guide-detail-preview" class="btn btn-outline btn-sm">Lire le tutoriel →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Guide 10 -->
+          <article class="card card-hover guide-card-layout fade-in-up stagger-1" data-category="developpement" data-searchable="creer premier site html css responsive flexbox developpement debutant facile">
+            <div class="card-body">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                <div class="guide-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <div style="text-align:right">
+                  <span class="guide-card-diff diff-facile">Débutant</span>
+                  <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Développement</div>
+                </div>
+              </div>
+              <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Créer son premier site HTML/CSS</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">
+                Guide d'initiation pas à pas pour coder une page web moderne et responsive : structure sémantique HTML5, mise en page Flexbox, sélecteurs CSS et hébergement gratuit.
+              </p>
+              <div class="guide-meta-strip" style="margin:0 0 16px;">
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 45 min</span>
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg> 7 étapes</span>
+              </div>
+              <div class="guide-card-footer">
+                <span style="color:var(--text-muted);">Par Jason_INFORMATIQUE</span>
+                <a href="#guide-detail-preview" class="btn btn-outline btn-sm">Lire le tutoriel →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Guide 11 -->
+          <article class="card card-hover guide-card-layout fade-in-up stagger-2" data-category="reseaux" data-searchable="analyser trafic reseau wireshark paquets tcp dns capture reseaux avance">
+            <div class="card-body">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                <div class="guide-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <div style="text-align:right">
+                  <span class="guide-card-diff diff-avance">Avancé</span>
+                  <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Réseaux</div>
+                </div>
+              </div>
+              <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Analyser le trafic réseau avec Wireshark</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">
+                Capturez et décortiquez les trames Ethernet et paquets IP en temps réel : filtres d'affichage essentiels (TCP handshake, requêtes DNS, HTTP), détection d'attaques et de latences.
+              </p>
+              <div class="guide-meta-strip" style="margin:0 0 16px;">
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 30 min</span>
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg> 5 étapes</span>
+              </div>
+              <div class="guide-card-footer">
+                <span style="color:var(--text-muted);">Par Gad Jason MBOU</span>
+                <a href="#guide-detail-preview" class="btn btn-outline btn-sm">Lire le tutoriel →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Guide 12 -->
+          <article class="card card-hover guide-card-layout fade-in-up stagger-3" data-category="linux" data-searchable="gerer utilisateurs sous linux useradd usermod sudo chmod permissions linux moyen software">
+            <div class="card-body">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                <div class="guide-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div style="text-align:right">
+                  <span class="guide-card-diff diff-moyen">Intermédiaire</span>
+                  <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Linux</div>
+                </div>
+              </div>
+              <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Gérer les utilisateurs sous Linux</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">
+                Maîtrisez la gestion des comptes et privilèges : création d'utilisateurs avec <code style="font-size:0.8rem; background:var(--bg-secondary); padding:2px 4px; border-radius:3px">useradd</code>, gestion des groupes secondaires, attribution des droits <code style="font-size:0.8rem; background:var(--bg-secondary); padding:2px 4px; border-radius:3px">sudo</code> et permissions strictes.
+              </p>
+              <div class="guide-meta-strip" style="margin:0 0 16px;">
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 20 min</span>
+                <span class="guide-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg> 5 étapes</span>
+              </div>
+              <div class="guide-card-footer">
+                <span style="color:var(--text-muted);">Par Gad Jason MBOU</span>
+                <a href="#guide-detail-preview" class="btn btn-outline btn-sm">Lire le tutoriel →</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Inline Detail Section (Preview expand for Windows 11 guide) -->
+        <section class="guide-preview-section" id="guide-detail-preview">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
+            <div>
+              <span class="badge badge-primary mb-8">Guide pas à pas complet</span>
+              <h2 style="font-size:1.55rem; margin-bottom:8px;">Tutoriel détaillé : Comment installer Windows 11 proprement (Clean Install)</h2>
+              <p style="font-size:0.9rem; color:var(--text-secondary);">
+                Suivez ce tutoriel interactif. Cochez chaque étape réalisée pour mesurer votre progression.
+              </p>
+            </div>
+            <div style="text-align:right">
+              <span id="progress-percentage-label" style="font-size:1.1rem; font-weight:800; color:var(--blue-primary);">20% complété</span>
+            </div>
+          </div>
+
+          <!-- Reading progress bar -->
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="guide-progress-bar" style="width: 20%;"></div>
+          </div>
+
+          <!-- Table of contents -->
+          <div class="toc-box">
+            <div class="toc-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              Table des matières & navigation rapide
+            </div>
+            <div class="toc-list">
+              <a href="#step-1" class="toc-link">1. Préparation de la clé USB d'installation</a>
+              <a href="#step-2" class="toc-link">2. Configuration du BIOS / UEFI & Sauvegarde</a>
+              <a href="#step-3" class="toc-link">3. Démarrage sur la clé (Boot Menu)</a>
+              <a href="#step-4" class="toc-link">4. Partitionnement propre et installation</a>
+              <a href="#step-5" class="toc-link">5. Configuration initiale (OOBE) sans compte MS</a>
+            </div>
+          </div>
+
+          <!-- Step Accordion (5 steps) -->
+          <div id="steps-accordion">
+
+            <!-- Step 1 -->
+            <div class="step-item open" id="step-1">
+              <div class="step-header">
+                <div class="step-title-group">
+                  <div class="step-badge">1</div>
+                  <div class="step-title">Étape 1 : Préparation de la clé USB d'installation avec Rufus</div>
+                </div>
+                <svg class="step-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="step-body">
+                <div class="tools-needed-box">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  <span><strong>Matériel requis :</strong> Clé USB 8 Go ou plus, Rufus portable, image ISO officielle Microsoft.</span>
+                </div>
+                <p style="font-size:0.9rem; line-height:1.6; margin-bottom:12px;">
+                  1. Téléchargez l'image ISO de Windows 11 depuis le site officiel de Microsoft ou lancez Rufus qui propose un téléchargement direct.<br>
+                  2. Branchez votre clé USB (attention : tout son contenu sera effacé).<br>
+                  3. Dans Rufus, sélectionnez le schéma de partition <strong>GPT</strong> et le système de destination <strong>UEFI (non-CSM)</strong>.<br>
+                  4. Dans les options de personnalisation de Windows, vous pouvez cocher : <em>« Supprimer l'exigence de 4 Go+ de RAM, Secure Boot et TPM 2.0 »</em> et <em>« Supprimer l'obligation de créer un compte Microsoft en ligne »</em>.
+                </p>
+                <div class="code-snippet-box">
+                  <code># Commande PowerShell alternative pour vérifier l'intégrité du fichier ISO
+Get-FileHash -Path "C:\ISOs\Win11_French_x64.iso" -Algorithm SHA256</code>
+                  <button class="copy-btn" onclick="navigator.clipboard.writeText('Get-FileHash -Path &quot;C:\\ISOs\\Win11_French_x64.iso&quot; -Algorithm SHA256'); JasonApp.Toast.show('Copié !', 'Commande copiée dans le presse-papier.', 'success')">Copier</button>
+                </div>
+                <label style="display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; cursor:pointer; margin-top:8px;">
+                  <input type="checkbox" class="step-checkbox" checked onchange="updateGuideProgress()">
+                  <span>J'ai terminé cette étape</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-item" id="step-2">
+              <div class="step-header">
+                <div class="step-title-group">
+                  <div class="step-badge">2</div>
+                  <div class="step-title">Étape 2 : Configuration du BIOS/UEFI & Sauvegarde préalable</div>
+                </div>
+                <svg class="step-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="step-body">
+                <div class="tools-needed-box">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <span><strong>Points clés :</strong> Disque dur externe pour sauvegardes, touche d'accès BIOS (F2, F12, Suppr).</span>
+                </div>
+                <p style="font-size:0.9rem; line-height:1.6; margin-bottom:12px;">
+                  1. Sauvegardez l'intégralité de vos documents personnels, favoris de navigateur et clés de licences sur un support externe ou cloud.<br>
+                  2. Redémarrez votre machine en appuyant frénétiquement sur la touche d'accès au BIOS (selon la marque : <kbd style="background:var(--bg-secondary); padding:2px 6px; border-radius:3px">F2</kbd> pour Asus/Dell/Acer, <kbd style="background:var(--bg-secondary); padding:2px 6px; border-radius:3px">F10</kbd> pour HP, <kbd style="background:var(--bg-secondary); padding:2px 6px; border-radius:3px">Suppr</kbd> pour MSI).<br>
+                  3. Activez le mode <strong>UEFI Boot</strong> et activez <strong>TPM / fTPM</strong> (Intel PTT ou AMD fTPM).
+                </p>
+                <label style="display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; cursor:pointer; margin-top:8px;">
+                  <input type="checkbox" class="step-checkbox" onchange="updateGuideProgress()">
+                  <span>J'ai terminé cette étape</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-item" id="step-3">
+              <div class="step-header">
+                <div class="step-title-group">
+                  <div class="step-badge">3</div>
+                  <div class="step-title">Étape 3 : Démarrage sur la clé USB (Boot Menu)</div>
+                </div>
+                <svg class="step-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="step-body">
+                <div class="tools-needed-box">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                  <span><strong>Raccourcis Boot Menu :</strong> F12 (Dell, Lenovo), F8 (Asus), F9 (HP), F11 (MSI).</span>
+                </div>
+                <p style="font-size:0.9rem; line-height:1.6; margin-bottom:12px;">
+                  1. Insérez la clé USB préparée sur un port USB direct (évitez les hubs non alimentés).<br>
+                  2. Allumez le PC et appuyez immédiatement sur la touche du menu de démarrage (Boot Menu).<br>
+                  3. Sélectionnez votre clé précédée de la mention <strong>UEFI : [Nom de la clé]</strong> et validez avec Entrée.<br>
+                  4. L'écran bleu d'installation de Windows apparaît après quelques secondes.
+                </p>
+                <label style="display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; cursor:pointer; margin-top:8px;">
+                  <input type="checkbox" class="step-checkbox" onchange="updateGuideProgress()">
+                  <span>J'ai terminé cette étape</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step-item" id="step-4">
+              <div class="step-header">
+                <div class="step-title-group">
+                  <div class="step-badge">4</div>
+                  <div class="step-title">Étape 4 : Partitionnement propre et installation du système</div>
+                </div>
+                <svg class="step-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="step-body">
+                <div class="tools-needed-box">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                  <span><strong>Attention :</strong> Cette étape supprime les partitions existantes sur le lecteur cible.</span>
+                </div>
+                <p style="font-size:0.9rem; line-height:1.6; margin-bottom:12px;">
+                  1. Choisissez la langue : <em>Français</em> et format horaire : <em>Français (Congo ou France)</em>.<br>
+                  2. Cliquez sur <strong>« Installer maintenant »</strong>, puis <em>« Je n'ai pas de clé de produit »</em> si votre licence numérique est déjà liée à la carte mère.<br>
+                  3. Choisissez l'option <strong>« Personnalisé : installer uniquement Windows (avancé) »</strong>.<br>
+                  4. Supprimez les anciennes partitions système (Partition principale, Récupération, Système EFI, MSR) sur le disque principal (Lecteur 0) jusqu'à obtenir un seul <strong>« Espace non alloué sur le lecteur 0 »</strong>.<br>
+                  5. Cliquez sur « Suivant » sans créer de partition manuellement : le programme créera automatiquement la table GPT requise.
+                </p>
+                <label style="display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; cursor:pointer; margin-top:8px;">
+                  <input type="checkbox" class="step-checkbox" onchange="updateGuideProgress()">
+                  <span>J'ai terminé cette étape</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="step-item" id="step-5">
+              <div class="step-header">
+                <div class="step-title-group">
+                  <div class="step-badge">5</div>
+                  <div class="step-title">Étape 5 : Premier démarrage (OOBE) sans compte Microsoft obligatoire</div>
+                </div>
+                <svg class="step-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="step-body">
+                <div class="tools-needed-box">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span><strong>Astuce professionnelle :</strong> Création d'un compte local indépendant et fluide.</span>
+                </div>
+                <p style="font-size:0.9rem; line-height:1.6; margin-bottom:12px;">
+                  Si vous souhaitez installer Windows 11 sans renseigner d'adresse Microsoft :<br>
+                  1. Sur l'écran demandant de vous connecter à Internet ou à un compte, appuyez sur <kbd style="background:var(--bg-secondary); padding:2px 6px; border-radius:3px">Maj + F10</kbd> (ou <kbd>Fn + Maj + F10</kbd> sur certains PC portables) pour ouvrir l'invite de commande.<br>
+                  2. Saisissez la commande ci-dessous et appuyez sur Entrée :
+                </p>
+                <div class="code-snippet-box">
+                  <code>OOBE\BYPASSNRO</code>
+                  <button class="copy-btn" onclick="navigator.clipboard.writeText('OOBE\\BYPASSNRO'); JasonApp.Toast.show('Copié !', 'Commande copiée.', 'success')">Copier</button>
+                </div>
+                <p style="font-size:0.9rem; line-height:1.6; margin-top:12px; margin-bottom:12px;">
+                  3. L'ordinateur redémarre l'assistant OOBE. Vous pouvez maintenant cliquer sur le lien : <strong>« Je n'ai pas Internet »</strong> puis <strong>« Continuer avec une installation limitée »</strong> pour créer un compte administrateur local sécurisé.
+                </p>
+                <label style="display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; cursor:pointer; margin-top:8px;">
+                  <input type="checkbox" class="step-checkbox" onchange="updateGuideProgress()">
+                  <span>J'ai terminé cette étape</span>
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="highlight-box mt-24" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+            <div>
+              <div style="font-weight:700; margin-bottom:4px;">Vous avez rencontré un blocage ou un problème matériel ?</div>
+              <div style="font-size:0.85rem; color:var(--text-secondary);">Nos techniciens sont à votre disposition pour prendre le relais à Mpila, Brazzaville ou à distance.</div>
+            </div>
+            <a href="assistance.html" class="btn btn-primary btn-sm">Demander une assistance technique</a>
+          </div>
+        </section>
+
+        <!-- Pagination -->
+        <nav class="pagination mb-48" aria-label="Pagination des guides">
+          <a href="#" class="page-btn" aria-label="Page précédente">«</a>
+          <a href="#" class="page-btn active" aria-current="page">1</a>
+          <a href="#" class="page-btn">2</a>
+          <a href="#" class="page-btn">3</a>
+          <a href="#" class="page-btn" aria-label="Page suivante">»</a>
+        </nav>
+
+      </div>
+
+      <!-- Sidebar Column -->
+      <aside>
+
+        <!-- Widget 1: Popular Guides -->
+        <div class="sidebar-widget">
+          <h3 class="sidebar-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue-primary)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Tutoriels populaires
+          </h3>
+          <div>
+            <div class="sidebar-guide-item">
+              <span class="sidebar-guide-num">01</span>
+              <div>
+                <a href="#guide-detail-preview" style="font-size:0.85rem; font-weight:600; color:var(--text-primary); line-height:1.3; display:block; margin-bottom:4px;">Installer Windows 11 proprement</a>
+                <span style="font-size:0.75rem; color:var(--text-muted);">OS &bull; 1.8k lectures</span>
+              </div>
+            </div>
+            <div class="sidebar-guide-item">
+              <span class="sidebar-guide-num">02</span>
+              <div>
+                <a href="#step-1" style="font-size:0.85rem; font-weight:600; color:var(--text-primary); line-height:1.3; display:block; margin-bottom:4px;">Diagnostiquer un PC qui ne démarre plus</a>
+                <span style="font-size:0.75rem; color:var(--text-muted);">Hardware &bull; 1.4k lectures</span>
+              </div>
+            </div>
+            <div class="sidebar-guide-item">
+              <span class="sidebar-guide-num">03</span>
+              <div>
+                <a href="#step-1" style="font-size:0.85rem; font-weight:600; color:var(--text-primary); line-height:1.3; display:block; margin-bottom:4px;">Analyser le trafic avec Wireshark</a>
+                <span style="font-size:0.75rem; color:var(--text-muted);">Réseaux &bull; 920 lectures</span>
+              </div>
+            </div>
+            <div class="sidebar-guide-item">
+              <span class="sidebar-guide-num">04</span>
+              <div>
+                <a href="#step-1" style="font-size:0.85rem; font-weight:600; color:var(--text-primary); line-height:1.3; display:block; margin-bottom:4px;">Sauvegarder avec rsync</a>
+                <span style="font-size:0.75rem; color:var(--text-muted);">Linux &bull; 870 lectures</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Widget 2: Recent Guides -->
+        <div class="sidebar-widget">
+          <h3 class="sidebar-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue-primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Guides récents
+          </h3>
+          <ul style="display:flex; flex-direction:column; gap:10px; font-size:0.85rem;">
+            <li>
+              <a href="#guide-detail-preview" style="color:var(--text-secondary); transition:color var(--transition-fast);" onmouseover="this.style.color='var(--blue-primary)'" onmouseout="this.style.color='var(--text-secondary)'">
+                &rsaquo; Configurer un serveur DHCP Windows Server 2022
+              </a>
+              <div style="font-size:0.72rem; color:var(--text-muted);">Publié il y a 3 jours</div>
+            </li>
+            <li>
+              <a href="#guide-detail-preview" style="color:var(--text-secondary); transition:color var(--transition-fast);" onmouseover="this.style.color='var(--blue-primary)'" onmouseout="this.style.color='var(--text-secondary)'">
+                &rsaquo; Apache2 et Let's Encrypt sur Ubuntu 24.04
+              </a>
+              <div style="font-size:0.72rem; color:var(--text-muted);">Publié il y a 1 semaine</div>
+            </li>
+            <li>
+              <a href="#guide-detail-preview" style="color:var(--text-secondary); transition:color var(--transition-fast);" onmouseover="this.style.color='var(--blue-primary)'" onmouseout="this.style.color='var(--text-secondary)'">
+                &rsaquo; Créer son premier réseau Cisco Packet Tracer
+              </a>
+              <div style="font-size:0.72rem; color:var(--text-muted);">Publié il y a 2 semaines</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Widget 3: Authors -->
+        <div class="sidebar-widget">
+          <h3 class="sidebar-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue-primary)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Auteurs & Experts
+          </h3>
+          <div class="author-card-small mb-12">
+            <div class="author-avatar-circle">GJ</div>
+            <div>
+              <div style="font-weight:700; font-size:0.88rem;">Gad Jason MBOU</div>
+              <div style="font-size:0.72rem; color:var(--blue-primary); font-weight:600;">Fondateur & Rédacteur en chef</div>
+              <div style="font-size:0.72rem; color:var(--text-muted);">Spécialiste Systèmes & Réseaux</div>
+            </div>
+          </div>
+          <div class="author-card-small">
+            <div class="author-avatar-circle" style="background:linear-gradient(135deg, #16A34A, #003366)">JI</div>
+            <div>
+              <div style="font-weight:700; font-size:0.88rem;">Équipe Technique JI</div>
+              <div style="font-size:0.72rem; color:var(--green); font-weight:600;">Support & Maintenance</div>
+              <div style="font-size:0.72rem; color:var(--text-muted);">Brazzaville, République du Congo</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Widget 4: Tags Cloud -->
+        <div class="sidebar-widget">
+          <h3 class="sidebar-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue-primary)" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            Mots-clés populaires
+          </h3>
+          <div class="tag-list">
+            <span class="tag" style="cursor:pointer;" onclick="filterByTag('Windows')">Windows 11</span>
+            <span class="tag" style="cursor:pointer;" onclick="filterByTag('Linux')">Linux Ubuntu</span>
+            <span class="tag" style="cursor:pointer;" onclick="filterByTag('DHCP')">Serveur DHCP</span>
+            <span class="tag" style="cursor:pointer;" onclick="filterByTag('Wireshark')">Wireshark</span>
+            <span class="tag" style="cursor:pointer;" onclick="filterByTag('PowerShell')">PowerShell</span>
+            <span class="tag" style="cursor:pointer;" onclick="filterByTag('Pare-feu')">Pare-feu</span>
+            <span class="tag" style="cursor:pointer;" onclick="filterByTag('VirtualBox')">VirtualBox</span>
+            <span class="tag" style="cursor:pointer;" onclick="filterByTag('Hardware')">Dépannage PC</span>
+            <span class="tag" style="cursor:pointer;" onclick="filterByTag('HTML')">HTML / CSS</span>
+            <span class="tag" style="cursor:pointer;" onclick="filterByTag('rsync')">Sauvegardes</span>
+          </div>
+        </div>
+
+        <!-- Widget 5: Support Promo -->
+        <div class="card" style="background:linear-gradient(135deg, var(--blue-night), var(--blue-dark)); color:white; border:none; padding:24px; text-align:center;">
+          <div style="font-size:2rem; margin-bottom:8px;">🛠️</div>
+          <h4 style="color:white; font-size:1.05rem; margin-bottom:8px;">Besoin d'aide en atelier ?</h4>
+          <p style="font-size:0.8rem; color:rgba(255,255,255,0.75); margin-bottom:16px;">
+            Confiez votre machine à nos techniciens certifiés à Mpila, Brazzaville. Diagnostic rapide et devis gratuit.
+          </p>
+          <a href="assistance.html" class="btn btn-primary btn-sm" style="width:100%;">Consulter l'assistance</a>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </div>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">JI</div>
+          <div>
+            <div style="font-weight:800;color:white;font-size:1rem"><span style="color:#38BDF8">Jason_</span>INFORMATIQUE</div>
+            <div style="font-size:.65rem;color:rgba(255,255,255,.4);letter-spacing:1px">SOLUTIONS INFORMATIQUES</div>
+          </div>
+        </div>
+        <p>Votre partenaire pour des solutions informatiques modernes. De la réparation à la formation, nous vous accompagnons.</p>
+        <div class="footer-social">
+          <a href="#" title="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" title="Twitter/X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="https://wa.me/242067814704" title="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <div class="footer-links">
+          <a href="services.html#maintenance">Maintenance informatique</a>
+          <a href="services.html#reseaux">Systèmes & Réseaux</a>
+          <a href="services.html#cybersecurite">Cybersécurité</a>
+          <a href="services.html#developpement">Développement web</a>
+          <a href="services.html#assistance">Assistance</a>
+          <a href="entreprises.html">Jason PRO</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Ressources</h4>
+        <div class="footer-links">
+          <a href="guides.html">Guides techniques</a>
+          <a href="formations.html">Formations IT</a>
+          <a href="boutique.html">Boutique</a>
+          <a href="reparation.html">Réparation</a>
+          <a href="assistance.html">Support</a>
+          <a href="publications.html">Publications</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Mpila, Brazzaville<br>République du Congo</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:jasoninformatique7@gmail.com" style="color:rgba(255,255,255,.55)">jasoninformatique7@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Lun – Sam : 08h00 – 19h00</span>
+        </div>
+        <div class="footer-links" style="margin-top:12px">
+          <a href="a-propos.html">À propos</a>
+          <a href="contact.html">Contact</a>
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="confidentialite.html">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Jason_INFORMATIQUE © 2026 — Fondé par Gad Jason MBOU. Tous droits réservés.</p>
+    <div class="footer-bottom-links">
+      <a href="cgv.html">CGV</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Elements -->
+<a href="https://wa.me/242067814704" class="whatsapp-float" target="_blank" title="WhatsApp" id="whatsapp-float">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</a>
+
+<button class="chatbot-float" id="chatbot-btn" title="Jason Assistant">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
+<div class="chatbot-panel" id="chatbot-panel">
+  <div class="chatbot-header">
+    <div class="chatbot-avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+    <div><div class="chatbot-name">Jason Assistant</div><div class="chatbot-status"><span class="chatbot-online"></span>En ligne</div></div>
+    <button class="chatbot-close" id="chatbot-close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="chatbot-messages" id="chatbot-messages"></div>
+  <div class="chatbot-input-area">
+    <input type="text" id="chatbot-input" placeholder="Posez votre question…" />
+    <button class="chatbot-send" id="chatbot-send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+
+<button class="scroll-top" id="scroll-top" title="Haut de page">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<div class="cookie-banner" id="cookie-banner">
+  <p>🍪 Ce site utilise uniquement des cookies essentiels à son fonctionnement. Aucun cookie publicitaire ou de traçage tiers n'est utilisé.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-sm btn-ghost" id="cookie-refuse" style="color:rgba(255,255,255,.6)">Refuser</button>
+    <button class="btn btn-sm btn-primary" id="cookie-accept">J'accepte</button>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<!-- Main JS -->
+<script src="../js/main.js"></script>
+
+<script>
+  // Guide Accordion toggle logic
+  document.querySelectorAll('.step-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const parent = header.closest('.step-item');
+      parent.classList.toggle('open');
+    });
+  });
+
+  // Reading progress update function
+  function updateGuideProgress() {
+    const checkboxes = document.querySelectorAll('.step-checkbox');
+    const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+    const total = checkboxes.length;
+    const pct = Math.round((checked / total) * 100);
+    const bar = document.getElementById('guide-progress-bar');
+    const label = document.getElementById('progress-percentage-label');
+    if (bar) bar.style.width = pct + '%';
+    if (label) label.textContent = pct + '% complété';
+    if (pct === 100) {
+      JasonApp.Toast.show('Félicitations ! 🎉', 'Vous avez complété l\'ensemble des étapes du guide.', 'success');
+    }
+  }
+
+  // Interactive Live Search for guides
+  const guideSearchInput = document.getElementById('guides-search-input');
+  const guideSearchBtn = document.getElementById('guides-search-btn');
+  const guideCards = document.querySelectorAll('#guides-grid article');
+  const countLabel = document.getElementById('guides-count-label');
+
+  function filterGuidesByQuery(q) {
+    const query = q.toLowerCase().trim();
+    let visibleCount = 0;
+
+    guideCards.forEach(card => {
+      const searchData = (card.getAttribute('data-searchable') || '') + ' ' + card.innerText.toLowerCase();
+      const match = !query || searchData.includes(query);
+      card.style.display = match ? 'flex' : 'none';
+      if (match) visibleCount++;
+    });
+
+    if (countLabel) {
+      countLabel.textContent = `${visibleCount} tutoriel${visibleCount > 1 ? 's' : ''} trouvé${visibleCount > 1 ? 's' : ''}`;
+    }
+  }
+
+  if (guideSearchInput) {
+    guideSearchInput.addEventListener('input', (e) => filterGuidesByQuery(e.target.value));
+  }
+  if (guideSearchBtn) {
+    guideSearchBtn.addEventListener('click', () => filterGuidesByQuery(guideSearchInput.value));
+  }
+
+  // Quick Chips
+  document.querySelectorAll('.search-chip[data-query]').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const q = chip.getAttribute('data-query');
+      if (guideSearchInput) {
+        guideSearchInput.value = q;
+        filterGuidesByQuery(q);
+      }
+    });
+  });
+
+  // Tag filter helper
+  function filterByTag(tag) {
+    if (guideSearchInput) {
+      guideSearchInput.value = tag;
+      filterGuidesByQuery(tag);
+      window.scrollTo({ top: document.querySelector('.search-section').offsetTop - 80, behavior: 'smooth' });
+    }
+  }
+</script>
+
+</body>
+</html>

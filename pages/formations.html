@@ -1,0 +1,1127 @@
+﻿<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formations informatiques — Jason_INFORMATIQUE | Brazzaville, Congo</title>
+  <meta name="description" content="Formations informatiques à Brazzaville, Congo : Administration systèmes, réseaux, cybersécurité, développement web, CCNA. 22 formations, 3 niveaux. Jason_INFORMATIQUE.">
+  <meta name="keywords" content="formation informatique Brazzaville, cours réseau Congo, formation CCNA, administration Windows Server, cybersécurité Congo, développement web Brazzaville">
+  <meta property="og:title" content="Formations informatiques — Jason_INFORMATIQUE">
+  <meta property="og:description" content="22 formations IT du débutant à l'avancé à Brazzaville, Congo.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .formation-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+    .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .filter-tab {
+      padding: 9px 20px; border-radius: var(--radius-full);
+      border: 1.5px solid var(--border-color);
+      font-size: .875rem; font-weight: 600; cursor: pointer;
+      transition: all var(--transition-fast);
+      color: var(--text-secondary); background: var(--bg-card);
+    }
+    .filter-tab.active, .filter-tab:hover { background: var(--blue-primary); color: white; border-color: var(--blue-primary); }
+    .formation-card { transition: all var(--transition-base); }
+    .formation-card.hidden { display: none; }
+    .stat-strip {
+      background: var(--blue-primary);
+      padding: 20px 0;
+    }
+    .stat-strip-inner { display: flex; gap: 0; flex-wrap: wrap; }
+    .stat-strip-item {
+      flex: 1; min-width: 150px; text-align: center; padding: 12px 20px;
+      border-right: 1px solid rgba(255,255,255,.2);
+      color: white;
+    }
+    .stat-strip-item:last-child { border-right: none; }
+    .stat-strip-value { font-size: 1.8rem; font-weight: 800; display: block; }
+    .stat-strip-label { font-size: .78rem; opacity: .8; margin-top: 2px; display: block; }
+    .process-block {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 0;
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg); overflow: hidden;
+    }
+    .process-item {
+      padding: 28px 20px; text-align: center; position: relative;
+      border-right: 1px solid var(--border-color);
+    }
+    .process-item:last-child { border-right: none; }
+    .process-item-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-primary), var(--blue-dark));
+      color: white; font-weight: 800; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .process-item-title { font-weight: 700; font-size: .95rem; margin-bottom: 6px; }
+    .process-item-desc { font-size: .8rem; color: var(--text-muted); }
+    .pricing-note {
+      background: linear-gradient(135deg, var(--blue-light), rgba(10,102,194,.05));
+      border: 1px solid rgba(10,102,194,.2);
+      border-radius: var(--radius-lg); padding: 24px 28px;
+      margin: 32px 0;
+    }
+    .modal-overlay { z-index: 500; }
+    .formation-modal-header {
+      background: linear-gradient(135deg, var(--blue-night), var(--blue-dark));
+      padding: 28px; color: white; position: relative;
+    }
+    .formation-modal-body { padding: 28px; }
+    .program-module {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 12px 0; border-bottom: 1px solid var(--border-color);
+    }
+    .program-module:last-child { border-bottom: none; }
+    .program-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--blue-light); color: var(--blue-primary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .78rem; font-weight: 700; flex-shrink: 0;
+    }
+    .section-divider {
+      display: flex; align-items: center; gap: 16px; margin: 48px 0 32px;
+    }
+    .section-divider-line { flex: 1; height: 1px; background: var(--border-color); }
+    .section-divider-label {
+      padding: 6px 16px; border-radius: var(--radius-full);
+      background: var(--blue-light); color: var(--blue-primary);
+      font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      white-space: nowrap;
+    }
+    @media(max-width:768px){
+      .process-block { grid-template-columns: 1fr 1fr; }
+      .process-item { border-bottom: 1px solid var(--border-color); }
+      .process-item:nth-child(2n) { border-right: none; }
+      .process-item:last-child,.process-item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+    }
+    @media(max-width:480px){
+      .process-block { grid-template-columns: 1fr; }
+      .process-item { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header id="header">
+  <nav class="nav-wrapper">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-icon">JI</div>
+      <div>
+        <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+        <div class="nav-logo-sub">Solutions informatiques</div>
+      </div>
+    </a>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="../index.html" class="nav-link">Accueil</a></li>
+      <li class="nav-item">
+        <a href="services.html" class="nav-link">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="services.html#maintenance" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div><div class="dropdown-item-text">Maintenance informatique</div><div class="dropdown-item-desc">Réparation, diagnostic, optimisation</div></div></a>
+          <a href="services.html#reseaux" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div><div><div class="dropdown-item-text">Systèmes & Réseaux</div><div class="dropdown-item-desc">Administration, configuration</div></div></a>
+          <a href="services.html#cybersecurite" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="dropdown-item-text">Cybersécurité</div><div class="dropdown-item-desc">Audit, protection, sécurisation</div></div></a>
+          <a href="services.html#developpement" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div><div class="dropdown-item-text">Développement web</div><div class="dropdown-item-desc">Sites, applications, outils</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="reparation.html" class="nav-link">Réparation</a></li>
+      <li class="nav-item"><a href="boutique.html" class="nav-link">Boutique</a></li>
+      <li class="nav-item"><a href="formations.html" class="nav-link active">Formations</a></li>
+      <li class="nav-item"><a href="guides.html" class="nav-link">Guides</a></li>
+      <li class="nav-item"><a href="assistance.html" class="nav-link">Assistance</a></li>
+      <li class="nav-item"><a href="entreprises.html" class="nav-link">Entreprises</a></li>
+      <li class="nav-item">
+        <a href="a-propos.html" class="nav-link">À propos <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="a-propos.html" class="dropdown-item"><div class="dropdown-item-text">À propos de nous</div></a>
+          <a href="fondateur.html" class="dropdown-item"><div class="dropdown-item-text">Le fondateur</div></a>
+          <a href="publications.html" class="dropdown-item"><div class="dropdown-item-text">Publications</div></a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-search-btn search-open-btn" title="Rechercher (Ctrl+K)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <a href="boutique.html#panier" class="nav-cart-btn" title="Panier">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge cart-count" style="display:none">0</span>
+      </a>
+      <button class="theme-toggle" title="Changer le thème">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="connexion.html" class="btn-connexion">Connexion</a>
+      <a href="contact.html#devis" class="btn-devis">Demander un devis</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-header">
+    <div class="nav-logo"><div class="nav-logo-icon">JI</div><div><div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div></div></div>
+  </div>
+  <a href="../index.html" class="mobile-nav-link">Accueil</a>
+  <a href="services.html" class="mobile-nav-link">Services</a>
+  <a href="reparation.html" class="mobile-nav-link">Réparation</a>
+  <a href="boutique.html" class="mobile-nav-link">Boutique</a>
+  <a href="formations.html" class="mobile-nav-link" style="color:var(--blue-primary)">Formations</a>
+  <a href="guides.html" class="mobile-nav-link">Guides & Tutoriels</a>
+  <a href="assistance.html" class="mobile-nav-link">Assistance</a>
+  <a href="entreprises.html" class="mobile-nav-link">Entreprises</a>
+  <a href="a-propos.html" class="mobile-nav-link">À propos</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+  <div class="mobile-menu-actions">
+    <a href="connexion.html" class="btn btn-outline btn-sm">Connexion</a>
+    <a href="contact.html#devis" class="btn btn-primary btn-sm">Demander un devis</a>
+  </div>
+</div>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <svg class="search-icon-input" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search-input" class="search-input" placeholder="Rechercher une formation, un service…" autocomplete="off">
+    <button class="search-close" id="search-close">✕</button>
+  </div>
+  <div class="search-suggestions">
+    <div class="search-suggestion"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Formation Administration Windows Server</div>
+    <div class="search-suggestion"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Formation Cisco CCNA</div>
+    <div class="search-suggestion"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Formation cybersécurité</div>
+    <div class="search-suggestion"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Apprendre Linux</div>
+  </div>
+</div>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero">
+  <div class="container" style="text-align:center">
+    <div class="page-hero-label">Centre de formation IT</div>
+    <h1>Développez vos compétences.<br><span style="color:#38BDF8">Construisez votre avenir numérique.</span></h1>
+    <p style="max-width:640px;margin:16px auto 28px">Des formations informatiques complètes, du niveau débutant à l'expert, dispensées en présentiel à Brazzaville et en ligne. Attestation de formation délivrée à l'issue de chaque programme.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="#catalogue" class="btn btn-white btn-lg">Voir le catalogue</a>
+      <a href="#inscription-form" class="btn btn-lg" style="border:2px solid rgba(255,255,255,.4);color:white">S'inscrire maintenant</a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Strip -->
+<div class="stat-strip">
+  <div class="container">
+    <div class="stat-strip-inner">
+      <div class="stat-strip-item"><span class="stat-strip-value">22+</span><span class="stat-strip-label">Formations disponibles</span></div>
+      <div class="stat-strip-item"><span class="stat-strip-value">3</span><span class="stat-strip-label">Niveaux d'apprentissage</span></div>
+      <div class="stat-strip-item"><span class="stat-strip-value">2</span><span class="stat-strip-label">Modalités : présentiel & en ligne</span></div>
+      <div class="stat-strip-item"><span class="stat-strip-value">✓</span><span class="stat-strip-label">Attestation de formation délivrée</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<main>
+  <!-- BREADCRUMB -->
+  <div class="container" style="padding-top:32px">
+    <div class="breadcrumb">
+      <a href="../index.html">Accueil</a><span>›</span><span style="color:var(--text-primary)">Formations</span>
+    </div>
+  </div>
+
+  <!-- PRICING NOTE -->
+  <div class="container">
+    <div class="pricing-note">
+      <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue-primary)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div>
+          <strong style="color:var(--blue-primary);font-size:.95rem">Tarification indicative</strong>
+          <p style="margin:4px 0 0;font-size:.875rem;color:var(--text-secondary)">Frais d'inscription : <strong style="color:var(--text-primary)">3 000 FCFA</strong> (non remboursables). Mensualité : <strong style="color:var(--text-primary)">à partir de 20 000 FCFA</strong> selon la formation. Les tarifs définitifs sont communiqués lors de l'entretien d'inscription. Des arrangements peuvent être envisagés selon les situations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATALOGUE -->
+  <section class="section" id="catalogue">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Nos formations</div>
+        <h2 class="section-title">Catalogue complet des formations</h2>
+        <p class="section-desc">Choisissez votre niveau et trouvez la formation adaptée à votre projet professionnel.</p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-tabs" id="formation-filters">
+        <button class="filter-tab active" data-filter="all">Toutes les formations (22)</button>
+        <button class="filter-tab" data-filter="debutant">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#4ADE80;margin-right:6px"></span>Débutant (5)
+        </button>
+        <button class="filter-tab" data-filter="intermediaire">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#FCD34D;margin-right:6px"></span>Intermédiaire (9)
+        </button>
+        <button class="filter-tab" data-filter="avance">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#FCA5A5;margin-right:6px"></span>Avancé (8)
+        </button>
+      </div>
+
+      <!-- SECTION: Débutant -->
+      <div class="section-divider">
+        <div class="section-divider-line"></div>
+        <div class="section-divider-label">🟢 Niveau Débutant</div>
+        <div class="section-divider-line"></div>
+      </div>
+
+      <div class="formation-grid" id="formation-grid">
+
+        <!-- 1 -->
+        <div class="formation-card card-hover fade-in-up" data-level="debutant" data-formation="initiation">
+          <div class="formation-card-header">
+            <div class="formation-card-level level-debutant">Débutant</div>
+            <div class="formation-card-title">Initiation à l'informatique</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2 mois</span>
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Découvrez les bases de l'informatique : matériel, logiciels, navigation Internet, bureautique et sécurité élémentaire.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+            <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+              <span class="badge badge-primary">Tous publics</span>
+              <span class="badge badge-gray">Aucun prérequis</span>
+            </div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('initiation')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="formation-card card-hover fade-in-up stagger-1" data-level="debutant" data-formation="bureautique">
+          <div class="formation-card-header">
+            <div class="formation-card-level level-debutant">Débutant</div>
+            <div class="formation-card-title">Bureautique</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 1,5 mois</span>
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Présentiel / En ligne</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Maîtrisez Word, Excel, PowerPoint et Outlook pour une utilisation professionnelle efficace au quotidien.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+            <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+              <span class="badge badge-primary">Particuliers & Pro</span>
+              <span class="badge badge-gray">Bases informatique</span>
+            </div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('bureautique')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="formation-card card-hover fade-in-up stagger-2" data-level="debutant" data-formation="htmlcssjs">
+          <div class="formation-card-header">
+            <div class="formation-card-level level-debutant">Débutant</div>
+            <div class="formation-card-title">HTML, CSS & JavaScript</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2 mois</span>
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><wifi/><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg> En ligne / Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Créez vos premières pages web avec les technologies fondamentales du développement web front-end.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+            <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+              <span class="badge badge-primary">Développeurs débutants</span>
+            </div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('htmlcssjs')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="formation-card card-hover fade-in-up" data-level="debutant" data-formation="git">
+          <div class="formation-card-header">
+            <div class="formation-card-level level-debutant">Débutant</div>
+            <div class="formation-card-title">Git & GitHub</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 1 mois</span>
+              <span class="formation-meta-item">En ligne / Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Maîtrisez le contrôle de version avec Git et la collaboration sur GitHub. Indispensable pour tout développeur.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('git')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="formation-card card-hover fade-in-up stagger-1" data-level="debutant" data-formation="helpdesk">
+          <div class="formation-card-header">
+            <div class="formation-card-level level-debutant">Débutant</div>
+            <div class="formation-card-title">Support informatique & Helpdesk</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 1,5 mois</span>
+              <span class="formation-meta-item">Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Apprenez à gérer les demandes d'assistance, diagnostiquer des problèmes courants et accompagner les utilisateurs.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('helpdesk')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- ── INTERMÉDIAIRE ── -->
+        <!-- Divider injected via JS -->
+
+        <!-- 6 -->
+        <div class="formation-card card-hover fade-in-up" data-level="intermediaire" data-formation="maintenance-hw">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A3A5C,#2D5986)">
+            <div class="formation-card-level level-intermediaire">Intermédiaire</div>
+            <div class="formation-card-title">Maintenance informatique Hardware</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2 mois</span>
+              <span class="formation-meta-item">Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Démontage, diagnostic, remplacement de composants, réparation de PC portables et fixes, gestion des périphériques.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('maintenance-hw')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="formation-card card-hover fade-in-up stagger-1" data-level="intermediaire" data-formation="maintenance-sw">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A3A5C,#2D5986)">
+            <div class="formation-card-level level-intermediaire">Intermédiaire</div>
+            <div class="formation-card-title">Maintenance informatique Software</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 1,5 mois</span>
+              <span class="formation-meta-item">Présentiel / En ligne</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Installation d'OS, suppression de malwares, optimisation système, récupération de données, scripts de maintenance.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('maintenance-sw')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="formation-card card-hover fade-in-up stagger-2" data-level="intermediaire" data-formation="installation-os">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A3A5C,#2D5986)">
+            <div class="formation-card-level level-intermediaire">Intermédiaire</div>
+            <div class="formation-card-title">Installation des systèmes d'exploitation</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 1 mois</span>
+              <span class="formation-meta-item">Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Windows 10/11, Ubuntu, Debian : partitionnement, dual-boot, drivers, configurations post-installation.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('installation-os')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="formation-card card-hover fade-in-up" data-level="intermediaire" data-formation="admin-windows">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A3A5C,#2D5986)">
+            <div class="formation-card-level level-intermediaire">Intermédiaire</div>
+            <div class="formation-card-title">Administration Windows</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2 mois</span>
+              <span class="formation-meta-item">Présentiel / En ligne</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Gestion avancée de Windows : registre, stratégies, comptes utilisateurs, sécurité, PowerShell de base.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('admin-windows')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="formation-card card-hover fade-in-up stagger-1" data-level="intermediaire" data-formation="admin-linux">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A3A5C,#2D5986)">
+            <div class="formation-card-level level-intermediaire">Intermédiaire</div>
+            <div class="formation-card-title">Administration Linux</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2,5 mois</span>
+              <span class="formation-meta-item">Présentiel / En ligne</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Shell, gestion des utilisateurs, système de fichiers, services, Apache2, SSH, cron, permissions.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('admin-linux')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="formation-card card-hover fade-in-up stagger-2" data-level="intermediaire" data-formation="reseaux">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A3A5C,#2D5986)">
+            <div class="formation-card-level level-intermediaire">Intermédiaire</div>
+            <div class="formation-card-title">Réseaux informatiques</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2,5 mois</span>
+              <span class="formation-meta-item">Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Modèle OSI/TCP-IP, adressage IP, routage, VLAN, Wi-Fi, câblage, configuration de base des équipements réseau.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('reseaux')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 12 -->
+        <div class="formation-card card-hover fade-in-up" data-level="intermediaire" data-formation="bases-donnees">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A3A5C,#2D5986)">
+            <div class="formation-card-level level-intermediaire">Intermédiaire</div>
+            <div class="formation-card-title">Bases de données</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2 mois</span>
+              <span class="formation-meta-item">En ligne / Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Conception de BDD relationnelles, SQL (MySQL/PostgreSQL), requêtes, jointures, optimisation et sécurité.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('bases-donnees')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 13 -->
+        <div class="formation-card card-hover fade-in-up stagger-1" data-level="intermediaire" data-formation="powershell">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A3A5C,#2D5986)">
+            <div class="formation-card-level level-intermediaire">Intermédiaire</div>
+            <div class="formation-card-title">PowerShell</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 1,5 mois</span>
+              <span class="formation-meta-item">En ligne / Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Automatisation Windows avec PowerShell : scripts, gestion AD, tâches planifiées, modules et bonnes pratiques.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('powershell')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 14 -->
+        <div class="formation-card card-hover fade-in-up stagger-2" data-level="intermediaire" data-formation="bash">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A3A5C,#2D5986)">
+            <div class="formation-card-level level-intermediaire">Intermédiaire</div>
+            <div class="formation-card-title">Bash & Scripts Shell</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 1,5 mois</span>
+              <span class="formation-meta-item">En ligne / Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Maîtrisez le Shell Bash : variables, boucles, fonctions, automatisation de tâches d'administration Linux.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('bash')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- ── AVANCÉ ── -->
+
+        <!-- 15 -->
+        <div class="formation-card card-hover fade-in-up" data-level="avance" data-formation="windows-server">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A0A2E,#3B1D8F)">
+            <div class="formation-card-level level-avance">Avancé</div>
+            <div class="formation-card-title">Administration Windows Server</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 3 mois</span>
+              <span class="formation-meta-item">Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Active Directory, DNS, DHCP, GPO, serveurs de fichiers, Hyper-V, IIS, sécurité et déploiement en entreprise.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+            <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+              <span class="badge badge-primary">Très demandée</span>
+              <span class="badge badge-orange">Prérequis : Admin Windows</span>
+            </div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('windows-server')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 16 -->
+        <div class="formation-card card-hover fade-in-up stagger-1" data-level="avance" data-formation="ccna">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A0A2E,#3B1D8F)">
+            <div class="formation-card-level level-avance">Avancé</div>
+            <div class="formation-card-title">Cisco CCNA</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 3 mois</span>
+              <span class="formation-meta-item">Présentiel / En ligne</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Préparation à la certification CCNA : routage, commutation, OSPF, EIGRP, ACL, NAT, VPN, sécurité réseau Cisco.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+            <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+              <span class="badge badge-primary">Certification Cisco</span>
+              <span class="badge badge-orange">Prérequis : Réseaux informatiques</span>
+            </div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('ccna')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 17 -->
+        <div class="formation-card card-hover fade-in-up stagger-2" data-level="avance" data-formation="admin-sys-res">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A0A2E,#3B1D8F)">
+            <div class="formation-card-level level-avance">Avancé</div>
+            <div class="formation-card-title">Administration Systèmes & Réseaux</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 3 mois</span>
+              <span class="formation-meta-item">Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Formation complète couvrant l'administration Windows Server & Linux en environnement réseau d'entreprise.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('admin-sys-res')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 18 -->
+        <div class="formation-card card-hover fade-in-up" data-level="avance" data-formation="cybersecurite">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A0A2E,#3B1D8F)">
+            <div class="formation-card-level level-avance">Avancé</div>
+            <div class="formation-card-title">Cybersécurité fondamentale</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2,5 mois</span>
+              <span class="formation-meta-item">Présentiel / En ligne</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Menaces, pare-feux, VPN, IDS/IPS, cryptographie, audit de sécurité autorisé, OWASP, sensibilisation.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('cybersecurite')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 19 -->
+        <div class="formation-card card-hover fade-in-up stagger-1" data-level="avance" data-formation="virtualisation">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A0A2E,#3B1D8F)">
+            <div class="formation-card-level level-avance">Avancé</div>
+            <div class="formation-card-title">Virtualisation</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2 mois</span>
+              <span class="formation-meta-item">Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Hyper-V, VMware Workstation & ESXi, VirtualBox : déploiement de VMs, snapshots, migration, haute disponibilité.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('virtualisation')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 20 -->
+        <div class="formation-card card-hover fade-in-up stagger-2" data-level="avance" data-formation="dev-web">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A0A2E,#3B1D8F)">
+            <div class="formation-card-level level-avance">Avancé</div>
+            <div class="formation-card-title">Développement web complet</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 3 mois</span>
+              <span class="formation-meta-item">En ligne / Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">HTML/CSS/JS avancé, frameworks modernes, PHP/Node.js, API REST, bases de données, déploiement.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('dev-web')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 21 -->
+        <div class="formation-card card-hover fade-in-up" data-level="avance" data-formation="ia">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A0A2E,#3B1D8F)">
+            <div class="formation-card-level level-avance">Avancé</div>
+            <div class="formation-card-title">Intelligence artificielle appliquée</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2,5 mois</span>
+              <span class="formation-meta-item">En ligne / Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Concepts IA, Machine Learning avec Python, outils IA du quotidien, automatisation et cas d'usage pratiques.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('ia')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+        <!-- 22 -->
+        <div class="formation-card card-hover fade-in-up stagger-1" data-level="avance" data-formation="gestion-projet">
+          <div class="formation-card-header" style="background:linear-gradient(135deg,#1A0A2E,#3B1D8F)">
+            <div class="formation-card-level level-avance">Avancé</div>
+            <div class="formation-card-title">Gestion de projet informatique</div>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 1,5 mois</span>
+              <span class="formation-meta-item">En ligne / Présentiel</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Méthodologies Agile/Scrum, gestion des risques, outils de planification, documentation et pilotage de projets IT.</p>
+            <div class="formation-card-price">Inscription : 3 000 FCFA <span style="font-size:.75rem;font-weight:400;color:var(--text-muted)">+ à partir de 20 000 FCFA/mois</span></div>
+          </div>
+          <div class="card-footer" style="padding:14px 20px">
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="openFormation('gestion-projet')">En savoir plus & S'inscrire</button>
+          </div>
+        </div>
+
+      </div><!-- /formation-grid -->
+    </div>
+  </section>
+
+  <!-- ── PROCESS ── -->
+  <section class="section-sm" style="background:var(--bg-secondary)">
+    <div class="container">
+      <div class="section-header mb-32">
+        <div class="section-label">Inscription</div>
+        <h2 class="section-title">Comment s'inscrire ?</h2>
+      </div>
+      <div class="process-block">
+        <div class="process-item">
+          <div class="process-item-num">1</div>
+          <div class="process-item-title">Choisir</div>
+          <div class="process-item-desc">Sélectionnez la formation qui correspond à votre niveau et vos objectifs professionnels.</div>
+        </div>
+        <div class="process-item">
+          <div class="process-item-num">2</div>
+          <div class="process-item-title">S'inscrire</div>
+          <div class="process-item-desc">Remplissez le formulaire d'inscription ci-dessous. Nous vous contacterons pour confirmer.</div>
+        </div>
+        <div class="process-item">
+          <div class="process-item-num">3</div>
+          <div class="process-item-title">Régler les frais</div>
+          <div class="process-item-desc">Payez les frais d'inscription de 3 000 FCFA pour confirmer votre place dans la formation.</div>
+        </div>
+        <div class="process-item">
+          <div class="process-item-num">4</div>
+          <div class="process-item-title">Démarrer</div>
+          <div class="process-item-desc">Rejoignez votre groupe et commencez à acquérir de nouvelles compétences informatiques.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INSCRIPTION FORM ── -->
+  <section class="section" id="inscription-form">
+    <div class="container-sm">
+      <div class="section-header">
+        <div class="section-label">Rejoindre Jason_INFORMATIQUE</div>
+        <h2 class="section-title">Formulaire d'inscription</h2>
+        <p class="section-desc">Remplissez ce formulaire et nous vous contacterons sous 24h pour finaliser votre inscription.</p>
+      </div>
+
+      <div class="card" style="box-shadow:var(--shadow-lg)">
+        <div class="card-body" style="padding:36px">
+          <div class="alert alert-info mb-24">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span>Vos données ne sont pas stockées dans cette version de démonstration. En version production, elles seront sécurisées et utilisées uniquement pour le traitement de votre inscription.</span>
+          </div>
+
+          <form id="inscription-form-el" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="ins-prenom">Prénom <span class="required">*</span></label>
+                <input type="text" id="ins-prenom" name="prenom" class="form-input" placeholder="Votre prénom" required>
+                <span class="form-error" data-error="prenom">Ce champ est requis.</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ins-nom">Nom <span class="required">*</span></label>
+                <input type="text" id="ins-nom" name="nom" class="form-input" placeholder="Votre nom" required>
+                <span class="form-error" data-error="nom">Ce champ est requis.</span>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="ins-email">Email <span class="required">*</span></label>
+                <input type="email" id="ins-email" name="email" class="form-input" placeholder="votre@email.com" required>
+                <span class="form-error" data-error="email">Email invalide.</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ins-tel">Téléphone <span class="required">*</span></label>
+                <input type="tel" id="ins-tel" name="telephone" class="form-input" placeholder="+242 XX XXX XXXX" required>
+                <span class="form-error" data-error="telephone">Ce champ est requis.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ins-formation">Formation choisie <span class="required">*</span></label>
+              <select id="ins-formation" name="formation" class="form-select" required>
+                <option value="">— Sélectionnez une formation —</option>
+                <optgroup label="🟢 Débutant">
+                  <option value="initiation">Initiation à l'informatique</option>
+                  <option value="bureautique">Bureautique</option>
+                  <option value="htmlcssjs">HTML, CSS & JavaScript</option>
+                  <option value="git">Git & GitHub</option>
+                  <option value="helpdesk">Support informatique & Helpdesk</option>
+                </optgroup>
+                <optgroup label="🟡 Intermédiaire">
+                  <option value="maintenance-hw">Maintenance informatique Hardware</option>
+                  <option value="maintenance-sw">Maintenance informatique Software</option>
+                  <option value="installation-os">Installation des systèmes d'exploitation</option>
+                  <option value="admin-windows">Administration Windows</option>
+                  <option value="admin-linux">Administration Linux</option>
+                  <option value="reseaux">Réseaux informatiques</option>
+                  <option value="bases-donnees">Bases de données</option>
+                  <option value="powershell">PowerShell</option>
+                  <option value="bash">Bash & Scripts Shell</option>
+                </optgroup>
+                <optgroup label="🔴 Avancé">
+                  <option value="windows-server">Administration Windows Server</option>
+                  <option value="ccna">Cisco CCNA</option>
+                  <option value="admin-sys-res">Administration Systèmes & Réseaux</option>
+                  <option value="cybersecurite">Cybersécurité fondamentale</option>
+                  <option value="virtualisation">Virtualisation</option>
+                  <option value="dev-web">Développement web complet</option>
+                  <option value="ia">Intelligence artificielle appliquée</option>
+                  <option value="gestion-projet">Gestion de projet informatique</option>
+                </optgroup>
+              </select>
+              <span class="form-error" data-error="formation">Veuillez sélectionner une formation.</span>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="ins-niveau">Niveau actuel</label>
+                <select id="ins-niveau" name="niveau_actuel" class="form-select">
+                  <option value="">— Votre niveau —</option>
+                  <option value="debutant">Débutant — peu ou pas d'expérience</option>
+                  <option value="intermediaire">Intermédiaire — bases acquises</option>
+                  <option value="avance">Avancé — expérience significative</option>
+                  <option value="professionnel">Professionnel en activité</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ins-mode">Modalité préférée</label>
+                <select id="ins-mode" name="mode_prefere" class="form-select">
+                  <option value="presentiel">Présentiel — Mpila, Brazzaville</option>
+                  <option value="enligne">En ligne (à distance)</option>
+                  <option value="mixte">Mixte (présentiel + en ligne)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ins-motivations">Motivations & objectifs professionnels</label>
+              <textarea id="ins-motivations" name="motivations" class="form-textarea" placeholder="Décrivez votre projet professionnel, pourquoi cette formation vous intéresse, vos objectifs…" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+              <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+                <input type="checkbox" name="consentement" required style="margin-top:3px;flex-shrink:0">
+                <span style="font-size:.875rem;color:var(--text-secondary)">J'accepte que mes données soient utilisées pour le traitement de mon inscription conformément à la <a href="confidentialite.html" style="color:var(--blue-primary)">politique de confidentialité</a> de Jason_INFORMATIQUE. <span class="required">*</span></span>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Envoyer ma demande d'inscription
+            </button>
+          </form>
+
+          <!-- Success -->
+          <div id="inscription-success" style="display:none;text-align:center;padding:32px 0">
+            <div style="width:70px;height:70px;background:var(--green-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3 style="color:var(--green);margin-bottom:8px">Demande envoyée !</h3>
+            <p style="margin-bottom:12px">Votre demande d'inscription a bien été enregistrée.</p>
+            <div class="highlight-box" style="display:inline-block;padding:12px 28px;margin:0 auto">
+              <p style="font-size:.8rem;color:var(--text-muted);margin:0">Référence</p>
+              <p style="font-size:1.3rem;font-weight:800;color:var(--blue-primary);margin:0" id="inscription-ref"></p>
+            </div>
+            <p style="margin-top:16px;font-size:.875rem;color:var(--text-muted)">Nous vous contacterons sous <strong>24h</strong> pour confirmer votre inscription et vous communiquer les prochaines sessions disponibles.</p>
+            <a href="contact.html" class="btn btn-outline mt-16">Nous contacter</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-title">Une question sur nos formations ?</div>
+      <p class="cta-desc">Notre équipe pédagogique est disponible pour vous orienter vers la formation la plus adaptée à votre profil et vos objectifs.</p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-white btn-lg">Nous contacter</a>
+        <a href="https://wa.me/242067814704" class="btn btn-lg" style="background:rgba(255,255,255,.15);color:white;border:2px solid rgba(255,255,255,.3)" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ── FORMATION MODAL ── -->
+<div class="modal-overlay" id="formation-modal">
+  <div class="modal" style="max-width:680px">
+    <div class="formation-modal-header" id="modal-header">
+      <button class="modal-close" onclick="document.getElementById('formation-modal').classList.remove('open')" style="position:absolute;top:16px;right:16px;color:rgba(255,255,255,.7);background:rgba(255,255,255,.1);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div id="modal-level-badge" class="formation-card-level" style="margin-bottom:10px"></div>
+      <h2 id="modal-title" style="color:white;font-size:1.4rem;padding-right:40px"></h2>
+      <p id="modal-meta" style="color:rgba(255,255,255,.7);font-size:.85rem;margin-top:8px"></p>
+    </div>
+    <div class="formation-modal-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px">
+        <div>
+          <h4 style="font-size:.9rem;margin-bottom:10px;color:var(--blue-primary)">🎯 Objectifs</h4>
+          <ul id="modal-objectives" style="padding-left:16px;color:var(--text-secondary);font-size:.85rem;line-height:1.9"></ul>
+        </div>
+        <div>
+          <h4 style="font-size:.9rem;margin-bottom:10px;color:var(--blue-primary)">📋 Prérequis</h4>
+          <p id="modal-prereqs" style="font-size:.85rem;color:var(--text-secondary);line-height:1.7"></p>
+        </div>
+      </div>
+      <h4 style="font-size:.9rem;margin-bottom:12px;color:var(--blue-primary)">📚 Programme (modules principaux)</h4>
+      <div id="modal-program"></div>
+      <div style="background:var(--bg-secondary);border-radius:var(--radius-md);padding:16px;margin-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+        <div>
+          <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px">Tarif</div>
+          <div style="font-size:1.1rem;font-weight:800;color:var(--blue-primary)">Inscription : 3 000 FCFA + à partir de 20 000 FCFA/mois</div>
+          <div style="font-size:.75rem;color:var(--text-muted);margin-top:3px">Tarif définitif communiqué lors de l'entretien d'inscription</div>
+        </div>
+        <button class="btn btn-primary" onclick="scrollToForm()">S'inscrire à cette formation</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">JI</div>
+          <div>
+            <div style="font-weight:800;color:white;font-size:1rem"><span style="color:#38BDF8">Jason_</span>INFORMATIQUE</div>
+            <div style="font-size:.65rem;color:rgba(255,255,255,.4);letter-spacing:1px">SOLUTIONS INFORMATIQUES</div>
+          </div>
+        </div>
+        <p>Votre partenaire pour des solutions informatiques modernes. Formations, réparations, services et accompagnement.</p>
+        <div class="footer-social">
+          <a href="#" title="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://wa.me/242067814704" title="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Formations</h4>
+        <div class="footer-links">
+          <a href="#catalogue">Débutant</a>
+          <a href="#catalogue">Intermédiaire</a>
+          <a href="#catalogue">Avancé</a>
+          <a href="#inscription-form">S'inscrire</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <div class="footer-links">
+          <a href="services.html">Maintenance</a>
+          <a href="reparation.html">Réparation</a>
+          <a href="guides.html">Guides techniques</a>
+          <a href="boutique.html">Boutique</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Mpila, Brazzaville, Congo</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:jasoninformatique7@gmail.com" style="color:rgba(255,255,255,.55)">jasoninformatique7@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Lun – Sam : 08h00 – 19h00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Jason_INFORMATIQUE © 2026 — Fondé par Gad Jason MBOU. Tous droits réservés.</p>
+    <div class="footer-bottom-links">
+      <a href="cgv.html">CGV</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Elements -->
+<a href="https://wa.me/242067814704" class="whatsapp-float" target="_blank" title="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</a>
+<button class="chatbot-float" id="chatbot-btn" title="Jason Assistant">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
+<div class="chatbot-panel" id="chatbot-panel">
+  <div class="chatbot-header">
+    <div class="chatbot-avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+    <div><div class="chatbot-name">Jason Assistant</div><div class="chatbot-status"><span class="chatbot-online"></span>En ligne</div></div>
+    <button class="chatbot-close" id="chatbot-close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="chatbot-messages" id="chatbot-messages"></div>
+  <div class="chatbot-input-area">
+    <input type="text" id="chatbot-input" placeholder="Posez votre question…">
+    <button class="chatbot-send" id="chatbot-send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+<button class="scroll-top" id="scroll-top" title="Haut de page">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+<div class="cookie-banner" id="cookie-banner">
+  <p>🍪 Ce site utilise uniquement des cookies essentiels à son fonctionnement.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-sm btn-ghost" id="cookie-refuse" style="color:rgba(255,255,255,.6)">Refuser</button>
+    <button class="btn btn-sm btn-primary" id="cookie-accept">J'accepte</button>
+  </div>
+</div>
+<div id="toast-container"></div>
+
+<script src="../js/main.js"></script>
+<script>
+// ── Formation data
+const FORMATIONS = {
+  'initiation': { title:'Initiation à l\'informatique', level:'debutant', levelLabel:'Débutant', duration:'2 mois', mode:'Présentiel', prereqs:'Aucun prérequis. Accessible à tous.', objectives:['Comprendre le fonctionnement d\'un ordinateur','Naviguer sur Internet en toute sécurité','Utiliser les logiciels de base (traitement de texte, tableur)','Gérer ses fichiers et son espace de stockage','Découvrir les bonnes pratiques numériques'], program:[{n:1,t:'Matériel informatique',d:'Composants, périphériques, architecture'},{n:2,t:'Systèmes d\'exploitation',d:'Windows, interface, paramètres'},{n:3,t:'Internet & navigation',d:'Navigateurs, recherche, emails, sécurité'},{n:4,t:'Bureautique de base',d:'Word, Excel, PowerPoint'},{n:5,t:'Sécurité numérique',d:'Mots de passe, arnaques, protection'}] },
+  'bureautique': { title:'Bureautique', level:'debutant', levelLabel:'Débutant', duration:'1,5 mois', mode:'Présentiel / En ligne', prereqs:'Bases de l\'informatique recommandées.', objectives:['Maîtriser Microsoft Word pour créer des documents professionnels','Utiliser Excel pour les tableaux et calculs','Concevoir des présentations avec PowerPoint','Gérer sa messagerie avec Outlook','Organiser et partager des fichiers efficacement'], program:[{n:1,t:'Microsoft Word avancé',d:'Styles, tableaux, publipostage, révision'},{n:2,t:'Microsoft Excel',d:'Formules, graphiques, tableaux croisés'},{n:3,t:'Microsoft PowerPoint',d:'Présentations professionnelles, animations'},{n:4,t:'Outlook & messagerie',d:'Emails, calendrier, tâches, contacts'},{n:5,t:'Google Workspace',d:'Docs, Sheets, Drive, collaboration'}] },
+  'htmlcssjs': { title:'HTML, CSS & JavaScript', level:'debutant', levelLabel:'Débutant', duration:'2 mois', mode:'En ligne / Présentiel', prereqs:'Maîtrise de l\'outil informatique. Aucune expérience de programmation requise.', objectives:['Créer la structure d\'une page web avec HTML5','Styliser des pages web avec CSS3 et Flexbox/Grid','Ajouter de l\'interactivité avec JavaScript','Comprendre le DOM et les événements','Publier son premier site web'], program:[{n:1,t:'HTML5 fondamental',d:'Balises, sémantique, formulaires'},{n:2,t:'CSS3 & mise en page',d:'Sélecteurs, Box Model, Flexbox, Grid'},{n:3,t:'Design responsive',d:'Media queries, mobile-first'},{n:4,t:'JavaScript de base',d:'Variables, fonctions, boucles, DOM'},{n:5,t:'Projet final',d:'Création d\'un mini-site complet'}] },
+  'git': { title:'Git & GitHub', level:'debutant', levelLabel:'Débutant', duration:'1 mois', mode:'En ligne / Présentiel', prereqs:'Bases en développement ou administration recommandées.', objectives:['Comprendre le contrôle de version','Utiliser les commandes Git essentielles','Gérer des branches et des fusions','Collaborer sur des projets GitHub','Résoudre les conflits de fusion'], program:[{n:1,t:'Introduction au contrôle de version',d:'Pourquoi Git, installation, configuration'},{n:2,t:'Commandes Git essentielles',d:'init, add, commit, status, log'},{n:3,t:'Branches & fusions',d:'branch, merge, rebase, checkout'},{n:4,t:'GitHub & collaboration',d:'push, pull, fork, pull requests'},{n:5,t:'Projets pratiques',d:'Workflow en équipe, résolution de conflits'}] },
+  'helpdesk': { title:'Support informatique & Helpdesk', level:'debutant', levelLabel:'Débutant', duration:'1,5 mois', mode:'Présentiel', prereqs:'Bases en informatique.', objectives:['Gérer les demandes d\'assistance utilisateur','Diagnostiquer et résoudre les problèmes courants','Utiliser un système de tickets','Communiquer efficacement avec les utilisateurs','Documenter les interventions'], program:[{n:1,t:'Rôle du technicien support',d:'Compétences, communication, documentation'},{n:2,t:'Diagnostic et résolution',d:'Méthodologie, outils, dépannage'},{n:3,t:'Systèmes de tickets',d:'Gestion des priorités, SLA'},{n:4,t:'Environnements Windows & Linux',d:'Administration courante, utilisateurs'},{n:5,t:'Relation utilisateur',d:'Communication, pédagogie, cas pratiques'}] },
+  'maintenance-hw': { title:'Maintenance informatique Hardware', level:'intermediaire', levelLabel:'Intermédiaire', duration:'2 mois', mode:'Présentiel', prereqs:'Bases en informatique recommandées.', objectives:['Identifier et remplacer les composants défectueux','Réparer des PC portables et fixes','Gérer les périphériques et drivers','Effectuer des diagnostics matériels','Appliquer les bonnes pratiques de maintenance'], program:[{n:1,t:'Composants internes',d:'CPU, RAM, Carte mère, GPU, alimentation'},{n:2,t:'Stockage',d:'HDD, SSD, RAID, clonage'},{n:3,t:'PC portables',d:'Démontage, écrans, batteries, clavier'},{n:4,t:'Périphériques',d:'Imprimantes, scanners, réseau'},{n:5,t:'Diagnostics & outils',d:'Logiciels de diagnostic, tests, ESD'}] },
+  'maintenance-sw': { title:'Maintenance informatique Software', level:'intermediaire', levelLabel:'Intermédiaire', duration:'1,5 mois', mode:'Présentiel / En ligne', prereqs:'Administration Windows de base.', objectives:['Installer et configurer des systèmes d\'exploitation','Supprimer les logiciels malveillants','Optimiser les performances système','Réaliser des sauvegardes et restaurations','Écrire des scripts de maintenance simples'], program:[{n:1,t:'Installation d\'OS',d:'Windows, Ubuntu, partitionnement, dual-boot'},{n:2,t:'Sécurité & malwares',d:'Antivirus, suppression, protection'},{n:3,t:'Optimisation',d:'Démarrage, registre, nettoyage, performances'},{n:4,t:'Sauvegarde & restauration',d:'Clonage, images système, récupération'},{n:5,t:'Scripts de maintenance',d:'Batch, PowerShell basique, automatisation'}] },
+  'installation-os': { title:'Installation des systèmes d\'exploitation', level:'intermediaire', levelLabel:'Intermédiaire', duration:'1 mois', mode:'Présentiel', prereqs:'Connaissance du matériel informatique.', objectives:['Installer Windows 10 et 11','Installer Ubuntu et distributions Linux','Configurer le dual-boot','Gérer le partitionnement','Effectuer la configuration post-installation'], program:[{n:1,t:'Préparation',d:'BIOS/UEFI, supports d\'installation, partitionnement'},{n:2,t:'Installation Windows',d:'Windows 10/11, activation, drivers'},{n:3,t:'Installation Linux',d:'Ubuntu, Debian, Linux Mint'},{n:4,t:'Dual-boot',d:'Gestionnaire de démarrage, GRUB'},{n:5,t:'Post-installation',d:'Mises à jour, logiciels essentiels, sécurité'}] },
+  'admin-windows': { title:'Administration Windows', level:'intermediaire', levelLabel:'Intermédiaire', duration:'2 mois', mode:'Présentiel / En ligne', prereqs:'Bonne maîtrise de Windows.', objectives:['Administrer les comptes utilisateurs et groupes','Gérer le registre Windows en toute sécurité','Configurer les stratégies locales','Utiliser PowerShell pour l\'administration','Assurer la sécurité du poste de travail'], program:[{n:1,t:'Gestion des utilisateurs',d:'Comptes, groupes, profils, permissions'},{n:2,t:'Registre & stratégies',d:'Regedit, GPO locales, sécurité'},{n:3,t:'Services & processus',d:'Gestionnaire de tâches, services Windows'},{n:4,t:'PowerShell administration',d:'Cmdlets essentiels, scripts simples'},{n:5,t:'Sécurité Windows',d:'Pare-feu, BitLocker, mises à jour, audit'}] },
+  'admin-linux': { title:'Administration Linux', level:'intermediaire', levelLabel:'Intermédiaire', duration:'2,5 mois', mode:'Présentiel / En ligne', prereqs:'Bases en informatique et utilisation de l\'ordinateur.', objectives:['Naviguer et administrer le système de fichiers Linux','Gérer les utilisateurs et permissions','Configurer et démarrer des services','Administrer un serveur web Apache2','Automatiser des tâches avec Bash'], program:[{n:1,t:'Shell & commandes essentielles',d:'Navigation, fichiers, recherche, pipes'},{n:2,t:'Gestion des utilisateurs',d:'Comptes, groupes, sudo, permissions'},{n:3,t:'Services & démons',d:'systemd, cron, SSH, journalisation'},{n:4,t:'Réseau Linux',d:'Configuration, pare-feu, DNS, NTP'},{n:5,t:'Serveurs & automatisation',d:'Apache2, sauvegardes rsync, Bash scripts'}] },
+  'reseaux': { title:'Réseaux informatiques', level:'intermediaire', levelLabel:'Intermédiaire', duration:'2,5 mois', mode:'Présentiel', prereqs:'Bases en informatique.', objectives:['Comprendre les modèles OSI et TCP/IP','Maîtriser l\'adressage IP et le sous-réseau','Configurer des équipements réseau de base','Mettre en place un réseau LAN/WLAN','Utiliser Cisco Packet Tracer pour les simulations'], program:[{n:1,t:'Fondamentaux réseau',d:'Modèle OSI, TCP/IP, protocoles'},{n:2,t:'Adressage IP',d:'IPv4, IPv6, CIDR, calcul de sous-réseaux'},{n:3,t:'Équipements réseau',d:'Switches, routeurs, points d\'accès'},{n:4,t:'VLAN & Wi-Fi',d:'Segmentation, 802.11, sécurité sans fil'},{n:5,t:'Packet Tracer & pratique',d:'Simulations, câblage, configuration'}] },
+  'bases-donnees': { title:'Bases de données', level:'intermediaire', levelLabel:'Intermédiaire', duration:'2 mois', mode:'En ligne / Présentiel', prereqs:'Bases en informatique. Notions de logique appréciées.', objectives:['Concevoir un schéma de base de données relationnelle','Écrire des requêtes SQL complètes','Gérer les relations et jointures','Assurer la sécurité des données','Optimiser les performances des requêtes'], program:[{n:1,t:'Modélisation',d:'MCD, MLD, clés primaires/étrangères'},{n:2,t:'SQL fondamental',d:'SELECT, INSERT, UPDATE, DELETE'},{n:3,t:'Jointures & requêtes avancées',d:'JOIN, sous-requêtes, agrégations'},{n:4,t:'Administration',d:'MySQL/PostgreSQL, utilisateurs, droits'},{n:5,t:'Optimisation',d:'Index, transactions, performances'}] },
+  'powershell': { title:'PowerShell', level:'intermediaire', levelLabel:'Intermédiaire', duration:'1,5 mois', mode:'En ligne / Présentiel', prereqs:'Administration Windows intermédiaire.', objectives:['Écrire des scripts PowerShell efficaces','Automatiser la gestion des utilisateurs','Gérer Active Directory par script','Créer des rapports systèmes automatisés','Utiliser les modules PowerShell avancés'], program:[{n:1,t:'Fondamentaux PowerShell',d:'Cmdlets, pipeline, variables, types'},{n:2,t:'Structures de contrôle',d:'If, boucles, fonctions, erreurs'},{n:3,t:'Gestion système',d:'Fichiers, processus, services, registre'},{n:4,t:'Active Directory',d:'Utilisateurs, groupes, GPO par script'},{n:5,t:'Automatisation avancée',d:'Planification, rapports, modules'}] },
+  'bash': { title:'Bash & Scripts Shell', level:'intermediaire', levelLabel:'Intermédiaire', duration:'1,5 mois', mode:'En ligne / Présentiel', prereqs:'Administration Linux de base.', objectives:['Écrire des scripts Bash complets','Automatiser les tâches d\'administration Linux','Gérer les erreurs dans les scripts','Créer des sauvegardes automatisées','Maîtriser les expressions régulières'], program:[{n:1,t:'Syntaxe Bash',d:'Variables, types, opérateurs, commentaires'},{n:2,t:'Structures de contrôle',d:'if/else, for, while, case'},{n:3,t:'Fonctions & modules',d:'Fonctions, sourcing, bibliothèques'},{n:4,t:'Administration système',d:'Logs, cron, sauvegardes, monitoring'},{n:5,t:'Expressions régulières',d:'grep, sed, awk, traitement de texte'}] },
+  'windows-server': { title:'Administration Windows Server', level:'avance', levelLabel:'Avancé', duration:'3 mois', mode:'Présentiel', prereqs:'Administration Windows intermédiaire. Bases en réseaux recommandées.', objectives:['Installer et configurer Windows Server','Déployer et administrer Active Directory','Gérer DNS, DHCP et GPO','Configurer Hyper-V et la virtualisation','Assurer la haute disponibilité et la sécurité'], program:[{n:1,t:'Windows Server fondamental',d:'Installation, rôles, configuration, licensing'},{n:2,t:'Active Directory',d:'Forêts, domaines, OUs, réplication'},{n:3,t:'Services réseau',d:'DNS, DHCP, GPO, stratégies de sécurité'},{n:4,t:'Hyper-V & stockage',d:'Virtualisation, VMs, Storage, clusters'},{n:5,t:'Sécurité & supervision',d:'Audit, PKI, WSUS, sauvegarde, supervision'}] },
+  'ccna': { title:'Cisco CCNA', level:'avance', levelLabel:'Avancé', duration:'3 mois', mode:'Présentiel / En ligne', prereqs:'Formation Réseaux informatiques ou connaissances équivalentes.', objectives:['Configurer des routeurs et switches Cisco','Implémenter les protocoles de routage OSPF','Sécuriser le réseau avec des ACL','Configurer les VPN site-à-site','Se préparer à la certification CCNA'], program:[{n:1,t:'IOS Cisco fondamental',d:'CLI, configuration de base, VLANs, STP'},{n:2,t:'Routage',d:'OSPF, EIGRP, redistribution, route statique'},{n:3,t:'Sécurité réseau',d:'ACL, NAT, PAT, AAA, sécurité des ports'},{n:4,t:'WAN & VPN',d:'PPP, MPLS, IPsec, GRE'},{n:5,t:'Préparation CCNA',d:'Révisions, QoS, IPv6, examens blancs'}] },
+  'admin-sys-res': { title:'Administration Systèmes & Réseaux', level:'avance', levelLabel:'Avancé', duration:'3 mois', mode:'Présentiel', prereqs:'Administration Windows Server ou Linux + Réseaux informatiques.', objectives:['Administrer une infrastructure complète','Gérer les serveurs Windows et Linux','Configurer les équipements réseau','Mettre en place la supervision','Assurer la continuité de service'], program:[{n:1,t:'Infrastructure hybride',d:'Windows Server + Linux en cohabitation'},{n:2,t:'Réseaux d\'entreprise',d:'Routage avancé, VLAN, QoS, redondance'},{n:3,t:'Virtualisation avancée',d:'Hyper-V cluster, VMware vSphere'},{n:4,t:'Supervision & monitoring',d:'Nagios, Zabbix, SNMP, alertes'},{n:5,t:'PRA & sécurité',d:'Plan de reprise, sauvegarde, tests'}] },
+  'cybersecurite': { title:'Cybersécurité fondamentale', level:'avance', levelLabel:'Avancé', duration:'2,5 mois', mode:'Présentiel / En ligne', prereqs:'Administration systèmes et réseaux intermédiaire.', objectives:['Identifier et analyser les menaces informatiques','Configurer des pare-feux et IDS/IPS','Réaliser des audits de sécurité autorisés','Appliquer les recommandations OWASP','Sensibiliser les utilisateurs aux risques'], program:[{n:1,t:'Fondamentaux sécurité',d:'CIA, menaces, vulnérabilités, cryptographie'},{n:2,t:'Sécurisation des systèmes',d:'Hardening Windows & Linux, patches'},{n:3,t:'Sécurité réseau',d:'Pare-feu, IDS/IPS, VPN, VLAN sécurisés'},{n:4,t:'Audit de sécurité',d:'Méthodologie, outils autorisés, rapports'},{n:5,t:'OWASP & sensibilisation',d:'Top 10, phishing, social engineering'}] },
+  'virtualisation': { title:'Virtualisation', level:'avance', levelLabel:'Avancé', duration:'2 mois', mode:'Présentiel', prereqs:'Administration Windows Server et Linux.', objectives:['Installer et configurer Hyper-V et VMware','Gérer le cycle de vie des machines virtuelles','Mettre en place des snapshots et migrations','Configurer les réseaux virtuels','Optimiser les performances de virtualisation'], program:[{n:1,t:'Concepts de virtualisation',d:'Hyperviseurs Type 1 et 2, conteneurs'},{n:2,t:'VMware Workstation & ESXi',d:'Installation, VMs, réseaux VMware'},{n:3,t:'Hyper-V',d:'Rôles, VMs, commutateurs virtuels'},{n:4,t:'VirtualBox',d:'Configuration avancée, snapshots, clonage'},{n:5,t:'Production',d:'HA, migration, stockage partagé, sauvegarde'}] },
+  'dev-web': { title:'Développement web complet', level:'avance', levelLabel:'Avancé', duration:'3 mois', mode:'En ligne / Présentiel', prereqs:'HTML, CSS, JavaScript de base.', objectives:['Maîtriser HTML/CSS/JS avancés','Développer des API REST','Créer des applications web dynamiques','Gérer les bases de données','Déployer des applications web'], program:[{n:1,t:'Frontend avancé',d:'JavaScript ES6+, frameworks, bundlers'},{n:2,t:'Backend',d:'PHP ou Node.js, API REST, authentification'},{n:3,t:'Base de données',d:'MySQL, SQL avancé, ORM'},{n:4,t:'Sécurité web',d:'OWASP, HTTPS, validation, injections'},{n:5,t:'Déploiement',d:'Hébergement, Git CI/CD, domaines'}] },
+  'ia': { title:'Intelligence artificielle appliquée', level:'avance', levelLabel:'Avancé', duration:'2,5 mois', mode:'En ligne / Présentiel', prereqs:'Bonnes bases en informatique. Python apprécié.', objectives:['Comprendre les fondements de l\'IA et du ML','Utiliser Python pour le Machine Learning','Exploiter les outils IA du quotidien','Automatiser des tâches avec l\'IA','Évaluer les cas d\'usage professionnels'], program:[{n:1,t:'Fondements IA & ML',d:'Concepts, histoire, types d\'apprentissage'},{n:2,t:'Python pour l\'IA',d:'NumPy, Pandas, Scikit-learn, visualisation'},{n:3,t:'Outils IA pratiques',d:'ChatGPT, Copilot, outils métiers'},{n:4,t:'Automatisation',d:'Workflows IA, API, intégrations'},{n:5,t:'Éthique & projets',d:'Biais, RGPD, cas pratiques professionnels'}] },
+  'gestion-projet': { title:'Gestion de projet informatique', level:'avance', levelLabel:'Avancé', duration:'1,5 mois', mode:'En ligne / Présentiel', prereqs:'Expérience en informatique recommandée.', objectives:['Maîtriser les méthodologies Agile et Scrum','Planifier et suivre un projet informatique','Gérer les risques et les parties prenantes','Utiliser les outils de gestion de projet','Rédiger la documentation technique'], program:[{n:1,t:'Méthodologies',d:'Cascade, Agile, Scrum, Kanban'},{n:2,t:'Planification',d:'WBS, Gantt, jalons, ressources'},{n:3,t:'Gestion des risques',d:'Identification, évaluation, mitigation'},{n:4,t:'Outils',d:'Trello, Jira, MS Project, GitHub Projects'},{n:5,t:'Documentation & livraison',d:'Cahier des charges, recette, bilan'}] }
+};
+
+function openFormation(id) {
+  const f = FORMATIONS[id];
+  if (!f) return;
+  const levelColors = { debutant:'level-debutant', intermediaire:'level-intermediaire', avance:'level-avance' };
+  document.getElementById('modal-level-badge').className = 'formation-card-level ' + (levelColors[f.level]||'');
+  document.getElementById('modal-level-badge').textContent = f.levelLabel;
+  document.getElementById('modal-title').textContent = f.title;
+  document.getElementById('modal-meta').textContent = '⏱ ' + f.duration + '  •  📍 ' + f.mode;
+  document.getElementById('modal-prereqs').textContent = f.prereqs;
+  const ol = document.getElementById('modal-objectives');
+  ol.innerHTML = f.objectives.map(o => `<li>${o}</li>`).join('');
+  const prog = document.getElementById('modal-program');
+  prog.innerHTML = f.program.map(m => `<div class="program-module"><div class="program-num">${m.n}</div><div><strong style="font-size:.875rem">${m.t}</strong><p style="font-size:.8rem;color:var(--text-muted);margin:2px 0 0">${m.d}</p></div></div>`).join('');
+  // Pre-fill select
+  const sel = document.getElementById('ins-formation');
+  if (sel) { for (let opt of sel.options) { if (opt.value === id) { sel.value = id; break; } } }
+  document.getElementById('formation-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function scrollToForm() {
+  document.getElementById('formation-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    document.getElementById('inscription-form').scrollIntoView({ behavior:'smooth', block:'start' });
+  }, 300);
+}
+
+// Close modal on overlay click
+document.getElementById('formation-modal').addEventListener('click', function(e) {
+  if (e.target === this) { this.classList.remove('open'); document.body.style.overflow = ''; }
+});
+
+// Filter tabs
+document.getElementById('formation-filters').addEventListener('click', function(e) {
+  const btn = e.target.closest('.filter-tab');
+  if (!btn) return;
+  this.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const filter = btn.dataset.filter;
+  document.querySelectorAll('.formation-card').forEach(card => {
+    const show = filter === 'all' || card.dataset.level === filter;
+    card.classList.toggle('hidden', !show);
+  });
+});
+
+// Inscription form
+document.getElementById('inscription-form-el').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const required = ['ins-prenom','ins-nom','ins-email','ins-tel','ins-formation'];
+  let valid = true;
+  required.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) { el.classList.add('error'); valid = false; }
+    else el.classList.remove('error');
+  });
+  const consent = this.querySelector('[name="consentement"]');
+  if (!consent.checked) { valid = false; window.JasonApp?.Toast?.show('Consentement requis','Veuillez accepter la politique de confidentialité.','error'); }
+  if (!valid) { window.JasonApp?.Toast?.show('Formulaire incomplet','Veuillez remplir tous les champs obligatoires.','error'); return; }
+  const d = new Date();
+  const ref = 'INS-' + d.getFullYear() + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0') + '-' + Math.floor(1000+Math.random()*9000);
+  document.getElementById('inscription-ref').textContent = ref;
+  this.style.display = 'none';
+  document.getElementById('inscription-success').style.display = 'block';
+  window.JasonApp?.Toast?.show('Inscription envoyée','Référence : ' + ref + '. Nous vous contacterons sous 24h.','success');
+});
+</script>
+  <!-- Envoi direct par email â€” Web3Forms -->
+  <script src="../js/email-forms.js"></script></body>
+</html>

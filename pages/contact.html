@@ -1,0 +1,935 @@
+﻿<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Jason_INFORMATIQUE | Mpila, Brazzaville</title>
+  <meta name="description" content="Contactez Jason_INFORMATIQUE à Mpila, Brazzaville. Demande de devis informatique gratuit, dépannage, assistance, formations et solutions entreprises Jason PRO.">
+  <meta name="keywords" content="contact, devis informatique, dépannage Brazzaville, Jason_INFORMATIQUE, Mpila, Congo, réparation PC, réseaux">
+  <meta property="og:title" content="Contact — Jason_INFORMATIQUE | Mpila, Brazzaville">
+  <meta property="og:description" content="Contactez Jason_INFORMATIQUE : devis gratuit, assistance technique et prise de rendez-vous à Brazzaville.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    /* Spécificités page Contact */
+    .contact-info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .contact-info-card:hover {
+      border-color: var(--blue-primary);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .contact-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      background: var(--blue-light);
+      color: var(--blue-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      transition: all var(--transition-fast);
+    }
+    .contact-info-card:hover .contact-card-icon {
+      background: var(--blue-primary);
+      color: white;
+    }
+    .contact-layout-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 40px;
+      align-items: flex-start;
+    }
+    /* Map visual simulation */
+    .styled-map-container {
+      width: 100%;
+      height: 260px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    }
+    .map-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    .map-river {
+      position: absolute;
+      width: 140%;
+      height: 60px;
+      background: linear-gradient(90deg, rgba(14, 116, 144, 0.4), rgba(2, 132, 199, 0.5));
+      bottom: -15px;
+      left: -20%;
+      transform: rotate(-12deg);
+      border-top: 1px solid rgba(56, 189, 248, 0.4);
+      filter: blur(1px);
+    }
+    .map-pin-pulse {
+      position: absolute;
+      top: 45%;
+      left: 55%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+    }
+    .pin-circle {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--red);
+      border: 3px solid white;
+      box-shadow: 0 0 14px rgba(220, 38, 38, 0.8);
+      position: relative;
+    }
+    .pin-pulse-ring {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border-radius: 50%;
+      border: 2px solid var(--red);
+      animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.6); opacity: 1; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+    .map-pin-label {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+      margin-top: 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    .map-legend-bar {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.75);
+      z-index: 3;
+    }
+    .faq-accordion-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 14px;
+      transition: all var(--transition-fast);
+    }
+    .faq-accordion-item:hover {
+      border-color: var(--blue-primary);
+    }
+    @media (max-width: 900px) {
+      .contact-layout-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+  <nav class="nav-wrapper">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-icon">JI</div>
+      <div>
+        <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+        <div class="nav-logo-sub">Solutions informatiques</div>
+      </div>
+    </a>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="../index.html" class="nav-link">Accueil</a></li>
+      <li class="nav-item">
+        <a href="services.html" class="nav-link">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="services.html#maintenance" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div><div class="dropdown-item-text">Maintenance informatique</div><div class="dropdown-item-desc">Réparation, diagnostic, optimisation</div></div></a>
+          <a href="services.html#reseaux" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div><div><div class="dropdown-item-text">Systèmes & Réseaux</div><div class="dropdown-item-desc">Administration, configuration</div></div></a>
+          <a href="services.html#cybersecurite" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="dropdown-item-text">Cybersécurité</div><div class="dropdown-item-desc">Audit, protection, sécurisation</div></div></a>
+          <a href="services.html#developpement" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div><div class="dropdown-item-text">Développement web</div><div class="dropdown-item-desc">Sites, applications, outils</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="reparation.html" class="nav-link">Réparation</a></li>
+      <li class="nav-item"><a href="boutique.html" class="nav-link">Boutique</a></li>
+      <li class="nav-item"><a href="formations.html" class="nav-link">Formations</a></li>
+      <li class="nav-item"><a href="guides.html" class="nav-link">Guides</a></li>
+      <li class="nav-item"><a href="assistance.html" class="nav-link">Assistance</a></li>
+      <li class="nav-item">
+        <a href="entreprises.html" class="nav-link">Entreprises <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="entreprises.html#pro" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div><div class="dropdown-item-text">Jason PRO</div><div class="dropdown-item-desc">Solutions entreprises</div></div></a>
+          <a href="entreprises.html#contrats" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="dropdown-item-text">Contrats de maintenance</div><div class="dropdown-item-desc">Offres sur mesure</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="a-propos.html" class="nav-link">À propos <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="a-propos.html" class="dropdown-item"><div class="dropdown-item-text">À propos de nous</div></a>
+          <a href="fondateur.html" class="dropdown-item"><div class="dropdown-item-text">Le fondateur</div></a>
+          <a href="publications.html" class="dropdown-item"><div class="dropdown-item-text">Publications</div></a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-search-btn search-open-btn" title="Rechercher (Ctrl+K)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <a href="boutique.html#panier" class="nav-cart-btn" title="Panier">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge cart-count" style="display:none">0</span>
+      </a>
+      <button class="theme-toggle" title="Changer le thème">
+        <svg class="theme-icon sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="connexion.html" class="btn-connexion">Connexion</a>
+      <a href="contact.html#devis" class="btn-devis">Demander un devis</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-header">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">JI</div>
+      <div>
+        <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+      </div>
+    </div>
+  </div>
+  <a href="../index.html" class="mobile-nav-link">Accueil</a>
+  <a href="services.html" class="mobile-nav-link">Services</a>
+  <a href="reparation.html" class="mobile-nav-link">Réparation</a>
+  <a href="boutique.html" class="mobile-nav-link">Boutique</a>
+  <a href="formations.html" class="mobile-nav-link">Formations</a>
+  <a href="guides.html" class="mobile-nav-link">Guides & Tutoriels</a>
+  <a href="assistance.html" class="mobile-nav-link">Assistance</a>
+  <a href="entreprises.html" class="mobile-nav-link">Entreprises</a>
+  <a href="a-propos.html" class="mobile-nav-link">À propos</a>
+  <a href="fondateur.html" class="mobile-nav-link">Le Fondateur</a>
+  <a href="publications.html" class="mobile-nav-link">Publications</a>
+  <a href="contact.html" class="mobile-nav-link active">Contact</a>
+  <div class="mobile-menu-actions">
+    <a href="connexion.html" class="btn btn-outline btn-sm">Connexion</a>
+    <a href="contact.html#devis" class="btn btn-primary btn-sm">Demander un devis</a>
+  </div>
+</div>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <svg class="search-icon-input" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" class="search-input" id="search-input" placeholder="Rechercher un service, un guide, un devis..." autocomplete="off">
+    <button class="search-close" id="search-close" aria-label="Fermer la recherche">✕</button>
+  </div>
+  <div class="search-suggestions">
+    <div class="search-suggestion">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Demande de devis informatique gratuit</span>
+    </div>
+    <div class="search-suggestion">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Prendre rendez-vous à l'atelier de Mpila</span>
+    </div>
+    <div class="search-suggestion">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Solutions professionnelles Jason PRO</span>
+    </div>
+  </div>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-label">CONTACT & ASSISTANCE</div>
+    <h1>Contactez-nous</h1>
+    <p>Une question technique, une panne urgente, un devis personnalisé ou un projet d'entreprise ? Notre équipe basée à Brazzaville est à votre écoute.</p>
+  </div>
+</section>
+
+<!-- Breadcrumb -->
+<div class="container" style="margin-top: 24px;">
+  <nav class="breadcrumb" aria-label="Fil d'Ariane">
+    <a href="../index.html">Accueil</a>
+    <span>/</span>
+    <span>Contact</span>
+  </nav>
+</div>
+
+<!-- Contact Info Cards -->
+<section class="section" style="padding-top: 20px;">
+  <div class="container">
+    <div class="grid grid-3">
+      <!-- Card 1: Email -->
+      <div class="contact-info-card fade-in-up">
+        <div class="contact-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 6px;">Email Professionnel</h3>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px;">
+          Pour toute demande d'information, transmission de documents ou correspondance officielle.
+        </p>
+        <div style="font-weight: 700; color: var(--blue-primary); font-size: 0.95rem; margin-bottom: 16px; word-break: break-all;">
+          jasoninformatique7@gmail.com
+        </div>
+        <div style="margin-top: auto;">
+          <a href="mailto:jasoninformatique7@gmail.com" class="btn btn-outline btn-sm" style="width: 100%;">
+            Écrire un courriel
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: Localisation -->
+      <div class="contact-info-card fade-in-up stagger-1">
+        <div class="contact-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 6px;">Localisation</h3>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px;">
+          Siège d'exploitation, atelier de maintenance et pôle d'ingénierie en plein cœur de Brazzaville.
+        </p>
+        <div style="font-weight: 700; color: var(--text-primary); font-size: 0.95rem; margin-bottom: 16px;">
+          Mpila, Brazzaville<br>
+          <span style="font-weight: 400; font-size: 0.82rem; color: var(--text-muted);">République du Congo</span>
+        </div>
+        <div style="margin-top: auto;">
+          <a href="#carte-section" class="btn btn-outline btn-sm" style="width: 100%;">
+            Voir la carte interactive
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3: Horaires -->
+      <div class="contact-info-card fade-in-up stagger-2">
+        <div class="contact-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 6px;">Horaires d'Ouverture</h3>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px;">
+          Accueil physique, réception des matériels et assistance téléphonique aux heures d'ouverture.
+        </p>
+        <div style="font-weight: 700; color: var(--text-primary); font-size: 0.95rem; margin-bottom: 16px;">
+          Lundi au Samedi : 08h00 – 19h00<br>
+          <span style="font-weight: 500; font-size: 0.78rem; color: var(--green);">Support d'urgence 24h/7j sous contrat Jason PRO</span>
+        </div>
+        <div style="margin-top: auto;">
+          <a href="#rdv-box" class="btn btn-outline btn-sm" style="width: 100%;">
+            Prendre rendez-vous
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Grid: Left = Form, Right = Business Info + Map + WhatsApp + RDV -->
+<section class="section" style="background: var(--bg-secondary); padding-top: 40px;">
+  <div class="container">
+    <div class="contact-layout-grid">
+      <!-- LEFT: Contact Form -->
+      <div class="card fade-in-up" style="padding: 36px; border: 1.5px solid var(--border-color);">
+        <div style="margin-bottom: 24px;">
+          <span class="badge badge-primary" style="margin-bottom: 8px;">FORMULAIRE DE CONTACT</span>
+          <h2 style="font-size: 1.5rem; margin-bottom: 6px;">Envoyez-nous un message</h2>
+          <p style="font-size: 0.88rem; color: var(--text-secondary);">
+            Remplissez ce formulaire pour nous exposer votre besoin. Nous vous répondrons dans les plus brefs délais.
+          </p>
+        </div>
+
+        <form id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="contact-nom">Nom complet <span class="required">*</span></label>
+              <input type="text" id="contact-nom" name="nom" class="form-input" placeholder="Ex. Jean Bakala" required>
+              <div class="form-error" data-error="nom">Veuillez renseigner votre nom complet.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact-email">Adresse email <span class="required">*</span></label>
+              <input type="email" id="contact-email" name="email" class="form-input" placeholder="jean.bakala@example.cg" required>
+              <div class="form-error" data-error="email">Veuillez renseigner un email valide.</div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="contact-tel">Numéro de téléphone</label>
+              <input type="tel" id="contact-tel" name="telephone" class="form-input" placeholder="+242 06 000 00 00">
+              <div class="form-hint">WhatsApp ou appel direct pour un contact plus rapide.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact-objet">Objet de la demande <span class="required">*</span></label>
+              <select id="contact-objet" name="objet" class="form-select" required>
+                <option value="">Sélectionnez un motif...</option>
+                <option value="Question générale">Question générale</option>
+                <option value="Demande de devis">Demande de devis</option>
+                <option value="Réparation">Réparation / Diagnostic de matériel</option>
+                <option value="Formation">Formation en informatique</option>
+                <option value="Partenariat">Partenariat ou contrat PRO</option>
+                <option value="Autre">Autre demande</option>
+              </select>
+              <div class="form-error" data-error="objet">Veuillez choisir un objet pour votre message.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact-message">Votre message <span class="required">*</span></label>
+            <textarea id="contact-message" name="message" class="form-textarea" placeholder="Décrivez précisément votre projet, votre panne ou votre question..." required></textarea>
+            <div class="form-error" data-error="message">Veuillez saisir votre message (minimum quelques mots).</div>
+          </div>
+
+          <div class="form-group">
+            <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.82rem; color: var(--text-secondary); cursor: pointer;">
+              <input type="checkbox" name="consentement" required style="margin-top: 3px;">
+              <span>J'accepte que Jason_INFORMATIQUE traite mes données transmises dans le cadre strict de ma demande, conformément à la politique de confidentialité. <span class="required">*</span></span>
+            </label>
+            <div class="form-error" data-error="consentement">Vous devez accepter le traitement de vos données pour envoyer le formulaire.</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Envoyer le message
+          </button>
+        </form>
+      </div>
+
+      <!-- RIGHT: Business Card, Map Placeholder, WhatsApp, RDV -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <!-- Business Card -->
+        <div class="card" style="padding: 26px; border: 1px solid var(--border-color); background: var(--bg-card);">
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+            <div class="nav-logo-icon" style="width: 44px; height: 44px; font-size: 1.1rem;">JI</div>
+            <div>
+              <div style="font-weight: 800; font-size: 1.05rem;"><span style="color: var(--blue-primary);">Jason_</span>INFORMATIQUE</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Solutions Informatiques & Réseaux</div>
+            </div>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+            Fondé et dirigé par <strong>Gad Jason MBOU</strong>, Administrateur Systèmes & Réseaux. Interventions sur site à Brazzaville et assistance télécommandée.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.82rem; border-top: 1px solid var(--border-color); padding-top: 14px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--blue-primary);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Mpila, Brazzaville — République du Congo</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--blue-primary);"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span>jasoninformatique7@gmail.com</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Styled Map Placeholder -->
+        <div id="carte-section">
+          <div class="styled-map-container">
+            <div class="map-grid-bg"></div>
+            <div class="map-river"></div>
+            <div class="map-pin-pulse">
+              <div class="pin-circle">
+                <div class="pin-pulse-ring"></div>
+              </div>
+              <div class="map-pin-label">Jason_INFORMATIQUE — Mpila</div>
+            </div>
+            <div class="map-legend-bar">
+              <span>📍 Mpila, Brazzaville — Carte interactive à intégrer</span>
+              <span style="font-family: var(--font-mono); font-size: 0.68rem; color: #38BDF8;">4°15'S 15°18'E</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- WhatsApp Direct Link Button (Large) -->
+        <a href="https://wa.me/242067814704" target="_blank" class="btn btn-whatsapp btn-lg" style="width: 100%; display: flex; justify-content: center; gap: 10px; font-weight: 700;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Discuter directement sur WhatsApp
+        </a>
+
+        <!-- Appointment Request Card (Prendre RDV) -->
+        <div class="card" id="rdv-box" style="padding: 24px; border: 1px solid var(--border-color); background: var(--bg-card);">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+            <div style="width: 36px; height: 36px; border-radius: var(--radius-sm); background: var(--blue-light); color: var(--blue-primary); display: flex; align-items: center; justify-content: center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div>
+              <h3 style="font-size: 1.05rem; margin: 0;">Prendre un rendez-vous</h3>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Dépôt de matériel ou consultation en atelier</div>
+            </div>
+          </div>
+          
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 14px;">
+            <div>
+              <label class="form-label" style="font-size: 0.78rem;">Date souhaitée</label>
+              <input type="date" id="rdv-date" class="form-input" style="padding: 8px 12px; font-size: 0.85rem;">
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.78rem;">Plage horaire</label>
+              <select id="rdv-creneau" class="form-select" style="padding: 8px 12px; font-size: 0.85rem;">
+                <option value="09h00 - 11h00">Matinée : 09h00 – 11h00</option>
+                <option value="11h00 - 13h00">Fin de matinée : 11h00 – 13h00</option>
+                <option value="14h00 - 16h00">Après-midi : 14h00 – 16h00</option>
+                <option value="16h00 - 18h30">Fin de journée : 16h00 – 18h30</option>
+              </select>
+            </div>
+            <button type="button" id="btn-rdv-confirm" class="btn btn-outline btn-sm" style="margin-top: 4px;">
+              Confirmer la réservation du créneau
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVIS SECTION (Full quote request form) -->
+<section class="section" id="devis">
+  <div class="container">
+    <div class="section-header fade-in-up">
+      <span class="section-label">ESTIMATION GRATUITE</span>
+      <h2 class="section-title">Demander un Devis Personnalisé</h2>
+      <p class="section-desc">Recevez une proposition chiffrée claire, détaillée et sans engagement sous 24h ouvrées.</p>
+    </div>
+
+    <div class="card fade-in-up" style="max-width: 900px; margin: 0 auto; padding: 40px; border: 1.5px solid var(--border-color); background: var(--bg-card); box-shadow: var(--shadow-md);">
+      <form id="quote-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="quote-nom">Nom complet ou Raison Sociale <span class="required">*</span></label>
+            <input type="text" id="quote-nom" name="nom" class="form-input" placeholder="Ex. Société ABC ou Paul Ndinga" required>
+            <div class="form-error" data-error="nom">Veuillez indiquer votre nom ou le nom de votre organisation.</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="quote-email">Email de contact <span class="required">*</span></label>
+            <input type="email" id="quote-email" name="email" class="form-input" placeholder="contact@domaine.cg" required>
+            <div class="form-error" data-error="email">Veuillez indiquer un email de contact valide.</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="quote-telephone">Téléphone (WhatsApp ou appel) <span class="required">*</span></label>
+            <input type="tel" id="quote-telephone" name="telephone" class="form-input" placeholder="+242 06 123 45 67" required>
+            <div class="form-error" data-error="telephone">Veuillez indiquer un numéro de téléphone pour vous joindre.</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="quote-service">Catégorie de service <span class="required">*</span></label>
+            <select id="quote-service" name="type_service" class="form-select" required>
+              <option value="">Sélectionnez un service...</option>
+              <option value="Maintenance">Maintenance & Dépannage informatique</option>
+              <option value="Reseaux">Systèmes & Réseaux (Câblage, Wi-Fi, Baies)</option>
+              <option value="Cybersecurite">Cybersécurité & Audit de vulnérabilités</option>
+              <option value="Developpement">Développement Web & Solutions numériques</option>
+              <option value="Formations">Formations professionnelles IT</option>
+              <option value="JasonPRO">Contrat d'infogérance Jason PRO</option>
+            </select>
+            <div class="form-error" data-error="type_service">Veuillez sélectionner la catégorie principale de votre projet.</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="quote-sous-type">Sous-type de prestation</label>
+            <select id="quote-sous-type" name="sous_type" class="form-select">
+              <option value="Standard">Prestation standard / À définir</option>
+              <option value="Diagnostic approfondi">Diagnostic approfondi en atelier</option>
+              <option value="Installation réseau complète">Installation réseau complète (câblage + switch/routeur)</option>
+              <option value="Configuration serveur">Configuration serveur (Windows / Linux)</option>
+              <option value="Sécurisation sauvegardes">Sécurisation et automatisation des sauvegardes</option>
+              <option value="Site web vitrine">Création de site web vitrine responsive</option>
+              <option value="Formation groupe">Formation groupe d'employés</option>
+              <option value="Contrat annuel">Contrat annuel de maintenance de parc</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="quote-urgence">Degré d'urgence <span class="required">*</span></label>
+            <select id="quote-urgence" name="urgence" class="form-select" required>
+              <option value="Normal">Normal — Traitement sous 48h à 72h</option>
+              <option value="Urgent">Urgent — Besoin d'un devis sous 24h</option>
+              <option value="TresUrgent">Très urgent — Panne bloquante / Intervention immédiate</option>
+            </select>
+            <div class="form-error" data-error="urgence">Veuillez indiquer le niveau d'urgence.</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="quote-budget">Budget estimatif indicatif</label>
+            <select id="quote-budget" name="budget" class="form-select">
+              <option value="A definir">À définir selon les recommandations techniques</option>
+              <option value="Moins de 50 000 FCFA">Moins de 50 000 FCFA</option>
+              <option value="50 000 à 150 000 FCFA">50 000 à 150 000 FCFA</option>
+              <option value="150 000 à 500 000 FCFA">150 000 à 500 000 FCFA</option>
+              <option value="Plus de 500 000 FCFA">Plus de 500 000 FCFA (Infrastructures / Entreprise)</option>
+            </select>
+            <div class="form-hint">Cette information nous aide à dimensionner la solution la plus réaliste.</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="quote-date-souhaitee">Date d'intervention souhaitée</label>
+            <input type="date" id="quote-date-souhaitee" name="date_souhaitee" class="form-input">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="quote-description">Description précise du besoin ou de la panne <span class="required">*</span></label>
+          <textarea id="quote-description" name="description" class="form-textarea" placeholder="Indiquez les détails utiles : symptômes de la panne, nombre de postes, type de matériel, système d'exploitation concerné, localisation précise..." required></textarea>
+          <div class="form-error" data-error="description">Veuillez détailler votre besoin technique.</div>
+        </div>
+
+        <div class="form-group">
+          <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.82rem; color: var(--text-secondary); cursor: pointer;">
+            <input type="checkbox" name="consentement" required style="margin-top: 3px;">
+            <span>J'atteste de l'exactitude des renseignements et j'autorise Jason_INFORMATIQUE à me contacter pour l'établissement du devis chiffré. <span class="required">*</span></span>
+          </label>
+          <div class="form-error" data-error="consentement">Veuillez cocher cette case pour valider votre demande.</div>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Générer ma demande de devis
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Pro Contact Section (Dedicated B2B inquiries) -->
+<section class="section" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="card fade-in-up" style="padding: 40px; border-radius: var(--radius-xl); border: 1.5px solid var(--border-color); background: linear-gradient(145deg, var(--bg-card), var(--bg-secondary));">
+      <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center;">
+        <div>
+          <span class="badge badge-green" style="margin-bottom: 12px;">ESPACE ENTREPRISES</span>
+          <h2 style="font-size: 1.6rem; margin-bottom: 12px;">Jason PRO : Solutions Dédiées aux Organisations</h2>
+          <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">
+            Vous êtes une entreprise, une PME, une administration ou une ONG basée à Brazzaville ? Bénéficiez d'un accompagnement personnalisé avec un contrat d'infogérance sur mesure, des délais d'intervention garantis et un audit initial gratuit.
+          </p>
+          <ul style="display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem; margin-bottom: 24px;">
+            <li style="display: flex; align-items: center; gap: 8px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Audit complet de votre parc et de la sécurité réseau.</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 8px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Astreinte d'urgence et maintenance préventive mensuelle.</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 8px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Facturation claire avec TVA et rapports d'interventions certifiés.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Pro Inquiry Form -->
+        <div style="background: var(--bg-card); padding: 28px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+          <h3 style="font-size: 1.15rem; margin-bottom: 16px;">Demande Spécifique Entreprise</h3>
+          <form id="pro-form" onsubmit="event.preventDefault(); window.JasonApp.Toast.show('Demande PRO reçue', 'Notre cellule entreprises vous contactera sous 12h.', 'success'); this.reset();">
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" style="font-size: 0.82rem;">Nom de l'entreprise / Organisation *</label>
+              <input type="text" class="form-input" placeholder="Ex. Société Générale de Distribution" required>
+            </div>
+            <div class="form-row" style="margin-bottom: 14px;">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" style="font-size: 0.82rem;">Taille du parc (postes / serveurs)</label>
+                <select class="form-select">
+                  <option value="1-5">1 à 5 postes</option>
+                  <option value="6-20">6 à 20 postes</option>
+                  <option value="21-50">21 à 50 postes</option>
+                  <option value="50+">Plus de 50 postes</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" style="font-size: 0.82rem;">Téléphone professionnel *</label>
+                <input type="tel" class="form-input" placeholder="+242 ..." required>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 16px;">
+              <label class="form-label" style="font-size: 0.82rem;">Email du responsable informatique ou direction *</label>
+              <input type="email" class="form-input" placeholder="direction@entreprise.cg" required>
+            </div>
+            <button type="submit" class="btn btn-green btn-sm" style="width: 100%;">
+              Solliciter un entretien Jason PRO
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Mini Section (3 quick FAQ items about contact) -->
+<section class="section">
+  <div class="container" style="max-width: 860px;">
+    <div class="section-header fade-in-up">
+      <span class="section-label">RÉPONSES RAPIDES</span>
+      <h2 class="section-title">Questions fréquentes sur nos contacts</h2>
+      <p class="section-desc">Tout ce que vous devez savoir avant de nous solliciter pour une intervention ou un devis.</p>
+    </div>
+
+    <div>
+      <!-- FAQ 1 -->
+      <div class="faq-accordion-item fade-in-up">
+        <h3 style="font-size: 1.05rem; margin-bottom: 8px; color: var(--blue-primary); display: flex; align-items: center; gap: 8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Quel est le délai moyen de réponse et d'intervention ?
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+          Pour toute demande envoyée via notre formulaire ou par email, notre équipe s'engage à vous répondre sous <strong>24 heures ouvrées</strong>. En cas d'urgence critique signalée ou sous contrat Jason PRO, une prise en charge intervient sous <strong>2 heures</strong>.
+        </p>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="faq-accordion-item fade-in-up stagger-1">
+        <h3 style="font-size: 1.05rem; margin-bottom: 8px; color: var(--blue-primary); display: flex; align-items: center; gap: 8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Proposez-vous des interventions à domicile ou directement en entreprise ?
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+          Oui, nous intervenons directement sur site partout dans l'agglomération de <strong>Brazzaville</strong> (Mpila, Centre-ville, Bacongo, Poto-Poto, Ouenzé, Talangaï, etc.). Pour les opérations matérielles lourdes (reballing, micro-soudures, désinfection profonde), le matériel peut être pris en charge dans notre atelier.
+        </p>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="faq-accordion-item fade-in-up stagger-2">
+        <h3 style="font-size: 1.05rem; margin-bottom: 8px; color: var(--blue-primary); display: flex; align-items: center; gap: 8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Comment s'établit le devis et quels sont les modes de règlement ?
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+          L'établissement de nos devis est <strong>100% gratuit et sans aucun engagement</strong>. Après validation du devis, nous acceptons le paiement en espèces lors de la livraison, par Mobile Money (Airtel Money, MTN Mobile Money) ou par virement bancaire pour les professionnels.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">JI</div>
+          <div>
+            <div style="font-weight:800;color:white;font-size:1rem"><span style="color:#38BDF8">Jason_</span>INFORMATIQUE</div>
+            <div style="font-size:.65rem;color:rgba(255,255,255,.4);letter-spacing:1px">SOLUTIONS INFORMATIQUES</div>
+          </div>
+        </div>
+        <p>Votre partenaire pour des solutions informatiques modernes. De la réparation à la formation, nous vous accompagnons.</p>
+        <div class="footer-social">
+          <a href="#" title="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" title="Twitter/X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="https://wa.me/242067814704" title="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <div class="footer-links">
+          <a href="services.html#maintenance">Maintenance informatique</a>
+          <a href="services.html#reseaux">Systèmes & Réseaux</a>
+          <a href="services.html#cybersecurite">Cybersécurité</a>
+          <a href="services.html#developpement">Développement web</a>
+          <a href="services.html#assistance">Assistance</a>
+          <a href="entreprises.html">Jason PRO</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Ressources</h4>
+        <div class="footer-links">
+          <a href="guides.html">Guides techniques</a>
+          <a href="formations.html">Formations IT</a>
+          <a href="boutique.html">Boutique</a>
+          <a href="reparation.html">Réparation</a>
+          <a href="assistance.html">Support</a>
+          <a href="publications.html">Publications</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Mpila, Brazzaville<br>République du Congo</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:jasoninformatique7@gmail.com" style="color:rgba(255,255,255,.55)">jasoninformatique7@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Lun – Sam : 08h00 – 19h00</span>
+        </div>
+        <div class="footer-links" style="margin-top:12px">
+          <a href="a-propos.html">À propos</a>
+          <a href="contact.html">Contact</a>
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="confidentialite.html">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Jason_INFORMATIQUE © 2026 — Fondé par Gad Jason MBOU. Tous droits réservés.</p>
+    <div class="footer-bottom-links">
+      <a href="cgv.html">CGV</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/242067814704" class="whatsapp-float" target="_blank" title="WhatsApp" id="whatsapp-float">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</a>
+
+<!-- Chatbot -->
+<button class="chatbot-float" id="chatbot-btn" title="Jason Assistant">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
+<div class="chatbot-panel" id="chatbot-panel">
+  <div class="chatbot-header">
+    <div class="chatbot-avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+    <div><div class="chatbot-name">Jason Assistant</div><div class="chatbot-status"><span class="chatbot-online"></span>En ligne</div></div>
+    <button class="chatbot-close" id="chatbot-close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="chatbot-messages" id="chatbot-messages"></div>
+  <div class="chatbot-input-area">
+    <input type="text" id="chatbot-input" placeholder="Posez votre question…" />
+    <button class="chatbot-send" id="chatbot-send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+
+<!-- Scroll Top -->
+<button class="scroll-top" id="scroll-top" title="Haut de page">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- Cookie Banner -->
+<div class="cookie-banner" id="cookie-banner">
+  <p>🍪 Ce site utilise uniquement des cookies essentiels à son fonctionnement. Aucun cookie publicitaire ou de traçage tiers n'est utilisé.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-sm btn-ghost" id="cookie-refuse" style="color:rgba(255,255,255,.6)">Refuser</button>
+    <button class="btn btn-sm btn-primary" id="cookie-accept">J'accepte</button>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<script src="../js/main.js"></script>
+<script>
+  // Dynamic sub-types for quote form
+  document.addEventListener('DOMContentLoaded', function() {
+    const serviceSelect = document.getElementById('quote-service');
+    const sousTypeSelect = document.getElementById('quote-sous-type');
+
+    const subTypeMap = {
+      'Maintenance': [
+        'Dépannage matériel sur PC fixe ou portable',
+        'Réparation / Remplacement composant (écran, clavier, disque)',
+        'Désinfection antivirale et nettoyage système',
+        'Optimisation et mise à niveau SSD/RAM',
+        'Récupération de données perdues'
+      ],
+      'Reseaux': [
+        'Câblage structuré et baie de brassage',
+        'Installation et paramétrage Wi-Fi professionnel',
+        'Configuration de routeurs, switchs et VLANs',
+        'Interconnexion VPN entre sites distants',
+        'Audit de couverture et stabilité réseau'
+      ],
+      'Cybersecurite': [
+        'Audit de vulnérabilités et test d\'intrusion',
+        'Sécurisation des serveurs et accès distants',
+        'Mise en place de sauvegardes 3-2-1 automatisées',
+        'Sensibilisation et formation du personnel'
+      ],
+      'Developpement': [
+        'Création de site web vitrine ou institutionnel',
+        'Plateforme web sur mesure ou intranet',
+        'Refonte et optimisation de site existant',
+        'Développement d\'outils métiers et scripts automatisés'
+      ],
+      'Formations': [
+        'Bureautique avancée (Word, Excel, PowerPoint)',
+        'Administration Windows Server & Active Directory',
+        'Systèmes Linux (Debian/Ubuntu/CentOS)',
+        'Réseaux informatiques (LAN, IP, Routage)',
+        'Formation sur mesure pour collaborateurs'
+      ],
+      'JasonPRO': [
+        'Contrat de maintenance préventive mensuelle',
+        'Infogérance complète de parc informatique',
+        'Assistance prioritaire 24h/7j',
+        'Conseil et accompagnement DSI externalisée'
+      ]
+    };
+
+    if (serviceSelect && sousTypeSelect) {
+      serviceSelect.addEventListener('change', function() {
+        const selected = this.value;
+        const options = subTypeMap[selected] || ['Prestation standard / À définir'];
+        sousTypeSelect.innerHTML = '';
+        options.forEach(function(opt) {
+          const el = document.createElement('option');
+          el.value = opt;
+          el.textContent = opt;
+          sousTypeSelect.appendChild(el);
+        });
+      });
+    }
+
+    // Appointment button handler
+    const btnRdv = document.getElementById('btn-rdv-confirm');
+    if (btnRdv) {
+      btnRdv.addEventListener('click', function() {
+        const dateVal = document.getElementById('rdv-date')?.value;
+        const timeVal = document.getElementById('rdv-creneau')?.value;
+        if (!dateVal) {
+          window.JasonApp.Toast.show('Date requise', 'Veuillez choisir une date pour votre rendez-vous.', 'error');
+          return;
+        }
+        const ref = window.JasonApp.TicketGen.generate('RDV');
+        window.JasonApp.Toast.show('Rendez-vous enregistré', `Créneau réservé le ${dateVal} (${timeVal}). Réf : ${ref}.`, 'success');
+      });
+    }
+  });
+</script>
+  <!-- Envoi direct par email â€” Web3Forms -->
+  <script src="../js/email-forms.js"></script></body>
+</html>

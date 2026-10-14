@@ -1,0 +1,1155 @@
+﻿<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assistance & Support — Jason_INFORMATIQUE</title>
+  <meta name="description" content="Centre d'assistance et support technique de Jason_INFORMATIQUE : ouverture de ticket en ligne, suivi en temps réel, assistance à distance, dépannage sur site à Brazzaville.">
+  <meta name="keywords" content="assistance informatique, support technique Brazzaville, dépannage PC Congo, ticket d'assistance, télémaintenance AnyDesk, Jason_INFORMATIQUE">
+  <meta property="og:title" content="Assistance & Support — Jason_INFORMATIQUE">
+  <meta property="og:description" content="Besoin d'aide technique ? Ouvrez un ticket, suivez son traitement en temps réel ou contactez notre équipe sur WhatsApp.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    /* Specific styles for Assistance page */
+    .support-options-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+    @media (max-width: 1024px) {
+      .support-options-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 640px) {
+      .support-options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .support-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-base);
+      position: relative;
+    }
+    .support-card:hover {
+      border-color: var(--blue-primary);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    .support-card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      background: var(--blue-light);
+      color: var(--blue-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      transition: all var(--transition-fast);
+    }
+    .support-card:hover .support-card-icon {
+      background: var(--blue-primary);
+      color: white;
+    }
+    .support-card-badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+    }
+    .support-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .support-card-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+    .ticket-section-layout {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 40px;
+      align-items: start;
+      margin-bottom: 64px;
+    }
+    @media (max-width: 950px) {
+      .ticket-section-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    .ticket-card-form {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      box-shadow: var(--shadow-md);
+    }
+    .ticket-tracking-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      box-shadow: var(--shadow-md);
+    }
+    .file-upload-dragzone {
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      background: var(--bg-secondary);
+      transition: all var(--transition-fast);
+    }
+    .file-upload-dragzone:hover {
+      border-color: var(--blue-primary);
+      background: var(--blue-light);
+    }
+    .faq-accordion-container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .faq-accordion-item {
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-bottom: 14px;
+      background: var(--bg-card);
+      overflow: hidden;
+      transition: all var(--transition-fast);
+    }
+    .faq-accordion-item:hover {
+      border-color: var(--gray-300);
+    }
+    .faq-accordion-header {
+      width: 100%;
+      padding: 20px 24px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      background: transparent;
+      user-select: none;
+    }
+    .faq-accordion-header svg {
+      color: var(--blue-primary);
+      transition: transform var(--transition-fast);
+      flex-shrink: 0;
+    }
+    .faq-accordion-body {
+      padding: 0 24px 20px;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      display: none;
+    }
+    .faq-accordion-item.active {
+      border-color: var(--blue-primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .faq-accordion-item.active .faq-accordion-body {
+      display: block;
+    }
+    .faq-accordion-item.active .faq-accordion-header svg {
+      transform: rotate(180deg);
+    }
+    .contact-bar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 900px) {
+      .contact-bar-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 550px) {
+      .contact-bar-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .contact-bar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all var(--transition-fast);
+    }
+    .contact-bar-card:hover {
+      border-color: var(--blue-primary);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .contact-bar-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: var(--blue-light);
+      color: var(--blue-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .kb-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      transition: all var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .kb-card:hover {
+      border-color: var(--blue-primary);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+  <nav class="nav-wrapper">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-icon">JI</div>
+      <div>
+        <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+        <div class="nav-logo-sub">Solutions informatiques</div>
+      </div>
+    </a>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="../index.html" class="nav-link">Accueil</a></li>
+      <li class="nav-item">
+        <a href="services.html" class="nav-link">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="services.html#maintenance" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div><div class="dropdown-item-text">Maintenance informatique</div><div class="dropdown-item-desc">Réparation, diagnostic, optimisation</div></div></a>
+          <a href="services.html#reseaux" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div><div><div class="dropdown-item-text">Systèmes & Réseaux</div><div class="dropdown-item-desc">Administration, configuration</div></div></a>
+          <a href="services.html#cybersecurite" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="dropdown-item-text">Cybersécurité</div><div class="dropdown-item-desc">Audit, protection, sécurisation</div></div></a>
+          <a href="services.html#developpement" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div><div class="dropdown-item-text">Développement web</div><div class="dropdown-item-desc">Sites, applications, outils</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="reparation.html" class="nav-link">Réparation</a></li>
+      <li class="nav-item"><a href="boutique.html" class="nav-link">Boutique</a></li>
+      <li class="nav-item"><a href="formations.html" class="nav-link">Formations</a></li>
+      <li class="nav-item"><a href="guides.html" class="nav-link">Guides</a></li>
+      <li class="nav-item"><a href="assistance.html" class="nav-link active">Assistance</a></li>
+      <li class="nav-item">
+        <a href="entreprises.html" class="nav-link">Entreprises <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="entreprises.html#pro" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div><div class="dropdown-item-text">Jason PRO</div><div class="dropdown-item-desc">Solutions entreprises</div></div></a>
+          <a href="entreprises.html#contrats" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="dropdown-item-text">Contrats de maintenance</div><div class="dropdown-item-desc">Offres sur mesure</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="a-propos.html" class="nav-link">À propos <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="a-propos.html" class="dropdown-item"><div class="dropdown-item-text">À propos de nous</div></a>
+          <a href="fondateur.html" class="dropdown-item"><div class="dropdown-item-text">Le fondateur</div></a>
+          <a href="publications.html" class="dropdown-item"><div class="dropdown-item-text">Publications</div></a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-search-btn search-open-btn" title="Rechercher (Ctrl+K)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <a href="boutique.html#panier" class="nav-cart-btn" title="Panier">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge cart-count" style="display:none">0</span>
+      </a>
+      <button class="theme-toggle" title="Changer le thème">
+        <svg class="theme-icon sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="connexion.html" class="btn-connexion">Connexion</a>
+      <a href="contact.html#devis" class="btn-devis">Demander un devis</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-header">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">JI</div>
+      <div>
+        <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+      </div>
+    </div>
+  </div>
+  <a href="../index.html" class="mobile-nav-link">Accueil</a>
+  <a href="services.html" class="mobile-nav-link">Services</a>
+  <a href="reparation.html" class="mobile-nav-link">Réparation</a>
+  <a href="boutique.html" class="mobile-nav-link">Boutique</a>
+  <a href="formations.html" class="mobile-nav-link">Formations</a>
+  <a href="guides.html" class="mobile-nav-link">Guides & Tutoriels</a>
+  <a href="assistance.html" class="mobile-nav-link active">Assistance</a>
+  <a href="entreprises.html" class="mobile-nav-link">Entreprises</a>
+  <a href="a-propos.html" class="mobile-nav-link">À propos</a>
+  <a href="fondateur.html" class="mobile-nav-link">Le Fondateur</a>
+  <a href="publications.html" class="mobile-nav-link">Publications</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+  <div class="mobile-menu-actions">
+    <a href="connexion.html" class="btn btn-outline btn-sm">Connexion</a>
+    <a href="contact.html#devis" class="btn btn-primary btn-sm">Demander un devis</a>
+  </div>
+</div>
+
+<div style="padding-top:70px"></div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-label">Support technique & Interventions</div>
+    <h1>Centre d'assistance Jason_INFORMATIQUE</h1>
+    <p>Une panne d'ordinateur ? Un souci réseau ou un blocage logiciel ? Notre équipe d'experts vous apporte une réponse rapide et sur mesure à Brazzaville, en atelier à Mpila ou à distance.</p>
+    <div style="display:inline-flex; align-items:center; gap:8px; margin-top:20px; padding:6px 16px; border-radius:var(--radius-full); background:rgba(22,163,74,0.15); border:1px solid rgba(22,163,74,0.3); font-size:0.82rem; color:#4ADE80;">
+      <span style="width:8px; height:8px; border-radius:50%; background:#4ADE80; box-shadow:0 0 8px #4ADE80;"></span>
+      <span>Équipe technique en service : Lun – Sam (08h00 – 19h00) | Prise en charge garantie sous 2h</span>
+    </div>
+  </div>
+</section>
+
+<main class="section">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Fil d'Ariane">
+      <a href="../index.html">Accueil</a>
+      <span>›</span>
+      <span aria-current="page">Assistance & Support</span>
+    </nav>
+
+    <!-- Support Options Cards (4 options) -->
+    <div class="support-options-grid fade-in-up">
+
+      <!-- Card 1: Ticket -->
+      <div class="support-card">
+        <span class="badge badge-primary support-card-badge">Recommandé</span>
+        <div class="support-card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/><line x1="13" y1="5" x2="13" y2="7"/><line x1="13" y1="11" x2="13" y2="13"/><line x1="13" y1="17" x2="13" y2="19"/></svg>
+        </div>
+        <h3 class="support-card-title">Créer un ticket</h3>
+        <p class="support-card-desc">
+          Enregistrez votre demande avec détails et pièces jointes. Vous recevez un numéro de suivi unique pour tracer chaque étape de la résolution.
+        </p>
+        <a href="#ticket-form-section" class="btn btn-primary btn-sm" style="width:100%;">
+          Ouvrir un ticket en ligne
+        </a>
+      </div>
+
+      <!-- Card 2: WhatsApp -->
+      <div class="support-card">
+        <span class="badge badge-green support-card-badge">Instantané</span>
+        <div class="support-card-icon" style="background:#DCFCE7; color:#16A34A;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <h3 class="support-card-title">Assistance WhatsApp</h3>
+        <p class="support-card-desc">
+          Envoyez des photos, vidéos ou messages vocaux directement à un réparateur Jason_INFORMATIQUE pour un pré-diagnostic immédiat.
+        </p>
+        <a href="https://wa.me/242067814704" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm" style="width:100%;">
+          Discuter sur WhatsApp
+        </a>
+      </div>
+
+      <!-- Card 3: Distance -->
+      <div class="support-card">
+        <span class="badge badge-orange support-card-badge">Télémaintenance</span>
+        <div class="support-card-icon" style="background:var(--orange-light); color:#D97706;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M7 10l5 5 5-5"/></svg>
+        </div>
+        <h3 class="support-card-title">Assistance à distance</h3>
+        <p class="support-card-desc">
+          Prise en main à distance sécurisée via AnyDesk ou RustDesk pour résoudre vos plantages logiciels, virus, configuration d'imprimantes et messageries.
+        </p>
+        <button class="btn btn-outline btn-sm" style="width:100%;" onclick="openRemoteModal()">
+          Lancer une session AnyDesk
+        </button>
+      </div>
+
+      <!-- Card 4: Site -->
+      <div class="support-card">
+        <span class="badge badge-gray support-card-badge">Brazzaville</span>
+        <div class="support-card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3 class="support-card-title">Intervention sur site</h3>
+        <p class="support-card-desc">
+          Nos techniciens se déplacent directement à votre domicile ou dans vos bureaux à Brazzaville (Mpila, Centre-ville, Bacongo, Talangaï...).
+        </p>
+        <a href="#ticket-form-section" class="btn btn-outline btn-sm" style="width:100%;" onclick="preselectOnSite()">
+          Planifier un déplacement
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Ticket Section: Creation Form + Real-time Tracking (Dual Layout) -->
+    <div class="ticket-section-layout" id="ticket-form-section">
+      
+      <!-- Left Column: Create Ticket Form -->
+      <div class="ticket-card-form fade-in-up">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+          <div style="width:36px; height:36px; border-radius:8px; background:var(--blue-light); color:var(--blue-primary); display:flex; align-items:center; justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div>
+            <h2 style="font-size:1.35rem; margin:0;">Ouvrir un ticket d'assistance</h2>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Remplissez les champs ci-dessous pour alerter un technicien</p>
+          </div>
+        </div>
+
+        <div class="divider" style="margin: 16px 0 24px;"></div>
+
+        <!-- The Ticket Form -->
+        <form id="ticket-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="ticket-nom">Nom complet <span class="required">*</span></label>
+              <input type="text" id="ticket-nom" name="nom" class="form-input" placeholder="Ex: Jean-Paul Mampouya" required>
+              <div class="form-error" data-error="nom">Le nom est requis.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ticket-email">Adresse email <span class="required">*</span></label>
+              <input type="email" id="ticket-email" name="email" class="form-input" placeholder="Ex: j.mampouya@gmail.com" required>
+              <div class="form-error" data-error="email">Email valide obligatoire.</div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="ticket-tel">Numéro de téléphone <span class="required">*</span></label>
+              <input type="tel" id="ticket-tel" name="telephone" class="form-input" placeholder="Ex: +242 06 000 00 00" required>
+              <div class="form-error" data-error="telephone">Numéro de téléphone requis.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ticket-type">Type de demande <span class="required">*</span></label>
+              <select id="ticket-type" name="type_demande" class="form-select" required>
+                <option value="Support technique">Support technique matériel/logiciel</option>
+                <option value="Question">Question générale ou conseil</option>
+                <option value="Réclamation">Réclamation ou suivi de commande</option>
+                <option value="Demande d'intervention">Demande d'intervention sur site (Brazzaville)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="ticket-priorite">Niveau d'urgence</label>
+              <select id="ticket-priorite" name="priorite" class="form-select">
+                <option value="Normale">Normale (Prise en charge sous 24h)</option>
+                <option value="Haute">Haute (Prise en charge sous 4h)</option>
+                <option value="Urgente">Urgente (Panne bloquante — sous 2h)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ticket-objet">Objet du ticket <span class="required">*</span></label>
+              <input type="text" id="ticket-objet" name="objet" class="form-input" placeholder="Ex: PC bloqué sur écran bleu au démarrage" required>
+              <div class="form-error" data-error="objet">L'objet est obligatoire.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="ticket-description">Description précise de la panne ou de la demande <span class="required">*</span></label>
+            <textarea id="ticket-description" name="description" class="form-textarea" placeholder="Indiquez la marque, le modèle, les symptômes constatés, les éventuels messages d'erreur et ce qui a provoqué la panne..." required rows="4"></textarea>
+            <div class="form-error" data-error="description">Veuillez décrire votre problème.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Pièce jointe (facultatif - capture d'écran, photo du composant)</label>
+            <div class="file-upload-dragzone" onclick="document.getElementById('ticket-file').click()">
+              <input type="file" id="ticket-file" style="display:none" accept="image/*,.pdf,.log,.txt" onchange="handleFileSelect(this)">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue-primary)" stroke-width="2" style="margin:0 auto 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <div id="file-upload-text" style="font-size:0.85rem; color:var(--text-secondary);">
+                Cliquez pour choisir un fichier ou glissez-le ici (PNG, JPG, PDF max 10 Mo)
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-top:24px;">
+            <span style="font-size:0.75rem; color:var(--text-muted);">
+              🔒 Vos données restent confidentielles et sécurisées.
+            </span>
+            <button type="submit" class="btn btn-primary btn-lg" id="btn-submit-ticket">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Soumettre mon ticket
+            </button>
+          </div>
+        </form>
+
+        <!-- Success State View (Initially Hidden) -->
+        <div id="ticket-success-box" style="display:none; text-align:center; padding:20px 0;">
+          <div style="width:72px; height:72px; border-radius:50%; background:var(--green-light); color:var(--green); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3 style="font-size:1.4rem; color:var(--text-primary); margin-bottom:8px;">Votre demande a bien été enregistrée !</h3>
+          <p style="font-size:0.95rem; color:var(--text-secondary); max-width:480px; margin:0 auto 20px;">
+            Un technicien vous contactera <strong>sous 2h en heures ouvrables</strong> par téléphone ou par email.
+          </p>
+
+          <div style="background:var(--bg-secondary); border:1.5px solid var(--border-color); border-radius:var(--radius-lg); padding:20px; max-width:420px; margin:0 auto 24px;">
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); font-weight:700;">Votre numéro de ticket :</div>
+            <div id="generated-ticket-number" style="font-size:1.5rem; font-weight:800; color:var(--blue-primary); margin:6px 0 12px; font-family:var(--font-mono);">
+              JAI-20261014-4821
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" id="btn-copy-ticket" onclick="copyCreatedTicket()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copier la référence
+            </button>
+          </div>
+
+          <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+            <button class="btn btn-primary btn-sm" onclick="trackGeneratedTicket()">
+              Voir le suivi en direct →
+            </button>
+            <button class="btn btn-ghost btn-sm" onclick="resetTicketForm()">
+              Ouvrir un autre ticket
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Ticket Tracking & Status Lookup -->
+      <div class="ticket-tracking-panel fade-in-up stagger-1" id="ticket-tracking">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+          <div style="width:36px; height:36px; border-radius:8px; background:var(--green-light); color:var(--green); display:flex; align-items:center; justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <h2 style="font-size:1.35rem; margin:0;">Suivi de votre ticket</h2>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Vérifiez l'état d'avancement d'un dossier en direct</p>
+          </div>
+        </div>
+
+        <div class="divider" style="margin: 16px 0 20px;"></div>
+
+        <!-- Tracking Input -->
+        <div style="margin-bottom:20px;">
+          <label class="form-label" for="track-ticket-input" style="font-size:0.85rem;">Numéro de référence</label>
+          <div style="display:flex; gap:8px;">
+            <input type="text" id="track-ticket-input" class="form-input" placeholder="Ex: JAI-20261014-4821" style="font-family:var(--font-mono); font-weight:600; text-transform:uppercase;">
+            <button type="button" class="btn btn-primary" id="btn-search-ticket" onclick="lookupTicket()">
+              Vérifier
+            </button>
+          </div>
+          <div style="display:flex; gap:8px; margin-top:10px;">
+            <button type="button" class="btn btn-ghost btn-sm" style="font-size:0.75rem; padding:4px 8px; color:var(--blue-primary);" onclick="fillDemoTicket('JAI-20261014-7832')">
+              Exemple en cours
+            </button>
+            <button type="button" class="btn btn-ghost btn-sm" style="font-size:0.75rem; padding:4px 8px; color:var(--green);" onclick="fillDemoTicket('JAI-20261012-3109')">
+              Exemple résolu
+            </button>
+          </div>
+        </div>
+
+        <!-- Ticket Summary Header -->
+        <div id="track-ticket-summary" style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:16px; margin-bottom:24px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.8rem; font-weight:700; color:var(--text-muted);" id="track-ticket-id">RÉF : JAI-20261014-7832</span>
+            <span class="badge badge-primary" id="track-ticket-status-badge">En cours de traitement</span>
+          </div>
+          <div style="font-weight:700; font-size:0.95rem; margin-bottom:4px;" id="track-ticket-subject">
+            Dépannage système — Windows 11 écran bleu & freeze
+          </div>
+          <div style="font-size:0.8rem; color:var(--text-muted);" id="track-ticket-technician">
+            Technicien assigné : <strong>Gad Jason MBOU</strong>
+          </div>
+        </div>
+
+        <!-- Mock Tracking Stages -->
+        <div class="ticket-track" id="ticket-stages-list">
+          
+          <!-- Stage 1 -->
+          <div class="ticket-track-item done" id="stage-1">
+            <div class="ticket-track-dot">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700; font-size:0.9rem;">1. Demande reçue & enregistrée</div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Le ticket a été créé avec succès dans notre système central.</div>
+              <div style="font-size:0.72rem; color:var(--green); margin-top:2px;" id="stage-1-date">Aujourd'hui à 08h45 &bull; Validé</div>
+            </div>
+          </div>
+
+          <!-- Stage 2 -->
+          <div class="ticket-track-item done" id="stage-2">
+            <div class="ticket-track-dot">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700; font-size:0.9rem;">2. Prise en charge par un technicien</div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Dossier assigné au pôle maintenance informatique de Mpila.</div>
+              <div style="font-size:0.72rem; color:var(--green); margin-top:2px;" id="stage-2-date">Aujourd'hui à 09h15 &bull; Assigné</div>
+            </div>
+          </div>
+
+          <!-- Stage 3 -->
+          <div class="ticket-track-item active" id="stage-3">
+            <div class="ticket-track-dot">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700; font-size:0.9rem; color:var(--blue-primary);">3. Diagnostic & résolution en cours</div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Analyse matérielle des composants et des logs d'erreurs en atelier.</div>
+              <div style="font-size:0.72rem; color:var(--blue-primary); margin-top:2px;" id="stage-3-date">En cours &bull; Mise à jour il y a 25 min</div>
+            </div>
+          </div>
+
+          <!-- Stage 4 -->
+          <div class="ticket-track-item" id="stage-4">
+            <div class="ticket-track-dot">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:600; font-size:0.9rem; color:var(--text-muted);">4. Ticket résolu & clôturé</div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Vérification du fonctionnement, validation client et clôture du dossier.</div>
+              <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;" id="stage-4-date">En attente de finalisation</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Section 6: FAQ Accordion (8 items) -->
+    <section class="section" style="padding-top:0;">
+      <div class="section-header">
+        <span class="section-label">Foire aux questions</span>
+        <h2 class="section-title">Questions fréquentes sur notre assistance</h2>
+        <p class="section-desc">Trouvez des réponses immédiates aux interrogations courantes concernant nos modalités d'intervention, délais et garanties.</p>
+      </div>
+
+      <div class="faq-accordion-container" id="faq-accordion">
+        
+        <!-- FAQ 1 -->
+        <div class="faq-accordion-item active">
+          <button class="faq-accordion-header" type="button" aria-expanded="true">
+            <span>Quels sont vos horaires d'ouverture et d'intervention ?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-accordion-body">
+            Notre atelier de Mpila à Brazzaville vous accueille du <strong>lundi au samedi, de 08h00 à 19h00 sans interruption</strong>. Nos équipes d'intervention sur site se déplacent pendant ces mêmes plages horaires. Pour les entreprises sous contrat Jason PRO, une ligne d'astreinte d'urgence est accessible 24h/24 et 7j/7.
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-accordion-item">
+          <button class="faq-accordion-header" type="button" aria-expanded="false">
+            <span>Proposez-vous des interventions à domicile ou en entreprise ?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-accordion-body">
+            <strong>Oui, absolument.</strong> Nos techniciens se déplacent dans tous les quartiers de Brazzaville (Mpila, Centre-ville, Poto-Poto, Bacongo, Ouenzé, Talangaï, Makélékélé, Mfilou) ainsi que dans la périphérie immédiate. Il vous suffit d'indiquer « Demande d'intervention » lors de l'ouverture de votre ticket ou de nous contacter sur WhatsApp.
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-accordion-item">
+          <button class="faq-accordion-header" type="button" aria-expanded="false">
+            <span>Comment fonctionne l'assistance informatique à distance ?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-accordion-body">
+            L'assistance à distance se déroule via un logiciel sécurisé certifié (AnyDesk ou RustDesk). Vous nous communiquez un code de session temporaire à usage unique. <strong>Vous visualisez en temps réel sur votre écran chaque action effectuée par notre technicien</strong>, et vous gardez la main pour interrompre la session à tout instant. C'est rapide, sécurisé et idéal pour les pannes logicielles.
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-accordion-item">
+          <button class="faq-accordion-header" type="button" aria-expanded="false">
+            <span>Quels types d'appareils et systèmes réparez-vous ?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-accordion-body">
+            Nous intervenons sur les ordinateurs de bureau (tours et mini PC), les ordinateurs portables toutes marques (HP, Dell, Lenovo, Asus, Acer, Apple MacBook), les serveurs d'entreprise, les périphériques réseau (routeurs, modems, switchs, points d'accès Wi-Fi), les imprimantes et copieurs. Nous maîtrisons Windows 10/11, Windows Server, Linux (Ubuntu, Debian, RedHat) et macOS.
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-accordion-item">
+          <button class="faq-accordion-header" type="button" aria-expanded="false">
+            <span>Combien coûte un diagnostic de panne ?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-accordion-body">
+            Le diagnostic en atelier est <strong>100% gratuit si vous effectuez la réparation chez Jason_INFORMATIQUE</strong>. Si vous choisissez de ne pas réparer après identification de la panne, un forfait d'audit technique forfaitaire très accessible vous sera facturé pour le temps de démontage et d'analyse. Aucun travail n'est engagé sans votre accord préalable sur devis.
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="faq-accordion-item">
+          <button class="faq-accordion-header" type="button" aria-expanded="false">
+            <span>Proposez-vous des contrats de maintenance pour particuliers ou PME ?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-accordion-body">
+            Oui, notre offre <strong>Jason PRO</strong> propose trois niveaux de contrats (Essentiel, Standard, Complet) comprenant des visites périodiques préventives, le nettoyage matériel et logiciel, la supervision continue des sauvegardes et un accès prioritaire à notre support. Consultez notre page <a href="entreprises.html" style="color:var(--blue-primary); font-weight:600;">Entreprises</a> pour en savoir plus.
+          </div>
+        </div>
+
+        <!-- FAQ 7 -->
+        <div class="faq-accordion-item">
+          <button class="faq-accordion-header" type="button" aria-expanded="false">
+            <span>Puis-je récupérer mes données perdues sur disque dur ou clé USB ?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-accordion-body">
+            Oui. Nous disposons d'outils matériels et logiciels spécialisés pour la récupération de données après suppression accidentelle, formatage involontaire, corruption de table de partition ou défaillance logique d'un support (disque dur interne/externe, SSD, clé USB, carte mémoire). Dès la panne constatée, cessez d'utiliser le support pour maximiser le taux de réussite.
+          </div>
+        </div>
+
+        <!-- FAQ 8 -->
+        <div class="faq-accordion-item">
+          <button class="faq-accordion-header" type="button" aria-expanded="false">
+            <span>Comment obtenir un devis personnalisé ?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-accordion-body">
+            Vous pouvez obtenir un devis gratuit en cliquant sur le bouton <strong>« Demander un devis »</strong> présent dans l'en-tête, en remplissant le formulaire de contact, ou en ouvrant un ticket avec mention de vos besoins. Nous vous répondrons avec une proposition détaillée sous 24h ouvrées maximum.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 7: Knowledge Base Quick Links -->
+    <section class="section-sm" style="background:var(--bg-secondary); border-radius:var(--radius-xl); padding:40px; margin-bottom:56px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:28px; flex-wrap:wrap; gap:16px;">
+        <div>
+          <span class="section-label">Base de connaissances</span>
+          <h2 style="font-size:1.45rem; margin:6px 0 0;">Résolvez vos pannes vous-même grâce à nos guides</h2>
+        </div>
+        <a href="guides.html" class="btn btn-outline btn-sm">Accéder à tous les guides →</a>
+      </div>
+
+      <div class="grid grid-4" style="gap:20px;">
+        
+        <div class="kb-card">
+          <div>
+            <span class="guide-card-diff diff-facile mb-8">Hardware</span>
+            <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:6px;">Diagnostiquer un PC qui ne démarre plus</h4>
+            <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:14px;">Écran noir, bips de démarrage, vérification de l'alimentation et des barrettes RAM.</p>
+          </div>
+          <a href="guides.html" style="font-size:0.8rem; font-weight:600; color:var(--blue-primary);">Lire le guide →</a>
+        </div>
+
+        <div class="kb-card">
+          <div>
+            <span class="guide-card-diff diff-facile mb-8">Windows</span>
+            <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:6px;">Nettoyer et booster Windows 10/11</h4>
+            <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:14px;">Supprimer les fichiers résiduels, optimiser le démarrage et restaurer la fluidité.</p>
+          </div>
+          <a href="guides.html" style="font-size:0.8rem; font-weight:600; color:var(--blue-primary);">Lire le guide →</a>
+        </div>
+
+        <div class="kb-card">
+          <div>
+            <span class="guide-card-diff diff-moyen mb-8">Sécurité</span>
+            <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:6px;">Configurer le pare-feu Windows</h4>
+            <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:14px;">Bloquer les flux non autorisés et se protéger contre les intrusions réseaux.</p>
+          </div>
+          <a href="guides.html" style="font-size:0.8rem; font-weight:600; color:var(--blue-primary);">Lire le guide →</a>
+        </div>
+
+        <div class="kb-card">
+          <div>
+            <span class="guide-card-diff diff-moyen mb-8">Système</span>
+            <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:6px;">Installer Windows 11 proprement</h4>
+            <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:14px;">Création de support USB UEFI, partitionnement GPT et démarrage optimal.</p>
+          </div>
+          <a href="guides.html" style="font-size:0.8rem; font-weight:600; color:var(--blue-primary);">Lire le guide →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 8: Contact Options Bar -->
+    <div style="margin-bottom:24px;">
+      <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:20px; text-align:center;">Nos canaux de contact directs</h3>
+      <div class="contact-bar-grid">
+        
+        <!-- Email -->
+        <a href="mailto:jasoninformatique7@gmail.com" class="contact-bar-card">
+          <div class="contact-bar-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:600;">Courrier électronique</div>
+            <div style="font-size:0.85rem; font-weight:700; color:var(--text-primary); word-break:break-all;">jasoninformatique7@gmail.com</div>
+            <div style="font-size:0.72rem; color:var(--green);">Réponse sous 2h ouvrées</div>
+          </div>
+        </a>
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/242067814704" target="_blank" rel="noopener" class="contact-bar-card">
+          <div class="contact-bar-icon" style="background:#DCFCE7; color:#16A34A;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </div>
+          <div>
+            <div style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:600;">WhatsApp Direct</div>
+            <div style="font-size:0.85rem; font-weight:700; color:var(--text-primary);">Messagerie instantanée</div>
+            <div style="font-size:0.72rem; color:var(--green);">Discuter en ligne</div>
+          </div>
+        </a>
+
+        <!-- En personne -->
+        <div class="contact-bar-card">
+          <div class="contact-bar-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:600;">Atelier technique</div>
+            <div style="font-size:0.85rem; font-weight:700; color:var(--text-primary);">Mpila, Brazzaville</div>
+            <div style="font-size:0.72rem; color:var(--text-muted);">République du Congo</div>
+          </div>
+        </div>
+
+        <!-- Téléphone -->
+        <div class="contact-bar-card">
+          <div class="contact-bar-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:600;">Téléphone</div>
+            <div style="font-size:0.85rem; font-weight:700; color:var(--text-primary);">Lun – Sam : 08h – 19h</div>
+            <div style="font-size:0.72rem; color:var(--blue-primary);">Support réactif</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Remote Support Modal -->
+<div class="modal-overlay" id="remote-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">Lancer une session d'assistance à distance</h3>
+      <button class="modal-close" onclick="closeRemoteModal()" aria-label="Fermer">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:0.9rem; line-height:1.6; margin-bottom:16px;">
+        Pour nous permettre de prendre la main à distance et résoudre votre incident logiciel en toute sécurité :
+      </p>
+      <ol style="font-size:0.85rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:12px; margin-bottom:20px; padding-left:18px;">
+        <li>1. Téléchargez le client léger sécurisé <strong>AnyDesk</strong> ou <strong>RustDesk</strong>.</li>
+        <li>2. Lancez l'application (aucune installation requise).</li>
+        <li>3. Transmettez votre numéro d'adresse à 9 chiffres à notre technicien via votre ticket ou WhatsApp.</li>
+        <li>4. Cliquez sur <strong>« Accepter »</strong> lorsque la notification de connexion s'affiche.</li>
+      </ol>
+      <div class="highlight-box" style="font-size:0.8rem; margin-bottom:20px;">
+        🛡️ <strong>Sécurité garantie :</strong> La connexion est chiffrée de bout en bout. Vous pouvez clore la session à tout moment en fermant la fenêtre.
+      </div>
+      <div style="display:flex; gap:10px; justify-content:flex-end;">
+        <button class="btn btn-ghost btn-sm" onclick="closeRemoteModal()">Fermer</button>
+        <a href="https://anydesk.com" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Télécharger AnyDesk</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">JI</div>
+          <div>
+            <div style="font-weight:800;color:white;font-size:1rem"><span style="color:#38BDF8">Jason_</span>INFORMATIQUE</div>
+            <div style="font-size:.65rem;color:rgba(255,255,255,.4);letter-spacing:1px">SOLUTIONS INFORMATIQUES</div>
+          </div>
+        </div>
+        <p>Votre partenaire pour des solutions informatiques modernes. De la réparation à la formation, nous vous accompagnons.</p>
+        <div class="footer-social">
+          <a href="#" title="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" title="Twitter/X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="https://wa.me/242067814704" title="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <div class="footer-links">
+          <a href="services.html#maintenance">Maintenance informatique</a>
+          <a href="services.html#reseaux">Systèmes & Réseaux</a>
+          <a href="services.html#cybersecurite">Cybersécurité</a>
+          <a href="services.html#developpement">Développement web</a>
+          <a href="services.html#assistance">Assistance</a>
+          <a href="entreprises.html">Jason PRO</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Ressources</h4>
+        <div class="footer-links">
+          <a href="guides.html">Guides techniques</a>
+          <a href="formations.html">Formations IT</a>
+          <a href="boutique.html">Boutique</a>
+          <a href="reparation.html">Réparation</a>
+          <a href="assistance.html">Support</a>
+          <a href="publications.html">Publications</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Mpila, Brazzaville<br>République du Congo</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:jasoninformatique7@gmail.com" style="color:rgba(255,255,255,.55)">jasoninformatique7@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Lun – Sam : 08h00 – 19h00</span>
+        </div>
+        <div class="footer-links" style="margin-top:12px">
+          <a href="a-propos.html">À propos</a>
+          <a href="contact.html">Contact</a>
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="confidentialite.html">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Jason_INFORMATIQUE © 2026 — Fondé par Gad Jason MBOU. Tous droits réservés.</p>
+    <div class="footer-bottom-links">
+      <a href="cgv.html">CGV</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Elements -->
+<a href="https://wa.me/242067814704" class="whatsapp-float" target="_blank" title="WhatsApp" id="whatsapp-float">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</a>
+
+<button class="chatbot-float" id="chatbot-btn" title="Jason Assistant">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
+<div class="chatbot-panel" id="chatbot-panel">
+  <div class="chatbot-header">
+    <div class="chatbot-avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+    <div><div class="chatbot-name">Jason Assistant</div><div class="chatbot-status"><span class="chatbot-online"></span>En ligne</div></div>
+    <button class="chatbot-close" id="chatbot-close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="chatbot-messages" id="chatbot-messages"></div>
+  <div class="chatbot-input-area">
+    <input type="text" id="chatbot-input" placeholder="Posez votre question…" />
+    <button class="chatbot-send" id="chatbot-send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+
+<button class="scroll-top" id="scroll-top" title="Haut de page">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<div class="cookie-banner" id="cookie-banner">
+  <p>🍪 Ce site utilise uniquement des cookies essentiels à son fonctionnement. Aucun cookie publicitaire ou de traçage tiers n'est utilisé.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-sm btn-ghost" id="cookie-refuse" style="color:rgba(255,255,255,.6)">Refuser</button>
+    <button class="btn btn-sm btn-primary" id="cookie-accept">J'accepte</button>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<!-- Main JS -->
+<script src="../js/main.js"></script>
+
+<script>
+  let lastCreatedTicket = 'JAI-20261014-4821';
+
+  // Handle Form Submission
+  const ticketForm = document.getElementById('ticket-form');
+  const ticketSuccessBox = document.getElementById('ticket-success-box');
+  const generatedNumEl = document.getElementById('generated-ticket-number');
+
+  if (ticketForm) {
+    ticketForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!JasonApp.FormValidator.validate(ticketForm)) {
+        JasonApp.Toast.show('Formulaire incomplet', 'Veuillez remplir tous les champs obligatoires.', 'error');
+        return;
+      }
+
+      const submitBtn = document.getElementById('btn-submit-ticket');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="loading-spinner" style="width:18px;height:18px;border-width:2px;"></span> Envoi en cours...';
+
+      setTimeout(() => {
+        const ticketNum = JasonApp.TicketGen.generate('JAI');
+        lastCreatedTicket = ticketNum;
+        if (generatedNumEl) generatedNumEl.textContent = ticketNum;
+
+        ticketForm.style.display = 'none';
+        ticketSuccessBox.style.display = 'block';
+
+        // Pre-fill tracking input with this new ticket
+        const trackInput = document.getElementById('track-ticket-input');
+        if (trackInput) trackInput.value = ticketNum;
+
+        // Update tracking panel right away to newly created state
+        updateTrackingState(ticketNum, 'Nouveau ticket créé', 'En attente d\'attribution', 1);
+
+        JasonApp.Toast.show('Ticket créé avec succès !', `Référence : ${ticketNum}. Un technicien vous contactera sous 2h.`, 'success');
+      }, 700);
+    });
+  }
+
+  function resetTicketForm() {
+    if (ticketForm) {
+      ticketForm.reset();
+      ticketForm.style.display = 'block';
+      const submitBtn = document.getElementById('btn-submit-ticket');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Soumettre mon ticket';
+    }
+    if (ticketSuccessBox) ticketSuccessBox.style.display = 'none';
+  }
+
+  function copyCreatedTicket() {
+    navigator.clipboard.writeText(lastCreatedTicket).then(() => {
+      JasonApp.Toast.show('Numéro copié !', `Le ticket ${lastCreatedTicket} a été copié.`, 'success');
+    });
+  }
+
+  function trackGeneratedTicket() {
+    const trackingPanel = document.getElementById('ticket-tracking');
+    if (trackingPanel) {
+      trackingPanel.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  function preselectOnSite() {
+    const typeSelect = document.getElementById('ticket-type');
+    if (typeSelect) {
+      typeSelect.value = "Demande d'intervention";
+    }
+  }
+
+  function handleFileSelect(input) {
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const textEl = document.getElementById('file-upload-text');
+      if (textEl) {
+        textEl.innerHTML = `<strong>Fichier sélectionné :</strong> ${file.name} (${(file.size/1024).toFixed(1)} Ko)`;
+      }
+    }
+  }
+
+  // Tracking Mock Engine
+  function fillDemoTicket(id) {
+    const trackInput = document.getElementById('track-ticket-input');
+    if (trackInput) trackInput.value = id;
+    lookupTicket();
+  }
+
+  function lookupTicket() {
+    const input = document.getElementById('track-ticket-input');
+    const val = (input ? input.value : '').trim().toUpperCase();
+    if (!val) {
+      JasonApp.Toast.show('Référence requise', 'Veuillez saisir votre numéro de ticket (ex: JAI-20261014-4821).', 'error');
+      return;
+    }
+
+    if (val.includes('3109')) {
+      updateTrackingState(val, 'Réparation carte mère & Récupération de données', 'Dossier résolu et clôturé', 4);
+      JasonApp.Toast.show('Ticket trouvé', `Statut du ticket ${val} : Résolu.`, 'success');
+    } else if (val.includes('4821') || val === lastCreatedTicket) {
+      updateTrackingState(val, 'Demande d\'assistance en ligne', 'En cours d\'affectation technique', 1);
+      JasonApp.Toast.show('Ticket trouvé', `Statut du ticket ${val} : Reçu et enregistré.`, 'info');
+    } else {
+      updateTrackingState(val, 'Dépannage système & Assistance technique', 'Diagnostic & résolution en cours', 3);
+      JasonApp.Toast.show('Ticket trouvé', `Statut du ticket ${val} : En cours de résolution.`, 'info');
+    }
+  }
+
+  function updateTrackingState(id, subject, statusLabel, activeStep) {
+    const idEl = document.getElementById('track-ticket-id');
+    const badgeEl = document.getElementById('track-ticket-status-badge');
+    const subjectEl = document.getElementById('track-ticket-subject');
+
+    if (idEl) idEl.textContent = 'RÉF : ' + id;
+    if (subjectEl) subjectEl.textContent = subject;
+    if (badgeEl) {
+      badgeEl.textContent = statusLabel;
+      badgeEl.className = activeStep === 4 ? 'badge badge-green' : 'badge badge-primary';
+    }
+
+    // Update stages 1 to 4
+    for (let i = 1; i <= 4; i++) {
+      const stage = document.getElementById('stage-' + i);
+      if (!stage) continue;
+      stage.classList.remove('done', 'active');
+      if (i < activeStep) {
+        stage.classList.add('done');
+      } else if (i === activeStep) {
+        stage.classList.add(activeStep === 4 ? 'done' : 'active');
+      }
+    }
+  }
+
+  // FAQ Accordion logic
+  document.querySelectorAll('.faq-accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.closest('.faq-accordion-item');
+      const isOpen = item.classList.contains('active');
+
+      document.querySelectorAll('.faq-accordion-item').forEach(it => {
+        it.classList.remove('active');
+        it.querySelector('.faq-accordion-header')?.setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isOpen) {
+        item.classList.add('active');
+        header.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Remote Support Modal
+  function openRemoteModal() {
+    const modal = document.getElementById('remote-modal');
+    if (modal) modal.classList.add('open');
+  }
+  function closeRemoteModal() {
+    const modal = document.getElementById('remote-modal');
+    if (modal) modal.classList.remove('open');
+  }
+</script>
+  <!-- Envoi direct par email â€” Web3Forms -->
+  <script src="../js/email-forms.js"></script></body>
+</html>

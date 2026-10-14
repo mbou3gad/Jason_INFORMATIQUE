@@ -1,0 +1,1515 @@
+﻿<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administration — Jason_INFORMATIQUE</title>
+  <meta name="description" content="Panneau d'administration Jason_INFORMATIQUE. Gestion des clients, réparations, boutique, formations et paramètres.">
+  <meta name="keywords" content="admin, panneau d'administration, Jason_INFORMATIQUE, gestion IT">
+  <meta property="og:title" content="Administration — Jason_INFORMATIQUE">
+  <meta property="og:description" content="Panneau d'administration complet Jason_INFORMATIQUE.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    /* Styles spécifiques Admin */
+    .admin-user-card {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.15);
+    }
+    .admin-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-primary), #38BDF8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: white;
+      font-size: .95rem;
+      flex-shrink: 0;
+    }
+    .admin-tab-panel {
+      display: none;
+      animation: fadeIn .3s ease;
+    }
+    .admin-tab-panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .admin-search-box {
+      position: relative;
+      width: 320px;
+    }
+    .admin-search-box input {
+      width: 100%;
+      padding: 8px 14px 8px 36px;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-secondary);
+      font-size: .85rem;
+      outline: none;
+      color: var(--text-primary);
+    }
+    .admin-search-box input:focus {
+      border-color: var(--blue-primary);
+      background: var(--bg-card);
+    }
+    .admin-search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+    .notification-bell-btn {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+    .notification-bell-btn:hover {
+      color: var(--blue-primary);
+      border-color: var(--blue-primary);
+    }
+    .notification-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--red);
+      color: white;
+      font-size: .65rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--bg-card);
+    }
+    .notifications-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 320px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-xl);
+      padding: 12px;
+      display: none;
+      z-index: 250;
+    }
+    .notifications-dropdown.open {
+      display: block;
+    }
+    .notif-item {
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: .82rem;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .notif-item:last-child {
+      border-bottom: none;
+    }
+    .notif-item:hover {
+      background: var(--bg-secondary);
+    }
+    /* Switch toggle */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: var(--gray-300);
+      transition: .3s;
+      border-radius: 24px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: var(--green);
+    }
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+    .demo-alert-banner {
+      padding: 10px 16px;
+      background: var(--orange-light);
+      color: #92400E;
+      border: 1px solid rgba(245,158,11,.3);
+      border-radius: var(--radius-md);
+      font-size: .82rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 950px) {
+      .admin-search-box {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- Sidebar Admin -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <a href="../index.html" class="admin-sidebar-logo" title="Jason_INFORMATIQUE">
+          <div class="admin-sidebar-logo-icon">JI</div>
+          <div>
+            <div class="admin-sidebar-title"><span>Jason_</span>ADMIN</div>
+            <div class="admin-sidebar-sub">Panneau d'Administration</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Utilisateur Connecté -->
+      <div class="admin-user-card">
+        <div class="admin-avatar">JM</div>
+        <div style="overflow:hidden;">
+          <div style="font-weight:700;font-size:.88rem;color:white;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            Gad Jason MBOU
+          </div>
+          <div style="font-size:.72rem;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:4px;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#4ADE80;display:inline-block;"></span>
+            Super Administrateur
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Structurée -->
+      <nav class="admin-nav" id="admin-nav">
+        
+        <div class="admin-nav-section">Tableau de Bord</div>
+        <a class="admin-nav-link active" data-tab="dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Accueil</span>
+        </a>
+
+        <div class="admin-nav-section">Gestion Opérationnelle</div>
+        <a class="admin-nav-link" data-tab="clients">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Clients</span>
+          <span class="admin-nav-badge">12</span>
+        </a>
+        <a class="admin-nav-link" data-tab="repairs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          <span>Réparations</span>
+          <span class="admin-nav-badge" style="background:var(--orange);">5</span>
+        </a>
+        <a class="admin-nav-link" data-tab="products">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span>Produits Boutique</span>
+          <span class="admin-nav-badge">6</span>
+        </a>
+        <a class="admin-nav-link" data-tab="orders">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span>Commandes</span>
+          <span class="admin-nav-badge">8</span>
+        </a>
+        <a class="admin-nav-link" data-tab="formations">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <span>Formations IT</span>
+          <span class="admin-nav-badge">22</span>
+        </a>
+        <a class="admin-nav-link" data-tab="technicians">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Techniciens</span>
+        </a>
+        <a class="admin-nav-link" data-tab="services">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span>Services</span>
+        </a>
+        <a class="admin-nav-link" data-tab="learners">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>Apprenants</span>
+        </a>
+        <a class="admin-nav-link" data-tab="guides">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span>Guides Techniques</span>
+        </a>
+        <a class="admin-nav-link" data-tab="support">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>Tickets Support</span>
+          <span class="admin-nav-badge" style="background:var(--red);">3</span>
+        </a>
+        <a class="admin-nav-link" data-tab="quotes">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span>Devis</span>
+        </a>
+        <a class="admin-nav-link" data-tab="invoices">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          <span>Factures</span>
+        </a>
+
+        <div class="admin-nav-section">Contenu & Messages</div>
+        <a class="admin-nav-link" data-tab="articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l6 6v10a2 2 0 0 1-2 2z"/></svg>
+          <span>Articles & Blog</span>
+        </a>
+        <a class="admin-nav-link" data-tab="messages">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>Messages Contact</span>
+        </a>
+
+        <div class="admin-nav-section">Paramètres Système</div>
+        <a class="admin-nav-link" data-tab="settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Informations & Configuration</span>
+        </a>
+      </nav>
+
+      <!-- Pied de Sidebar Admin -->
+      <div style="padding:16px 20px;border-top:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:8px;background:rgba(0,0,0,.2);">
+        <a href="../index.html" class="btn btn-ghost btn-sm" style="color:rgba(255,255,255,.7);justify-content:flex-start;gap:10px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          <span>Retour au site</span>
+        </a>
+        <button id="btn-admin-logout" class="btn btn-ghost btn-sm" style="color:var(--red);justify-content:flex-start;gap:10px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span>Déconnexion</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      
+      <!-- Topbar Admin -->
+      <header class="admin-topbar">
+        <div style="display:flex;align-items:center;gap:16px;">
+          <button class="hamburger" id="admin-sidebar-toggle" style="display:flex;" aria-label="Menu Admin">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="admin-page-title" id="admin-topbar-title">Tableau de bord administrateur</div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:16px;">
+          
+          <!-- Recherche rapide -->
+          <div class="admin-search-box">
+            <svg class="admin-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="admin-global-search" placeholder="Rechercher ticket, client, produit…" />
+          </div>
+
+          <!-- Cloche Notifications -->
+          <div style="position:relative;">
+            <button class="notification-bell-btn" id="notif-btn" aria-label="Notifications">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <span class="notification-badge">3</span>
+            </button>
+
+            <!-- Menu dropdown notifs -->
+            <div class="notifications-dropdown" id="notif-dropdown">
+              <div class="flex-between" style="padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid var(--border-color);">
+                <strong style="font-size:.85rem;">Notifications (3)</strong>
+                <span style="font-size:.72rem;color:var(--blue-primary);cursor:pointer;" onclick="Toast.show('Notifications', 'Marquées comme lues.', 'info');document.querySelector('.notification-badge').style.display='none';">Tout marquer comme lu</span>
+              </div>
+              <div class="notif-item">
+                <span style="color:var(--orange);">🔧</span>
+                <div>
+                  <div style="font-weight:600;">Nouvelle réparation déposée</div>
+                  <div style="color:var(--text-muted);font-size:.75rem;">REP-20241201-1234 (HP Pavilion Gaming)</div>
+                </div>
+              </div>
+              <div class="notif-item">
+                <span style="color:var(--green);">🛒</span>
+                <div>
+                  <div style="font-weight:600;">Commande CMD-20241201-002</div>
+                  <div style="color:var(--text-muted);font-size:.75rem;">SSD 500GB à expédier vers Mpila</div>
+                </div>
+              </div>
+              <div class="notif-item">
+                <span style="color:var(--red);">⚠️</span>
+                <div>
+                  <div style="font-weight:600;">Ticket d'urgence reçu</div>
+                  <div style="color:var(--text-muted);font-size:.75rem;">Câblage baie serveur société partenaire</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Theme Toggle -->
+          <button class="theme-toggle" title="Changer le thème">
+            <svg class="theme-icon sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+
+          <!-- Avatar Admin -->
+          <div style="display:flex;align-items:center;gap:10px;padding-left:8px;border-left:1px solid var(--border-color);">
+            <div class="admin-avatar" style="width:34px;height:34px;font-size:.85rem;">JM</div>
+            <div style="display:none;flex-direction:column;font-size:.8rem;line-height:1.2;">
+              <span style="font-weight:700;">Gad Jason</span>
+              <span style="font-size:.7rem;color:var(--text-muted);">Admin</span>
+            </div>
+          </div>
+
+        </div>
+      </header>
+
+      <!-- Contenu Dynamique Admin -->
+      <div class="admin-content">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: DASHBOARD                           -->
+        <!-- ========================================== -->
+        <section class="admin-tab-panel active" id="admin-panel-dashboard">
+          
+          <!-- Note de démonstration obligatoire -->
+          <div class="demo-alert-banner">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div>
+              <strong>Mode démonstration :</strong> Les données affichées sont fictives. Les statistiques réelles seront synchronisées après connexion au backend de production.
+            </div>
+          </div>
+
+          <!-- 4 Stat Cards -->
+          <div class="grid grid-4" style="margin-bottom:32px;">
+            <div class="stat-card">
+              <div class="stat-card-icon" style="background:var(--blue-light);color:var(--blue-primary);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div class="stat-card-value">12</div>
+              <div class="stat-card-label">Clients actifs</div>
+              <div class="stat-card-trend trend-up">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                +8% ce mois
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-icon" style="background:var(--red-light);color:var(--red);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="stat-card-value">3</div>
+              <div class="stat-card-label">Tickets ouverts</div>
+              <div class="stat-card-trend trend-down">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                1 intervention urgente
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-icon" style="background:var(--orange-light);color:var(--orange);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <div class="stat-card-value">5</div>
+              <div class="stat-card-label">Réparations en cours</div>
+              <div class="stat-card-trend trend-up">
+                2 appareils prêts pour retrait
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-icon" style="background:var(--green-light);color:var(--green);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              </div>
+              <div class="stat-card-value">8</div>
+              <div class="stat-card-label">Commandes du mois</div>
+              <div class="stat-card-trend" style="color:var(--blue-primary);font-weight:700;">
+                540 000 FCFA volume
+              </div>
+            </div>
+          </div>
+
+          <!-- Section Réparations Récentes (5 Démo) -->
+          <div class="card" style="margin-bottom:32px;">
+            <div class="card-header flex-between">
+              <div>
+                <h3 style="font-size:1.05rem;font-weight:700;">Réparations récentes en atelier</h3>
+                <div style="font-size:.78rem;color:var(--text-muted);">5 dernières prises en charge matériel</div>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="switchAdminTab('repairs')">Toutes les réparations</button>
+            </div>
+            <div style="overflow-x:auto;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>N° Ticket</th>
+                    <th>Client</th>
+                    <th>Appareil</th>
+                    <th>Problème déclaré</th>
+                    <th>Statut</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;color:var(--blue-primary);">REP-20241201-1234</span></td>
+                    <td>Gad Jason</td>
+                    <td>PC Portable HP Pavilion</td>
+                    <td>Surchauffe anormale & coupures</td>
+                    <td><span class="badge badge-orange">En diagnostic</span></td>
+                    <td>01/12/2024</td>
+                    <td><button class="action-btn action-view" title="Voir fiche" onclick="switchAdminTab('repairs')">👁️</button></td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;color:var(--blue-primary);">REP-20241202-3321</span></td>
+                    <td>Société Congo BTP</td>
+                    <td>Dell OptiPlex 7090</td>
+                    <td>Disque dur non détecté (bruit mécanique)</td>
+                    <td><span class="badge badge-primary">Réparation en cours</span></td>
+                    <td>02/12/2024</td>
+                    <td><button class="action-btn action-view" title="Voir fiche" onclick="switchAdminTab('repairs')">👁️</button></td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;color:var(--blue-primary);">REP-20241203-5590</span></td>
+                    <td>Aline Mampouya</td>
+                    <td>MacBook Air M1</td>
+                    <td>Liquide renversé sur clavier</td>
+                    <td><span class="badge badge-red">Devis émis</span></td>
+                    <td>03/12/2024</td>
+                    <td><button class="action-btn action-view" title="Voir fiche" onclick="switchAdminTab('repairs')">👁️</button></td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;color:var(--blue-primary);">REP-20241204-7712</span></td>
+                    <td>Cabinet Juridique Mpila</td>
+                    <td>Serveur tour Lenovo ST50</td>
+                    <td>Ventilateur d'alimentation bloqué</td>
+                    <td><span class="badge badge-green">Prêt pour retrait</span></td>
+                    <td>04/12/2024</td>
+                    <td><button class="action-btn action-view" title="Voir fiche" onclick="switchAdminTab('repairs')">👁️</button></td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;color:var(--blue-primary);">REP-20241205-9901</span></td>
+                    <td>Patrick Ngoma</td>
+                    <td>Imprimante HP LaserJet Pro</td>
+                    <td>Bourrage papier récurrent</td>
+                    <td><span class="badge badge-gray">Réception</span></td>
+                    <td>05/12/2024</td>
+                    <td><button class="action-btn action-view" title="Voir fiche" onclick="switchAdminTab('repairs')">👁️</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section Commandes Récentes (5 Démo) -->
+          <div class="card">
+            <div class="card-header flex-between">
+              <div>
+                <h3 style="font-size:1.05rem;font-weight:700;">Commandes récentes de la boutique</h3>
+                <div style="font-size:.78rem;color:var(--text-muted);">5 derniers achats passés en ligne</div>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="switchAdminTab('orders')">Toutes les commandes</button>
+            </div>
+            <div style="overflow-x:auto;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>N° Commande</th>
+                    <th>Client</th>
+                    <th>Articles</th>
+                    <th>Montant total</th>
+                    <th>Statut</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;">CMD-20241201-002</span></td>
+                    <td>Gad Jason</td>
+                    <td>Disque SSD NVMe Kingston 500GB (x1)</td>
+                    <td><strong>45 000 FCFA</strong></td>
+                    <td><span class="badge badge-orange">En cours</span></td>
+                    <td>05/12/2024</td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;">CMD-20241201-001</span></td>
+                    <td>Gad Jason</td>
+                    <td>Câble RJ45 CAT6 10m + Clé USB 64GB</td>
+                    <td><strong>18 500 FCFA</strong></td>
+                    <td><span class="badge badge-green">Livré</span></td>
+                    <td>01/12/2024</td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;">CMD-20241129-019</span></td>
+                    <td>Clinique Océan Brazzaville</td>
+                    <td>Switch Gigabit TP-Link 16 Ports (x2)</td>
+                    <td><strong>120 000 FCFA</strong></td>
+                    <td><span class="badge badge-green">Livré</span></td>
+                    <td>29/11/2024</td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;">CMD-20241125-014</span></td>
+                    <td>Christian Moukoko</td>
+                    <td>RAM DDR4 16GB Crucial 3200MHz</td>
+                    <td><strong>38 000 FCFA</strong></td>
+                    <td><span class="badge badge-green">Livré</span></td>
+                    <td>25/11/2024</td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;">CMD-20241120-008</span></td>
+                    <td>ONG Solidarité IT</td>
+                    <td>Onduleur APC 1000VA (x3)</td>
+                    <td><strong>318 500 FCFA</strong></td>
+                    <td><span class="badge badge-green">Livré</span></td>
+                    <td>20/11/2024</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: CLIENTS                             -->
+        <!-- ========================================== -->
+        <section class="admin-tab-panel" id="admin-panel-clients">
+          <div class="demo-alert-banner">
+            <span>ℹ️ Mode démonstration — Données fictives.</span>
+          </div>
+
+          <div class="flex-between" style="margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+            <div>
+              <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:4px;">Gestion des clients</h2>
+              <p style="font-size:.85rem;color:var(--text-secondary);">Liste des particuliers et comptes Jason PRO enregistrés.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="Modal.open('modal-add-client')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Ajouter un client
+            </button>
+          </div>
+
+          <div class="card">
+            <div style="overflow-x:auto;">
+              <table class="data-table" id="table-clients">
+                <thead>
+                  <tr>
+                    <th>Nom Complet</th>
+                    <th>Email</th>
+                    <th>Type de Compte</th>
+                    <th>Inscrit le</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Gad Jason MBOU</strong></td>
+                    <td>demo@jason.cg</td>
+                    <td><span class="badge badge-primary">Particulier</span></td>
+                    <td>01/12/2024</td>
+                    <td><span class="badge badge-green">Actif</span></td>
+                    <td>
+                      <div class="table-actions">
+                        <button class="action-btn action-edit" title="Éditer" onclick="Toast.show('Client', 'Édition simulée pour Gad Jason.', 'info')">✏️</button>
+                        <button class="action-btn action-view" title="Voir historique" onclick="Toast.show('Fiche client', 'Historique complet : 1 réparation, 2 commandes.', 'info')">👁️</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Société Congo BTP</strong></td>
+                    <td>contact@congo-btp.cg</td>
+                    <td><span class="badge badge-orange">Entreprise (PRO)</span></td>
+                    <td>15/11/2024</td>
+                    <td><span class="badge badge-green">Actif</span></td>
+                    <td>
+                      <div class="table-actions">
+                        <button class="action-btn action-edit" title="Éditer" onclick="Toast.show('Client', 'Édition Congo BTP.', 'info')">✏️</button>
+                        <button class="action-btn action-view" title="Voir historique" onclick="Toast.show('Fiche client', 'Contrat de maintenance parc 15 PC.', 'info')">👁️</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Aline Mampouya</strong></td>
+                    <td>aline.m@gmail.com</td>
+                    <td><span class="badge badge-primary">Particulier</span></td>
+                    <td>20/11/2024</td>
+                    <td><span class="badge badge-green">Actif</span></td>
+                    <td>
+                      <div class="table-actions">
+                        <button class="action-btn action-edit" title="Éditer">✏️</button>
+                        <button class="action-btn action-view" title="Voir historique">👁️</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Cabinet Juridique Mpila</strong></td>
+                    <td>secretariat@cabinet-mpila.cg</td>
+                    <td><span class="badge badge-orange">Entreprise (PRO)</span></td>
+                    <td>05/10/2024</td>
+                    <td><span class="badge badge-green">Actif</span></td>
+                    <td>
+                      <div class="table-actions">
+                        <button class="action-btn action-edit" title="Éditer">✏️</button>
+                        <button class="action-btn action-view" title="Voir historique">👁️</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Patrick Ngoma</strong></td>
+                    <td>ngoma.p@yahoo.fr</td>
+                    <td><span class="badge badge-primary">Particulier</span></td>
+                    <td>28/11/2024</td>
+                    <td><span class="badge badge-gray">Inactif</span></td>
+                    <td>
+                      <div class="table-actions">
+                        <button class="action-btn action-edit" title="Éditer">✏️</button>
+                        <button class="action-btn action-view" title="Voir historique">👁️</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: PRODUITS                            -->
+        <!-- ========================================== -->
+        <section class="admin-tab-panel" id="admin-panel-products">
+          <div class="demo-alert-banner">
+            <span>ℹ️ Mode démonstration — Catalogue boutique test.</span>
+          </div>
+
+          <div class="flex-between" style="margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+            <div>
+              <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:4px;">Gestion des produits</h2>
+              <p style="font-size:.85rem;color:var(--text-secondary);">Inventaire matériel, pièces détachées et accessoires en vente.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="Modal.open('modal-add-product')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Ajouter un produit
+            </button>
+          </div>
+
+          <div class="card">
+            <div style="overflow-x:auto;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Référence</th>
+                    <th>Nom du produit</th>
+                    <th>Catégorie</th>
+                    <th>Prix unitaire</th>
+                    <th>Stock</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;">PRD-SSD-01</span></td>
+                    <td><strong>Disque SSD Kingston NVMe 500GB</strong></td>
+                    <td>Stockage & Disques</td>
+                    <td><strong style="color:var(--blue-primary);">45 000 FCFA</strong></td>
+                    <td>14 unités</td>
+                    <td><span class="badge badge-green">En stock</span></td>
+                    <td>
+                      <div class="table-actions">
+                        <button class="action-btn action-edit" title="Modifier" onclick="Toast.show('Produit', 'Modification simulée.', 'info')">✏️</button>
+                        <button class="action-btn action-del" title="Supprimer" onclick="Toast.show('Produit', 'Suppression bloquée en démo.', 'error')">🗑️</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;">PRD-RAM-02</span></td>
+                    <td><strong>RAM Crucial 16GB DDR4 3200MHz</strong></td>
+                    <td>Mémoire vive</td>
+                    <td><strong style="color:var(--blue-primary);">38 000 FCFA</strong></td>
+                    <td>8 unités</td>
+                    <td><span class="badge badge-green">En stock</span></td>
+                    <td>
+                      <div class="table-actions">
+                        <button class="action-btn action-edit" title="Modifier">✏️</button>
+                        <button class="action-btn action-del" title="Supprimer">🗑️</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;">PRD-RJ45-03</span></td>
+                    <td><strong>Câble Réseau Ethernet CAT6 10m Blindé</strong></td>
+                    <td>Câblage & Réseau</td>
+                    <td><strong style="color:var(--blue-primary);">8 500 FCFA</strong></td>
+                    <td>35 unités</td>
+                    <td><span class="badge badge-green">En stock</span></td>
+                    <td>
+                      <div class="table-actions">
+                        <button class="action-btn action-edit" title="Modifier">✏️</button>
+                        <button class="action-btn action-del" title="Supprimer">🗑️</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;">PRD-OND-04</span></td>
+                    <td><strong>Onduleur APC Back-UPS 650VA / 230V</strong></td>
+                    <td>Protection électrique</td>
+                    <td><strong style="color:var(--blue-primary);">68 000 FCFA</strong></td>
+                    <td>3 unités</td>
+                    <td><span class="badge badge-orange">Stock faible</span></td>
+                    <td>
+                      <div class="table-actions">
+                        <button class="action-btn action-edit" title="Modifier">✏️</button>
+                        <button class="action-btn action-del" title="Supprimer">🗑️</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;">PRD-PATE-05</span></td>
+                    <td><strong>Pâte thermique Arctic MX-4 4g</strong></td>
+                    <td>Maintenance atelier</td>
+                    <td><strong style="color:var(--blue-primary);">7 500 FCFA</strong></td>
+                    <td>22 unités</td>
+                    <td><span class="badge badge-green">En stock</span></td>
+                    <td>
+                      <div class="table-actions">
+                        <button class="action-btn action-edit" title="Modifier">✏️</button>
+                        <button class="action-btn action-del" title="Supprimer">🗑️</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-family:var(--font-mono);font-weight:700;">PRD-CLAV-06</span></td>
+                    <td><strong>Pack Clavier + Souris Logitech MK120</strong></td>
+                    <td>Périphériques</td>
+                    <td><strong style="color:var(--blue-primary);">19 000 FCFA</strong></td>
+                    <td>0 unité</td>
+                    <td><span class="badge badge-red">Rupture</span></td>
+                    <td>
+                      <div class="table-actions">
+                        <button class="action-btn action-edit" title="Modifier">✏️</button>
+                        <button class="action-btn action-del" title="Supprimer">🗑️</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 4: RÉPARATIONS (Avec Dropdown 7 Étapes) -->
+        <!-- ========================================== -->
+        <section class="admin-tab-panel" id="admin-panel-repairs">
+          <div class="demo-alert-banner">
+            <span>ℹ️ Mode démonstration — Modifiez le statut d'un ticket pour tester la mise à jour dynamique.</span>
+          </div>
+
+          <div class="flex-between" style="margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+            <div>
+              <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:4px;">Gestion des tickets de réparation</h2>
+              <p style="font-size:.85rem;color:var(--text-secondary);">Cycle de vie des appareils en atelier (7 étapes réglementaires).</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="overflow-x:auto;">
+              <table class="data-table" id="admin-repairs-table">
+                <thead>
+                  <tr>
+                    <th>N° Ticket</th>
+                    <th>Client</th>
+                    <th>Appareil</th>
+                    <th>Problème</th>
+                    <th>Statut Actuel</th>
+                    <th>Changer le Statut (7 étapes)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  <!-- Ligne 1 -->
+                  <tr data-repair-row="REP-20241201-1234">
+                    <td><span style="font-family:var(--font-mono);font-weight:700;color:var(--blue-primary);">REP-20241201-1234</span></td>
+                    <td><strong>Gad Jason</strong></td>
+                    <td>PC HP Pavilion</td>
+                    <td>Surchauffe</td>
+                    <td><span class="badge badge-orange status-badge">Diagnostic en cours</span></td>
+                    <td>
+                      <select class="form-select status-changer" style="padding:6px 10px;font-size:.82rem;width:200px;">
+                        <option value="reception">1. Réception</option>
+                        <option value="diagnostic" selected>2. Diagnostic en cours</option>
+                        <option value="devis">3. Devis émis</option>
+                        <option value="reparation">4. Réparation en cours</option>
+                        <option value="tests">5. Tests de conformité</option>
+                        <option value="pret">6. Prêt pour retrait</option>
+                        <option value="cloture">7. Clôturé / Livré</option>
+                      </select>
+                    </td>
+                  </tr>
+
+                  <!-- Ligne 2 -->
+                  <tr data-repair-row="REP-20241202-3321">
+                    <td><span style="font-family:var(--font-mono);font-weight:700;color:var(--blue-primary);">REP-20241202-3321</span></td>
+                    <td><strong>Société Congo BTP</strong></td>
+                    <td>Dell OptiPlex 7090</td>
+                    <td>Disque dur HS</td>
+                    <td><span class="badge badge-primary status-badge">Réparation en cours</span></td>
+                    <td>
+                      <select class="form-select status-changer" style="padding:6px 10px;font-size:.82rem;width:200px;">
+                        <option value="reception">1. Réception</option>
+                        <option value="diagnostic">2. Diagnostic en cours</option>
+                        <option value="devis">3. Devis émis</option>
+                        <option value="reparation" selected>4. Réparation en cours</option>
+                        <option value="tests">5. Tests de conformité</option>
+                        <option value="pret">6. Prêt pour retrait</option>
+                        <option value="cloture">7. Clôturé / Livré</option>
+                      </select>
+                    </td>
+                  </tr>
+
+                  <!-- Ligne 3 -->
+                  <tr data-repair-row="REP-20241203-5590">
+                    <td><span style="font-family:var(--font-mono);font-weight:700;color:var(--blue-primary);">REP-20241203-5590</span></td>
+                    <td><strong>Aline Mampouya</strong></td>
+                    <td>MacBook Air M1</td>
+                    <td>Liquide clavier</td>
+                    <td><span class="badge badge-red status-badge">Devis émis</span></td>
+                    <td>
+                      <select class="form-select status-changer" style="padding:6px 10px;font-size:.82rem;width:200px;">
+                        <option value="reception">1. Réception</option>
+                        <option value="diagnostic">2. Diagnostic en cours</option>
+                        <option value="devis" selected>3. Devis émis</option>
+                        <option value="reparation">4. Réparation en cours</option>
+                        <option value="tests">5. Tests de conformité</option>
+                        <option value="pret">6. Prêt pour retrait</option>
+                        <option value="cloture">7. Clôturé / Livré</option>
+                      </select>
+                    </td>
+                  </tr>
+
+                  <!-- Ligne 4 -->
+                  <tr data-repair-row="REP-20241204-7712">
+                    <td><span style="font-family:var(--font-mono);font-weight:700;color:var(--blue-primary);">REP-20241204-7712</span></td>
+                    <td><strong>Cabinet Mpila</strong></td>
+                    <td>Serveur Lenovo</td>
+                    <td>Alimentation</td>
+                    <td><span class="badge badge-green status-badge">Prêt pour retrait</span></td>
+                    <td>
+                      <select class="form-select status-changer" style="padding:6px 10px;font-size:.82rem;width:200px;">
+                        <option value="reception">1. Réception</option>
+                        <option value="diagnostic">2. Diagnostic en cours</option>
+                        <option value="devis">3. Devis émis</option>
+                        <option value="reparation">4. Réparation en cours</option>
+                        <option value="tests">5. Tests de conformité</option>
+                        <option value="pret" selected>6. Prêt pour retrait</option>
+                        <option value="cloture">7. Clôturé / Livré</option>
+                      </select>
+                    </td>
+                  </tr>
+
+                  <!-- Ligne 5 -->
+                  <tr data-repair-row="REP-20241205-9901">
+                    <td><span style="font-family:var(--font-mono);font-weight:700;color:var(--blue-primary);">REP-20241205-9901</span></td>
+                    <td><strong>Patrick Ngoma</strong></td>
+                    <td>Imprimante HP</td>
+                    <td>Bourrage rouleaux</td>
+                    <td><span class="badge badge-gray status-badge">Réception</span></td>
+                    <td>
+                      <select class="form-select status-changer" style="padding:6px 10px;font-size:.82rem;width:200px;">
+                        <option value="reception" selected>1. Réception</option>
+                        <option value="diagnostic">2. Diagnostic en cours</option>
+                        <option value="devis">3. Devis émis</option>
+                        <option value="reparation">4. Réparation en cours</option>
+                        <option value="tests">5. Tests de conformité</option>
+                        <option value="pret">6. Prêt pour retrait</option>
+                        <option value="cloture">7. Clôturé / Livré</option>
+                      </select>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 5: FORMATIONS (22 Formations avec Toggle) -->
+        <!-- ========================================== -->
+        <section class="admin-tab-panel" id="admin-panel-formations">
+          <div class="demo-alert-banner">
+            <span>ℹ️ Mode démonstration — Activez ou désactivez une formation avec l'interrupteur.</span>
+          </div>
+
+          <div class="flex-between" style="margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+            <div>
+              <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:4px;">Catalogue des 22 formations</h2>
+              <p style="font-size:.85rem;color:var(--text-secondary);">Gestion de la visibilité publique et des apprenants inscrits.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="Toast.show('Nouvelle formation', 'Formulaire de création de cours (Démo).', 'info')">
+              + Nouvelle formation
+            </button>
+          </div>
+
+          <div class="card">
+            <div style="overflow-x:auto;">
+              <table class="data-table" id="table-formations">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Intitulé de la formation</th>
+                    <th>Niveau</th>
+                    <th>Inscrits</th>
+                    <th>Statut Public</th>
+                    <th>Activation</th>
+                  </tr>
+                </thead>
+                <tbody id="formations-tbody">
+                  <!-- Sera généré / complété dynamiquement avec les 22 formations -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 6: PARAMÈTRES                          -->
+        <!-- ========================================== -->
+        <section class="admin-tab-panel" id="admin-panel-settings">
+          <div class="demo-alert-banner">
+            <span>ℹ️ Mode démonstration — Paramètres globaux de l'entreprise.</span>
+          </div>
+
+          <div style="margin-bottom:20px;">
+            <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:4px;">Configuration & Paramètres de l'entreprise</h2>
+            <p style="font-size:.85rem;color:var(--text-secondary);">Coordonnées, horaires, réseaux sociaux et identité visuelle.</p>
+          </div>
+
+          <form id="admin-settings-form">
+            <div class="grid grid-2" style="gap:24px;">
+              
+              <!-- Informations Principales -->
+              <div class="card">
+                <div class="card-header">
+                  <h3 style="font-size:1rem;font-weight:700;">Informations de l'entreprise</h3>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label class="form-label">Nom de l'entreprise</label>
+                    <input type="text" class="form-input" id="set-name" value="Jason_INFORMATIQUE" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Email officiel</label>
+                    <input type="email" class="form-input" id="set-email" value="jasoninformatique7@gmail.com" required />
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Téléphone</label>
+                      <input type="tel" class="form-input" id="set-tel" value="+242 06 000 00 00" required />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">WhatsApp (Placeholder)</label>
+                      <input type="text" class="form-input" id="set-wa" value="+242 06 000 00 00" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Adresse physique</label>
+                    <input type="text" class="form-input" id="set-address" value="Mpila, Brazzaville, République du Congo" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Horaires d'ouverture</label>
+                    <input type="text" class="form-input" id="set-hours" value="Lun – Sam : 08h00 – 19h00" required />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Réseaux Sociaux & Logo -->
+              <div class="card">
+                <div class="card-header">
+                  <h3 style="font-size:1rem;font-weight:700;">Réseaux Sociaux & Identité Visuelle</h3>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label class="form-label">Page Facebook</label>
+                    <input type="text" class="form-input" value="https://facebook.com/jasoninformatique" placeholder="https://facebook.com/..." />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Page LinkedIn</label>
+                    <input type="text" class="form-input" value="https://linkedin.com/company/jason-informatique" placeholder="https://linkedin.com/..." />
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Twitter / X</label>
+                      <input type="text" class="form-input" value="https://x.com/jason_it" placeholder="https://x.com/..." />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Instagram</label>
+                      <input type="text" class="form-input" value="https://instagram.com/jason_informatique" placeholder="https://instagram.com/..." />
+                    </div>
+                  </div>
+
+                  <!-- Zone upload logo -->
+                  <div class="form-group">
+                    <label class="form-label">Logo de l'entreprise</label>
+                    <div class="file-upload" onclick="Toast.show('Fichier', 'Sélection de logo simulée (Démo).', 'info')">
+                      <div class="nav-logo-icon" style="margin:0 auto 12px;width:48px;height:48px;font-size:1.3rem;">JI</div>
+                      <div style="font-weight:600;font-size:.88rem;color:var(--text-primary);margin-bottom:4px;">Cliquez pour remplacer le logo</div>
+                      <div style="font-size:.75rem;color:var(--text-muted);">PNG, SVG ou WebP (max. 2 Mo)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div style="margin-top:24px;text-align:right;">
+              <button type="submit" class="btn btn-primary" style="padding:12px 32px;">
+                Enregistrer tous les paramètres
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- ONGLETS GÉNÉRIQUES SECONDAIRES            -->
+        <!-- ========================================== -->
+        <section class="admin-tab-panel" id="admin-panel-generic">
+          <div class="demo-alert-banner">
+            <span>ℹ️ Mode démonstration — Section de gestion opérationnelle.</span>
+          </div>
+          <div class="card" style="padding:48px;text-align:center;">
+            <div style="font-size:2.5rem;margin-bottom:12px;">📁</div>
+            <h3 id="generic-tab-title" style="font-size:1.4rem;font-weight:800;margin-bottom:8px;">Section</h3>
+            <p style="font-size:.9rem;color:var(--text-muted);max-width:480px;margin:0 auto 20px;">
+              Cette interface est prête à être connectée à l'API de gestion centralisée Jason_INFORMATIQUE.
+            </p>
+            <button class="btn btn-primary btn-sm" onclick="Toast.show('Actualisation', 'Données actualisées depuis le cache.', 'info')">
+              Rafraîchir les enregistrements
+            </button>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Modal Ajouter un Client -->
+  <div class="modal-overlay" id="modal-add-client">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">Ajouter un nouveau client</div>
+        <button class="modal-close" onclick="Modal.close('modal-add-client')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-add-client">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Prénom <span class="required">*</span></label>
+              <input type="text" id="add-cli-prenom" class="form-input" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nom <span class="required">*</span></label>
+              <input type="text" id="add-cli-nom" class="form-input" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email <span class="required">*</span></label>
+            <input type="email" id="add-cli-email" class="form-input" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Téléphone <span class="required">*</span></label>
+              <input type="tel" id="add-cli-tel" class="form-input" placeholder="+242 06 000 00 00" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Type de compte</label>
+              <select id="add-cli-type" class="form-select">
+                <option value="Particulier">Particulier</option>
+                <option value="Entreprise">Entreprise / Pro</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer" style="padding:0;margin-top:20px;border-top:none;">
+            <button type="button" class="btn btn-ghost" onclick="Modal.close('modal-add-client')">Annuler</button>
+            <button type="submit" class="btn btn-primary">Enregistrer le client</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Ajouter un Produit -->
+  <div class="modal-overlay" id="modal-add-product">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">Ajouter un produit en boutique</div>
+        <button class="modal-close" onclick="Modal.close('modal-add-product')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-add-product">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Référence <span class="required">*</span></label>
+              <input type="text" id="add-prd-ref" class="form-input" placeholder="PRD-XXX-00" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nom du produit <span class="required">*</span></label>
+              <input type="text" id="add-prd-nom" class="form-input" placeholder="Ex. Disque SSD 1TB" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Catégorie <span class="required">*</span></label>
+              <select id="add-prd-cat" class="form-select" required>
+                <option value="Stockage">Stockage & Disques</option>
+                <option value="Memoire">Mémoire RAM</option>
+                <option value="Reseau">Câblage & Réseau</option>
+                <option value="Protection">Protection électrique</option>
+                <option value="Maintenance">Maintenance & Outillage</option>
+                <option value="Peripherique">Périphériques</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Prix unitaire (FCFA) <span class="required">*</span></label>
+              <input type="number" id="add-prd-prix" class="form-input" placeholder="45000" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Stock initial <span class="required">*</span></label>
+            <input type="number" id="add-prd-stock" class="form-input" placeholder="10" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea id="add-prd-desc" class="form-textarea" placeholder="Spécifications techniques..." style="min-height:80px;"></textarea>
+          </div>
+          <div class="modal-footer" style="padding:0;margin-top:20px;border-top:none;">
+            <button type="button" class="btn btn-ghost" onclick="Modal.close('modal-add-product')">Annuler</button>
+            <button type="submit" class="btn btn-primary">Créer le produit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // Liste des 22 Formations avec niveaux et données
+    const FORMATIONS_LIST = [
+      { id: 1, title: "Maintenance et dépannage matériel PC", level: "Débutant", levelClass: "level-debutant", enrolled: 48, active: true },
+      { id: 2, title: "Diagnostic avancé et micro-soudure", level: "Avancé", levelClass: "level-avance", enrolled: 19, active: true },
+      { id: 3, title: "Administration Windows 11 & Windows Server", level: "Intermédiaire", levelClass: "level-intermediaire", enrolled: 35, active: true },
+      { id: 4, title: "Administration Linux Ubuntu & Debian", level: "Intermédiaire", levelClass: "level-intermediaire", enrolled: 28, active: true },
+      { id: 5, title: "Fondamentaux des réseaux TCP/IP & Wi-Fi", level: "Débutant", levelClass: "level-debutant", enrolled: 52, active: true },
+      { id: 6, title: "Configuration routeurs & commutateurs Cisco", level: "Avancé", levelClass: "level-avance", enrolled: 22, active: true },
+      { id: 7, title: "Sécurité des systèmes & Hygiène cybernétique", level: "Débutant", levelClass: "level-debutant", enrolled: 41, active: true },
+      { id: 8, title: "Audit de sécurité & Pentesting éthique", level: "Avancé", levelClass: "level-avance", enrolled: 16, active: true },
+      { id: 9, title: "Développement Web Frontend (HTML5, CSS3, JS)", level: "Débutant", levelClass: "level-debutant", enrolled: 64, active: true },
+      { id: 10, title: "Développement Web Backend (Node.js & Python)", level: "Intermédiaire", levelClass: "level-intermediaire", enrolled: 31, active: true },
+      { id: 11, title: "Conception & Gestion bases MySQL / PostgreSQL", level: "Intermédiaire", levelClass: "level-intermediaire", enrolled: 27, active: true },
+      { id: 12, title: "Virtualisation d'entreprise (VMware & Proxmox)", level: "Avancé", levelClass: "level-avance", enrolled: 18, active: true },
+      { id: 13, title: "Sauvegarde & Plans de reprise d'activité (PRA)", level: "Intermédiaire", levelClass: "level-intermediaire", enrolled: 20, active: true },
+      { id: 14, title: "Bureautique Pro (Office & Google Workspace)", level: "Débutant", levelClass: "level-debutant", enrolled: 75, active: true },
+      { id: 15, title: "Récupération de données sur disques & SSD", level: "Avancé", levelClass: "level-avance", enrolled: 14, active: true },
+      { id: 16, title: "Déploiement & Sécurisation réseaux Wi-Fi Pro", level: "Intermédiaire", levelClass: "level-intermediaire", enrolled: 23, active: true },
+      { id: 17, title: "Cloud Computing & Microsoft 365 Entreprises", level: "Intermédiaire", levelClass: "level-intermediaire", enrolled: 29, active: true },
+      { id: 18, title: "Sécurisation des postes de travail & Antivirus EDR", level: "Intermédiaire", levelClass: "level-intermediaire", enrolled: 21, active: true },
+      { id: 19, title: "Gestion de parc informatique & Helpdesk GLPI", level: "Intermédiaire", levelClass: "level-intermediaire", enrolled: 26, active: true },
+      { id: 20, title: "Câblage structuré & Organisation baie réseau", level: "Débutant", levelClass: "level-debutant", enrolled: 33, active: true },
+      { id: 21, title: "Initiation à la programmation Python pour l'IT", level: "Débutant", levelClass: "level-debutant", enrolled: 45, active: true },
+      { id: 22, title: "Déploiement automatisé d'OS avec WDS & MDT", level: "Avancé", levelClass: "level-avance", enrolled: 12, active: false }
+    ];
+
+    function renderFormations() {
+      const tbody = document.getElementById('formations-tbody');
+      if (!tbody) return;
+      tbody.innerHTML = FORMATIONS_LIST.map(f => `
+        <tr>
+          <td><span style="font-family:var(--font-mono);color:var(--text-muted);">${f.id}</span></td>
+          <td><strong>${f.title}</strong></td>
+          <td><span class="formation-card-level ${f.levelClass}" style="margin:0;">${f.level}</span></td>
+          <td>${f.enrolled} apprenants</td>
+          <td>
+            <span class="badge ${f.active ? 'badge-green' : 'badge-gray'}" id="status-badge-${f.id}">
+              ${f.active ? 'Actif' : 'Inactif'}
+            </span>
+          </td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" ${f.active ? 'checked' : ''} onchange="toggleFormation(${f.id}, this.checked)">
+              <span class="slider"></span>
+            </label>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function toggleFormation(id, isChecked) {
+      const form = FORMATIONS_LIST.find(f => f.id === id);
+      if (form) {
+        form.active = isChecked;
+        const badge = document.getElementById(`status-badge-${id}`);
+        if (badge) {
+          badge.className = `badge ${isChecked ? 'badge-green' : 'badge-gray'}`;
+          badge.textContent = isChecked ? 'Actif' : 'Inactif';
+        }
+        Toast.show(
+          isChecked ? 'Formation activée' : 'Formation désactivée',
+          `"${form.title}" est maintenant ${isChecked ? 'visible' : 'masquée'} aux apprenants.`,
+          isChecked ? 'success' : 'info'
+        );
+      }
+    }
+
+    // Gestion du changement d'onglet Admin
+    function switchAdminTab(tabName) {
+      document.querySelectorAll('#admin-nav .admin-nav-link').forEach(link => {
+        link.classList.toggle('active', link.dataset.tab === tabName);
+      });
+
+      // Vérifier si un panel dédié existe
+      const dedicated = document.getElementById(`admin-panel-${tabName}`);
+      const generic = document.getElementById('admin-panel-generic');
+      const allPanels = document.querySelectorAll('.admin-tab-panel');
+
+      allPanels.forEach(p => p.classList.remove('active'));
+
+      if (dedicated) {
+        dedicated.classList.add('active');
+      } else if (generic) {
+        generic.classList.add('active');
+        const titleEl = document.getElementById('generic-tab-title');
+        if (titleEl) {
+          titleEl.textContent = 'Gestion : ' + tabName.toUpperCase();
+        }
+      }
+
+      const titles = {
+        dashboard: 'Tableau de bord administrateur',
+        clients: 'Gestion des clients',
+        repairs: 'Gestion des réparations en atelier',
+        products: 'Inventaire de la boutique',
+        orders: 'Commandes de la boutique',
+        formations: 'Gestion des 22 formations',
+        technicians: 'Équipe technique & Assignations',
+        services: 'Catalogue des prestations IT',
+        learners: 'Gestion des apprenants',
+        guides: 'Bibliothèque de guides techniques',
+        support: 'Tickets de support technique',
+        quotes: 'Devis & Propositions commerciales',
+        invoices: 'Facturation & Règlements',
+        articles: 'Publications & Articles de blog',
+        messages: 'Messages reçus (Contact)',
+        settings: 'Paramètres globaux de l\'entreprise'
+      };
+
+      const topbarTitle = document.getElementById('admin-topbar-title');
+      if (topbarTitle && titles[tabName]) {
+        topbarTitle.textContent = titles[tabName];
+      }
+
+      document.getElementById('admin-sidebar')?.classList.remove('open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Contrôle d'accès administrateur
+      const isAuthRole = localStorage.getItem('jason-auth-role');
+      if (isAuthRole !== 'admin') {
+        // En mode démo, configurer automatiquement les droits admin pour un test fluide
+        localStorage.setItem('jason-auth', 'true');
+        localStorage.setItem('jason-auth-role', 'admin');
+        localStorage.setItem('jason-auth-user', JSON.stringify({
+          name: 'Gad Jason MBOU',
+          email: 'admin@jason.cg',
+          role: 'Super Administrateur',
+          initials: 'JM'
+        }));
+      }
+
+      // Rendu du tableau des 22 formations
+      renderFormations();
+
+      // 2. Navigation
+      document.querySelectorAll('#admin-nav .admin-nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const tab = link.dataset.tab;
+          if (tab) switchAdminTab(tab);
+        });
+      });
+
+      // 3. Dropdown notifications
+      const notifBtn = document.getElementById('notif-btn');
+      const notifDropdown = document.getElementById('notif-dropdown');
+      notifBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        notifDropdown?.classList.toggle('open');
+      });
+      document.addEventListener('click', () => notifDropdown?.classList.remove('open'));
+
+      // 4. Hamburger mobile
+      document.getElementById('admin-sidebar-toggle')?.addEventListener('click', () => {
+        document.getElementById('admin-sidebar')?.classList.toggle('open');
+      });
+
+      // 5. Statut des réparations (7 étapes)
+      document.querySelectorAll('.status-changer').forEach(select => {
+        select.addEventListener('change', (e) => {
+          const row = select.closest('tr');
+          const badge = row.querySelector('.status-badge');
+          const ticketId = row.dataset.repairRow;
+          const statusText = select.options[select.selectedIndex].text;
+
+          // Mapping des couleurs de badge
+          const colorMap = {
+            reception: 'badge-gray',
+            diagnostic: 'badge-orange',
+            devis: 'badge-red',
+            reparation: 'badge-primary',
+            tests: 'badge-primary',
+            pret: 'badge-green',
+            cloture: 'badge-green'
+          };
+
+          if (badge) {
+            badge.className = `badge status-badge ${colorMap[select.value] || 'badge-primary'}`;
+            badge.textContent = statusText.replace(/^\d+\.\s*/, '');
+          }
+
+          Toast.show('Statut mis à jour', `Ticket ${ticketId} passé à : "${statusText}"`, 'success');
+        });
+      });
+
+      // 6. Formulaire Ajouter un Client
+      document.getElementById('form-add-client')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const prenom = document.getElementById('add-cli-prenom').value;
+        const nom = document.getElementById('add-cli-nom').value;
+        const email = document.getElementById('add-cli-email').value;
+        const type = document.getElementById('add-cli-type').value;
+
+        const tbody = document.querySelector('#table-clients tbody');
+        if (tbody) {
+          const newTr = document.createElement('tr');
+          newTr.innerHTML = `
+            <td><strong>${prenom} ${nom}</strong></td>
+            <td>${email}</td>
+            <td><span class="badge ${type === 'Entreprise' ? 'badge-orange' : 'badge-primary'}">${type}</span></td>
+            <td>Aujourd'hui</td>
+            <td><span class="badge badge-green">Actif</span></td>
+            <td>
+              <div class="table-actions">
+                <button class="action-btn action-edit">✏️</button>
+                <button class="action-btn action-view">👁️</button>
+              </div>
+            </td>
+          `;
+          tbody.prepend(newTr);
+        }
+
+        Modal.close('modal-add-client');
+        Toast.show('Client ajouté', `${prenom} ${nom} a été créé avec succès (Démo).`, 'success');
+        e.target.reset();
+      });
+
+      // 7. Formulaire Ajouter un Produit
+      document.getElementById('form-add-product')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const ref = document.getElementById('add-prd-ref').value;
+        const nom = document.getElementById('add-prd-nom').value;
+        const cat = document.getElementById('add-prd-cat').value;
+        const prix = document.getElementById('add-prd-prix').value;
+        const stock = document.getElementById('add-prd-stock').value;
+
+        const tbody = document.querySelector('#admin-panel-products table tbody');
+        if (tbody) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><span style="font-family:var(--font-mono);font-weight:700;">${ref}</span></td>
+            <td><strong>${nom}</strong></td>
+            <td>${cat}</td>
+            <td><strong style="color:var(--blue-primary);">${Number(prix).toLocaleString('fr-FR')} FCFA</strong></td>
+            <td>${stock} unités</td>
+            <td><span class="badge badge-green">En stock</span></td>
+            <td>
+              <div class="table-actions">
+                <button class="action-btn action-edit">✏️</button>
+                <button class="action-btn action-del">🗑️</button>
+              </div>
+            </td>
+          `;
+          tbody.prepend(tr);
+        }
+
+        Modal.close('modal-add-product');
+        Toast.show('Produit créé', `${nom} ajouté à l'inventaire boutique.`, 'success');
+        e.target.reset();
+      });
+
+      // 8. Formulaire Paramètres
+      document.getElementById('admin-settings-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        Toast.show('Paramètres sauvegardés', 'Les configurations système et coordonnées ont été mises à jour.', 'success');
+      });
+
+      // 9. Déconnexion
+      document.getElementById('btn-admin-logout')?.addEventListener('click', () => {
+        localStorage.removeItem('jason-auth');
+        localStorage.removeItem('jason-auth-role');
+        localStorage.removeItem('jason-auth-user');
+        Toast.show('Déconnexion Admin', 'Session terminée.', 'info');
+        setTimeout(() => {
+          window.location.href = 'connexion.html';
+        }, 600);
+      });
+
+      // 10. Recherche globale
+      document.getElementById('admin-global-search')?.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        if (!query) return;
+        // Filtrage simple sur le tableau actif
+        const activeTable = document.querySelector('.admin-tab-panel.active table tbody');
+        if (activeTable) {
+          Array.from(activeTable.rows).forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(query) ? '' : 'none';
+          });
+        }
+      });
+    });
+  </script>
+  <!-- Envoi direct par email â€” Web3Forms -->
+  <script src="../js/email-forms.js"></script></body>
+</html>

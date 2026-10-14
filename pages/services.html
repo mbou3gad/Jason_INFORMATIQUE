@@ -1,0 +1,2021 @@
+﻿<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogue des services — Jason_INFORMATIQUE</title>
+  <meta name="description" content="Découvrez le catalogue complet des services informatiques de Jason_INFORMATIQUE à Brazzaville : maintenance PC, systèmes et réseaux, cybersécurité, développement web et assistance technique.">
+  <meta name="keywords" content="maintenance informatique Brazzaville, réparation ordinateur Congo, dépannage PC, réseaux informatiques, cybersécurité Brazzaville, développement web Congo">
+  <meta property="og:title" content="Catalogue des services — Jason_INFORMATIQUE">
+  <meta property="og:description" content="Solutions informatiques complètes pour particuliers et entreprises à Brazzaville et partout au Congo.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    /* Specific styles for Services page */
+    .services-filter-nav {
+      position: sticky;
+      top: 70px;
+      z-index: 100;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .filter-btn-group {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+    }
+    .filter-btn-group::-webkit-scrollbar {
+      height: 4px;
+    }
+    .filter-btn-group::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 4px;
+    }
+    .filter-btn {
+      padding: 9px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .filter-btn:hover {
+      background: var(--blue-light);
+      color: var(--blue-primary);
+      border-color: var(--blue-primary);
+    }
+    .filter-btn.active {
+      background: var(--blue-primary);
+      color: var(--white);
+      border-color: var(--blue-primary);
+      box-shadow: 0 4px 12px rgba(10,102,194,0.3);
+    }
+    .service-section {
+      padding: 60px 0 20px;
+      scroll-margin-top: 140px;
+    }
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      transition: all var(--transition-base);
+      position: relative;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--blue-primary);
+    }
+    .service-card-top {
+      padding: 24px 24px 16px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .service-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      background: var(--blue-light);
+      color: var(--blue-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all var(--transition-fast);
+    }
+    .service-card:hover .service-icon-box {
+      background: var(--blue-primary);
+      color: var(--white);
+      transform: scale(1.08);
+    }
+    .service-duration-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background: var(--bg-secondary);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+    .service-card-body {
+      padding: 0 24px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card-category {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--blue-primary);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .service-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+    .service-card-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+    .service-features-list {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: auto;
+    }
+    .service-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+    .service-feature-item svg {
+      color: var(--green);
+      flex-shrink: 0;
+    }
+    .service-card-footer {
+      padding: 18px 24px;
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .service-price-block {
+      display: flex;
+      flex-direction: column;
+    }
+    .service-price-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .service-price-val {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--blue-primary);
+      line-height: 1.2;
+    }
+    .service-price-val.sur-devis {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+    }
+    .service-order-btn {
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: var(--blue-primary);
+      color: white;
+      border: 1px solid var(--blue-primary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .service-order-btn:hover {
+      background: var(--blue-dark);
+      border-color: var(--blue-dark);
+      transform: translateY(-1px);
+    }
+    .section-headline {
+      margin-bottom: 32px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 16px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .section-headline-text h2 {
+      font-size: 1.6rem;
+      color: var(--text-primary);
+      margin-top: 4px;
+    }
+    .section-counter-badge {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      background: var(--blue-light);
+      color: var(--blue-primary);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+  <nav class="nav-wrapper">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-icon">JI</div>
+      <div>
+        <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+        <div class="nav-logo-sub">Solutions informatiques</div>
+      </div>
+    </a>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="../index.html" class="nav-link">Accueil</a></li>
+      <li class="nav-item">
+        <a href="services.html" class="nav-link active">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="services.html#maintenance" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div><div class="dropdown-item-text">Maintenance informatique</div><div class="dropdown-item-desc">Réparation, diagnostic, optimisation</div></div></a>
+          <a href="services.html#reseaux" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div><div><div class="dropdown-item-text">Systèmes & Réseaux</div><div class="dropdown-item-desc">Administration, configuration</div></div></a>
+          <a href="services.html#cybersecurite" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="dropdown-item-text">Cybersécurité</div><div class="dropdown-item-desc">Audit, protection, sécurisation</div></div></a>
+          <a href="services.html#developpement" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div><div class="dropdown-item-text">Développement web</div><div class="dropdown-item-desc">Sites, applications, outils</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="reparation.html" class="nav-link">Réparation</a></li>
+      <li class="nav-item"><a href="boutique.html" class="nav-link">Boutique</a></li>
+      <li class="nav-item"><a href="formations.html" class="nav-link">Formations</a></li>
+      <li class="nav-item"><a href="guides.html" class="nav-link">Guides</a></li>
+      <li class="nav-item"><a href="assistance.html" class="nav-link">Assistance</a></li>
+      <li class="nav-item">
+        <a href="entreprises.html" class="nav-link">Entreprises <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="entreprises.html#pro" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div><div class="dropdown-item-text">Jason PRO</div><div class="dropdown-item-desc">Solutions entreprises</div></div></a>
+          <a href="entreprises.html#contrats" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="dropdown-item-text">Contrats de maintenance</div><div class="dropdown-item-desc">Offres sur mesure</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="a-propos.html" class="nav-link">À propos <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="a-propos.html" class="dropdown-item"><div class="dropdown-item-text">À propos de nous</div></a>
+          <a href="fondateur.html" class="dropdown-item"><div class="dropdown-item-text">Le fondateur</div></a>
+          <a href="publications.html" class="dropdown-item"><div class="dropdown-item-text">Publications</div></a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-search-btn search-open-btn" title="Rechercher (Ctrl+K)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <a href="boutique.html#panier" class="nav-cart-btn" title="Panier">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge cart-count" style="display:none">0</span>
+      </a>
+      <button class="theme-toggle" title="Changer le thème">
+        <svg class="theme-icon sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="connexion.html" class="btn-connexion">Connexion</a>
+      <a href="#devis-modal" data-open-modal="devis-modal" class="btn-devis">Demander un devis</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-header">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">JI</div>
+      <div>
+        <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+      </div>
+    </div>
+  </div>
+  <a href="../index.html" class="mobile-nav-link">Accueil</a>
+  <a href="services.html" class="mobile-nav-link active">Services</a>
+  <a href="reparation.html" class="mobile-nav-link">Réparation</a>
+  <a href="boutique.html" class="mobile-nav-link">Boutique</a>
+  <a href="formations.html" class="mobile-nav-link">Formations</a>
+  <a href="guides.html" class="mobile-nav-link">Guides & Tutoriels</a>
+  <a href="assistance.html" class="mobile-nav-link">Assistance</a>
+  <a href="entreprises.html" class="mobile-nav-link">Entreprises</a>
+  <a href="a-propos.html" class="mobile-nav-link">À propos</a>
+  <a href="fondateur.html" class="mobile-nav-link">Le Fondateur</a>
+  <a href="publications.html" class="mobile-nav-link">Publications</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+  <div class="mobile-menu-actions">
+    <a href="connexion.html" class="btn btn-outline btn-sm">Connexion</a>
+    <a href="#devis-modal" data-open-modal="devis-modal" class="btn btn-primary btn-sm">Demander un devis</a>
+  </div>
+</div>
+
+<!-- Main Page Content -->
+<main>
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="page-hero-label">Solutions Informatiques & Digitales</span>
+      <h1>Catalogue de nos services</h1>
+      <p>Découvrez notre gamme complète de prestations informatiques adaptées aux particuliers, professionnels et entreprises à Brazzaville et partout en République du Congo.</p>
+    </div>
+  </section>
+
+  <!-- Breadcrumb & Container -->
+  <div class="container" style="margin-top: 24px;">
+    <nav class="breadcrumb" aria-label="Fil d'Ariane">
+      <a href="../index.html">Accueil</a>
+      <span>/</span>
+      <span style="color: var(--text-primary); font-weight: 500;">Services</span>
+    </nav>
+  </div>
+
+  <!-- Filter tabs -->
+  <div class="services-filter-nav">
+    <div class="container">
+      <div class="filter-btn-group" role="tablist" aria-label="Filtrer les services par catégorie">
+        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Tous les services (32)
+        </button>
+        <button class="filter-btn" data-filter="maintenance" role="tab" aria-selected="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          Maintenance & Dépannage (8)
+        </button>
+        <button class="filter-btn" data-filter="reseaux" role="tab" aria-selected="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          Systèmes & Réseaux (8)
+        </button>
+        <button class="filter-btn" data-filter="cybersecurite" role="tab" aria-selected="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Cybersécurité (6)
+        </button>
+        <button class="filter-btn" data-filter="developpement" role="tab" aria-selected="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Développement Web (6)
+        </button>
+        <button class="filter-btn" data-filter="assistance" role="tab" aria-selected="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 18.72a9 9 0 1 1 0-13.44"/><path d="M18 12a6 6 0 1 1 0-8.94"/><circle cx="12" cy="12" r="3"/></svg>
+          Assistance & Support (4)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Filter Container -->
+  <div class="filter-container container">
+
+    <!-- ==========================================
+         SECTION A: MAINTENANCE INFORMATIQUE (8)
+         ========================================== -->
+    <section id="maintenance" class="service-section" data-category="maintenance">
+      <div class="section-headline">
+        <div class="section-headline-text">
+          <span class="section-label">Matériel & Logiciel</span>
+          <h2>Maintenance & Dépannage informatique</h2>
+          <p class="text-secondary-c text-sm">Interventions rapides et soignées pour redonner vie et performance à vos ordinateurs portables et de bureau.</p>
+        </div>
+        <div class="section-counter-badge">8 services disponibles</div>
+      </div>
+
+      <div class="grid grid-auto-fill-280 gap-24">
+        <!-- 1. Diagnostic complet -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              1h à 2h
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Diagnostic & Bilan</span>
+            <h3 class="service-card-title">Diagnostic complet</h3>
+            <p class="service-card-desc">Examen minutieux de chaque composant : test mémoire vive, disque dur/SSD, températures et intégrité système.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Bilan matériel et logiciel précis</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Devis de réparation clair et sans surprise</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val">5 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Diagnostic complet">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Réparation PC portable -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              24h à 48h
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Quincaillerie & Écran</span>
+            <h3 class="service-card-title">Réparation PC portable</h3>
+            <p class="service-card-desc">Changement de dalles cassées, remplacement de claviers, connecteurs d'alimentation et réfection des charnières fissurées.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Dalles LCD / OLED d'origine</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Toutes marques (HP, Dell, Lenovo, Apple)</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">À partir de</span>
+              <span class="service-price-val">15 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Réparation PC portable">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Réparation PC bureau -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              24h à 48h
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Matériel Desktop</span>
+            <h3 class="service-card-title">Réparation PC bureau</h3>
+            <p class="service-card-desc">Diagnostic de bloc d'alimentation grillé, carte mère, carte graphique, upgrades de composants et tests de stabilité sous charge.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Blocs d'alimentation haute fiabilité</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Test de charge processeur & RAM</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">À partir de</span>
+              <span class="service-price-val">12 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Réparation PC bureau">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. Installation Windows/Linux -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/><circle cx="12" cy="12" r="4"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              2h à 4h
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Système d'exploitation</span>
+            <h3 class="service-card-title">Installation Windows / Linux</h3>
+            <p class="service-card-desc">Installation propre de Windows 10/11 ou distributions Linux (Ubuntu, Debian), avec ensemble des pilotes certifiés et utilitaires essentiels.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Pilotes à jour et certifiés constructeur</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Logiciels essentiels & bureautique inclus</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val">10 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Installation Windows / Linux">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 5. Nettoyage & optimisation -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4"/><path d="M12 18v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="m16.24 7.76 2.83-2.83"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              2h à 3h
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Vitesse & Température</span>
+            <h3 class="service-card-title">Nettoyage & optimisation</h3>
+            <p class="service-card-desc">Dépoussiérage des ventilateurs, renouvellement de pâte thermique haute performance et allègement des processus au démarrage.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Baisse mesurée des températures</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Démarrage 2 à 3 fois plus rapide</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val">8 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Nettoyage & optimisation">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 6. Suppression malwares -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              3h à 5h
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Désinfection</span>
+            <h3 class="service-card-title">Suppression malwares & virus</h3>
+            <p class="service-card-desc">Éradication totale des logiciels espions, chevaux de Troie, adwares intrusifs et réparation des clés de registre endommagées.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Suppression complète sans perte de données</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Durcissement du pare-feu & antivirus</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val">10 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Suppression malwares">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 7. Récupération de données -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              24h à 72h
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Sauvegarde & Restauration</span>
+            <h3 class="service-card-title">Récupération de données (best-effort)</h3>
+            <p class="service-card-desc">Tentative de sauvetage de documents, photos et bases sur disques durs corrompus, clés USB illisibles ou formatées (obligation de moyen).</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Traitement en environnement isolé</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Transfert sur support sécurisé</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">À partir de</span>
+              <span class="service-price-val">20 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Récupération données">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 8. Maintenance préventive -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Demi-journée
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Longévité du matériel</span>
+            <h3 class="service-card-title">Maintenance préventive</h3>
+            <p class="service-card-desc">Vérification programmée pour anticiper les pannes matérielles, contrôler les secteurs défectueux et sauvegarder les données vitales.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Contrôle d'usure des disques SMART</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Rapport de santé complet du parc</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif par poste</span>
+              <span class="service-price-val">15 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Maintenance préventive">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION B: SYSTÈMES & RÉSEAUX (8)
+         ========================================== -->
+    <section id="reseaux" class="service-section" data-category="reseaux">
+      <div class="section-headline">
+        <div class="section-headline-text">
+          <span class="section-label">Infrastructure Pro</span>
+          <h2>Systèmes d'exploitation & Réseaux</h2>
+          <p class="text-secondary-c text-sm">Déploiement d'architectures serveurs stables, interconnexions haute vitesse et administration réseau centralisée.</p>
+        </div>
+        <div class="section-counter-badge">8 services disponibles</div>
+      </div>
+
+      <div class="grid grid-auto-fill-280 gap-24">
+        <!-- 1. Installation Windows Server -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              1 à 3 jours
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Serveur Windows</span>
+            <h3 class="service-card-title">Installation Windows Server</h3>
+            <p class="service-card-desc">Configuration de Windows Server 2019/2022 : rôles DNS, DHCP, contrôleur de domaine, services de fichiers et stratégie de sauvegarde.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Rôles DNS, DHCP, File Services</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Partages sécurisés par profils</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Installation Windows Server">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Administration Linux -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              1 à 3 jours
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Open Source Enterprise</span>
+            <h3 class="service-card-title">Administration Linux</h3>
+            <p class="service-card-desc">Déploiement et sécurisation de serveurs Debian, Ubuntu Server ou Rocky Linux. Automatisation de tâches, gestion des paquets et services web.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Durcissement SSH et IPTables</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Scripts Bash d'automatisation</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Administration Linux">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Configuration Active Directory -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              2 à 5 jours
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Gestion des identités</span>
+            <h3 class="service-card-title">Configuration Active Directory</h3>
+            <p class="service-card-desc">Arborescence organisationnelle OU, déploiement de stratégies de groupe (GPO), gestion des droits d'accès et mots de passe centralisés.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Stratégies GPO d'entreprise</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Contrôle d'accès granulaire</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Active Directory">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. Installation réseau LAN/WLAN -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Selon surface
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Câblage & WiFi</span>
+            <h3 class="service-card-title">Installation réseau LAN/WLAN</h3>
+            <p class="service-card-desc">Tirage de câbles Cat6/7, pose de goulottes, brassage en baie et déploiement de bornes WiFi professionnelles maillées sans coupure.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Baies de brassage ordonnées</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Couverture WiFi maillée (Mesh)</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Installation réseau LAN/WLAN">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 5. Configuration routeurs/switches -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              1 à 2 jours
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Équipements actifs</span>
+            <h3 class="service-card-title">Configuration routeurs & switches</h3>
+            <p class="service-card-desc">Paramétrage d'équipements MikroTik, Cisco, Ubiquiti, TP-Link. Routage dynamique, agrégation de liens LACP et priorisation de bande passante (QoS).</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>MikroTik RouterOS & Cisco IOS</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>QoS pour la voix et les flux critiques</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Routeurs et switches">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 6. Mise en place VLAN -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              1 à 2 jours
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Segmentation réseau</span>
+            <h3 class="service-card-title">Mise en place VLAN</h3>
+            <p class="service-card-desc">Séparation étanche des flux pour isoler la comptabilité, la direction, les serveurs, la vidéosurveillance et le réseau public invité.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Routage inter-VLAN sécurisé</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Isolation totale des réseaux visiteurs</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Mise en place VLAN">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 7. Virtualisation Hyper-V / VMware -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><rect x="7" y="7" width="3" height="3"/><rect x="14" y="7" width="3" height="3"/><rect x="7" y="14" width="3" height="3"/><rect x="14" y="14" width="3" height="3"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              2 à 4 jours
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Virtualisation</span>
+            <h3 class="service-card-title">Virtualisation (Hyper-V / VMware)</h3>
+            <p class="service-card-desc">Consolidation de multiples serveurs physiques sur des hyperviseurs robustes. Réduction des coûts d'énergie, sauvegardes facilitées et haute résilience.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Migration de serveurs physiques (P2V)</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Snapshots et réplications automatisées</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Virtualisation Hyper-V/VMware">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 8. Supervision d'infrastructure -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              2 à 3 jours
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Monitoring 24/7</span>
+            <h3 class="service-card-title">Supervision d'infrastructure</h3>
+            <p class="service-card-desc">Mise en place de sondes Zabbix / Grafana pour surveiller la santé des serveurs, l'utilisation mémoire, la bande passante et recevoir des alertes en temps réel.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Tableaux de bord dynamiques</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Alertes instantanées WhatsApp / Email</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Supervision infrastructure">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION C: CYBERSÉCURITÉ (6)
+         ========================================== -->
+    <section id="cybersecurite" class="service-section" data-category="cybersecurite">
+      <div class="section-headline">
+        <div class="section-headline-text">
+          <span class="section-label">Sécurité & Résilience</span>
+          <h2>Cybersécurité & Protection des données</h2>
+          <p class="text-secondary-c text-sm">Protégez vos postes de travail, vos données stratégiques et vos communications contre les piratages et rançongiciels.</p>
+        </div>
+        <div class="section-counter-badge">6 services disponibles</div>
+      </div>
+
+      <div class="grid grid-auto-fill-280 gap-24">
+        <!-- 1. Audit sécurité -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              3 à 7 jours
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Évaluation des risques</span>
+            <h3 class="service-card-title">Audit sécurité</h3>
+            <p class="service-card-desc">Analyse exhaustive des vulnérabilités de votre réseau, cartographie des failles, tests de pénétration internes et rapport d'actions prioritaires.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Scans de vulnérabilités réseau</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Plan de remédiation documenté</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Audit sécurité">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Sécurisation postes -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              2h par poste
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Postes de travail</span>
+            <h3 class="service-card-title">Sécurisation postes</h3>
+            <p class="service-card-desc">Durcissement des systèmes d'exploitation, chiffrement des disques durs (BitLocker/FileVault) et protection contre les clés USB non autorisées.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Chiffrement des disques intégré</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Blocage des supports amovibles non certifiés</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif par poste</span>
+              <span class="service-price-val">15 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Sécurisation postes">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Configuration pare-feu -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              1 à 3 jours
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Périmètre de défense</span>
+            <h3 class="service-card-title">Configuration pare-feu</h3>
+            <p class="service-card-desc">Installation de pare-feux nouvelle génération pfSense, Fortinet ou Sophos. Filtrage de contenus, détection d'intrusions (IDS/IPS) et blocage de flux suspects.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Filtrage web & blocage de sites malveillants</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Protection anti-intrusion active</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Configuration pare-feu">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. Sécurisation réseau & VPN -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              1 à 2 jours
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Tunnels distants</span>
+            <h3 class="service-card-title">Sécurisation réseau & VPN</h3>
+            <p class="service-card-desc">Mise en place de tunnels VPN chiffrés IPsec / WireGuard / OpenVPN pour permettre le travail à distance en toute sécurité sans exposer le réseau d'entreprise.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Chiffrement fort de bout en bout</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Accès télétravail certifié et sécurisé</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Sécurisation réseau & VPN">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 5. Gestion des accès -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-1.5 1.5L16 7l-4 4-2-2-4 4 2 2-2 2-3-3 2-2 2 2 4-4-2-2 4-4 1.5 1.5L20 4l1-2z"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              1 à 2 jours
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Contrôle d'accès & 2FA</span>
+            <h3 class="service-card-title">Gestion des accès</h3>
+            <p class="service-card-desc">Authentification multifacteur (MFA/2FA), gestionnaire de mots de passe professionnel et application stricte du principe du moindre privilège.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Déploiement authentification double facteur</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Gestionnaire de coffre-fort d'entreprise</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Gestion des accès">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 6. Sensibilisation sécurité -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              1/2 journée
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Facteur humain</span>
+            <h3 class="service-card-title">Sensibilisation sécurité</h3>
+            <p class="service-card-desc">Ateliers pratiques pour former vos collaborateurs à déceler les courriels de phishing, déjouer l'ingénierie sociale et adopter les bonnes habitudes.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Exercices concrets de simulation de phishing</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Guide de bonnes pratiques remis à l'équipe</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Sensibilisation sécurité">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION D: DÉVELOPPEMENT WEB & APPS (6)
+         ========================================== -->
+    <section id="developpement" class="service-section" data-category="developpement">
+      <div class="section-headline">
+        <div class="section-headline-text">
+          <span class="section-label">Digital & Code</span>
+          <h2>Développement Web & Applications</h2>
+          <p class="text-secondary-c text-sm">Sites internet élégants, boutiques e-commerce et logiciels métier sur mesure pour propulser votre entreprise.</p>
+        </div>
+        <div class="section-counter-badge">6 services disponibles</div>
+      </div>
+
+      <div class="grid grid-auto-fill-280 gap-24">
+        <!-- 1. Site vitrine -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              1 à 2 semaines
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Présence en ligne</span>
+            <h3 class="service-card-title">Site vitrine professionnel</h3>
+            <p class="service-card-desc">Conception d'un site web moderne, rapide et optimisé pour le référencement naturel local (SEO) pour mettre en valeur votre société.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Design 100% responsive smartphone & PC</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Formulaire de devis & bouton WhatsApp direct</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">À partir de</span>
+              <span class="service-price-val">150 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Site vitrine">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Site e-commerce -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              3 à 4 semaines
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Vente en ligne</span>
+            <h3 class="service-card-title">Site e-commerce</h3>
+            <p class="service-card-desc">Boutique en ligne avec gestion de catalogue produits, panier, factures automatisées et intégration de solutions de paiement adaptées.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Gestion simplifiée des stocks & commandes</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Paiement sécurisé et notification instantanée</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">À partir de</span>
+              <span class="service-price-val">350 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Site e-commerce">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Application web -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              3 à 8 semaines
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Logiciel Cloud</span>
+            <h3 class="service-card-title">Application web sur mesure</h3>
+            <p class="service-card-desc">Développement d'outils web interactifs pour automatiser vos processus métiers, vos flux internes et faciliter la collaboration d'équipe.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Architecture moderne & API REST</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Base de données sécurisée & évolutive</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Application web">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. Outil de gestion interne -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              2 à 6 semaines
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Gestion d'activité</span>
+            <h3 class="service-card-title">Outil de gestion interne</h3>
+            <p class="service-card-desc">Applications adaptées à votre quotidien : gestion de stock, devis et facturation, suivi des clients (CRM) ou gestion des plannings de service.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Tableaux de bord opérationnels</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Export comptable Excel et PDF</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Outil de gestion">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 5. Maintenance site -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              En continu
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Pérennité web</span>
+            <h3 class="service-card-title">Maintenance de site & refonte</h3>
+            <p class="service-card-desc">Mises à jour de sécurité régulières, sauvegardes automatiques quotidiennes, correction de bugs et actualisation de vos contenus et visuels.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Sauvegardes cloud régulières</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Temps de réponse prioritaire en cas de bug</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Forfait mensuel dès</span>
+              <span class="service-price-val">30 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Maintenance site">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 6. Hébergement & déploiement -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              24h
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Serveurs & Domaines</span>
+            <h3 class="service-card-title">Hébergement & déploiement</h3>
+            <p class="service-card-desc">Réservation et gestion de noms de domaine (.cg, .com, etc.), serveurs VPS performants, certificats SSL HTTPS et boîtes emails professionnelles.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Certificat SSL HTTPS offert</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Adresses email pro (nom@entreprise.cg)</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">À partir de</span>
+              <span class="service-price-val">25 000 FCFA <span style="font-size:0.75rem; font-weight:normal;">/an</span></span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Hébergement et nom de domaine">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION E: ASSISTANCE & SUPPORT (4)
+         ========================================== -->
+    <section id="assistance" class="service-section" data-category="assistance">
+      <div class="section-headline">
+        <div class="section-headline-text">
+          <span class="section-label">Support Réactif</span>
+          <h2>Assistance & Dépannage rapide</h2>
+          <p class="text-secondary-c text-sm">Une équipe disponible pour résoudre immédiatement vos blocages informatiques, sur place ou à distance.</p>
+        </div>
+        <div class="section-counter-badge">4 services disponibles</div>
+      </div>
+
+      <div class="grid grid-auto-fill-280 gap-24">
+        <!-- 1. Assistance à distance -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Immédiat
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Télémaintenance</span>
+            <h3 class="service-card-title">Assistance à distance</h3>
+            <p class="service-card-desc">Prise en main à distance sécurisée via AnyDesk ou TeamViewer pour résoudre instantanément les bugs logiciels et lenteurs.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Sans déplacement nécessaire</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Connexion sécurisée et cryptée</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif horaire</span>
+              <span class="service-price-val">8 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Assistance à distance">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Intervention sur site -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Sous 2h à 4h
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">À domicile & Bureau</span>
+            <h3 class="service-card-title">Intervention sur site</h3>
+            <p class="service-card-desc">Déplacement d'un technicien à votre domicile ou dans vos bureaux à Mpila et dans tous les arrondissements de Brazzaville.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Déplacement rapide sur Brazzaville</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Diagnostic physique et résolution directe</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Forfait déplacement</span>
+              <span class="service-price-val">15 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Intervention sur site">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Support logiciel -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              1h à 2h
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Bureautique & Outils</span>
+            <h3 class="service-card-title">Support logiciel</h3>
+            <p class="service-card-desc">Assistance pour la configuration d'Office 365, boîtes emails Outlook, logiciels comptables, pilotes d'imprimantes et scanners réseau.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Paramétrage comptes email IMAP/Exchange</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Partage d'imprimantes multi-postes</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Par intervention dès</span>
+              <span class="service-price-val">7 000 FCFA</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Support logiciel">
+              <span>Choisir</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. Maintenance contractuelle -->
+        <div class="service-card card-hover fade-in-up">
+          <div class="service-card-top">
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <span class="service-duration-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Contrat Pro
+            </span>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-category">Entreprises & PME</span>
+            <h3 class="service-card-title">Maintenance contractuelle</h3>
+            <p class="service-card-desc">Contrat mensuel ou annuel Jason PRO garantissant un temps d'intervention garanti (SLA), un suivi personnalisé et des visites préventives régulières.</p>
+            <div class="service-features-list">
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Temps de réponse contractuel garanti</span>
+              </div>
+              <div class="service-feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Visites techniques périodiques sur site</span>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-footer">
+            <div class="service-price-block">
+              <span class="service-price-label">Tarif</span>
+              <span class="service-price-val sur-devis">Sur devis</span>
+            </div>
+            <button type="button" class="service-order-btn" data-open-modal="devis-modal" data-preselect="Maintenance contractuelle">
+              <span>Devis</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CTA Section -->
+  <section class="cta-section" style="margin-top: 60px;">
+    <div class="container">
+      <span class="section-label" style="background: rgba(255,255,255,0.15); color: white;">Assistance sur mesure</span>
+      <h2 class="cta-title">Besoin d'un service sur mesure ?</h2>
+      <p class="cta-desc">Vous avez un projet spécifique ou un parc informatique complexe ? Nos spécialistes analysent vos besoins et vous transmettent un devis personnalisé sous 24h ouvrées.</p>
+      <div class="cta-actions">
+        <button class="btn btn-white" data-open-modal="devis-modal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Demander un devis personnalisé
+        </button>
+        <a href="https://wa.me/242067814704" class="btn btn-whatsapp" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Discuter sur WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Devis Modal -->
+<div class="modal-overlay" id="devis-modal" role="dialog" aria-modal="true" aria-labelledby="modal-devis-title">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="flex items-center gap-12">
+        <div style="width:36px; height:36px; border-radius:8px; background:var(--blue-light); color:var(--blue-primary); display:flex; align-items:center; justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3 class="modal-title" id="modal-devis-title">Demander un devis gratuit</h3>
+      </div>
+      <button class="modal-close" title="Fermer" aria-label="Fermer la boîte de dialogue">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div id="modal-quote-alert" class="alert alert-success" style="display:none; margin-bottom: 20px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        <div>
+          <div style="font-weight: 700;">Demande enregistrée avec succès !</div>
+          <div style="font-size: 0.85rem;" id="modal-quote-ref"></div>
+        </div>
+      </div>
+
+      <form id="quote-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="quote-nom">Nom complet <span class="required">*</span></label>
+            <input type="text" id="quote-nom" name="nom" class="form-input" placeholder="Ex. Jean Moukoko" required>
+            <div class="form-error" data-error="nom">Veuillez indiquer votre nom complet.</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="quote-telephone">Téléphone <span class="required">*</span></label>
+            <input type="tel" id="quote-telephone" name="telephone" class="form-input" placeholder="Ex. +242 06 000 00 00" required>
+            <div class="form-error" data-error="telephone">Numéro de téléphone requis.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="quote-email">Adresse email</label>
+          <input type="email" id="quote-email" name="email" class="form-input" placeholder="exemple@domaine.com">
+          <div class="form-error" data-error="email">Format d'email invalide.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="quote-service">Type de service souhaité <span class="required">*</span></label>
+          <select id="quote-service" name="service" class="form-select" required>
+            <option value="">Sélectionnez un domaine d'intervention...</option>
+            <optgroup label="Maintenance & Réparation">
+              <option value="Diagnostic complet">Diagnostic complet</option>
+              <option value="Réparation PC portable">Réparation PC portable</option>
+              <option value="Réparation PC bureau">Réparation PC bureau</option>
+              <option value="Installation Windows / Linux">Installation Windows / Linux</option>
+              <option value="Nettoyage & optimisation">Nettoyage & optimisation</option>
+              <option value="Suppression malwares">Suppression malwares & virus</option>
+              <option value="Récupération données">Récupération de données</option>
+              <option value="Maintenance préventive">Maintenance préventive</option>
+            </optgroup>
+            <optgroup label="Systèmes & Réseaux">
+              <option value="Installation Windows Server">Installation Windows Server</option>
+              <option value="Administration Linux">Administration Linux</option>
+              <option value="Active Directory">Active Directory & GPO</option>
+              <option value="Installation réseau LAN/WLAN">Câblage LAN & Bornes WiFi</option>
+              <option value="Routeurs et switches">Routeurs et switches (MikroTik / Cisco)</option>
+              <option value="Mise en place VLAN">Segmentation VLAN</option>
+              <option value="Virtualisation Hyper-V/VMware">Virtualisation Hyper-V / VMware</option>
+              <option value="Supervision infrastructure">Supervision réseau 24/7</option>
+            </optgroup>
+            <optgroup label="Cybersécurité">
+              <option value="Audit sécurité">Audit de sécurité & vulnérabilités</option>
+              <option value="Sécurisation postes">Sécurisation postes & chiffrement</option>
+              <option value="Configuration pare-feu">Configuration pare-feu (pfSense, Fortinet)</option>
+              <option value="Sécurisation réseau & VPN">Mise en place VPN sécurisé</option>
+              <option value="Gestion des accès">Authentification multifacteur (MFA)</option>
+              <option value="Sensibilisation sécurité">Sensibilisation employés</option>
+            </optgroup>
+            <optgroup label="Développement Web">
+              <option value="Site vitrine">Création de site vitrine</option>
+              <option value="Site e-commerce">Création de site e-commerce</option>
+              <option value="Application web">Application web sur mesure</option>
+              <option value="Outil de gestion">Outil de gestion interne (CRM/Stock)</option>
+              <option value="Maintenance site">Maintenance & refonte de site</option>
+              <option value="Hébergement et nom de domaine">Hébergement & Nom de domaine</option>
+            </optgroup>
+            <optgroup label="Assistance & Support">
+              <option value="Assistance à distance">Assistance à distance (Télémaintenance)</option>
+              <option value="Intervention sur site">Intervention sur site à Brazzaville</option>
+              <option value="Support logiciel">Support logiciel & bureautique</option>
+              <option value="Maintenance contractuelle">Contrat Jason PRO (Entreprise)</option>
+            </optgroup>
+            <option value="Autre demande sur mesure">Autre demande sur mesure</option>
+          </select>
+          <div class="form-error" data-error="service">Veuillez choisir un service.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="quote-description">Description de votre besoin <span class="required">*</span></label>
+          <textarea id="quote-description" name="description" class="form-textarea" placeholder="Décrivez votre projet, vos équipements concernés, les éventuels symptômes de panne ou le calendrier souhaité..." required></textarea>
+          <div class="form-error" data-error="description">Veuillez décrire brièvement votre besoin.</div>
+        </div>
+
+        <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:16px;">
+          🔒 Vos informations personnelles sont traitées confidentiellement et ne seront jamais partagées avec des tiers.
+        </div>
+
+        <div class="flex-between">
+          <button type="button" class="btn btn-ghost modal-close">Annuler</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit-quote">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <span>Envoyer ma demande</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Search Overlay (Shared) -->
+<div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Recherche">
+  <div class="search-box">
+    <span class="search-icon-input">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </span>
+    <input type="text" id="search-input" class="search-input" placeholder="Rechercher un service, une formation, un produit…" autocomplete="off" />
+    <span class="search-close" id="search-close">&times;</span>
+  </div>
+  <div class="search-suggestions">
+    <div class="search-suggestion" data-q="Maintenance PC portable">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+      <span>Réparation ordinateur portable Brazzaville</span>
+    </div>
+    <div class="search-suggestion" data-q="Installation réseau entreprise">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>
+      <span>Câblage réseau LAN et WiFi professionnel</span>
+    </div>
+    <div class="search-suggestion" data-q="Audit sécurité informatique">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Audit de cybersécurité et pare-feu</span>
+    </div>
+    <div class="search-suggestion" data-q="Développement de site web">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>Création de site internet vitrine et e-commerce</span>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">JI</div>
+          <div>
+            <div style="font-weight:800;color:white;font-size:1rem"><span style="color:#38BDF8">Jason_</span>INFORMATIQUE</div>
+            <div style="font-size:.65rem;color:rgba(255,255,255,.4);letter-spacing:1px">SOLUTIONS INFORMATIQUES</div>
+          </div>
+        </div>
+        <p>Votre partenaire de confiance pour des solutions informatiques modernes et fiables. De la maintenance à la cybersécurité, nous accompagnons particuliers et entreprises à Brazzaville.</p>
+        <div class="footer-social">
+          <a href="#" title="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" title="Twitter/X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="https://wa.me/242067814704" title="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <div class="footer-links">
+          <a href="services.html#maintenance">Maintenance informatique</a>
+          <a href="services.html#reseaux">Systèmes & Réseaux</a>
+          <a href="services.html#cybersecurite">Cybersécurité</a>
+          <a href="services.html#developpement">Développement web</a>
+          <a href="services.html#assistance">Assistance & Support</a>
+          <a href="entreprises.html">Jason PRO</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Ressources</h4>
+        <div class="footer-links">
+          <a href="guides.html">Guides techniques</a>
+          <a href="formations.html">Formations IT</a>
+          <a href="boutique.html">Boutique en ligne</a>
+          <a href="reparation.html">Atelier de réparation</a>
+          <a href="assistance.html">Centre de support</a>
+          <a href="publications.html">Publications & Livres</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Mpila, Brazzaville<br>République du Congo</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:jasoninformatique7@gmail.com" style="color:rgba(255,255,255,.55)">jasoninformatique7@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Lun – Sam : 08h00 – 19h00</span>
+        </div>
+        <div class="footer-links" style="margin-top:12px">
+          <a href="a-propos.html">À propos de nous</a>
+          <a href="contact.html">Nous contacter</a>
+          <a href="pages/mentions-legales.html">Mentions légales</a>
+          <a href="pages/confidentialite.html">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Jason_INFORMATIQUE © 2026 — Fondé par Gad Jason MBOU. Tous droits réservés.</p>
+    <div class="footer-bottom-links">
+      <a href="pages/cgv.html">CGV</a>
+      <a href="pages/mentions-legales.html">Mentions légales</a>
+      <a href="pages/confidentialite.html">Politique de confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/242067814704" class="whatsapp-float" target="_blank" rel="noopener" title="Contacter sur WhatsApp" id="whatsapp-float">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</a>
+
+<!-- Chatbot -->
+<button class="chatbot-float" id="chatbot-btn" title="Jason Assistant">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
+<div class="chatbot-panel" id="chatbot-panel">
+  <div class="chatbot-header">
+    <div class="chatbot-avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+    <div><div class="chatbot-name">Jason Assistant</div><div class="chatbot-status"><span class="chatbot-online"></span>En ligne</div></div>
+    <button class="chatbot-close" id="chatbot-close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="chatbot-messages" id="chatbot-messages"></div>
+  <div class="chatbot-input-area">
+    <input type="text" id="chatbot-input" placeholder="Posez votre question…" />
+    <button class="chatbot-send" id="chatbot-send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+
+<!-- Scroll Top -->
+<button class="scroll-top" id="scroll-top" title="Haut de page">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- Cookie Banner -->
+<div class="cookie-banner" id="cookie-banner">
+  <p>🍪 Ce site utilise uniquement des cookies essentiels à son fonctionnement. Aucun cookie publicitaire ou de traçage tiers n'est utilisé.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-sm btn-ghost" id="cookie-refuse" style="color:rgba(255,255,255,.6)">Refuser</button>
+    <button class="btn btn-sm btn-primary" id="cookie-accept">J'accepte</button>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<!-- Core Script -->
+<script src="../js/main.js"></script>
+
+<!-- Supplementary Script for Devis Modal Pre-selection & Hash Anchor Filtering -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Pre-selection of service in quote modal when clicking "Choisir" on any card
+    document.querySelectorAll('[data-preselect]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const serviceName = this.dataset.preselect;
+        const select = document.getElementById('quote-service');
+        if (select) {
+          for (let i = 0; i < select.options.length; i++) {
+            if (select.options[i].text.toLowerCase().includes(serviceName.toLowerCase()) || 
+                select.options[i].value.toLowerCase().includes(serviceName.toLowerCase())) {
+              select.selectedIndex = i;
+              break;
+            }
+          }
+        }
+        if (window.JasonApp && window.JasonApp.Modal) {
+          window.JasonApp.Modal.open('devis-modal');
+        }
+      });
+    });
+
+    // Custom Quote form submission handler inside modal to show reference ticket inline
+    const quoteForm = document.getElementById('quote-form');
+    if (quoteForm) {
+      quoteForm.addEventListener('submit', function(e) {
+        // Let main.js QuoteForm handle toast, but also update modal feedback
+        setTimeout(function() {
+          const alertBox = document.getElementById('modal-quote-alert');
+          const refBox = document.getElementById('modal-quote-ref');
+          if (alertBox && refBox) {
+            const lastToast = document.querySelector('.toast:last-child .toast-msg');
+            const refText = lastToast ? lastToast.textContent : 'Votre dossier a été enregistré.';
+            refBox.innerHTML = `Référence générée : <strong>${refText}</strong>. Un technicien vous recontactera sous 24h.`;
+            alertBox.style.display = 'flex';
+          }
+        }, 100);
+      });
+    }
+
+    // Handle initial hash in URL (e.g., #maintenance, #reseaux, etc.)
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      const matchingFilterBtn = document.querySelector(`.filter-btn[data-filter="${hash}"]`);
+      if (matchingFilterBtn) {
+        matchingFilterBtn.click();
+      }
+    }
+  });
+</script>
+  <!-- Envoi direct par email â€” Web3Forms -->
+  <script src="../js/email-forms.js"></script></body>
+</html>

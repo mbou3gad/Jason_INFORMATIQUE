@@ -1,0 +1,1433 @@
+﻿<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réparation d'appareils — Jason_INFORMATIQUE | Brazzaville</title>
+  <meta name="description" content="Atelier de réparation informatique à Brazzaville. Diagnostic précis et dépannage rapide d'ordinateurs portables, PC de bureau, smartphones, tablettes, imprimantes et serveurs à Mpila.">
+  <meta name="keywords" content="réparation ordinateur Congo, dépannage informatique Brazzaville, réparation PC portable Mpila, maintenance ordinateur Brazzaville">
+  <meta property="og:title" content="Réparation d'appareils — Jason_INFORMATIQUE | Brazzaville">
+  <meta property="og:description" content="Réparez, entretenez et prolongez la durée de vie de vos équipements informatiques à Brazzaville.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    /* Specific styles for Reparation page */
+    .repair-container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .repair-step-header {
+      margin-bottom: 28px;
+      text-align: center;
+    }
+    .repair-step-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .repair-step-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    
+    /* Device Cards Grid */
+    .device-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 768px) {
+      .device-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 480px) {
+      .device-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .device-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+    }
+    .device-card:hover {
+      border-color: var(--blue-primary);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .device-card.selected {
+      border-color: var(--blue-primary);
+      background: var(--blue-light);
+      box-shadow: 0 0 0 3px rgba(10,102,194,0.18);
+    }
+    .device-card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      background: var(--bg-secondary);
+      color: var(--blue-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+    }
+    .device-card.selected .device-card-icon {
+      background: var(--blue-primary);
+      color: white;
+    }
+    .device-card-name {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--text-primary);
+    }
+    .device-card-check {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--blue-primary);
+      color: white;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+    }
+    .device-card.selected .device-card-check {
+      display: flex;
+    }
+
+    /* Problem Chips Grid */
+    .problem-chips-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .problem-chip {
+      padding: 10px 18px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .problem-chip:hover {
+      border-color: var(--blue-primary);
+      color: var(--blue-primary);
+      background: var(--blue-light);
+    }
+    .problem-chip.selected {
+      background: var(--blue-primary);
+      color: white;
+      border-color: var(--blue-primary);
+      box-shadow: 0 4px 12px rgba(10,102,194,0.25);
+    }
+
+    /* Summary Pill */
+    .selection-summary-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+      font-size: 0.85rem;
+    }
+    .selection-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      background: var(--blue-primary);
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Accordion */
+    .accordion-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .accordion-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: all var(--transition-fast);
+    }
+    .accordion-item:hover {
+      border-color: var(--blue-primary);
+    }
+    .accordion-trigger {
+      width: 100%;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      text-align: left;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: none;
+      cursor: pointer;
+    }
+    .accordion-trigger svg {
+      transition: transform var(--transition-base);
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    .accordion-item.open .accordion-trigger svg {
+      transform: rotate(180deg);
+      color: var(--blue-primary);
+    }
+    .accordion-content {
+      display: none;
+      padding: 0 20px 18px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      border-top: 1px dashed var(--border-color);
+      margin-top: 4px;
+      padding-top: 12px;
+    }
+    .accordion-item.open .accordion-content {
+      display: block;
+    }
+
+    /* Radio Cards */
+    .radio-cards-group {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 8px;
+    }
+    @media (max-width: 680px) {
+      .radio-cards-group {
+        grid-template-columns: 1fr;
+      }
+    }
+    .radio-card {
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      cursor: pointer;
+      background: var(--bg-primary);
+      transition: all var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .radio-card:hover {
+      border-color: var(--blue-primary);
+    }
+    .radio-card.active {
+      border-color: var(--blue-primary);
+      background: var(--blue-light);
+    }
+    .radio-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+    }
+    .radio-card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .radio-card-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Success Box */
+    .success-card {
+      background: var(--bg-card);
+      border: 2px solid var(--green);
+      border-radius: var(--radius-xl);
+      padding: 40px 32px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+    .ticket-badge-box {
+      display: inline-block;
+      padding: 12px 24px;
+      background: var(--blue-light);
+      border: 2px dashed var(--blue-primary);
+      border-radius: var(--radius-md);
+      margin: 20px 0;
+    }
+    #ticket-number {
+      font-family: var(--font-mono);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--blue-primary);
+      letter-spacing: 1px;
+    }
+
+    /* Ticket Tracking Section */
+    .tracker-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+    }
+    .track-search-bar {
+      display: flex;
+      gap: 12px;
+      max-width: 580px;
+      margin: 0 auto 24px;
+    }
+    .track-search-bar input {
+      flex: 1;
+      padding: 14px 18px;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      text-transform: uppercase;
+      outline: none;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+    }
+    .track-search-bar input:focus {
+      border-color: var(--blue-primary);
+      box-shadow: 0 0 0 3px rgba(10,102,194,0.15);
+    }
+    .quick-track-samples {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+    .quick-track-pill {
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--blue-primary);
+      font-family: var(--font-mono);
+    }
+    .quick-track-pill:hover {
+      background: var(--blue-light);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+  <nav class="nav-wrapper">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-icon">JI</div>
+      <div>
+        <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+        <div class="nav-logo-sub">Solutions informatiques</div>
+      </div>
+    </a>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="../index.html" class="nav-link">Accueil</a></li>
+      <li class="nav-item">
+        <a href="services.html" class="nav-link">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="services.html#maintenance" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div><div class="dropdown-item-text">Maintenance informatique</div><div class="dropdown-item-desc">Réparation, diagnostic, optimisation</div></div></a>
+          <a href="services.html#reseaux" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div><div><div class="dropdown-item-text">Systèmes & Réseaux</div><div class="dropdown-item-desc">Administration, configuration</div></div></a>
+          <a href="services.html#cybersecurite" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="dropdown-item-text">Cybersécurité</div><div class="dropdown-item-desc">Audit, protection, sécurisation</div></div></a>
+          <a href="services.html#developpement" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div><div class="dropdown-item-text">Développement web</div><div class="dropdown-item-desc">Sites, applications, outils</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="reparation.html" class="nav-link active">Réparation</a></li>
+      <li class="nav-item"><a href="boutique.html" class="nav-link">Boutique</a></li>
+      <li class="nav-item"><a href="formations.html" class="nav-link">Formations</a></li>
+      <li class="nav-item"><a href="guides.html" class="nav-link">Guides</a></li>
+      <li class="nav-item"><a href="assistance.html" class="nav-link">Assistance</a></li>
+      <li class="nav-item">
+        <a href="entreprises.html" class="nav-link">Entreprises <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="entreprises.html#pro" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div><div class="dropdown-item-text">Jason PRO</div><div class="dropdown-item-desc">Solutions entreprises</div></div></a>
+          <a href="entreprises.html#contrats" class="dropdown-item"><div class="dropdown-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="dropdown-item-text">Contrats de maintenance</div><div class="dropdown-item-desc">Offres sur mesure</div></div></a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="a-propos.html" class="nav-link">À propos <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="dropdown">
+          <a href="a-propos.html" class="dropdown-item"><div class="dropdown-item-text">À propos de nous</div></a>
+          <a href="fondateur.html" class="dropdown-item"><div class="dropdown-item-text">Le fondateur</div></a>
+          <a href="publications.html" class="dropdown-item"><div class="dropdown-item-text">Publications</div></a>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-search-btn search-open-btn" title="Rechercher (Ctrl+K)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <a href="boutique.html#panier" class="nav-cart-btn" title="Panier">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge cart-count" style="display:none">0</span>
+      </a>
+      <button class="theme-toggle" title="Changer le thème">
+        <svg class="theme-icon sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="connexion.html" class="btn-connexion">Connexion</a>
+      <a href="contact.html#devis" class="btn-devis">Demander un devis</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-header">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">JI</div>
+      <div>
+        <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+      </div>
+    </div>
+  </div>
+  <a href="../index.html" class="mobile-nav-link">Accueil</a>
+  <a href="services.html" class="mobile-nav-link">Services</a>
+  <a href="reparation.html" class="mobile-nav-link active">Réparation</a>
+  <a href="boutique.html" class="mobile-nav-link">Boutique</a>
+  <a href="formations.html" class="mobile-nav-link">Formations</a>
+  <a href="guides.html" class="mobile-nav-link">Guides & Tutoriels</a>
+  <a href="assistance.html" class="mobile-nav-link">Assistance</a>
+  <a href="entreprises.html" class="mobile-nav-link">Entreprises</a>
+  <a href="a-propos.html" class="mobile-nav-link">À propos</a>
+  <a href="fondateur.html" class="mobile-nav-link">Le Fondateur</a>
+  <a href="publications.html" class="mobile-nav-link">Publications</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+  <div class="mobile-menu-actions">
+    <a href="connexion.html" class="btn btn-outline btn-sm">Connexion</a>
+    <a href="contact.html#devis" class="btn btn-primary btn-sm">Demander un devis</a>
+  </div>
+</div>
+
+<!-- Main Content -->
+<main>
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="page-hero-label">Atelier Technique & Dépannage</span>
+      <h1>Réparez, entretenez et prolongez la durée de vie de vos équipements.</h1>
+      <p>Diagnostic précis, pièces de rechange de qualité et techniciens certifiés à Mpila, Brazzaville. Nous redonnons vie à votre matériel informatique en toute confiance.</p>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <div class="container" style="margin-top: 24px;">
+    <nav class="breadcrumb" aria-label="Fil d'Ariane">
+      <a href="../index.html">Accueil</a>
+      <span>/</span>
+      <span style="color: var(--text-primary); font-weight: 500;">Réparation d'appareils</span>
+    </nav>
+  </div>
+
+  <!-- Repair Wizard Section -->
+  <section class="section-sm">
+    <div class="container repair-container">
+
+      <!-- Repair Steps Tabs -->
+      <div class="repair-steps" role="tablist">
+        <div class="repair-step-tab active" data-repair-step="1" role="tab" aria-selected="true">
+          <span style="font-weight:700;">1.</span> Appareil
+        </div>
+        <div class="repair-step-tab" data-repair-step="2" role="tab" aria-selected="false">
+          <span style="font-weight:700;">2.</span> Problème
+        </div>
+        <div class="repair-step-tab" data-repair-step="3" role="tab" aria-selected="false">
+          <span style="font-weight:700;">3.</span> Vos coordonnées
+        </div>
+        <div class="repair-step-tab" data-repair-step="4" role="tab" aria-selected="false">
+          <span style="font-weight:700;">4.</span> Confirmation
+        </div>
+      </div>
+
+      <!-- ==============================================
+           STEP 1 PANEL: CHOIX DE L'APPAREIL
+           ============================================== -->
+      <div class="repair-panel" id="repair-panel-1" style="display: block;">
+        <div class="repair-step-header">
+          <h2 class="repair-step-title">Quel type d'appareil souhaitez-vous faire réparer ?</h2>
+          <p class="repair-step-desc">Sélectionnez la catégorie de votre équipement pour orienter le diagnostic.</p>
+        </div>
+
+        <!-- 8 Device Type Cards -->
+        <div class="device-grid" id="device-selector-grid">
+          <!-- 1. Ordinateur portable -->
+          <div class="device-card selected" data-device="Ordinateur portable">
+            <span class="device-card-check">✓</span>
+            <div class="device-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+            </div>
+            <div class="device-card-name">Ordinateur portable</div>
+          </div>
+
+          <!-- 2. Ordinateur de bureau -->
+          <div class="device-card" data-device="Ordinateur de bureau">
+            <span class="device-card-check">✓</span>
+            <div class="device-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <div class="device-card-name">Ordinateur de bureau</div>
+          </div>
+
+          <!-- 3. Smartphone -->
+          <div class="device-card" data-device="Smartphone">
+            <span class="device-card-check">✓</span>
+            <div class="device-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <div class="device-card-name">Smartphone</div>
+          </div>
+
+          <!-- 4. Tablette -->
+          <div class="device-card" data-device="Tablette">
+            <span class="device-card-check">✓</span>
+            <div class="device-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <div class="device-card-name">Tablette tactile</div>
+          </div>
+
+          <!-- 5. Imprimante -->
+          <div class="device-card" data-device="Imprimante">
+            <span class="device-card-check">✓</span>
+            <div class="device-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            </div>
+            <div class="device-card-name">Imprimante & Scanner</div>
+          </div>
+
+          <!-- 6. Équipement réseau -->
+          <div class="device-card" data-device="Équipement réseau">
+            <span class="device-card-check">✓</span>
+            <div class="device-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/></svg>
+            </div>
+            <div class="device-card-name">Équipement réseau</div>
+          </div>
+
+          <!-- 7. Périphérique -->
+          <div class="device-card" data-device="Périphérique">
+            <span class="device-card-check">✓</span>
+            <div class="device-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="device-card-name">Écran & Périphérique</div>
+          </div>
+
+          <!-- 8. Serveur -->
+          <div class="device-card" data-device="Serveur">
+            <span class="device-card-check">✓</span>
+            <div class="device-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/><line x1="12" y1="6" x2="12.01" y2="6"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <div class="device-card-name">Serveur d'entreprise</div>
+          </div>
+        </div>
+
+        <div style="text-align: right;">
+          <button type="button" class="btn btn-primary" data-repair-step="2">
+            <span>Étape suivante : Décrire la panne</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ==============================================
+           STEP 2 PANEL: CHOIX DU PROBLÈME & CAUSES
+           ============================================== -->
+      <div class="repair-panel" id="repair-panel-2" style="display: none;">
+        <div class="repair-step-header">
+          <h2 class="repair-step-title">Quel symptôme observez-vous ?</h2>
+          <p class="repair-step-desc">Cliquez sur le dysfonctionnement principal constaté sur votre appareil.</p>
+        </div>
+
+        <div class="selection-summary-bar">
+          <span style="color:var(--text-muted);">Appareil sélectionné :</span>
+          <span class="selection-tag" id="summary-device-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/></svg>
+            Ordinateur portable
+          </span>
+        </div>
+
+        <!-- 10 Problem Chips -->
+        <div class="problem-chips-grid" id="problem-chips-container">
+          <button type="button" class="problem-chip selected" data-problem="Ne s'allume plus">⚡ Ne s'allume plus</button>
+          <button type="button" class="problem-chip" data-problem="Écran noir">🖥️ Écran noir / Pas d'affichage</button>
+          <button type="button" class="problem-chip" data-problem="Batterie défectueuse">🔋 Batterie défectueuse / Ne charge pas</button>
+          <button type="button" class="problem-chip" data-problem="Surchauffe">🔥 Surchauffe & ventilateur bruyant</button>
+          <button type="button" class="problem-chip" data-problem="Problème de connexion">📶 Problème de connexion WiFi / Réseau</button>
+          <button type="button" class="problem-chip" data-problem="Disque dur défaillant">💾 Disque dur défaillant / Clac-clac</button>
+          <button type="button" class="problem-chip" data-problem="Système corrompu">⚠️ Système corrompu / Écran bleu (BSOD)</button>
+          <button type="button" class="problem-chip" data-problem="Perte de données">📁 Perte de données / Disque inaccessible</button>
+          <button type="button" class="problem-chip" data-problem="Problème logiciel">⚙️ Problème logiciel / Virus / Lenteur</button>
+          <button type="button" class="problem-chip" data-problem="Autre">❓ Autre problème non listé</button>
+        </div>
+
+        <!-- Possible Causes Section (Accordion) -->
+        <div style="margin-top: 36px;">
+          <div class="flex items-center gap-8 mb-8">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--blue-primary);"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <h3 style="font-size: 1.15rem; font-weight:700;">Comprendre les causes fréquentes de pannes</h3>
+          </div>
+          <div class="alert alert-info text-sm" style="margin-bottom: 16px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span><strong>Note informative :</strong> Ces explications sont données à titre de repère général et ne remplacent pas un examen physique en atelier par nos techniciens qualifiés.</span>
+          </div>
+
+          <div class="accordion-group">
+            <div class="accordion-item open">
+              <button type="button" class="accordion-trigger">
+                <span>Causes possibles : L'ordinateur ne démarre plus du tout</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="accordion-content">
+                Bloc d'alimentation interne défectueux ou chargeur grillé, connecteur de charge jack dessoudé ou endommagé, court-circuit sur la carte mère (condensateur CMS ou MOSFET HS), ou batterie lithium en décharge profonde bloquant le démarrage.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button type="button" class="accordion-trigger">
+                <span>Causes possibles : L'écran reste noir ou affiche des lignes anormales</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="accordion-content">
+                Nappe vidéo LVDS/eDP déconnectée ou sectionnée dans les charnières, rétroéclairage de dalle LCD en panne, barrette de mémoire RAM oxydée ou mal enfichée, ou puce graphique (GPU) nécessitant un rebillage ou remplacement.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button type="button" class="accordion-trigger">
+                <span>Causes possibles : Lenteur extrême, blocages et figeages d'écran</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="accordion-content">
+                Disque dur mécanique vieillissant avec secteurs défectueux (remplacement avantageux par un SSD haute vitesse), saturation de la RAM, programmes malveillants résidents en tâche de fond, ou surchauffe provoquant un bridage thermique du processeur.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button type="button" class="accordion-trigger">
+                <span>Causes possibles : Surchauffe excessive et bruit de soufflerie</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="accordion-content">
+                Colmatage des grilles de ventilation par la poussière ambiante, pâte thermique d'origine séchée et inefficace, ou roulement du ventilateur grippé empêchant l'évacuation normale des calories.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button type="button" class="accordion-trigger">
+                <span>Causes possibles : Déconnexions WiFi répétées ou absence d'adresse IP</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="accordion-content">
+                Pilote de carte réseau dégradé après une mise à jour, antenne WiFi interne déclipsée, pile CMOS épuisée réinitialisant l'horloge réseau, ou conflit d'adresses IP avec un équipement du réseau local.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-between mt-32">
+          <button type="button" class="btn btn-outline" data-repair-step="1">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            <span>Précédent</span>
+          </button>
+          <button type="button" class="btn btn-primary" data-repair-step="3">
+            <span>Étape suivante : Coordonnées & Détails</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ==============================================
+           STEP 3 PANEL: FORMULAIRE DE RÉPARATION
+           ============================================== -->
+      <div class="repair-panel" id="repair-panel-3" style="display: none;">
+        <div class="repair-step-header">
+          <h2 class="repair-step-title">Vos informations & Détails du matériel</h2>
+          <p class="repair-step-desc">Complétez ce formulaire pour enregistrer votre fiche de réparation et générer votre ticket de suivi.</p>
+        </div>
+
+        <div class="selection-summary-bar">
+          <span style="color:var(--text-muted);">Récapitulatif :</span>
+          <span class="selection-tag" id="summary-device-tag-2">Ordinateur portable</span>
+          <span class="selection-tag" id="summary-problem-tag" style="background:var(--blue-dark);">Ne s'allume plus</span>
+        </div>
+
+        <!-- The Repair Form -->
+        <form id="repair-form" class="card card-body" style="border: 1px solid var(--border-color); padding: 28px;" novalidate>
+          <!-- Hidden inputs populated by Step 1 & 2 -->
+          <input type="hidden" id="form-appareil" name="appareil" value="Ordinateur portable">
+          <input type="hidden" id="form-probleme" name="probleme" value="Ne s'allume plus">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="repair-nom">Nom & Prénom <span class="required">*</span></label>
+              <input type="text" id="repair-nom" name="nom" class="form-input" placeholder="Ex. Paul Nguesso" required>
+              <div class="form-error" data-error="nom">Le nom est obligatoire.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="repair-telephone">Téléphone (WhatsApp de préférence) <span class="required">*</span></label>
+              <input type="tel" id="repair-telephone" name="telephone" class="form-input" placeholder="Ex. +242 06 123 45 67" required>
+              <div class="form-error" data-error="telephone">Le numéro de téléphone est obligatoire.</div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="repair-email">Adresse email (facultatif)</label>
+              <input type="email" id="repair-email" name="email" class="form-input" placeholder="votre.email@domaine.com">
+              <div class="form-error" data-error="email">Format d'email invalide.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="repair-marque">Marque de l'appareil <span class="required">*</span></label>
+              <input type="text" id="repair-marque" name="marque" class="form-input" placeholder="Ex. HP, Dell, Lenovo, Apple, Asus, Samsung..." required>
+              <div class="form-error" data-error="marque">Veuillez préciser la marque.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="repair-modele">Modèle exact ou numéro de série</label>
+            <input type="text" id="repair-modele" name="modele" class="form-input" placeholder="Ex. Pavilion 15-eg000, Latitude 5400, MacBook Pro A2289...">
+            <div class="form-hint">Vous trouverez généralement cette information sur l'étiquette située sous l'ordinateur ou la batterie.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="repair-description">Description précise de la panne & antécédents <span class="required">*</span></label>
+            <textarea id="repair-description" name="description" class="form-textarea" placeholder="Expliquez ce qui s'est passé : l'appareil a-t-il subi une chute, un liquide renversé, une surtension électrique, un arrêt brutal ? Avez-vous remarqué des bruits ou des odeurs ?" required></textarea>
+            <div class="form-error" data-error="description">Veuillez décrire le problème constaté.</div>
+          </div>
+
+          <!-- Photo upload -->
+          <div class="form-group">
+            <label class="form-label">Photo ou capture d'écran du problème (facultatif)</label>
+            <div class="file-upload">
+              <input type="file" id="repair-photo" name="photo" accept="image/*" style="display:none;">
+              <label for="repair-photo" style="cursor:pointer; display:block;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--blue-primary); margin:0 auto 8px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <div style="font-weight:600; font-size:0.9rem;">Cliquez pour joindre une photo de l'appareil ou du message d'erreur</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Formats acceptés : JPG, PNG, WEBP (Max 5 Mo)</div>
+              </label>
+              <div id="file-name-display" style="margin-top:8px; font-size:0.8rem; color:var(--blue-primary); font-weight:600; display:none;"></div>
+            </div>
+            <div class="form-hint" style="color:var(--orange); display:flex; align-items:center; gap:6px; margin-top:6px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span><strong>Consigne de sécurité :</strong> Ne jamais inclure de mot de passe ni de données bancaires dans vos photos ou descriptions.</span>
+            </div>
+          </div>
+
+          <!-- Type d'intervention -->
+          <div class="form-group">
+            <label class="form-label">Mode d'intervention souhaité <span class="required">*</span></label>
+            <div class="radio-cards-group">
+              <label class="radio-card active">
+                <input type="radio" name="intervention" value="boutique" checked>
+                <div class="radio-card-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  Dépôt en boutique
+                </div>
+                <div class="radio-card-desc">Déposez votre appareil directement à notre atelier de Mpila, Brazzaville.</div>
+              </label>
+
+              <label class="radio-card">
+                <input type="radio" name="intervention" value="domicile">
+                <div class="radio-card-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                  Intervention sur site
+                </div>
+                <div class="radio-card-desc">Un technicien se déplace à votre domicile ou bureau à Brazzaville.</div>
+              </label>
+
+              <label class="radio-card">
+                <input type="radio" name="intervention" value="distance">
+                <div class="radio-card-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/></svg>
+                  À distance
+                </div>
+                <div class="radio-card-desc">Télémaintenance AnyDesk immédiate (uniquement si l'appareil démarre).</div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Disponibilité -->
+          <div class="form-group">
+            <label class="form-label" for="repair-dispo">Créneau de disponibilité préféré</label>
+            <select id="repair-dispo" name="disponibilite" class="form-select">
+              <option value="Au plus tôt">Au plus tôt (Dès aujourd'hui / Premier créneau)</option>
+              <option value="Matin (08h00 - 12h00)">En matinée (08h00 – 12h00)</option>
+              <option value="Après-midi (13h00 - 18h00)">En après-midi (13h00 – 18h00)</option>
+              <option value="Samedi matin">Samedi matin (09h00 – 13h00)</option>
+              <option value="En semaine après 17h00">En fin de journée (après 17h00)</option>
+            </select>
+          </div>
+
+          <!-- Consent checkbox -->
+          <div class="form-group">
+            <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-size:0.85rem; color:var(--text-secondary);">
+              <input type="checkbox" id="repair-consent" name="consent" required style="margin-top:3px; width:16px; height:16px; cursor:pointer;">
+              <span>J'accepte que mes coordonnées soient enregistrées par Jason_INFORMATIQUE pour la gestion de ma demande de dépannage et la génération de mon ticket de suivi, conformément à la politique de confidentialité. <span class="required">*</span></span>
+            </label>
+            <div class="form-error" data-error="consent">Veuillez cocher la case de consentement pour poursuivre.</div>
+          </div>
+
+          <div class="flex-between mt-24">
+            <button type="button" class="btn btn-outline" data-repair-step="2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              <span>Précédent</span>
+            </button>
+            <button type="submit" class="btn btn-primary btn-lg" id="btn-submit-repair">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Soumettre ma demande de réparation</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ==============================================
+           STEP 4 PANEL: SUCCÈS & CONFIRMATION
+           ============================================== -->
+      <div class="repair-panel" id="repair-panel-4" style="display: none;">
+        <div id="repair-success" class="success-card">
+          <div style="width:72px; height:72px; border-radius:50%; background:var(--green-light); color:var(--green); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2 style="font-size:1.8rem; font-weight:800; color:var(--text-primary); margin-bottom:8px;">Demande de réparation enregistrée !</h2>
+          <p style="color:var(--text-secondary); max-width:540px; margin:0 auto;">Votre demande a bien été transmise à notre atelier. Conservez précieusement votre numéro de ticket pour suivre chaque étape du diagnostic.</p>
+
+          <div class="ticket-badge-box">
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); font-weight:600; margin-bottom:4px;">Votre numéro de ticket officiel</div>
+            <div id="ticket-number">REP-20261014-4821</div>
+          </div>
+
+          <div class="alert alert-info" style="max-width:580px; margin:0 auto 28px; text-align:left;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <div>
+              <div style="font-weight:700;">Prochaines étapes :</div>
+              <ul style="list-style:disc; margin-left:18px; margin-top:6px; font-size:0.83rem; line-height:1.5;">
+                <li><strong>Dépôt matériel :</strong> Rendez-vous à notre atelier de Mpila avec votre appareil et son chargeur d'origine.</li>
+                <li><strong>Confirmation :</strong> Un technicien vous contactera par SMS ou WhatsApp dans les 2 heures.</li>
+                <li><strong>Diagnostic sous 24h :</strong> Nous testons vos composants et vous soumettons un devis précis avant toute réparation.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="flex-center gap-12" style="flex-wrap:wrap;">
+            <a href="#ticket-tracker-section" class="btn btn-outline" id="btn-goto-tracker">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Suivre mon ticket en direct</span>
+            </a>
+            <a href="https://wa.me/242067814704" class="btn btn-whatsapp" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              <span>Contacter l'atelier sur WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==============================================
+       SECTION SUIVI DE TICKET (7 ÉTAPES)
+       ============================================== -->
+  <section id="ticket-tracker-section" class="section" style="background: var(--bg-secondary);">
+    <div class="container repair-container">
+      <div class="section-header">
+        <span class="section-label">Suivi en direct</span>
+        <h2 class="section-title">Suivre l'avancement de mon ticket</h2>
+        <p class="section-desc">Entrez le numéro de ticket qui vous a été attribué pour consulter en direct l'état d'avancement de votre réparation dans notre atelier.</p>
+      </div>
+
+      <div class="tracker-box">
+        <form id="track-search-form" class="track-search-bar" onsubmit="return false;">
+          <input type="text" id="track-input" placeholder="Ex: REP-20261014-4821" aria-label="Numéro de ticket">
+          <button type="button" id="btn-track-submit" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span>Consulter</span>
+          </button>
+        </form>
+
+        <div class="quick-track-samples">
+          <span>Tickets démo à tester :</span>
+          <button type="button" class="quick-track-pill" data-fill="REP-20261014-1024">REP-20261014-1024 (Diagnostic)</button>
+          <button type="button" class="quick-track-pill" data-fill="REP-20261013-4890">REP-20261013-4890 (Réparation)</button>
+          <button type="button" class="quick-track-pill" data-fill="REP-20261011-8271">REP-20261011-8271 (Prêt / Livré)</button>
+        </div>
+
+        <!-- Ticket Detail Header -->
+        <div id="tracker-ticket-header" style="background:var(--bg-secondary); border-radius:var(--radius-md); padding:16px 20px; margin-bottom:28px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div>
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); font-weight:600;">Dossier en cours</div>
+            <div style="font-weight:800; font-size:1.15rem; color:var(--blue-primary);" id="tracker-current-ref">REP-20261014-1024</div>
+            <div style="font-size:0.83rem; color:var(--text-secondary);" id="tracker-device-info">Ordinateur portable HP Pavilion 15 • Écran noir</div>
+          </div>
+          <div style="text-align:right;">
+            <span class="badge badge-primary" id="tracker-status-badge">Étape 2 / 7 : Diagnostic</span>
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;" id="tracker-update-time">Dernière mise à jour : il y a 25 min</div>
+          </div>
+        </div>
+
+        <!-- Visual Tracker with 7 stages -->
+        <div class="ticket-track" id="visual-ticket-track">
+          <!-- Stage 1 -->
+          <div class="ticket-track-item done" data-stage="1">
+            <div class="ticket-track-dot">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="ticket-track-content">
+              <div style="font-weight: 700; font-size: 0.95rem; color:var(--text-primary);">1. Demande reçue & Dossier ouvert</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted);">Votre fiche de prise en charge a été enregistrée avec succès dans notre système.</div>
+            </div>
+          </div>
+
+          <!-- Stage 2 -->
+          <div class="ticket-track-item active" data-stage="2">
+            <div class="ticket-track-dot">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <div class="ticket-track-content">
+              <div style="font-weight: 700; font-size: 0.95rem; color:var(--text-primary);">2. Diagnostic technique en atelier</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted);">Démontage, tests des circuits et identification précise des composants défectueux.</div>
+            </div>
+          </div>
+
+          <!-- Stage 3 -->
+          <div class="ticket-track-item" data-stage="3">
+            <div class="ticket-track-dot">
+              <span style="font-size:0.75rem; font-weight:700;">3</span>
+            </div>
+            <div class="ticket-track-content">
+              <div style="font-weight: 700; font-size: 0.95rem; color:var(--text-primary);">3. Établissement du devis détaillé</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted);">Chiffrage exact des pièces de rechange et du coût de main-d'œuvre.</div>
+            </div>
+          </div>
+
+          <!-- Stage 4 -->
+          <div class="ticket-track-item" data-stage="4">
+            <div class="ticket-track-dot">
+              <span style="font-size:0.75rem; font-weight:700;">4</span>
+            </div>
+            <div class="ticket-track-content">
+              <div style="font-weight: 700; font-size: 0.95rem; color:var(--text-primary);">4. Validation client</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted);">Accord formel du propriétaire par téléphone, WhatsApp ou email pour débuter les travaux.</div>
+            </div>
+          </div>
+
+          <!-- Stage 5 -->
+          <div class="ticket-track-item" data-stage="5">
+            <div class="ticket-track-dot">
+              <span style="font-size:0.75rem; font-weight:700;">5</span>
+            </div>
+            <div class="ticket-track-content">
+              <div style="font-weight: 700; font-size: 0.95rem; color:var(--text-primary);">5. Réparation & Remplacement de composants</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted);">Intervention matérielle, microsoudure, changement d'écran ou réinstallation système.</div>
+            </div>
+          </div>
+
+          <!-- Stage 6 -->
+          <div class="ticket-track-item" data-stage="6">
+            <div class="ticket-track-dot">
+              <span style="font-size:0.75rem; font-weight:700;">6</span>
+            </div>
+            <div class="ticket-track-content">
+              <div style="font-weight: 700; font-size: 0.95rem; color:var(--text-primary);">6. Contrôle qualité & Tests de charge</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted);">Vérification du fonctionnement global, températures et endurance sous sollicitation.</div>
+            </div>
+          </div>
+
+          <!-- Stage 7 -->
+          <div class="ticket-track-item" data-stage="7">
+            <div class="ticket-track-dot">
+              <span style="font-size:0.75rem; font-weight:700;">7</span>
+            </div>
+            <div class="ticket-track-content">
+              <div style="font-weight: 700; font-size: 0.95rem; color:var(--text-primary);">7. Appareil prêt & Livré</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted);">Matériel prêt à être retiré à l'atelier avec bon de garantie ou livré à domicile.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       FAQ RÉPARATION (5 QUESTIONS)
+       ============================================== -->
+  <section class="section">
+    <div class="container repair-container">
+      <div class="section-header">
+        <span class="section-label">Questions Fréquentes</span>
+        <h2 class="section-title">Tout savoir sur notre service de réparation</h2>
+        <p class="section-desc">Des réponses claires et transparentes aux questions les plus régulières posées à notre atelier de Mpila.</p>
+      </div>
+
+      <div class="accordion-group">
+        <!-- Q1 -->
+        <div class="accordion-item open">
+          <button type="button" class="accordion-trigger">
+            <span>Combien de temps prend un diagnostic en atelier ?</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion-content">
+            Un diagnostic standard est généralement réalisé sous <strong>1h à 24h ouvrées</strong> selon la complexité du problème. Dès que nos tests sont terminés, nous vous appelons immédiatement pour vous expliquer la source de la panne et vous remettre un devis clair et chiffré avant tout engagement.
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="accordion-item">
+          <button type="button" class="accordion-trigger">
+            <span>Mes données personnelles sont-elles en sécurité pendant la réparation ?</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion-content">
+            La confidentialité de vos fichiers est notre priorité absolue. Nos techniciens respectent une charte déontologique stricte : aucun fichier privé n'est consulté. Si vous le souhaitez, nous pouvons réaliser une sauvegarde de précaution de l'intégralité de vos documents avant d'intervenir.
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="accordion-item">
+          <button type="button" class="accordion-trigger">
+            <span>Que se passe-t-il si mon appareil n'est pas réparable ?</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion-content">
+            Si une pièce n'est plus fabriquée ou si le coût d'une réparation dépasse la valeur de votre appareil, nous vous prévenons honnêtement. Dans ce cas, nous ne vous facturons que le forfait de diagnostic initial (5 000 FCFA), et nous pouvons vous proposer des solutions de récupération de vos données sur un disque externe.
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="accordion-item">
+          <button type="button" class="accordion-trigger">
+            <span>Quelle garantie offrez-vous sur les pièces et la main-d'œuvre ?</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion-content">
+            Toutes nos interventions matérielles et pièces neuves (écrans, claviers, disques SSD, blocs d'alimentation, batteries) sont couvertes par une <strong>garantie de 30 à 90 jours</strong>. En cas d'anomalie sur la pièce installée, le remplacement est pris en charge gratuitement.
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="accordion-item">
+          <button type="button" class="accordion-trigger">
+            <span>Faut-il impérativement prendre rendez-vous pour déposer un appareil ?</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion-content">
+            Non, vous pouvez vous présenter directement sans rendez-vous du lundi au samedi, de 08h00 à 19h00, à notre atelier de Mpila à Brazzaville. Cependant, renseigner le formulaire ci-dessus vous permet de gagner du temps lors de la dépose et de bénéficier d'une prise en charge prioritaire.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <span class="section-label" style="background: rgba(255,255,255,0.15); color: white;">Assistance Express</span>
+      <h2 class="cta-title">Votre équipement a besoin d'un dépannage urgent ?</h2>
+      <p class="cta-desc">Appelez-nous ou écrivez-nous sur WhatsApp pour une prise en charge rapide de votre panne par nos techniciens à Brazzaville.</p>
+      <div class="cta-actions">
+        <a href="https://wa.me/242067814704" class="btn btn-whatsapp" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Contacter l'atelier sur WhatsApp
+        </a>
+        <a href="services.html" class="btn btn-white">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Découvrir tous nos services
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Search Overlay (Shared) -->
+<div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Recherche">
+  <div class="search-box">
+    <span class="search-icon-input">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </span>
+    <input type="text" id="search-input" class="search-input" placeholder="Rechercher un service, une panne, un produit…" autocomplete="off" />
+    <span class="search-close" id="search-close">&times;</span>
+  </div>
+  <div class="search-suggestions">
+    <div class="search-suggestion" data-q="Changement écran PC portable">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+      <span>Changement d'écran PC portable cassé</span>
+    </div>
+    <div class="search-suggestion" data-q="Disque dur non reconnu">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+      <span>Récupération de données disque dur endommagé</span>
+    </div>
+    <div class="search-suggestion" data-q="Nettoyage et pâte thermique">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4"/><path d="M12 18v4"/><circle cx="12" cy="12" r="4"/></svg>
+      <span>Nettoyage interne & remplacement pâte thermique</span>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">JI</div>
+          <div>
+            <div style="font-weight:800;color:white;font-size:1rem"><span style="color:#38BDF8">Jason_</span>INFORMATIQUE</div>
+            <div style="font-size:.65rem;color:rgba(255,255,255,.4);letter-spacing:1px">SOLUTIONS INFORMATIQUES</div>
+          </div>
+        </div>
+        <p>Votre partenaire pour des solutions informatiques modernes. De la réparation à la formation, nous vous accompagnons au quotidien à Brazzaville.</p>
+        <div class="footer-social">
+          <a href="#" title="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" title="Twitter/X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="https://wa.me/242067814704" title="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <div class="footer-links">
+          <a href="services.html#maintenance">Maintenance informatique</a>
+          <a href="services.html#reseaux">Systèmes & Réseaux</a>
+          <a href="services.html#cybersecurite">Cybersécurité</a>
+          <a href="services.html#developpement">Développement web</a>
+          <a href="services.html#assistance">Assistance</a>
+          <a href="entreprises.html">Jason PRO</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Ressources</h4>
+        <div class="footer-links">
+          <a href="guides.html">Guides techniques</a>
+          <a href="formations.html">Formations IT</a>
+          <a href="boutique.html">Boutique</a>
+          <a href="reparation.html">Réparation</a>
+          <a href="assistance.html">Support</a>
+          <a href="publications.html">Publications</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Mpila, Brazzaville<br>République du Congo</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:jasoninformatique7@gmail.com" style="color:rgba(255,255,255,.55)">jasoninformatique7@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Lun – Sam : 08h00 – 19h00</span>
+        </div>
+        <div class="footer-links" style="margin-top:12px">
+          <a href="a-propos.html">À propos</a>
+          <a href="contact.html">Contact</a>
+          <a href="pages/mentions-legales.html">Mentions légales</a>
+          <a href="pages/confidentialite.html">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Jason_INFORMATIQUE © 2026 — Fondé par Gad Jason MBOU. Tous droits réservés.</p>
+    <div class="footer-bottom-links">
+      <a href="pages/cgv.html">CGV</a>
+      <a href="pages/mentions-legales.html">Mentions légales</a>
+      <a href="pages/confidentialite.html">Politique de confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/242067814704" class="whatsapp-float" target="_blank" rel="noopener" title="Contacter sur WhatsApp" id="whatsapp-float">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</a>
+
+<!-- Chatbot -->
+<button class="chatbot-float" id="chatbot-btn" title="Jason Assistant">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
+<div class="chatbot-panel" id="chatbot-panel">
+  <div class="chatbot-header">
+    <div class="chatbot-avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+    <div><div class="chatbot-name">Jason Assistant</div><div class="chatbot-status"><span class="chatbot-online"></span>En ligne</div></div>
+    <button class="chatbot-close" id="chatbot-close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="chatbot-messages" id="chatbot-messages"></div>
+  <div class="chatbot-input-area">
+    <input type="text" id="chatbot-input" placeholder="Posez votre question…" />
+    <button class="chatbot-send" id="chatbot-send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+
+<!-- Scroll Top -->
+<button class="scroll-top" id="scroll-top" title="Haut de page">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- Cookie Banner -->
+<div class="cookie-banner" id="cookie-banner">
+  <p>🍪 Ce site utilise uniquement des cookies essentiels à son fonctionnement. Aucun cookie publicitaire ou de traçage tiers n'est utilisé.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-sm btn-ghost" id="cookie-refuse" style="color:rgba(255,255,255,.6)">Refuser</button>
+    <button class="btn btn-sm btn-primary" id="cookie-accept">J'accepte</button>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<!-- Core Script -->
+<script src="../js/main.js"></script>
+
+<!-- Custom Script for Reparation Page Interactions -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    let currentDevice = 'Ordinateur portable';
+    let currentProblem = "Ne s'allume plus";
+
+    // 1. Device Selector Logic
+    const deviceCards = document.querySelectorAll('.device-card');
+    const inputAppareil = document.getElementById('form-appareil');
+    const summaryDeviceTag = document.getElementById('summary-device-tag');
+    const summaryDeviceTag2 = document.getElementById('summary-device-tag-2');
+
+    deviceCards.forEach(card => {
+      card.addEventListener('click', function() {
+        deviceCards.forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+        currentDevice = this.dataset.device;
+        if (inputAppareil) inputAppareil.value = currentDevice;
+        if (summaryDeviceTag) summaryDeviceTag.textContent = currentDevice;
+        if (summaryDeviceTag2) summaryDeviceTag2.textContent = currentDevice;
+      });
+    });
+
+    // 2. Problem Selector Logic
+    const problemChips = document.querySelectorAll('.problem-chip');
+    const inputProbleme = document.getElementById('form-probleme');
+    const summaryProblemTag = document.getElementById('summary-problem-tag');
+
+    problemChips.forEach(chip => {
+      chip.addEventListener('click', function() {
+        problemChips.forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+        currentProblem = this.dataset.problem;
+        if (inputProbleme) inputProbleme.value = currentProblem;
+        if (summaryProblemTag) summaryProblemTag.textContent = currentProblem;
+      });
+    });
+
+    // 3. Photo file input display
+    const photoInput = document.getElementById('repair-photo');
+    const fileNameDisplay = document.getElementById('file-name-display');
+    if (photoInput && fileNameDisplay) {
+      photoInput.addEventListener('change', function() {
+        if (this.files && this.files.length > 0) {
+          fileNameDisplay.textContent = '📎 Fichier joint : ' + this.files[0].name;
+          fileNameDisplay.style.display = 'block';
+        }
+      });
+    }
+
+    // 4. Radio cards selection styling
+    const radioCards = document.querySelectorAll('.radio-card');
+    radioCards.forEach(card => {
+      card.addEventListener('click', function() {
+        radioCards.forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+        const radio = this.querySelector('input[type="radio"]');
+        if (radio) radio.checked = true;
+      });
+    });
+
+    // 5. Accordion triggers (independent handler for instant responsiveness)
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', function() {
+        const item = this.closest('.accordion-item');
+        if (item) {
+          item.classList.toggle('open');
+        }
+      });
+    });
+
+    // 6. Connect success state to step 4 tab
+    const repairForm = document.getElementById('repair-form');
+    if (repairForm) {
+      repairForm.addEventListener('submit', function() {
+        // When form submits successfully, switch wizard to step 4
+        setTimeout(function() {
+          const successBox = document.getElementById('repair-success');
+          if (successBox && successBox.style.display !== 'none') {
+            document.querySelectorAll('.repair-panel').forEach(p => p.style.display = 'none');
+            const panel4 = document.getElementById('repair-panel-4');
+            if (panel4) panel4.style.display = 'block';
+
+            document.querySelectorAll('.repair-step-tab').forEach((t, i) => {
+              t.classList.toggle('active', i === 3);
+              t.classList.toggle('done', i < 3);
+            });
+
+            // Update tracker with generated ticket
+            const generatedTicket = document.getElementById('ticket-number').textContent;
+            const trackInput = document.getElementById('track-input');
+            if (trackInput && generatedTicket) {
+              trackInput.value = generatedTicket;
+            }
+          }
+        }, 150);
+      });
+    }
+
+    // 7. Ticket Tracking Simulator
+    const trackInput = document.getElementById('track-input');
+    const trackBtn = document.getElementById('btn-track-submit');
+    const trackHeaderRef = document.getElementById('tracker-current-ref');
+    const trackDeviceInfo = document.getElementById('tracker-device-info');
+    const trackStatusBadge = document.getElementById('tracker-status-badge');
+    const trackUpdateTime = document.getElementById('tracker-update-time');
+    const trackItems = document.querySelectorAll('.ticket-track-item');
+
+    const demoDatabase = {
+      'REP-20261014-1024': {
+        stage: 2,
+        device: 'Ordinateur portable HP Pavilion 15 • Écran noir',
+        status: 'Étape 2 / 7 : Diagnostic en atelier',
+        time: 'Dernière mise à jour : il y a 25 min'
+      },
+      'REP-20261013-4890': {
+        stage: 5,
+        device: 'PC Bureau Dell OptiPlex • Remplacement Alimentation & Dépoussiérage',
+        status: 'Étape 5 / 7 : Réparation en cours',
+        time: 'Dernière mise à jour : il y a 3h'
+      },
+      'REP-20261011-8271': {
+        stage: 7,
+        device: 'MacBook Air M1 • Clavier & Connecteur USB-C',
+        status: 'Étape 7 / 7 : Appareil prêt & Livré',
+        time: 'Clôturé le 13/10/2026'
+      }
+    };
+
+    function updateTracker(ticketId) {
+      const cleanId = ticketId.trim().toUpperCase();
+      let data = demoDatabase[cleanId];
+
+      if (!data) {
+        // Dynamic fallback simulation for newly generated tickets
+        data = {
+          stage: 1,
+          device: `${currentDevice} • ${currentProblem}`,
+          status: 'Étape 1 / 7 : Demande reçue',
+          time: 'Enregistré à l’instant'
+        };
+      }
+
+      if (trackHeaderRef) trackHeaderRef.textContent = cleanId;
+      if (trackDeviceInfo) trackDeviceInfo.textContent = data.device;
+      if (trackStatusBadge) trackStatusBadge.textContent = data.status;
+      if (trackUpdateTime) trackUpdateTime.textContent = data.time;
+
+      trackItems.forEach(item => {
+        const itemStage = parseInt(item.dataset.stage);
+        item.classList.remove('done', 'active');
+        if (itemStage < data.stage) {
+          item.classList.add('done');
+          item.querySelector('.ticket-track-dot').innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+        } else if (itemStage === data.stage) {
+          item.classList.add('active');
+          item.querySelector('.ticket-track-dot').innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+        } else {
+          item.querySelector('.ticket-track-dot').innerHTML = `<span style="font-size:0.75rem; font-weight:700;">${itemStage}</span>`;
+        }
+      });
+
+      if (window.JasonApp && window.JasonApp.Toast) {
+        window.JasonApp.Toast.show('Ticket actualisé', `Informations du ticket ${cleanId} affichées.`, 'info');
+      }
+    }
+
+    if (trackBtn && trackInput) {
+      trackBtn.addEventListener('click', function() {
+        if (trackInput.value.trim()) {
+          updateTracker(trackInput.value);
+        } else {
+          trackInput.focus();
+        }
+      });
+      trackInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          if (trackInput.value.trim()) updateTracker(trackInput.value);
+        }
+      });
+    }
+
+    // Quick track demo buttons
+    document.querySelectorAll('.quick-track-pill').forEach(pill => {
+      pill.addEventListener('click', function() {
+        const id = this.dataset.fill;
+        if (trackInput) trackInput.value = id;
+        updateTracker(id);
+      });
+    });
+
+    // Link from success state to tracker
+    const btnGotoTracker = document.getElementById('btn-goto-tracker');
+    if (btnGotoTracker) {
+      btnGotoTracker.addEventListener('click', function(e) {
+        const ticket = document.getElementById('ticket-number').textContent;
+        if (ticket && trackInput) {
+          trackInput.value = ticket;
+          updateTracker(ticket);
+        }
+      });
+    }
+  });
+</script>
+  <!-- Envoi direct par email â€” Web3Forms -->
+  <script src="../js/email-forms.js"></script></body>
+</html>
