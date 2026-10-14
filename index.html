@@ -1,0 +1,1635 @@
+﻿<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jason_INFORMATIQUE — Solutions Informatiques à Brazzaville, Congo</title>
+  <meta name="description" content="Jason_INFORMATIQUE à Brazzaville (Mpila) : maintenance, réseaux, cybersécurité, développement web, vente de matériel et formations informatiques professionnelles.">
+  <meta name="keywords" content="Jason Informatique, maintenance informatique Brazzaville, réparation ordinateur Congo, réseaux télécoms Mpila, formation informatique Brazzaville, dépannage PC, cybersécurité Congo, Gad Jason MBOU">
+  <meta name="author" content="Gad Jason MBOU">
+  <meta property="og:title" content="Jason_INFORMATIQUE — Solutions Informatiques à Brazzaville, Congo">
+  <meta property="og:description" content="Partenaire de référence en solutions informatiques : maintenance matérielle et logicielle, réseaux, sécurité, développement et formations certifiantes.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jason-informatique.cg">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/main.css">
+  
+  <style>
+    /* Spécificités esthétiques et compléments visuels pour la page d'accueil */
+    .hero-stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-stat-note {
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 2px;
+    }
+    .demo-badge-corner {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(245, 158, 11, 0.15);
+      color: #F59E0B;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-base);
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--blue-primary);
+    }
+    .blog-card-header {
+      height: 180px;
+      background: linear-gradient(135deg, var(--blue-night), var(--blue-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: white;
+      padding: 20px;
+    }
+    .blog-card-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: rgba(10, 102, 194, 0.85);
+      color: white;
+      backdrop-filter: blur(4px);
+    }
+    .blog-card-body {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .blog-card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+    .blog-card-text {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    .blog-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-color);
+      padding-top: 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--blue-primary);
+    }
+    .terminal-body {
+      color: #94A3B8;
+      line-height: 1.65;
+      font-size: 0.8rem;
+    }
+    .terminal-line-code {
+      display: block;
+      margin-bottom: 4px;
+    }
+    .code-cmd { color: #38BDF8; font-weight: 600; }
+    .code-ok  { color: #4ADE80; font-weight: 500; }
+    .code-warn{ color: #FBBF24; font-weight: 500; }
+    .code-val { color: #E2E8F0; }
+    .service-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-color);
+    }
+    .service-card-link {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--blue-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .service-card-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       1. PRELOADER
+       ============================================================ -->
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader-letters">
+      <span class="preloader-letter">J</span>
+      <span class="preloader-letter">A</span>
+      <span class="preloader-letter">S</span>
+      <span class="preloader-letter">O</span>
+      <span class="preloader-letter">N</span>
+    </div>
+    <div class="preloader-tagline">SOLUTIONS INFORMATIQUES · BRAZZAVILLE</div>
+    <div class="preloader-bar">
+      <div class="preloader-bar-fill"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       2. HEADER
+       ============================================================ -->
+  <header id="header">
+    <nav class="nav-wrapper" aria-label="Navigation principale">
+      <a href="index.html" class="nav-logo" title="Accueil Jason_INFORMATIQUE">
+        <div class="nav-logo-icon" aria-hidden="true">JI</div>
+        <div>
+          <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+          <div class="nav-logo-sub">Solutions informatiques</div>
+        </div>
+      </a>
+
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link active">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a href="pages/services.html" class="nav-link">
+            Services
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+          <div class="dropdown">
+            <a href="pages/services.html#maintenance" class="dropdown-item">
+              <div class="dropdown-item-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <div>
+                <div class="dropdown-item-text">Maintenance informatique</div>
+                <div class="dropdown-item-desc">Diagnostic, réparation PC, optimisation</div>
+              </div>
+            </a>
+            <a href="pages/services.html#reseaux" class="dropdown-item">
+              <div class="dropdown-item-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+              </div>
+              <div>
+                <div class="dropdown-item-text">Systèmes & Réseaux</div>
+                <div class="dropdown-item-desc">Architecture, câblage, Windows Server, Wi-Fi</div>
+              </div>
+            </a>
+            <a href="pages/services.html#cybersecurite" class="dropdown-item">
+              <div class="dropdown-item-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <div class="dropdown-item-text">Cybersécurité</div>
+                <div class="dropdown-item-desc">Audit, pare-feu, protection des données</div>
+              </div>
+            </a>
+            <a href="pages/services.html#developpement" class="dropdown-item">
+              <div class="dropdown-item-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <div>
+                <div class="dropdown-item-text">Développement web</div>
+                <div class="dropdown-item-desc">Sites web, plateformes, outils métier</div>
+              </div>
+            </a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="pages/reparation.html" class="nav-link">Réparation</a></li>
+        <li class="nav-item"><a href="pages/boutique.html" class="nav-link">Boutique</a></li>
+        <li class="nav-item"><a href="pages/formations.html" class="nav-link">Formations</a></li>
+        <li class="nav-item"><a href="pages/guides.html" class="nav-link">Guides</a></li>
+        <li class="nav-item"><a href="pages/assistance.html" class="nav-link">Assistance</a></li>
+        <li class="nav-item">
+          <a href="pages/entreprises.html" class="nav-link">
+            Entreprises
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+          <div class="dropdown">
+            <a href="pages/entreprises.html#pro" class="dropdown-item">
+              <div class="dropdown-item-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </div>
+              <div>
+                <div class="dropdown-item-text">Jason PRO</div>
+                <div class="dropdown-item-desc">Infogérance et contrats PME / ONG</div>
+              </div>
+            </a>
+            <a href="pages/entreprises.html#contrats" class="dropdown-item">
+              <div class="dropdown-item-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div>
+                <div class="dropdown-item-text">Contrats de maintenance</div>
+                <div class="dropdown-item-desc">Forfaits préventifs et curatifs sur mesure</div>
+              </div>
+            </a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="pages/a-propos.html" class="nav-link">
+            À propos
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+          <div class="dropdown">
+            <a href="pages/a-propos.html" class="dropdown-item">
+              <div class="dropdown-item-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              </div>
+              <div>
+                <div class="dropdown-item-text">À propos de nous</div>
+                <div class="dropdown-item-desc">Notre vision & notre mission au Congo</div>
+              </div>
+            </a>
+            <a href="pages/fondateur.html" class="dropdown-item">
+              <div class="dropdown-item-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <div>
+                <div class="dropdown-item-text">Le fondateur</div>
+                <div class="dropdown-item-desc">Gad Jason MBOU, parcours & expertise</div>
+              </div>
+            </a>
+            <a href="pages/publications.html" class="dropdown-item">
+              <div class="dropdown-item-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </div>
+              <div>
+                <div class="dropdown-item-text">Publications</div>
+                <div class="dropdown-item-desc">Livres, guides et travaux de recherche</div>
+              </div>
+            </a>
+          </div>
+        </li>
+      </ul>
+
+      <div class="nav-right">
+        <button class="nav-search-btn search-open-btn" title="Rechercher (Ctrl+K)" aria-label="Ouvrir la recherche">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="pages/boutique.html#panier" class="nav-cart-btn" title="Mon panier d'achats" aria-label="Voir le panier">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="cart-badge cart-count" style="display:none">0</span>
+        </a>
+        <button class="theme-toggle" title="Basculer thème clair/sombre" aria-label="Changer le thème">
+          <svg class="theme-icon sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <a href="pages/connexion.html" class="btn-connexion">Connexion</a>
+        <button type="button" class="btn-devis" data-open-modal="modal-devis">Demander un devis</button>
+        <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu mobile" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-label="Menu mobile">
+    <div class="mobile-menu-header">
+      <div class="nav-logo">
+        <div class="nav-logo-icon">JI</div>
+        <div>
+          <div class="nav-logo-text"><span>Jason_</span>INFORMATIQUE</div>
+          <div class="nav-logo-sub">Solutions informatiques</div>
+        </div>
+      </div>
+    </div>
+    <a href="index.html" class="mobile-nav-link">Accueil</a>
+    <a href="pages/services.html" class="mobile-nav-link">Services</a>
+    <a href="pages/reparation.html" class="mobile-nav-link">Réparation</a>
+    <a href="pages/boutique.html" class="mobile-nav-link">Boutique</a>
+    <a href="pages/formations.html" class="mobile-nav-link">Formations</a>
+    <a href="pages/guides.html" class="mobile-nav-link">Guides & Tutoriels</a>
+    <a href="pages/assistance.html" class="mobile-nav-link">Assistance</a>
+    <a href="pages/entreprises.html" class="mobile-nav-link">Entreprises (Jason PRO)</a>
+    <a href="pages/a-propos.html" class="mobile-nav-link">À propos</a>
+    <a href="pages/fondateur.html" class="mobile-nav-link">Le Fondateur</a>
+    <a href="pages/publications.html" class="mobile-nav-link">Publications</a>
+    <a href="pages/contact.html" class="mobile-nav-link">Contact</a>
+    <div class="mobile-menu-actions">
+      <a href="pages/connexion.html" class="btn btn-outline btn-sm">Connexion</a>
+      <button type="button" class="btn btn-primary btn-sm" data-open-modal="modal-devis">Demander un devis</button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       3. SEARCH OVERLAY (Ctrl+K)
+       ============================================================ -->
+  <div id="search-overlay" class="search-overlay" role="dialog" aria-modal="true" aria-label="Recherche sur le site">
+    <div class="search-box">
+      <svg class="search-icon-input" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" class="search-input" placeholder="Que recherchez-vous ? (ex : panne écran, Windows Server, SSD...)" autocomplete="off">
+      <button type="button" id="search-close" class="search-close" aria-label="Fermer la recherche">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="search-suggestions">
+      <div class="search-suggestion" tabindex="0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>Mon ordinateur ne démarre plus</span>
+      </div>
+      <div class="search-suggestion" tabindex="0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Mon PC est devenu lent</span>
+      </div>
+      <div class="search-suggestion" tabindex="0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span>Installer Windows</span>
+      </div>
+      <div class="search-suggestion" tabindex="0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+        <span>Configurer un réseau Wi-Fi</span>
+      </div>
+      <div class="search-suggestion" tabindex="0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        <span>Réparer un ordinateur portable</span>
+      </div>
+      <div class="search-suggestion" tabindex="0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        <span>Apprendre l'administration réseau</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       4. HERO SECTION
+       ============================================================ -->
+  <section class="hero" id="hero">
+    <div class="hero-glow-1" aria-hidden="true"></div>
+    <div class="hero-glow-2" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero-content">
+        <!-- Colonne gauche : texte & CTA -->
+        <div class="hero-left">
+          <div class="hero-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polygon points="12 8 8 12 12 16 12 8"/></svg>
+            Brazzaville, Congo · Depuis 2024
+          </div>
+          <h1 class="hero-title">
+            JASON_<span>INFORMATIQUE</span>
+          </h1>
+          <p class="hero-subtitle">
+            Votre partenaire pour des solutions informatiques modernes.
+          </p>
+          <p class="hero-text">
+            De la maintenance matérielle de pointe au déploiement de réseaux d'entreprise sécurisés, en passant par la formation certifiante et la fourniture de matériel fiable, nous accompagnons les particuliers, professionnels et organisations vers l'excellence numérique à Brazzaville et partout au Congo.
+          </p>
+          <div class="hero-ctas">
+            <a href="pages/services.html" class="btn btn-white">
+              Découvrir nos services
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="pages/reparation.html" class="btn btn-outline" style="border-color: rgba(255,255,255,0.4); color: white;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              Réparer mon appareil
+            </a>
+            <button type="button" class="btn btn-primary" data-open-modal="modal-devis">
+              Demander un devis
+            </button>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat-item">
+              <div class="hero-stat-value" data-counter data-target="2" data-suffix="+">2+</div>
+              <div class="hero-stat-label">Années d'expérience</div>
+              <span class="hero-stat-note">(Exemple indicatif)</span>
+            </div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-value" data-counter data-target="30" data-suffix="+">30+</div>
+              <div class="hero-stat-label">Services proposés</div>
+              <span class="hero-stat-note">(Prestations IT)</span>
+            </div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-value">24/7</div>
+              <div class="hero-stat-label">Support réactif</div>
+              <span class="hero-stat-note">(Sous contrat pro)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonne droite : visual interactif & terminal -->
+        <div class="hero-visual">
+          <div class="hero-visual-card">
+            <!-- Badges flottants -->
+            <div class="floating-badge floating-badge-1">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <span>Diagnostic Express 30 min</span>
+            </div>
+            <div class="floating-badge floating-badge-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Cybersécurité & Réseaux Pro</span>
+            </div>
+            <div class="floating-badge floating-badge-3">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Atelier à Mpila, Brazzaville</span>
+            </div>
+
+            <!-- Terminal animé -->
+            <div class="terminal" aria-label="Terminal de démonstration technique">
+              <div class="terminal-header">
+                <span class="terminal-dot terminal-dot-red"></span>
+                <span class="terminal-dot terminal-dot-yellow"></span>
+                <span class="terminal-dot terminal-dot-green"></span>
+                <span style="margin-left: 10px; font-size: 0.72rem; color: #64748B;">jason@brazzaville-core:~</span>
+              </div>
+              <div class="terminal-body" id="terminal-body">
+                <div class="terminal-line">
+                  <span class="terminal-prompt">admin@jason-inf:~$</span>
+                  <span class="terminal-cmd"> jason-core --status --location "Mpila, Brazzaville"</span>
+                </div>
+                <div class="terminal-line-code">
+                  <span class="code-ok">[OK]</span> <span class="code-val">Serveur d'assistance : Actif & Connecté</span>
+                </div>
+                <div class="terminal-line-code">
+                  <span class="code-ok">[OK]</span> <span class="code-val">Banc de diagnostic électronique : Prêt</span>
+                </div>
+                <div class="terminal-line-code">
+                  <span class="code-ok">[OK]</span> <span class="code-val">Gestionnaire de parc réseau : 100% opérationnel</span>
+                </div>
+                <div class="terminal-line" style="margin-top: 8px;">
+                  <span class="terminal-prompt">admin@jason-inf:~$</span>
+                  <span class="terminal-cmd"> ./check-security-protocols.sh</span>
+                </div>
+                <div class="terminal-line-code">
+                  <span class="code-warn">[AUDIT]</span> <span class="code-val">Pare-feu & chiffrement SSL : Strict mode validé</span>
+                </div>
+                <div class="terminal-line" style="margin-top: 8px;">
+                  <span class="terminal-prompt">admin@jason-inf:~$</span>
+                  <span class="terminal-cmd" id="typed-cmd">echo "Bienvenue chez Jason_INFORMATIQUE"</span><span class="terminal-cursor"></span>
+                </div>
+                <div class="terminal-line-code" id="typed-output" style="color: #38BDF8; font-weight: 600; margin-top: 4px;">
+                  &gt; Solutions fiables et certifiées pour vos systèmes.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. SEARCH SECTION
+       ============================================================ -->
+  <section class="search-section" id="recherche-rapide">
+    <div class="container">
+      <div class="search-hero">
+        <h2>Quel problème informatique souhaitez-vous résoudre ?</h2>
+        <p>Recherchez un symptôme de panne, une technologie, un logiciel ou un module de formation</p>
+        <div class="search-bar-big">
+          <input type="text" id="home-search-input" placeholder="Ex. : ordinateur très lent, écran bleu, câblage baie réseau, cours Linux..." aria-label="Zone de recherche de panne ou service">
+          <button type="button" id="home-search-btn" onclick="const q = document.getElementById('home-search-input').value; if(q.trim()){ window.location.href='pages/services.html?q='+encodeURIComponent(q); }">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Rechercher
+          </button>
+        </div>
+        <div class="search-chips">
+          <button type="button" class="search-chip">Écran noir au démarrage</button>
+          <button type="button" class="search-chip">Nettoyage virus & malwares</button>
+          <button type="button" class="search-chip">Câblage réseau RJ45 & Wi-Fi</button>
+          <button type="button" class="search-chip">Installation SSD ultra-rapide</button>
+          <button type="button" class="search-chip">Formation Windows Server</button>
+          <button type="button" class="search-chip">Sauvegarde données critiques</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. CATEGORIES SECTION (Domaines d'intervention)
+       ============================================================ -->
+  <section class="section" id="domaines">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">Nos pôles d'expertise</span>
+        <h2 class="section-title">Nos domaines d'intervention</h2>
+        <p class="section-desc">Une couverture technique intégrale pour répondre avec précision à tous vos défis numériques.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <!-- 1. Maintenance & Réparation -->
+        <a href="pages/services.html#maintenance" class="category-card fade-in-up stagger-1">
+          <div class="category-card-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h3 class="category-card-title">Maintenance & Réparation</h3>
+          <p class="category-card-desc">Diagnostic de composants, remplacement de dalles, dépoussiérage thermique, formatage et réparation logicielle.</p>
+          <span class="category-card-count">14+ prestations</span>
+        </a>
+
+        <!-- 2. Systèmes & Réseaux -->
+        <a href="pages/services.html#reseaux" class="category-card fade-in-up stagger-2">
+          <div class="category-card-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <h3 class="category-card-title">Systèmes & Réseaux</h3>
+          <p class="category-card-desc">Installation de serveurs, routage, segmentation VLAN, baies de brassage et optimisation de la connectivité.</p>
+          <span class="category-card-count">17+ services</span>
+        </a>
+
+        <!-- 3. Développement Web -->
+        <a href="pages/services.html#developpement" class="category-card fade-in-up stagger-3">
+          <div class="category-card-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3 class="category-card-title">Développement Web</h3>
+          <p class="category-card-desc">Création de sites vitrines élégants, portails web professionnels, e-commerce et applications sur mesure.</p>
+          <span class="category-card-count">12+ solutions</span>
+        </a>
+
+        <!-- 4. Cybersécurité -->
+        <a href="pages/services.html#cybersecurite" class="category-card fade-in-up stagger-1">
+          <div class="category-card-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="category-card-title">Cybersécurité</h3>
+          <p class="category-card-desc">Audits de vulnérabilités, protection contre les rançongiciels, sauvegardes redondantes et sensibilisation des équipes.</p>
+          <span class="category-card-count">10+ services</span>
+        </a>
+
+        <!-- 5. Boutique Informatique -->
+        <a href="pages/boutique.html" class="category-card fade-in-up stagger-2">
+          <div class="category-card-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          </div>
+          <h3 class="category-card-title">Boutique Informatique</h3>
+          <p class="category-card-desc">PC portables reconditionnés ou neufs, disques SSD, barrettes RAM, équipements réseau et accessoires certifiés.</p>
+          <span class="category-card-count">Matériel & pièces</span>
+        </a>
+
+        <!-- 6. Formations IT -->
+        <a href="pages/formations.html" class="category-card fade-in-up stagger-3">
+          <div class="category-card-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <h3 class="category-card-title">Formations IT</h3>
+          <p class="category-card-desc">Programmes orientés pratique : de l'initiation aux certifications réseau, administration système et programmation web.</p>
+          <span class="category-card-count">22+ formations</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. HOW IT WORKS (Processus d'intervention)
+       ============================================================ -->
+  <section class="section" style="background: var(--bg-secondary);" id="comment-ca-marche">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">Méthodologie transparente</span>
+        <h2 class="section-title">Comment fonctionne notre assistance</h2>
+        <p class="section-desc">Un processus en quatre étapes garantissant clarté, rapidité d'exécution et sérénité totale pour votre matériel.</p>
+      </div>
+
+      <div class="process-steps">
+        <!-- Step 1 -->
+        <div class="process-step fade-in-up stagger-1">
+          <div class="process-step-num">01</div>
+          <h3 class="process-step-title">1. Demandez</h3>
+          <p class="process-step-desc">Contactez-nous via le formulaire en ligne, WhatsApp ou par téléphone. Décrivez le symptôme ou le projet à réaliser.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="process-step fade-in-up stagger-2">
+          <div class="process-step-num">02</div>
+          <h3 class="process-step-title">2. Diagnostiquons</h3>
+          <p class="process-step-desc">Dépôt à notre atelier à Mpila ou télédiagnostic. Analyse méthodique de la panne et établissement d'un devis chiffré sans surprise.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="process-step fade-in-up stagger-3">
+          <div class="process-step-num">03</div>
+          <h3 class="process-step-title">3. Réparons & Livrons</h3>
+          <p class="process-step-desc">Intervention rigoureuse avec composants de qualité, tests de stabilité sous charge et livraison dans les délais convenus.</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="process-step fade-in-up stagger-4">
+          <div class="process-step-num">04</div>
+          <h3 class="process-step-title">4. Suivi Garanti</h3>
+          <p class="process-step-desc">Tous nos travaux bénéficient d'une garantie de bon fonctionnement, de conseils de prévention et d'un support après intervention.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       8. SERVICES SECTION (Services populaires)
+       ============================================================ -->
+  <section class="section" id="services-populaires">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">Interventions courantes</span>
+        <h2 class="section-title">Nos services populaires</h2>
+        <p class="section-desc">Des prestations courantes exécutées avec rigueur et minutie par nos experts.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <!-- Service 1 -->
+        <div class="service-card fade-in-up stagger-1">
+          <div class="service-card-img">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-tag">Maintenance</span>
+            <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">Diagnostic & Dépannage Complet</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">Inspection matérielle approfondie, test de la carte mère, RAM, stockage et détection des conflits système.</p>
+            <div class="service-card-price">À partir de 10 000 FCFA</div>
+            <div class="service-card-meta">
+              <span style="font-size: 0.78rem; color: var(--text-muted);">Délai : 24h à 48h</span>
+              <a href="pages/reparation.html" class="service-card-link">Réserver &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card fade-in-up stagger-2">
+          <div class="service-card-img">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-tag">Système d'exploitation</span>
+            <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">Installation & Optimisation Windows / Linux</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">Installation propre, configuration de pilotes d'origine, pack bureautique, antivirus et suppression des bloatwares.</p>
+            <div class="service-card-price">15 000 FCFA</div>
+            <div class="service-card-meta">
+              <span style="font-size: 0.78rem; color: var(--text-muted);">Délai : Même jour</span>
+              <a href="pages/services.html#maintenance" class="service-card-link">En savoir plus &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card fade-in-up stagger-3">
+          <div class="service-card-img">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-tag">Réseau d'entreprise</span>
+            <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">Câblage & Administration Réseau</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">Conception d'architecture locale, paramétrage de routeurs Mikrotik/Cisco, brassage de baie et Wi-Fi maillé sécurisé.</p>
+            <div class="service-card-price">Sur Devis Personnalisé</div>
+            <div class="service-card-meta">
+              <span style="font-size: 0.78rem; color: var(--text-muted);">Audit préalable offert</span>
+              <button type="button" class="service-card-link" style="border:none;background:none;cursor:pointer;" data-open-modal="modal-devis">Devis rapide &rarr;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card fade-in-up stagger-1">
+          <div class="service-card-img">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-tag">Développement Web</span>
+            <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">Création de Site Web Professionnel</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">Site vitrine moderne, ultra-rapide et responsive adapté pour smartphones, optimisé pour le référencement naturel à Brazzaville.</p>
+            <div class="service-card-price">À partir de 150 000 FCFA</div>
+            <div class="service-card-meta">
+              <span style="font-size: 0.78rem; color: var(--text-muted);">Nom de domaine inclus</span>
+              <a href="pages/services.html#developpement" class="service-card-link">Détails &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="service-card fade-in-up stagger-2">
+          <div class="service-card-img">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-tag">Assistance à distance</span>
+            <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">Télémaintenance & Support d'Urgence</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">Prise en main à distance sécurisée pour résoudre les problèmes d'imprimante, boîtes mails bloquées ou suppressions de virus.</p>
+            <div class="service-card-price">10 000 FCFA / session</div>
+            <div class="service-card-meta">
+              <span style="font-size: 0.78rem; color: var(--text-muted);">Sans déplacement requis</span>
+              <a href="pages/assistance.html" class="service-card-link">Demander &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="service-card fade-in-up stagger-3">
+          <div class="service-card-img">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div class="service-card-body">
+            <span class="service-card-tag">Formation Pratique</span>
+            <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">Formation Technique en Informatique</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">Coaching individuel ou en petit groupe sur la maintenance hardware, les réseaux informatiques et les outils numériques avancés.</p>
+            <div class="service-card-price">À partir de 45 000 FCFA</div>
+            <div class="service-card-meta">
+              <span style="font-size: 0.78rem; color: var(--text-muted);">Attestation de fin de session</span>
+              <a href="pages/formations.html" class="service-card-link">Voir catalogue &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       9. PRODUCTS SECTION (Boutique phares)
+       ============================================================ -->
+  <section class="section" style="background: var(--bg-secondary);" id="boutique-phares">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">Matériel garanti</span>
+        <h2 class="section-title">Nos produits phares <span class="demo-badge-corner">Données de démonstration</span></h2>
+        <p class="section-desc">Composants rigoureusement testés et matériels reconditionnés professionnels avec garantie constructeur / atelier.</p>
+      </div>
+
+      <div class="grid grid-4">
+        <!-- Produit 1 -->
+        <div class="product-card fade-in-up stagger-1">
+          <div class="product-card-img">
+            <span class="product-badge badge-new">Reconditionné Pro</span>
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="color:var(--gray-400);"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          </div>
+          <div class="product-card-body">
+            <div class="product-card-brand">DELL LATITUDE PRO (EX.)</div>
+            <h3 class="product-card-name">PC Portable Dell Core i5 16Go RAM / SSD 512Go</h3>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 12px;">Parfait pour gestion d'entreprise, bureautique avancée et études techniques. Écran 14" Full HD, batterie neuve.</p>
+            <div class="product-card-price">
+              <span class="product-card-price-old">320 000 FCFA</span>
+              280 000 FCFA
+            </div>
+          </div>
+          <div class="product-card-actions">
+            <button type="button" class="btn btn-primary btn-sm" onclick="JasonApp.Cart.add({id:'prod-1', name:'PC Portable Dell Latitude (Démo)', price:280000, stock:5})">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              Ajouter au panier
+            </button>
+            <a href="pages/boutique.html" class="btn btn-outline btn-sm">Détails</a>
+          </div>
+        </div>
+
+        <!-- Produit 2 -->
+        <div class="product-card fade-in-up stagger-2">
+          <div class="product-card-img">
+            <span class="product-badge badge-stock">En stock</span>
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="color:var(--gray-400);"><rect x="2" y="2" width="20" height="20" rx="2"/><line x1="8" y1="2" x2="8" y2="22"/><line x1="16" y1="2" x2="16" y2="22"/></svg>
+          </div>
+          <div class="product-card-body">
+            <div class="product-card-brand">KINGSTON / CRUCIAL (EX.)</div>
+            <h3 class="product-card-name">Barrette Mémoire RAM DDR4 16Go 3200MHz</h3>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 12px;">Booste instantanément la vitesse et le multitâche de votre ordinateur portable ou fixe. Compatibilité assurée.</p>
+            <div class="product-card-price">35 000 FCFA</div>
+          </div>
+          <div class="product-card-actions">
+            <button type="button" class="btn btn-primary btn-sm" onclick="JasonApp.Cart.add({id:'prod-2', name:'RAM DDR4 16Go (Démo)', price:35000, stock:12})">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              Ajouter au panier
+            </button>
+            <a href="pages/boutique.html" class="btn btn-outline btn-sm">Détails</a>
+          </div>
+        </div>
+
+        <!-- Produit 3 -->
+        <div class="product-card fade-in-up stagger-3">
+          <div class="product-card-img">
+            <span class="product-badge badge-promo">-15% Promo</span>
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="color:var(--gray-400);"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="7.01" y2="8"/><line x1="7" y1="12" x2="7.01" y2="12"/><line x1="7" y1="16" x2="7.01" y2="16"/></svg>
+          </div>
+          <div class="product-card-body">
+            <div class="product-card-brand">SAMSUNG / WD (EX.)</div>
+            <h3 class="product-card-name">Disque SSD NVMe M.2 500Go Haute Vitesse</h3>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 12px;">Démarrage Windows en 10 secondes. Jusqu'à 3500 Mo/s en lecture. Rajeunissez votre machine à petit prix.</p>
+            <div class="product-card-price">
+              <span class="product-card-price-old">48 000 FCFA</span>
+              40 000 FCFA
+            </div>
+          </div>
+          <div class="product-card-actions">
+            <button type="button" class="btn btn-primary btn-sm" onclick="JasonApp.Cart.add({id:'prod-3', name:'SSD 500Go NVMe (Démo)', price:40000, stock:8})">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              Ajouter au panier
+            </button>
+            <a href="pages/boutique.html" class="btn btn-outline btn-sm">Détails</a>
+          </div>
+        </div>
+
+        <!-- Produit 4 -->
+        <div class="product-card fade-in-up stagger-4">
+          <div class="product-card-img">
+            <span class="product-badge badge-stock">Réseau</span>
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="color:var(--gray-400);"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="6" cy="12" r="1"/><circle cx="10" cy="12" r="1"/><circle cx="14" cy="12" r="1"/><circle cx="18" cy="12" r="1"/></svg>
+          </div>
+          <div class="product-card-body">
+            <div class="product-card-brand">TP-LINK GIGABIT (EX.)</div>
+            <h3 class="product-card-name">Switch Réseau Gigabit 8 Ports Métallique</h3>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 12px;">Idéal pour interconnecter ordinateurs, imprimantes et serveurs au bureau. Plug & Play sans configuration.</p>
+            <div class="product-card-price">25 000 FCFA</div>
+          </div>
+          <div class="product-card-actions">
+            <button type="button" class="btn btn-primary btn-sm" onclick="JasonApp.Cart.add({id:'prod-4', name:'Switch Gigabit 8 Ports (Démo)', price:25000, stock:15})">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              Ajouter au panier
+            </button>
+            <a href="pages/boutique.html" class="btn btn-outline btn-sm">Détails</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       10. FORMATIONS SECTION (Formations populaires)
+       ============================================================ -->
+  <section class="section" id="formations-phares">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">Renforcement des compétences</span>
+        <h2 class="section-title">Nos formations populaires</h2>
+        <p class="section-desc">Des cursus intensifs conçus pour former les administrateurs et techniciens de demain au Congo.</p>
+      </div>
+
+      <div class="grid grid-4">
+        <!-- Formation 1 -->
+        <div class="formation-card fade-in-up stagger-1">
+          <div class="formation-card-header">
+            <span class="formation-card-level level-avance">Niveau Avancé</span>
+            <h3 class="formation-card-title">Administration Windows Server & Active Directory</h3>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                40 heures
+              </span>
+              <span class="formation-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Présentiel / Hybride
+              </span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">Maîtrisez les GPO, DNS, DHCP, contrôleurs de domaine et la virtualisation Hyper-V en entreprise.</p>
+            <div class="formation-card-price" style="margin-bottom: 16px;">120 000 FCFA</div>
+            <a href="pages/formations.html" class="btn btn-outline btn-sm" style="width: 100%;">Voir le programme</a>
+          </div>
+        </div>
+
+        <!-- Formation 2 -->
+        <div class="formation-card fade-in-up stagger-2">
+          <div class="formation-card-header">
+            <span class="formation-card-level level-intermediaire">Niveau Intermédiaire</span>
+            <h3 class="formation-card-title">Réseaux Informatiques, Routage & Commutation Cisco</h3>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                36 heures
+              </span>
+              <span class="formation-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Atelier pratique
+              </span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">Configuration de commutateurs, sous-réseaux IPv4/IPv6, routage statique et dynamique, sécurité de port.</p>
+            <div class="formation-card-price" style="margin-bottom: 16px;">95 000 FCFA</div>
+            <a href="pages/formations.html" class="btn btn-outline btn-sm" style="width: 100%;">Voir le programme</a>
+          </div>
+        </div>
+
+        <!-- Formation 3 -->
+        <div class="formation-card fade-in-up stagger-3">
+          <div class="formation-card-header">
+            <span class="formation-card-level level-debutant">Niveau Débutant</span>
+            <h3 class="formation-card-title">Développement Web Moderne : HTML, CSS & JavaScript</h3>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                30 heures
+              </span>
+              <span class="formation-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                En ligne / Présentiel
+              </span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">Construisez vos premiers sites responsives, dynamiques et prêts pour la publication en ligne.</p>
+            <div class="formation-card-price" style="margin-bottom: 16px;">75 000 FCFA</div>
+            <a href="pages/formations.html" class="btn btn-outline btn-sm" style="width: 100%;">Voir le programme</a>
+          </div>
+        </div>
+
+        <!-- Formation 4 -->
+        <div class="formation-card fade-in-up stagger-4">
+          <div class="formation-card-header">
+            <span class="formation-card-level level-intermediaire">Niveau Intermédiaire</span>
+            <h3 class="formation-card-title">Cybersécurité & Protection des Données Personnelles</h3>
+          </div>
+          <div class="formation-card-body">
+            <div class="formation-meta">
+              <span class="formation-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                25 heures
+              </span>
+              <span class="formation-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Certifiante
+              </span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">Sensibilisation aux attaques de phishing, mise en place de politiques de sécurité et chiffrement des sauvegardes.</p>
+            <div class="formation-card-price" style="margin-bottom: 16px;">85 000 FCFA</div>
+            <a href="pages/formations.html" class="btn btn-outline btn-sm" style="width: 100%;">Voir le programme</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       11. GUIDES SECTION (Derniers guides techniques)
+       ============================================================ -->
+  <section class="section" style="background: var(--bg-secondary);" id="guides-techniques">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">Base de connaissances</span>
+        <h2 class="section-title">Derniers guides & tutoriels</h2>
+        <p class="section-desc">Des fiches pratiques gratuites rédigées par nos experts pour vous aider à résoudre les problèmes courants.</p>
+      </div>
+
+      <div class="grid grid-2">
+        <!-- Guide 1 -->
+        <a href="pages/guides.html" class="guide-card fade-in-up stagger-1">
+          <div class="guide-card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div>
+            <span class="guide-card-diff diff-facile">Facile · 10 min de lecture</span>
+            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);">Comment accélérer un PC lent sous Windows 10/11 sans formater</h3>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">Les 7 étapes indispensables : désactivation des programmes au démarrage, nettoyage de disque et vérification des disques durs.</p>
+          </div>
+        </a>
+
+        <!-- Guide 2 -->
+        <a href="pages/guides.html" class="guide-card fade-in-up stagger-2">
+          <div class="guide-card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div>
+            <span class="guide-card-diff diff-facile">Facile · 15 min de lecture</span>
+            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);">Configurer une adresse IP fixe et choisir des serveurs DNS rapides</h3>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">Guide pas-à-pas pour éviter les conflits d'adresses IP en réseau local et accélérer l'ouverture des pages web au Congo.</p>
+          </div>
+        </a>
+
+        <!-- Guide 3 -->
+        <a href="pages/guides.html" class="guide-card fade-in-up stagger-3">
+          <div class="guide-card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <span class="guide-card-diff diff-moyen">Moyen · 25 min de lecture</span>
+            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);">Sécuriser le réseau Wi-Fi d'un bureau contre les intrusions</h3>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">Paramétrage WPA3, isolation des invités (Guest network), masquage du SSID et filtrage par adresses MAC.</p>
+          </div>
+        </a>
+
+        <!-- Guide 4 -->
+        <a href="pages/guides.html" class="guide-card fade-in-up stagger-4">
+          <div class="guide-card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div>
+            <span class="guide-card-diff diff-avance">Avancé · 30 min de lecture</span>
+            <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);">Diagnostic électronique : tester une carte mère et des bips BIOS</h3>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">Comprendre les codes sonores d'alerte des fabricants (Dell, HP, Lenovo) et tester les tensions d'alimentation au multimètre.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       12. WHY US (Pourquoi nous choisir)
+       ============================================================ -->
+  <section class="section" id="pourquoi-nous">
+    <div class="container">
+      <div class="why-us-grid">
+        <!-- Gauche : Titre, vision et CTA -->
+        <div class="fade-in-up">
+          <span class="section-label">Nos engagements</span>
+          <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); margin-bottom: 18px; line-height: 1.2;">
+            Pourquoi confier vos projets à Jason_INFORMATIQUE ?
+          </h2>
+          <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 24px;">
+            Fondé sur une exigence de transparence totale et une maîtrise technique pointue, notre cabinet met un point d'honneur à offrir des solutions durables, documentées et adaptées aux réalités des entreprises et particuliers de la République du Congo.
+          </p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="pages/contact.html" class="btn btn-primary">Prendre contact</a>
+            <a href="pages/a-propos.html" class="btn btn-outline">En savoir plus</a>
+          </div>
+        </div>
+
+        <!-- Droite : 8 Caractéristiques -->
+        <div class="why-us-features fade-in-up">
+          <!-- 1 -->
+          <div class="why-feature">
+            <div class="why-feature-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="why-feature-title">Expertise Reconnue</div>
+              <div class="why-feature-desc">Compétences certifiées en systèmes, réseaux et micro-informatique.</div>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="why-feature">
+            <div class="why-feature-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="why-feature-title">Proximité Locale</div>
+              <div class="why-feature-desc">Atelier implanté à Mpila, Brazzaville, disponible pour interventions sur site.</div>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="why-feature">
+            <div class="why-feature-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div>
+              <div class="why-feature-title">Prix Transparents</div>
+              <div class="why-feature-desc">Tarification claire en FCFA, devis préalable et zéro frais cachés.</div>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="why-feature">
+            <div class="why-feature-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div>
+              <div class="why-feature-title">Réactivité Maximale</div>
+              <div class="why-feature-desc">Prise en charge rapide des pannes critiques sous 24h ouvrées.</div>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="why-feature">
+            <div class="why-feature-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <div>
+              <div class="why-feature-title">Formation Incluse</div>
+              <div class="why-feature-desc">Nous formons vos utilisateurs pour éviter la récurrence des incidents.</div>
+            </div>
+          </div>
+
+          <!-- 6 -->
+          <div class="why-feature">
+            <div class="why-feature-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <div class="why-feature-title">Support Continu</div>
+              <div class="why-feature-desc">Contrats d'infogérance pour garantir la continuité d'activité de vos parcs.</div>
+            </div>
+          </div>
+
+          <!-- 7 -->
+          <div class="why-feature">
+            <div class="why-feature-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <div>
+              <div class="why-feature-title">Solutions Sur Mesure</div>
+              <div class="why-feature-desc">Chaque infrastructure est pensée selon vos besoins réels et vos contraintes.</div>
+            </div>
+          </div>
+
+          <!-- 8 -->
+          <div class="why-feature">
+            <div class="why-feature-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div>
+              <div class="why-feature-title">Confidentialité Totale</div>
+              <div class="why-feature-desc">Respect strict du secret professionnel et de la vie privée de vos données.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       13. FOUNDER SECTION (Gad Jason MBOU)
+       ============================================================ -->
+  <section class="founder-section" id="fondateur">
+    <div class="container">
+      <div class="founder-grid">
+        <!-- Photo placeholder -->
+        <div class="founder-photo-wrapper fade-in-up">
+          <div class="founder-photo">
+            <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <div class="founder-photo-placeholder">
+              <strong style="color: white; display: block; font-size: 0.95rem;">Gad Jason MBOU</strong>
+              <span style="font-size: 0.75rem; color: rgba(255,255,255,0.5);">(Photo officielle à fournir)</span>
+            </div>
+          </div>
+          <div class="founder-photo-badge">Fondateur & Consultant Lead</div>
+        </div>
+
+        <!-- Contenu du fondateur -->
+        <div class="founder-content fade-in-up">
+          <span class="section-label" style="background: rgba(255,255,255,0.1); color: #7DD3FC; border: 1px solid rgba(255,255,255,0.15);">La vision d'un passionné</span>
+          <h2 class="founder-name">Gad Jason MBOU</h2>
+          <div class="founder-title">Fondateur de Jason_INFORMATIQUE · Spécialiste Systèmes, Réseaux & Pédagogie IT</div>
+          <p class="founder-bio">
+            Passionné d'informatique, de télécommunications et de transmission du savoir, Gad Jason MBOU a fondé <strong>Jason_INFORMATIQUE</strong> pour apporter une réponse concrète aux défis technologiques que rencontrent les PME, les administrations et la jeunesse au Congo. Convaincu que l'autonomie numérique est la clé de voûte de l'émancipation économique, il combine expertise de terrain en dépannage micro et administration réseau avec une vocation pédagogique affirmée.
+          </p>
+          <div class="founder-quote">
+            « L'informatique ne doit pas être un obstacle inaccessible, mais un puissant levier d'émancipation, de rigueur et d'excellence pour notre jeunesse et nos entreprises locales. »
+          </div>
+          <div class="founder-skills" style="margin-bottom: 24px;">
+            <span class="founder-skill-tag">Administration Windows Server</span>
+            <span class="founder-skill-tag">Réseaux LAN / Wi-Fi & Cisco</span>
+            <span class="founder-skill-tag">Maintenance & Dépannage Micro</span>
+            <span class="founder-skill-tag">Cybersécurité Pratique</span>
+            <span class="founder-skill-tag">Développement Web</span>
+            <span class="founder-skill-tag">Transmission & Pédagogie</span>
+          </div>
+          <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+            <a href="pages/fondateur.html" class="btn btn-white btn-sm">Lire le parcours complet</a>
+            <a href="pages/a-propos.html" class="btn btn-outline btn-sm" style="color: white; border-color: rgba(255,255,255,0.4);">À propos de l'entreprise</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       14. PUBLICATION HIGHLIGHT (Ouvrage technique)
+       ============================================================ -->
+  <section class="section" id="publication">
+    <div class="container">
+      <div class="publication-highlight fade-in-up">
+        <!-- Couverture de livre placeholder -->
+        <div class="book-cover">
+          <div class="book-placeholder-icon">📖</div>
+          <div class="book-cover-title">Guide Pratique d'Informatique & Réseaux</div>
+          <div class="book-cover-author">Par Gad Jason MBOU</div>
+          <span style="font-size: 0.6rem; color: #93C5FD; margin-top: 6px;">Édition Technique</span>
+        </div>
+
+        <!-- Informations sur la publication -->
+        <div class="publication-info">
+          <div class="publication-label">Ouvrage & Référence Technique</div>
+          <h2 class="publication-title">Manuel de Maintenance & d'Administration Réseau</h2>
+          <p class="publication-desc">
+            Un travail de synthèse méthodologique conçu pour les techniciens, les étudiants en génie informatique et les autodidactes désireux d'acquérir une méthode de diagnostic rigoureuse, étape par étape, éprouvée sur le terrain congolais.
+          </p>
+          <div class="publication-actions">
+            <a href="pages/publications.html" class="btn btn-primary btn-sm">Découvrir la publication</a>
+            <a href="pages/contact.html" class="btn btn-outline btn-sm" style="color: white; border-color: rgba(255,255,255,0.3);">Se renseigner</a>
+          </div>
+          <div class="publication-placeholder-note">
+            * Note : Informations éditoriales détaillées et sommaire complet à compléter par l'auteur sur la page dédiée.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       15. TESTIMONIALS (Témoignages clients illustratifs)
+       ============================================================ -->
+  <section class="section" style="background: var(--bg-secondary);" id="temoignages">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">Avis & Retours d'expérience</span>
+        <h2 class="section-title">Ce que disent nos clients</h2>
+        <p class="section-desc">La satisfaction de nos partenaires et apprenants est notre plus belle carte de visite.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <!-- Témoignage 1 -->
+        <div class="testimonial-card fade-in-up stagger-1">
+          <div class="testimonial-stars" aria-label="Note 5 sur 5">★★★★★</div>
+          <p class="testimonial-text">
+            « Nous avions une panne de réseau récurrente qui paralysait notre comptabilité. L'équipe de Jason_INFORMATIQUE est intervenue à Mpila, a reconfiguré notre switch et segmenté le Wi-Fi. Depuis, zéro coupure ! »
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">CN</div>
+            <div>
+              <div class="testimonial-name">Claire N.</div>
+              <div class="testimonial-role">Directrice Administrative, PME Brazzaville</div>
+            </div>
+          </div>
+          <div class="testimonial-disclaimer">Témoignage illustratif — à remplacer par des avis clients réels.</div>
+        </div>
+
+        <!-- Témoignage 2 -->
+        <div class="testimonial-card fade-in-up stagger-2">
+          <div class="testimonial-stars" aria-label="Note 5 sur 5">★★★★★</div>
+          <p class="testimonial-text">
+            « La formation sur Windows Server et Active Directory dispensée par Jason MBOU m'a permis de décrocher mon premier stage en administration système. Des explications claires et beaucoup de pratique sur machine réelle. »
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SM</div>
+            <div>
+              <div class="testimonial-name">Serge M.</div>
+              <div class="testimonial-role">Apprenant certifié & Technicien Réseau</div>
+            </div>
+          </div>
+          <div class="testimonial-disclaimer">Témoignage illustratif — à remplacer par des avis clients réels.</div>
+        </div>
+
+        <!-- Témoignage 3 -->
+        <div class="testimonial-card fade-in-up stagger-3">
+          <div class="testimonial-stars" aria-label="Note 5 sur 5">★★★★★</div>
+          <p class="testimonial-text">
+            « Mon ordinateur portable ne s'allumait plus du tout suite à une surtension. Le diagnostic a été posé en moins de 24h et le circuit d'alimentation réparé pour un tarif très honnête. Service très professionnel. »
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">PK</div>
+            <div>
+              <div class="testimonial-name">Patrick K.</div>
+              <div class="testimonial-role">Consultant Logistique Indépendant</div>
+            </div>
+          </div>
+          <div class="testimonial-disclaimer">Témoignage illustratif — à remplacer par des avis clients réels.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       16. NEWS/BLOG (Actualités informatiques)
+       ============================================================ -->
+  <section class="section" id="actualites">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">Veille & Conseils</span>
+        <h2 class="section-title">Actualités informatiques <span class="demo-badge-corner">Contenu démonstratif</span></h2>
+        <p class="section-desc">Restez informé des tendances technologiques et découvrez nos conseils pratiques pour protéger votre informatique.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <!-- Article 1 -->
+        <article class="blog-card fade-in-up stagger-1">
+          <div class="blog-card-header">
+            <span class="blog-card-badge">Cybersécurité</span>
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-date">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>Octobre 2026 · Veille technologique</span>
+            </div>
+            <h3 class="blog-card-title">Pourquoi les mots de passe simples ne suffisent plus en 2026</h3>
+            <p class="blog-card-text">Avec la montée des attaques par force brute et dictionnaire, découvrez comment activer la double authentification (2FA) sur tous vos comptes professionnels.</p>
+            <div class="blog-card-footer">
+              <a href="pages/guides.html" style="color:var(--blue-primary);display:flex;align-items:center;gap:4px;">Lire l'article &rarr;</a>
+              <span style="font-size:0.75rem;color:var(--text-muted);">5 min</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 2 -->
+        <article class="blog-card fade-in-up stagger-2">
+          <div class="blog-card-header">
+            <span class="blog-card-badge">Infrastructure</span>
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-date">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>Septembre 2026 · Connectivité</span>
+            </div>
+            <h3 class="blog-card-title">Fibre optique à Brazzaville : comment bien équiper son réseau interne</h3>
+            <p class="blog-card-text">Avoir un bon débit d'arrivée ne sert à rien si vos câbles RJ45 et vos switchs sont obsolètes. Nos préconisations pour exploiter 100% de votre bande passante.</p>
+            <div class="blog-card-footer">
+              <a href="pages/guides.html" style="color:var(--blue-primary);display:flex;align-items:center;gap:4px;">Lire l'article &rarr;</a>
+              <span style="font-size:0.75rem;color:var(--text-muted);">7 min</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 3 -->
+        <article class="blog-card fade-in-up stagger-3">
+          <div class="blog-card-header">
+            <span class="blog-card-badge">Maintenance</span>
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-date">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>Août 2026 · Entretien matériel</span>
+            </div>
+            <h3 class="blog-card-title">Poussière et surchauffe : pourquoi renouveler la pâte thermique</h3>
+            <p class="blog-card-text">Sous le climat tropical de Brazzaville, les ventilateurs s'encrassent vite. Découvrez pourquoi un nettoyage annuel double l'espérance de vie de vos ordinateurs.</p>
+            <div class="blog-card-footer">
+              <a href="pages/guides.html" style="color:var(--blue-primary);display:flex;align-items:center;gap:4px;">Lire l'article &rarr;</a>
+              <span style="font-size:0.75rem;color:var(--text-muted);">4 min</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       17. CTA SECTION (Prêt à démarrer)
+       ============================================================ -->
+  <section class="cta-section" id="contact-cta">
+    <div class="container">
+      <h2 class="cta-title">Prêt à transformer votre informatique ?</h2>
+      <p class="cta-desc">
+        Que vous ayez un ordinateur à réparer, un réseau d'entreprise à fiabiliser ou un projet de formation à concrétiser, notre équipe est à votre écoute immédiate.
+      </p>
+      <div class="cta-actions">
+        <button type="button" class="btn btn-white btn-lg" data-open-modal="modal-devis">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Demander un devis gratuit
+        </button>
+        <a href="https://wa.me/242067814704" target="_blank" class="btn btn-whatsapp btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Discuter sur WhatsApp
+        </a>
+        <a href="pages/contact.html" class="btn btn-outline btn-lg" style="color:white;border-color:rgba(255,255,255,0.4);">
+          Nous contacter
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       18. FOOTER
+       ============================================================ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-icon">JI</div>
+            <div>
+              <div style="font-weight:800;color:white;font-size:1rem"><span style="color:#38BDF8">Jason_</span>INFORMATIQUE</div>
+              <div style="font-size:.65rem;color:rgba(255,255,255,.4);letter-spacing:1px">SOLUTIONS INFORMATIQUES</div>
+            </div>
+          </div>
+          <p>Votre partenaire pour des solutions informatiques modernes. De la réparation matérielle à la formation professionnelle, nous vous accompagnons au quotidien avec rigueur et passion.</p>
+          <div class="footer-social">
+            <a href="#" title="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="#" title="Twitter/X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+            <a href="https://wa.me/242067814704" title="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <div class="footer-links">
+            <a href="pages/services.html#maintenance">Maintenance informatique</a>
+            <a href="pages/services.html#reseaux">Systèmes & Réseaux</a>
+            <a href="pages/services.html#cybersecurite">Cybersécurité</a>
+            <a href="pages/services.html#developpement">Développement web</a>
+            <a href="pages/assistance.html">Assistance à distance</a>
+            <a href="pages/entreprises.html">Jason PRO Entreprises</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Ressources</h4>
+          <div class="footer-links">
+            <a href="pages/guides.html">Guides techniques</a>
+            <a href="pages/formations.html">Formations IT</a>
+            <a href="pages/boutique.html">Boutique en ligne</a>
+            <a href="pages/reparation.html">Dépôt Réparation</a>
+            <a href="pages/assistance.html">Support & Ticket</a>
+            <a href="pages/publications.html">Publications & Livres</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Mpila, Brazzaville<br>République du Congo</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:jasoninformatique7@gmail.com" style="color:rgba(255,255,255,.55)">jasoninformatique7@gmail.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Lun – Sam : 08h00 – 19h00</span>
+          </div>
+          <div class="footer-links" style="margin-top:12px">
+            <a href="pages/a-propos.html">À propos de nous</a>
+            <a href="pages/contact.html">Formulaire de contact</a>
+            <a href="pages/mentions-legales.html">Mentions légales</a>
+            <a href="pages/confidentialite.html">Confidentialité</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Jason_INFORMATIQUE © 2026 — Fondé par Gad Jason MBOU. Tous droits réservés.</p>
+      <div class="footer-bottom-links">
+        <a href="pages/cgv.html">CGV</a>
+        <a href="pages/mentions-legales.html">Mentions légales</a>
+        <a href="pages/confidentialite.html">Politique de confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       19. FLOATING ELEMENTS & MODALS
+       ============================================================ -->
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/242067814704" class="whatsapp-float" target="_blank" title="Contactez-nous sur WhatsApp" id="whatsapp-float" aria-label="Ouvrir WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </a>
+
+  <!-- Chatbot Float & Panel -->
+  <button class="chatbot-float" id="chatbot-btn" title="Jason Assistant" aria-label="Ouvrir l'assistant virtuel">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  </button>
+  <div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-modal="true" aria-label="Assistant Jason">
+    <div class="chatbot-header">
+      <div class="chatbot-avatar" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div>
+        <div class="chatbot-name">Jason Assistant</div>
+        <div class="chatbot-status"><span class="chatbot-online"></span>En ligne</div>
+      </div>
+      <button class="chatbot-close" id="chatbot-close" aria-label="Fermer le chat">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages"></div>
+    <div class="chatbot-input-area">
+      <input type="text" id="chatbot-input" placeholder="Posez votre question…" aria-label="Votre message à l'assistant" />
+      <button class="chatbot-send" id="chatbot-send" aria-label="Envoyer le message">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Scroll Top -->
+  <button class="scroll-top" id="scroll-top" title="Haut de page" aria-label="Remonter en haut de page">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- Cookie Banner -->
+  <div class="cookie-banner" id="cookie-banner">
+    <p>🍪 Ce site utilise uniquement des cookies essentiels et des préférences locales pour son bon fonctionnement. Aucun cookie publicitaire tiers n'est utilisé.</p>
+    <div class="cookie-actions">
+      <button class="btn btn-sm btn-ghost" id="cookie-refuse" style="color:rgba(255,255,255,.6)">Refuser</button>
+      <button class="btn btn-sm btn-primary" id="cookie-accept">J'accepte</button>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Modal Devis Rapide -->
+  <div class="modal-overlay" id="modal-devis" role="dialog" aria-modal="true" aria-labelledby="modal-devis-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-devis-title">Demande de devis gratuit</h3>
+        <button type="button" class="modal-close" onclick="Modal.close('modal-devis')" aria-label="Fermer la fenêtre">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:20px;">
+          Remplissez ce formulaire pour recevoir une estimation chiffrée sous 24h. Aucun engagement requis.
+        </p>
+        <form id="quote-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Votre nom <span class="required">*</span></label>
+              <input type="text" name="name" class="form-input" placeholder="Ex. : Jean MBEMBA" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Téléphone <span class="required">*</span></label>
+              <input type="tel" name="phone" class="form-input" placeholder="+242 06 000 00 00" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Adresse email <span class="required">*</span></label>
+            <input type="email" name="email" class="form-input" placeholder="jean.mbemba@example.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Type de service souhaité <span class="required">*</span></label>
+            <select name="service" class="form-select" required>
+              <option value="">Sélectionnez une catégorie...</option>
+              <option value="maintenance">Maintenance & Réparation d'ordinateur</option>
+              <option value="reseaux">Systèmes & Câblage Réseau</option>
+              <option value="cybersecurite">Cybersécurité & Audit</option>
+              <option value="developpement">Création de Site Web</option>
+              <option value="formation">Formation Informatique</option>
+              <option value="materiel">Achat de Matériel / Composants</option>
+              <option value="contrat-pro">Contrat de maintenance PRO</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description de votre besoin <span class="required">*</span></label>
+            <textarea name="description" class="form-textarea" placeholder="Précisez le modèle de machine, le nombre de postes, ou le cahier des charges..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Envoyer ma demande de devis
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       20. SCRIPTS
+       ============================================================ -->
+  <script src="js/main.js"></script>
+  
+  <!-- Script d'animation interactive du terminal héro -->
+  <script>
+    (function initTerminalHeroAnimation() {
+      const typedCmd = document.getElementById('typed-cmd');
+      const typedOutput = document.getElementById('typed-output');
+      if (!typedCmd || !typedOutput) return;
+
+      const sequences = [
+        { cmd: 'echo "Bienvenue chez Jason_INFORMATIQUE"', output: '> Solutions fiables et certifiées pour vos systèmes.' },
+        { cmd: 'jason-network --scan-wifi --band 5GHz', output: '> 4 bornes Wi-Fi configurées. Bande passante maximale.' },
+        { cmd: 'jason-backup --verify-redundancy', output: '> Sauvegardes chiffrées AES-256 intègres et vérifiées.' },
+        { cmd: 'jason-support --status', output: '> Équipe disponible à Mpila, Brazzaville.' }
+      ];
+
+      let seqIndex = 0;
+
+      function typeSequence() {
+        const item = sequences[seqIndex];
+        let charIndex = 0;
+        typedCmd.textContent = '';
+        typedOutput.textContent = '';
+        typedOutput.style.opacity = '0';
+
+        const typingInterval = setInterval(() => {
+          if (charIndex < item.cmd.length) {
+            typedCmd.textContent += item.cmd.charAt(charIndex);
+            charIndex++;
+          } else {
+            clearInterval(typingInterval);
+            setTimeout(() => {
+              typedOutput.textContent = item.output;
+              typedOutput.style.opacity = '1';
+              typedOutput.style.transition = 'opacity 0.4s ease';
+
+              setTimeout(() => {
+                seqIndex = (seqIndex + 1) % sequences.length;
+                typeSequence();
+              }, 4000);
+            }, 400);
+          }
+        }, 60);
+      }
+
+      // Lancer après le preloader
+      setTimeout(typeSequence, 3200);
+    })();
+  </script>
+</body>
+</html>
